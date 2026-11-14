@@ -56,7 +56,7 @@ export default function PrioritiesSheet({ open, onClose, d5Signed }: { open: boo
           <span className="fa-muted">The table re-sorts as you change these. Stored Jev answers are reused, so no model call is made.</span>
         </div>
         <section className="fa-sec" aria-labelledby="pr-order" style={{ marginTop: 12 }}>
-          <h3 id="pr-order">Priority order, highest first</h3>
+          <h3 id="pr-order">Priority order, top is highest</h3>
           <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'grid', gap: 1, background: 'var(--fa-hair)', border: '1px solid var(--fa-hair)' }}>
             {priority.map((k, i) => (
               <li key={k} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 10px', background: 'var(--fa-surface)' }}>

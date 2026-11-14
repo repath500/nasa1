@@ -238,3 +238,5 @@ button.fa-chip:hover { background: var(--fa-raised); }
   .fa-brief a { color: #111418; text-decoration: none; }
   .fa-brief section { break-inside: avoid; }
 }
+.fa-term { position: relative; }
+.fa-term:hover .fa-badge__card, .fa-term:focus .fa-badge__card { display: block; }

@@ -45,10 +45,10 @@ function kindsFor(acc: string, records: EvidenceRecord[], hasRows: boolean): str
 }
 
 function JevBadge({ model }: { model: AtlasModel }) {
-  const first = [...model.jev.values()].find((j): j is JevJudgement => j !== null);
-  if (!first) return null;
-  if (first.source === 'fixture') return <Badge kind="fixture" />;
-  return <Badge kind="si" modelId={first.modelId} hover={`${first.source}, recorded ${first.recordedAt.slice(0, 10)}. Ordinal model judgement, not a probability that the science is true.`} />;
+  const sample = [...model.jev.values()].find((j): j is JevJudgement => j !== null);
+  if (!sample) return null;
+  if (sample.source === 'fixture') return <Badge kind="fixture" />;
+  return <Badge kind="si" modelId={sample.modelId} hover={`${sample.source}, recorded ${sample.recordedAt.slice(0, 10)}. Ordinal model judgement, not a probability that the science is true.`} />;
 }
 
 function AgreementStrip({ model }: { model: AtlasModel }) {

@@ -50,7 +50,7 @@ export default function NotesTab() {
         />
         <div className="fa-chips">
           <Btn type="submit" variant="primary" disabled={full || text.trim() === ''}>Add note</Btn>
-          <Btn icon={<PushPin size={14} />} disabled={full || !selected} title={selected ? undefined : 'Select a dot on the map first'} onClick={() => add(true)}>Pin selected row</Btn>
+          <Btn icon={<PushPin size={14} />} disabled={full || !selected} title={selected ? undefined : 'Select a dot on the map before pinning'} onClick={() => add(true)}>Pin selected row</Btn>
         </div>
       </form>
       {notes.length === 0 ? (
