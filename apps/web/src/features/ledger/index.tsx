@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { RejectedCell } from '@fire/contracts';
 import { useAtlasModel } from '../atlas/data';
+import { LedgerEggTip } from '../eggs';
 import { Badge, CopyBtn, EmptyState, ErrorState, Skeleton, usePrefersReducedMotion } from '../atlas/_ui';
 
 const REASON: Record<RejectedCell['reason'], string> = {
@@ -24,22 +25,8 @@ function markTyped() {
   try { sessionStorage.setItem(SS_KEY, '1'); } catch { /* storage unavailable */ }
 }
 
-const EGG_TEXT = 'Even a spacecraft cannot hold 3400% oxygen. Code rejected this one.';
-
 function RawCell({ value }: { value: string }) {
-  const [tip, setTip] = useState(false);
-  const t = useRef<number | undefined>(undefined);
-  const is3400 = value.replace(/\s/g, '') === '3400%';
-  useEffect(() => () => window.clearTimeout(t.current), []);
-  if (!is3400) return <span className="fa-ledger__raw">{value}</span>;
-  const start = () => { window.clearTimeout(t.current); t.current = window.setTimeout(() => setTip(true), 3000); };
-  const stop = () => { window.clearTimeout(t.current); setTip(false); };
-  return (
-    <span className="fa-tip" onMouseEnter={start} onMouseLeave={stop} onFocus={start} onBlur={stop} tabIndex={0} aria-describedby={tip ? 'fa-egg-tip' : undefined}>
-      <span className="fa-ledger__raw">{value}</span>
-      {tip && <span id="fa-egg-tip" role="tooltip" className="fa-tip__bubble">{EGG_TEXT}</span>}
-    </span>
-  );
+  return <LedgerEggTip rawValue={value}><span className="fa-ledger__raw">{value}</span></LedgerEggTip>;
 }
 
 export default function LedgerTab() {

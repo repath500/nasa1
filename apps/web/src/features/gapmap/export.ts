@@ -4,14 +4,15 @@ export function exportFooter(citation: { corpusHash: string; sourcesLine: string
 
 export async function saveChart(canvas: HTMLCanvasElement, svg: SVGSVGElement, footer: string[]): Promise<void> {
   const output = document.createElement('canvas');
+  const chartHeight = Math.round(1800 * canvas.height / canvas.width);
   output.width = 1800;
-  output.height = 1180;
+  output.height = chartHeight + 180;
   const context = output.getContext('2d');
   if (!context) return;
   const styles = getComputedStyle(svg);
   context.fillStyle = styles.getPropertyValue('--color-surface').trim() || '#12161b';
   context.fillRect(0, 0, output.width, output.height);
-  context.drawImage(canvas, 0, 0, 1800, 1000);
+  context.drawImage(canvas, 0, 0, 1800, chartHeight);
   const clone = svg.cloneNode(true) as SVGSVGElement;
   const originalNodes = [svg, ...svg.querySelectorAll('*')];
   const clonedNodes = [clone, ...clone.querySelectorAll('*')];
@@ -26,11 +27,11 @@ export async function saveChart(canvas: HTMLCanvasElement, svg: SVGSVGElement, f
   try {
     const image = new Image();
     await new Promise<void>((resolve, reject) => { image.onload = () => resolve(); image.onerror = reject; image.src = url; });
-    context.drawImage(image, 0, 0, 1800, 1000);
+    context.drawImage(image, 0, 0, 1800, chartHeight);
     context.fillStyle = styles.getPropertyValue('--color-ink').trim() || '#e8eaed';
     context.font = '22px sans-serif';
-    context.fillText('Circle: droplet   Square: solid   Triangle: gas   Diamond: aerosol   Hollow: burner O2 (excluded from counts)', 30, 1035, 1740);
-    footer.forEach((line, index) => context.fillText(line, 30, 1065 + index * 28, 1740));
+    context.fillText('Circle: droplet   Square: solid   Triangle: gas   Diamond: aerosol   Hollow: burner-stream O₂, not cabin air, excluded from counts', 30, chartHeight + 35, 1740);
+    footer.forEach((line, index) => context.fillText(line, 30, chartHeight + 65 + index * 28, 1740));
     const link = document.createElement('a');
     link.download = 'fire-atlas-map.png';
     link.href = output.toDataURL('image/png');

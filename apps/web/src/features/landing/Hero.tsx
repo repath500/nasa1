@@ -17,7 +17,7 @@ const BODIES: { id: Exclude<ScenarioId, 'custom' | 'suit'>; name: string }[] = [
 /** SPEC §3.1: asymmetric split, two CTAs, live readout from the loaded corpus. */
 export function Hero() {
   const navigate = useNavigate(); const corpus = useCorpus();
-  const pick = (id: ScenarioId) => { useAtlas.getState().set({ habitat: id }); if (id === 'lunar-cabin-example') window.dispatchEvent(new CustomEvent('fa:moon-click')); };
+  const pick = (id: ScenarioId) => { useAtlas.getState().set({ habitat: id }); };
   const c = corpus.status === 'ready' ? corpus.corpus : null;
   return (
     <section aria-labelledby="hero-h" className="mx-auto grid max-w-[1200px] gap-10 px-4 pb-16 pt-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:pb-24 lg:pt-20">

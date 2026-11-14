@@ -181,18 +181,20 @@ export default function EvidenceDrawer({ rowId, onClose, recordId = null }: Evid
     return () => { window.clearTimeout(t); opener?.focus?.(); };
   }, [open]);
 
-  /* keys: Esc closes, [ and ] step through rows of the same investigation */
+  /* Esc closes. [ and ] arrive as the shell's fa:shortcut event (prev-row, next-row), so each key has exactly one handler. */
+  const goRef = useRef(go); goRef.current = go;
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      const t = e.target as HTMLElement | null;
-      const typing = !!t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable);
       if (e.key === 'Escape' && !e.defaultPrevented) { if (document.querySelector('[role="dialog"][data-state="open"]')) return; onClose(); }
-      else if (!typing && !e.metaKey && !e.ctrlKey && !e.altKey && e.key === '[') { e.preventDefault(); go(-1); }
-      else if (!typing && !e.metaKey && !e.ctrlKey && !e.altKey && e.key === ']') { e.preventDefault(); go(1); }
+    };
+    const onShortcut = (e: Event) => {
+      const action = (e as CustomEvent<{ action?: string }>).detail?.action;
+      if (action === 'prev-row') goRef.current(-1); else if (action === 'next-row') goRef.current(1);
     };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    window.addEventListener('fa:shortcut', onShortcut);
+    return () => { window.removeEventListener('keydown', onKey); window.removeEventListener('fa:shortcut', onShortcut); };
   });
 
   const title = row ? `${card?.acronym ?? row.accession} · ${row.testLabel ? `test ${row.testLabel}` : `row ${row.rowIndex}`}` : rec ? `${card?.acronym ?? rec.accession} · ${rec.evidenceKind}` : 'Evidence';

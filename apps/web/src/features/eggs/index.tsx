@@ -102,7 +102,7 @@ export function LedgerEggTip({ rawValue, children }: { rawValue: string; childre
   const off = useUi((s) => s.eggsOff);
   const [open, setOpen] = useState(false); const t = useRef<ReturnType<typeof setTimeout>>();
   useEffect(() => () => clearTimeout(t.current), []);
-  if (rawValue.trim() !== '3400%' || off) return <>{children}</>;
+  if (rawValue.replace(/\s/g, '') !== '3400%' || off) return <>{children}</>;
   const start = () => { clearTimeout(t.current); t.current = setTimeout(() => setOpen(true), 3000); };
   const stop = () => { clearTimeout(t.current); setOpen(false); };
   return (
