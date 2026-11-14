@@ -100,6 +100,13 @@ Each worker ran in its own git worktree and branch; the lead merged in dependenc
 | W9 merge | Typed API client, guarded `ai:publish`, G3 statistics (partial; Terra stopped early) | |
 | this commit | `pnpm ai:record`, `pnpm g3:label`, `g3:adjudicate`, `g3:metrics` (lead) | One command records real Jev judgements honestly; two blind labellers decide whether Jev beats the code baseline |
 
+### Phase 6: wiring, map polish, accessibility (W7, Sonnet 5.5; saved by the lead after a rate limit)
+| Commit | What | Why |
+|---|---|---|
+| `98afe19` | Shortcuts (0 fit, M mark navigation, [ ] rows), coach marks, orbit and timeline events and narration cues wired across features; Gap Map layout rebuilt: labelled reference lines, habitat labels with leader lines, legend with the hollow-burner note, missing-value strips | The parts were built separately and did not talk to each other; labels collided |
+| `e1e8aa2` | axe accessibility specs on key pages in Night and Paper, data-colour contrast test, copy fixes | Accessibility is judged; data marks need 3:1 contrast |
+| merge | 80 browser tests and 172 unit tests pass | |
+
 ## 4. Numbers you can quote (all computed by code from `data/corpus.v1.json`, hash `4d3a7aa6…`)
 
 - 1,476 parsed test rows from 12 PSI investigations; 11 source cells rejected by code.
@@ -120,6 +127,5 @@ Each worker ran in its own git worktree and branch; the lead merged in dependenc
 **Ready for the team now:** `pnpm review` (two people), `pnpm corpus`, `pnpm review:sign d5`, `pnpm review:sign k5`; with keys, `pnpm ai:record`, then `pnpm g3:label` (two people), `pnpm g3:adjudicate`, `pnpm g3:metrics`. Step-by-step guides: `packages/pipeline/README.md` and `packages/server/README.md`.
 
 **In progress (agents):**
-- W7 (Claude Sonnet 5.5): wiring shortcuts, coach marks, eggs and the single audio player across features; Gap Map label overlap; saving resized habitat boxes; axe accessibility and data-colour contrast.
 - WL (Claude Sonnet 5.5, medium): the new dithered landing page with the access button, challenge explainer and team credit.
 - OV-2 (GPT-6.1 Sol): end-to-end review of the merged app, 10-row re-verification against the CSVs, submission readiness, 7-slide deck outline.
