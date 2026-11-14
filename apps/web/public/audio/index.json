@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-11-14T20:31:24.775Z",
+  "voice": "device",
+  "keys": [
+    "landing",
+    "earth-iss__prevention",
+    "earth-iss__detection",
+    "earth-iss__suppression",
+    "earth-iss__explore",
+    "lunar-cabin-example__prevention",
+    "lunar-cabin-example__detection",
+    "lunar-cabin-example__suppression",
+    "lunar-cabin-example__explore",
+    "exploration-upper__prevention",
+    "exploration-upper__detection",
+    "exploration-upper__suppression",
+    "exploration-upper__explore",
+    "suit__prevention",
+    "suit__detection",
+    "suit__suppression",
+    "suit__explore"
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "scenarioKey": "exploration-upper__explore",
+  "scriptHash": "333a1aa62f5cf3603f0e350b23d0d7314496f802946aa6f40a641bb07a952e82",
+  "segments": [
+    {
+      "id": "intro",
+      "title": "Intro",
+      "text": "This overview uses a device voice. No AI voice service is called. This is a briefing for Exploration atmosphere. The preset is an illustrative atmosphere, not a design value.",
+      "claimIds": [
+        "scenario:exploration-upper"
+      ],
+      "cues": [
+        {
+          "kind": "focusHabitat",
+          "habitat": "exploration-upper",
+          "at": 0
+        }
+      ],
+      "startSec": 0,
+      "endSec": 11.15
+    },
+    {
+      "id": "air",
+      "title": "The air",
+      "text": "Exploration atmosphere is shown at 34 percent oxygen and 56.5 kPa. The map draws a tolerance box around that air, three oxygen points and fifteen percent of pressure. Every test row inside the box is counted by code.",
+      "claimIds": [
+        "scenario:exploration-upper"
+      ],
+      "cues": [
+        {
+          "kind": "focusHabitat",
+          "habitat": "exploration-upper",
+          "at": 11.5
+        }
+      ],
+      "startSec": 11.5,
+      "endSec": 26.12
+    },
+    {
+      "id": "tested",
+      "title": "What was tested",
+      "text": "Each mark is one parsed test row. Shape and colour show the fuel phase. Hollow marks are burner-stream oxygen and are left out of counts. A row with no reported pressure sits on the pressure not reported rail.",
+      "claimIds": [
+        "scenario:exploration-upper"
+      ],
+      "cues": [],
+      "startSec": 26.47,
+      "endSec": 41.08
+    },
+    {
+      "id": "gap",
+      "title": "The gap",
+      "text": "The gap sentence is written by code from reported rows. Tables that do not report oxygen are counted as unknown, never as absent. No model writes the counts, and no curve is fitted to the marks.",
+      "claimIds": [
+        "scenario:exploration-upper"
+      ],
+      "cues": [
+        {
+          "kind": "openLedger",
+          "at": 41.43
+        }
+      ],
+      "startSec": 41.43,
+      "endSec": 55.28
+    },
+    {
+      "id": "read",
+      "title": "Where to start",
+      "text": "Use the study list to compare the transparent baseline with the model judgement. The baseline sorts by purpose, overlap, evidence tier and nearby rows. The model column is an ordinal judgement, not a probability that the science is true.",
+      "claimIds": [
+        "PSI-69"
+      ],
+      "cues": [
+        {
+          "kind": "openStudy",
+          "accession": "PSI-69",
+          "at": 55.93
+        }
+      ],
+      "startSec": 55.63,
+      "endSec": 70.63
+    },
+    {
+      "id": "limits",
+      "title": "Limits",
+      "text": "These maps support literature screening. Gravity, hardware and fuel geometry differ between tests. Partial gravity is not represented in the NASA data here. The atlas does not assess flammability, judge materials or replace expert review.",
+      "claimIds": [
+        "scenario:exploration-upper"
+      ],
+      "cues": [
+        {
+          "kind": "clear",
+          "at": 70.98
+        }
+      ],
+      "startSec": 70.98,
+      "endSec": 84.44
+    },
+    {
+      "id": "outro",
+      "title": "Outro",
+      "text": "Open any dot for its source row, hash and licence. The Gap Brief collects the result for a chosen air. NASA does not endorse this project.",
+      "claimIds": [
+        "scenario:exploration-upper"
+      ],
+      "cues": [
+        {
+          "kind": "clear",
+          "at": 84.79
+        }
+      ],
+      "startSec": 84.79,
+      "endSec": 94.79
+    }
+  ],
+  "words": null,
+  "audioUrl": null,
+  "voice": {
+    "provider": "device",
+    "voiceId": null,
+    "modelId": null
+  },
+  "generatedAt": "2026-11-14T20:31:24.774Z",
+  "disclosure": "This overview uses a device voice. No AI voice service is called."
+}

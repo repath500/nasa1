@@ -1,0 +1,133 @@
+{
+  "scenarioKey": "lunar-cabin-example__detection",
+  "scriptHash": "af124ba3f9b399f1dd8964e02f946ce5a2de34481edb0345f4239264c255cb39",
+  "segments": [
+    {
+      "id": "intro",
+      "title": "Intro",
+      "text": "This overview uses a device voice. No AI voice service is called. This is a briefing for Moon base (example). The preset is an illustrative atmosphere, not a design value.",
+      "claimIds": [
+        "scenario:lunar-cabin-example"
+      ],
+      "cues": [
+        {
+          "kind": "focusHabitat",
+          "habitat": "lunar-cabin-example",
+          "at": 0
+        }
+      ],
+      "startSec": 0,
+      "endSec": 11.54
+    },
+    {
+      "id": "air",
+      "title": "The air",
+      "text": "Moon base (example) is shown at 30 percent oxygen and 70.3 kPa. The map draws a tolerance box around that air, three oxygen points and fifteen percent of pressure. Every test row inside the box is counted by code.",
+      "claimIds": [
+        "scenario:lunar-cabin-example"
+      ],
+      "cues": [
+        {
+          "kind": "focusHabitat",
+          "habitat": "lunar-cabin-example",
+          "at": 11.89
+        }
+      ],
+      "startSec": 11.89,
+      "endSec": 26.89
+    },
+    {
+      "id": "tested",
+      "title": "What was tested",
+      "text": "Each mark is one parsed test row. Shape and colour show the fuel phase. Hollow marks are burner-stream oxygen and are left out of counts. A row with no reported pressure sits on the pressure not reported rail.",
+      "claimIds": [
+        "scenario:lunar-cabin-example"
+      ],
+      "cues": [
+        {
+          "kind": "filterPhase",
+          "phases": [
+            "aerosol"
+          ],
+          "at": 27.64
+        }
+      ],
+      "startSec": 27.24,
+      "endSec": 41.85
+    },
+    {
+      "id": "gap",
+      "title": "The gap",
+      "text": "The gap sentence is written by code from reported rows. Tables that do not report oxygen are counted as unknown, never as absent. No model writes the counts, and no curve is fitted to the marks.",
+      "claimIds": [
+        "scenario:lunar-cabin-example"
+      ],
+      "cues": [
+        {
+          "kind": "openLedger",
+          "at": 42.2
+        }
+      ],
+      "startSec": 42.2,
+      "endSec": 56.05
+    },
+    {
+      "id": "read",
+      "title": "Where to start",
+      "text": "Use the study list to compare the transparent baseline with the model judgement. The baseline sorts by purpose, overlap, evidence tier and nearby rows. The model column is an ordinal judgement, not a probability that the science is true.",
+      "claimIds": [
+        "PSI-102"
+      ],
+      "cues": [
+        {
+          "kind": "openStudy",
+          "accession": "PSI-102",
+          "at": 56.7
+        }
+      ],
+      "startSec": 56.4,
+      "endSec": 71.4
+    },
+    {
+      "id": "limits",
+      "title": "Limits",
+      "text": "These maps support literature screening. Gravity, hardware and fuel geometry differ between tests. Partial gravity is not represented in the NASA data here. The atlas does not assess flammability, judge materials or replace expert review.",
+      "claimIds": [
+        "scenario:lunar-cabin-example"
+      ],
+      "cues": [
+        {
+          "kind": "clear",
+          "at": 71.75
+        }
+      ],
+      "startSec": 71.75,
+      "endSec": 85.21
+    },
+    {
+      "id": "outro",
+      "title": "Outro",
+      "text": "Open any dot for its source row, hash and licence. The Gap Brief collects the result for a chosen air. NASA does not endorse this project.",
+      "claimIds": [
+        "scenario:lunar-cabin-example"
+      ],
+      "cues": [
+        {
+          "kind": "clear",
+          "at": 85.56
+        }
+      ],
+      "startSec": 85.56,
+      "endSec": 95.56
+    }
+  ],
+  "words": null,
+  "audioUrl": null,
+  "voice": {
+    "provider": "device",
+    "voiceId": null,
+    "modelId": null
+  },
+  "generatedAt": "2026-11-14T20:31:24.771Z",
+  "disclosure": "This overview uses a device voice. No AI voice service is called."
+}
