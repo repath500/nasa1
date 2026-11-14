@@ -1,20 +1,18 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import { PushPin, Trash } from '@phosphor-icons/react';
 import { useAtlas } from '../../state/store';
 import { useAtlasModel } from '../atlas/data';
 import { Banner, Btn, EmptyState, IconBtn, Skeleton, ErrorState } from '../atlas/_ui';
-import { FREE_NOTE_LIMIT, addNote, removeNote, updateNote, useNotes } from './notesStore';
+import { addNote, removeNote, updateNote, useNotes } from './notesStore';
 
 export default function NotesTab() {
   const model = useAtlasModel();
   const notes = useNotes();
-  const plan = useAtlas((s) => s.license.plan);
   const selected = useAtlas((s) => s.selectedRowId);
   const set = useAtlas((s) => s.set);
   const [text, setText] = useState('');
-  const limited = plan === 'explorer';
-  const full = limited && notes.length >= FREE_NOTE_LIMIT;
+  const full = false;
 
   if (model.status === 'loading') return <Skeleton rows={3} height={48} label="Loading notes" />;
   if (model.status === 'error') return <ErrorState message={model.message} stillWorks="notes saved in this browser are still listed once data loads." onRetry={model.retry} />;
@@ -31,15 +29,10 @@ export default function NotesTab() {
     <>
       <div className="fa-strip__line" style={{ justifyContent: 'space-between' }}>
         <span className="fa-mono" style={{ fontSize: 12 }}>
-          {limited ? `${notes.length} of ${FREE_NOTE_LIMIT} notes used` : `${notes.length} notes`}
+          {`${notes.length} ${notes.length === 1 ? 'note' : 'notes'}`}
         </span>
         <span className="fa-muted" style={{ fontSize: 12 }}>Kept in this browser. Included in the Gap Brief.</span>
       </div>
-      {full && (
-        <Banner tone="accent">
-          The Explorer plan holds {FREE_NOTE_LIMIT} notes. <Link to="/pricing">See plans</Link> for unlimited notes. Evidence, rankings and printing stay free.
-        </Banner>
-      )}
       <form className="fa-sec" onSubmit={(e) => { e.preventDefault(); add(false); }}>
         <label htmlFor="fa-note-text" className="fa-muted" style={{ fontSize: 12 }}>
           {selected ? <>Note on source row <span className="fa-mono">{selected}</span></> : 'Note on the whole view (select a dot to attach it to a row)'}

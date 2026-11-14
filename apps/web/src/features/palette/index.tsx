@@ -85,7 +85,6 @@ export default function CommandPalette() {
     { id: 'redo', label: 'Redo', hint: '⇧⌘Z', run: redo },
     { id: 'shortcuts', label: 'Keyboard shortcuts', hint: '?', run: () => useUi.getState().set({ cheatOpen: true }) },
     { id: 'learn', label: 'Open Learn mode', run: () => navigate('/learn') },
-    { id: 'pricing', label: 'Open pricing', run: () => navigate('/pricing') },
     { id: 'nodata', label: 'Toggle No-AI baseline', run: () => { const s = useAtlas.getState(); s.set({ mode: s.mode === 'no-ai' ? 'explore' : 'no-ai' }); } },
   ];
 

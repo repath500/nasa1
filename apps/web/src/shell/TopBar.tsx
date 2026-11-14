@@ -13,7 +13,7 @@ import { useUi } from './uiStore';
 import { cycleTheme, THEME_LABEL, useListen } from './shortcuts';
 import { KEYS, lsSet } from './storage';
 
-const NAV = [{ to: '/atlas', label: 'Atlas' }, { to: '/learn', label: 'Learn' }, { to: '/pricing', label: 'Pricing' }, { to: '/about', label: 'About' }] as const;
+const NAV = [{ to: '/atlas', label: 'Atlas' }, { to: '/learn', label: 'Learn' }, { to: '/about', label: 'About' }] as const;
 const UNITS: PressureUnit[] = ['kPa', 'psi', 'atm', 'mmHg'];
 const THEME_ICON: Record<Theme, typeof Moon> = { night: Moon, paper: Sun, contrast: CircleHalf };
 

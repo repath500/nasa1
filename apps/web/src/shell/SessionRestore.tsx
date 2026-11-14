@@ -5,7 +5,7 @@ import { Button } from '../components/Button';
 import { KEYS, lsGetJson, lsRemove, lsSetJson } from './storage';
 
 interface Saved { path: string; search: string; at: number }
-const SKIP = ['/', '/checkout/success', '/checkout/cancel', '/present'];
+const SKIP = ['/', '/present'];
 const SAVE = ['/atlas', '/briefing', '/study/', '/compare', '/duel', '/brief/'];
 const saveable = (p: string) => SAVE.some((x) => p === x || (x.endsWith('/') && p.startsWith(x)));
 

@@ -51,41 +51,26 @@ describe('router security', () => {
     const off = await (await router(get('/api/health'), {}, deps())).json();
     expect(off).toEqual({
       ok: true,
-      services: { jev: false, gemini: false, elevenlabs: false, stripe: false },
-      stripeMode: 'off',
+      services: { jev: false, gemini: false, elevenlabs: false },
     });
     const env: Env = {
       TYPESAFE_API_KEY: 't',
       GEMINI_API_KEY: 'g',
       ELEVENLABS_API_KEY: 'e',
       ELEVENLABS_VOICE_ID: 'v',
-      STRIPE_SECRET_KEY: 's',
-      LICENSE_SECRET: 'l',
-      STRIPE_MODE: 'test',
     };
     const on = await (await router(get('/api/health'), env, deps())).json();
-    expect(on.services).toEqual({ jev: true, gemini: true, elevenlabs: true, stripe: true });
-    expect(on.stripeMode).toBe('test');
+    expect(on.services).toEqual({ jev: true, gemini: true, elevenlabs: true });
     expect(JSON.stringify(on)).not.toContain('"t"');
   });
 
-  it('returns 503 Billing not configured from every billing endpoint', async () => {
-    const endpoints: [string, Request][] = [
-      ['checkout', post('/api/checkout', { plan: 'researcher', interval: 'month' })],
-      ['claim', post('/api/license/claim', { sessionId: 'cs_test_1234567890' })],
-      ['license', get('/api/license', { authorization: 'License abcdefghijklmnop' })],
-      ['portal', post('/api/portal', {})],
-      ['webhook', post('/api/stripe/webhook', { id: 'evt_1', type: 'x', data: { object: {} } })],
-    ];
-    for (const [, request] of endpoints) {
-      const res = await router(request, {}, deps());
-      expect(res.status, request.url).toBe(503);
-      expect(await res.json()).toEqual({ error: 'Billing not configured' });
+  it('has no billing endpoints (Fire Atlas is free and open)', async () => {
+    for (const path of ['/api/checkout', '/api/license', '/api/license/claim', '/api/portal', '/api/stripe/webhook']) {
+      const res = await router(new Request('http://localhost' + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' }), {}, deps());
+      expect(res.status).toBe(404);
     }
   });
-});
 
-describe('rank and ask validation', () => {
   it('accepts only allowlisted rank ids and a hex corpus hash', async () => {
     const badScenario = await router(
       post('/api/rank', { scenarioId: 'custom', concern: 'prevention', corpusHash: 'a'.repeat(64) }),

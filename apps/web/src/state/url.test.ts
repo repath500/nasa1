@@ -3,11 +3,11 @@ import { readUrl, writeUrl } from './url';
 import { useAtlas } from './store';
 
 describe('URL sync rules', () => {
-  it('preserves non-atlas parameters (compare, duel, Stripe) when writing', () => {
-    const out = new URLSearchParams(writeUrl('a=PSI-69&b=PSI-25&session_id=cs_test_1&h=suit'));
+  it('preserves non-atlas parameters (compare, duel and others) when writing', () => {
+    const out = new URLSearchParams(writeUrl('a=PSI-69&b=PSI-25&x_other=1&h=suit'));
     expect(out.get('a')).toBe('PSI-69');
     expect(out.get('b')).toBe('PSI-25');
-    expect(out.get('session_id')).toBe('cs_test_1');
+    expect(out.get('x_other')).toBe('1');
     expect(out.get('h')).toBe(useAtlas.getState().habitat);
   });
   it('returns nothing for links without atlas keys, so plain pages do not reset state', () => {

@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import type { HealthResponse } from '@fire/contracts';
-import { useAtlas } from '../state/store';
-import { KEYS, lsGet } from './storage';
 
 /** Thin fetch helpers. Every call tolerates failure (offline, no server, no keys). */
 export async function apiFetch<T>(path: string, init: RequestInit & { timeoutMs?: number } = {}): Promise<{ ok: true; data: T } | { ok: false; status: number; message: string }> {
@@ -10,8 +8,6 @@ export async function apiFetch<T>(path: string, init: RequestInit & { timeoutMs?
   try {
     const headers = new Headers(init.headers);
     if (init.body && !headers.has('content-type')) headers.set('content-type', 'application/json');
-    const token = useAtlas.getState().license.token ?? lsGet(KEYS.license);
-    if (token && !headers.has('authorization')) headers.set('authorization', `License ${token}`);
     const res = await fetch(path, { ...init, headers, signal: init.signal ?? ctrl.signal });
     if (!res.ok) {
       let message = `Request failed (${res.status}).`;

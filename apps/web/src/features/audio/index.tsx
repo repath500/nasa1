@@ -1,5 +1,5 @@
 import { useEffect, useId, useReducer, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ClosedCaptioning, ListBullets, Pause, Play, SkipBack, SkipForward, Waveform as WaveIcon } from '@phosphor-icons/react';
 import type { NarrationCue } from '@fire/contracts';
 import { useAtlas } from '../../state/store';
@@ -108,7 +108,7 @@ function Bar() {
         <p className="mx-auto max-w-[1100px] truncate px-4 pt-2 text-sm text-ink md:whitespace-normal" data-testid="captions">{cur.text}</p>
       )}
       {n.load === 'missing' && (
-        <p className="px-4 pt-2 text-sm text-muted">{habitat === 'custom' ? <>No pre-rendered overview for custom air. Live voice generation is part of the Researcher plan. <Link to="/pricing">See plans</Link>.</> : 'No audio overview has been built for this scenario yet. Everything else still works.'}</p>
+        <p className="px-4 pt-2 text-sm text-muted">{habitat === 'custom' ? 'No pre-rendered overview for custom air yet. The map, rankings and sources all work.' : 'No audio overview has been built for this scenario yet. Everything else still works.'}</p>
       )}
       <div className="mx-auto flex max-w-[1100px] flex-wrap items-center gap-x-3 gap-y-1 px-4 py-1.5 md:flex-nowrap md:py-2">
         <div className="flex items-center gap-1">

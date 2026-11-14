@@ -1,5 +1,5 @@
 import type { HealthResponse } from '@fire/contracts';
-import { elevenLabsConfigured, geminiConfigured, jevConfigured, stripeConfigured, stripeMode, type Env } from '../env.ts';
+import { elevenLabsConfigured, geminiConfigured, jevConfigured, type Env } from '../env.ts';
 import { json } from '../http.ts';
 
 export const health = async (_req: Request, env: Env): Promise<Response> => {
@@ -9,9 +9,7 @@ export const health = async (_req: Request, env: Env): Promise<Response> => {
       jev: jevConfigured(env),
       gemini: geminiConfigured(env),
       elevenlabs: elevenLabsConfigured(env),
-      stripe: stripeConfigured(env),
     },
-    stripeMode: stripeMode(env),
   };
   return json(body);
 };

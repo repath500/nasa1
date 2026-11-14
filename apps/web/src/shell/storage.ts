@@ -20,7 +20,6 @@ export const KEYS = {
   session: 'fa.session',
   recent: 'fa.recent',
   coach: 'fa.coach.seen',
-  license: 'fa.license',
   eggsOff: 'fa.eggs.off',
   konami: 'fa.konami',
   theme: 'fa.theme',

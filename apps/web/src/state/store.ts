@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import {
   DEFAULT_PRIORITY, DEFAULT_TOLERANCES, PRESETS,
   type BaselineKey, type Concern, type FuelPhase, type LadderLevel, type Mode, type PanelTab,
-  type Plan, type PressureUnit, type Scenario, type ScenarioId, type Theme, type Tolerances,
+  type PressureUnit, type Scenario, type ScenarioId, type Theme, type Tolerances,
 } from '@fire/contracts';
 
 /** SPEC §13. One store, five slices. Continuous values (map transform, audio time) do NOT live here per frame. */
@@ -31,8 +31,6 @@ export interface AtlasState {
   ladder: LadderLevel | null;
   // audio slice
   audio: { playing: boolean; following: boolean; scenarioKey: string | null };
-  // license slice
-  license: { plan: Plan; token: string | null };
   // actions
   set: (patch: Partial<Omit<AtlasState, 'set' | 'scenario'>>) => void;
   scenario: () => Scenario;
@@ -58,7 +56,6 @@ export const useAtlas = create<AtlasState>((set, get) => ({
   mapDomain: null,
   ladder: null,
   audio: { playing: false, following: true, scenarioKey: null },
-  license: { plan: 'explorer', token: null },
   set: (patch) => set(patch),
   scenario: () => {
     const s = get();

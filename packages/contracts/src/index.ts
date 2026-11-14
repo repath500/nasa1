@@ -193,7 +193,8 @@ export interface JevJudgement {
   evidenceDirectness: number | null;
   directnessProbs: number[] | null;
   pillar: { choice: Pillar; probabilities: Partial<Record<Pillar, number>>; confidence: number } | null;
-  source: 'jev-live' | 'decision-1' | 'cache' | 'fixture';
+  /** hydrogen-fallback: Gemini 4 Hydrogen (via OpenRouter) answering Jev's questions when Jev is unavailable. */
+  source: 'jev-live' | 'decision-1' | 'hydrogen-fallback' | 'cache' | 'fixture';
   modelId: string;
   recordedAt: string;
 }
@@ -266,11 +267,8 @@ export interface NarrationManifest {
   disclosure: string;
 }
 
-export type Plan = 'explorer' | 'researcher' | 'lab';
-export interface LicenseInfo { plan: Plan; status: 'active' | 'expired' | 'revoked' | 'none'; expiresAt: string | null; usage: { audioMinutes: number; askCalls: number } }
-export interface CheckoutRequest { plan: 'researcher' | 'lab' | 'support'; interval: 'month' | 'year' | 'once'; amountCents?: number }
 
-export interface HealthResponse { ok: boolean; services: { jev: boolean; gemini: boolean; elevenlabs: boolean; stripe: boolean }; stripeMode: 'test' | 'live' | 'off' }
+export interface HealthResponse { ok: boolean; services: { jev: boolean; gemini: boolean; elevenlabs: boolean } }
 
 // ---------- UI shared ----------
 export type Mode = 'explore' | 'briefing' | 'listen' | 'present' | 'learn' | 'duel' | 'no-ai';

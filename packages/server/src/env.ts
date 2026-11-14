@@ -12,18 +12,12 @@ export interface KvNamespaceLike {
 export interface Env {
   TYPESAFE_API_KEY?: string;
   GEMINI_API_KEY?: string;
+  /** Preferred route for Gemini 4 Hydrogen (google/gemini-4-hydrogen via OpenRouter). */
+  OPENROUTER_API_KEY?: string;
+  OPENROUTER_MODEL?: string;
   ELEVENLABS_API_KEY?: string;
   ELEVENLABS_VOICE_ID?: string;
   ELEVENLABS_MODEL_ID?: string;
-  STRIPE_SECRET_KEY?: string;
-  STRIPE_WEBHOOK_SECRET?: string;
-  STRIPE_PRICE_RESEARCHER_MONTH?: string;
-  STRIPE_PRICE_RESEARCHER_YEAR?: string;
-  STRIPE_PRICE_LAB_MONTH?: string;
-  STRIPE_PRICE_LAB_YEAR?: string;
-  STRIPE_PRICE_SUPPORT?: string;
-  STRIPE_MODE?: string;
-  LICENSE_SECRET?: string;
   PUBLIC_ORIGIN?: string;
   /** Cloudflare KV binding for licence records. */
   LICENSES?: KvNamespaceLike;
@@ -35,7 +29,6 @@ export interface Env {
   TYPESAFE_API_BASE?: string;
   GEMINI_API_BASE?: string;
   ELEVENLABS_API_BASE?: string;
-  STRIPE_API_BASE?: string;
   GEMINI_MODEL?: string;
   /** Authoring only: persist live model responses as recorded cache. */
   CACHE_RECORD?: string;
@@ -50,19 +43,11 @@ export interface Env {
 const present = (value: string | undefined): boolean => typeof value === 'string' && value.trim().length > 0;
 
 export const jevConfigured = (env: Env): boolean => present(env.TYPESAFE_API_KEY);
-export const geminiConfigured = (env: Env): boolean => present(env.GEMINI_API_KEY);
+export const geminiConfigured = (env: Env): boolean => present(env.GEMINI_API_KEY) || present(env.OPENROUTER_API_KEY);
 export const elevenLabsConfigured = (env: Env): boolean =>
   present(env.ELEVENLABS_API_KEY) && present(env.ELEVENLABS_VOICE_ID);
-export const licenseConfigured = (env: Env): boolean => present(env.LICENSE_SECRET);
-export const stripeConfigured = (env: Env): boolean =>
-  present(env.STRIPE_SECRET_KEY) && present(env.LICENSE_SECRET);
 
-export type StripeMode = 'test' | 'live' | 'off';
 
-export const stripeMode = (env: Env): StripeMode => {
-  if (!stripeConfigured(env)) return 'off';
-  return env.STRIPE_MODE === 'live' ? 'live' : 'test';
-};
 
 export const publicOrigin = (env: Env): string => {
   const raw = env.PUBLIC_ORIGIN?.trim();

@@ -4,6 +4,8 @@ import { UpstreamError, upstreamJson } from './upstream.ts';
 import { DecisionUpstreamSchema, toPillarRecord } from './schemas.ts';
 import { buildJevQuestions, buildJevState, type JudgeContext, type JudgeOptions } from './jev.ts';
 import { consumeProviderCall } from './budget.ts';
+import { openRouterConfigured, openRouterJson } from './openrouter.ts';
+import { z } from 'zod';
 
 export const DECISION_MODEL = 'gemini-decision-1';
 export const DECISION_BASE = 'https://generativelanguage.googleapis.com';
@@ -38,11 +40,83 @@ const levelsFrom = (probabilities: Record<string, number>): [number, number, num
   return levels;
 };
 
+const PILLARS = ['prevention', 'detection', 'suppression', 'fundamental', 'unknown'] as const;
+const prob = { type: 'number', minimum: 0, maximum: 1 };
+const HYDROGEN_JUDGE_SCHEMA = {
+  type: 'object',
+  properties: {
+    regime_relevance: { ...prob, description: 'Probability the answer to the regime_relevance question is yes.' },
+    evidence_directness: {
+      type: 'object',
+      properties: { level_0: prob, level_1: prob, level_2: prob, level_3: prob },
+      required: ['level_0', 'level_1', 'level_2', 'level_3'],
+      additionalProperties: false,
+      description: 'Probability of each criterion, in the order given; must sum to 1.',
+    },
+    pillar: {
+      type: 'object',
+      properties: {
+        choice: { type: 'string', enum: [...PILLARS] },
+        probabilities: { type: 'object', properties: Object.fromEntries(PILLARS.map((p) => [p, prob])), required: [...PILLARS], additionalProperties: false },
+        confidence: prob,
+      },
+      required: ['choice', 'probabilities', 'confidence'],
+      additionalProperties: false,
+    },
+  },
+  required: ['regime_relevance', 'evidence_directness', 'pillar'],
+  additionalProperties: false,
+};
+const HydrogenJudgeSchema = z.object({
+  regime_relevance: z.number().min(0).max(1),
+  evidence_directness: z.object({ level_0: z.number().min(0).max(1), level_1: z.number().min(0).max(1), level_2: z.number().min(0).max(1), level_3: z.number().min(0).max(1) }),
+  pillar: z.object({ choice: z.enum(PILLARS), probabilities: z.record(z.number().min(0).max(1)), confidence: z.number().min(0).max(1) }),
+});
+
+/**
+ * Fallback judge: Gemini 4 Hydrogen via OpenRouter answers the same three questions Jev is asked, as typed JSON.
+ * Its probabilities are the model's own stated distribution, not calibrated and not a probability that the science
+ * is true. Always labelled hydrogen-fallback, never Jev.
+ */
+export const judgeWithHydrogenFallback = async (env: Env, ctx: JudgeContext, options?: JudgeOptions): Promise<JevJudgement> => {
+  const result = await openRouterJson(env, {
+    schemaName: 'fire_atlas_judgement',
+    schema: HYDROGEN_JUDGE_SCHEMA,
+    system: 'You judge NASA microgravity combustion evidence for a literature screen. Answer only the questions given, using only the state given. Do not assess fire safety. Return only the JSON object.',
+    user: JSON.stringify({ state: buildJevState(ctx), questions: buildJevQuestions() }),
+    timeoutMs: options?.timeoutMs ?? 6000,
+    fetchImpl: options?.fetchImpl,
+  });
+  const parsed = HydrogenJudgeSchema.safeParse(result.value);
+  if (!parsed.success) throw new UpstreamError('Hydrogen judgement failed validation', 502);
+  const d = parsed.data;
+  const raw = [d.evidence_directness.level_0, d.evidence_directness.level_1, d.evidence_directness.level_2, d.evidence_directness.level_3];
+  const total = sum(raw);
+  if (Math.abs(total - 1) > 0.05) throw new UpstreamError('Hydrogen directness probabilities do not sum to one', 502);
+  const levels = raw.map((p) => p / total) as [number, number, number, number];
+  const pillarTotal = sum(Object.values(d.pillar.probabilities));
+  if (Math.abs(pillarTotal - 1) > 0.05) throw new UpstreamError('Hydrogen pillar probabilities do not sum to one', 502);
+  const probabilities = toPillarRecord(Object.fromEntries(Object.entries(d.pillar.probabilities).map(([k, v]) => [k, v / pillarTotal])));
+  return {
+    accession: ctx.study.accession,
+    scenarioId: ctx.scenario.id,
+    regimeRelevance: d.regime_relevance,
+    evidenceDirectness: Number(levels.reduce((acc, p, i) => acc + p * i, 0).toFixed(2)),
+    directnessProbs: levels,
+    pillar: { choice: d.pillar.choice, probabilities, confidence: d.pillar.confidence },
+    source: 'hydrogen-fallback',
+    modelId: result.modelId,
+    recordedAt: (options?.now?.() ?? new Date()).toISOString(),
+  };
+};
+
 export const judgeWithDecision1 = async (
   env: Env,
   ctx: JudgeContext,
   options?: JudgeOptions,
 ): Promise<JevJudgement> => {
+  // Gemini decision-1 is not available on OpenRouter; with an OpenRouter key the fallback judge is Hydrogen.
+  if (openRouterConfigured(env)) return judgeWithHydrogenFallback(env, ctx, options);
   if (!env.GEMINI_API_KEY) throw new UpstreamError('decision-1 is not configured', 503);
   consumeProviderCall(env, 'gemini');
   const body = buildDecisionRequest(ctx);

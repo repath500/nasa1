@@ -56,6 +56,9 @@ export const explain = async (req: Request, env: Env, options?: ModelCallOptions
           scenarioLabel: scenario.label,
           o2Pct: scenario.o2Pct,
           totalKpa: scenario.totalKpa,
+          objective: study.objective,
+          hardware: study.hardware,
+          phases: study.phases,
         },
         options,
       );
@@ -68,7 +71,7 @@ export const explain = async (req: Request, env: Env, options?: ModelCallOptions
         result.claimIds.length > 0 &&
         result.claimIds.every((id) => allowedClaims.has(id))
       ) {
-        return json({ text: result.text, claimIds: result.claimIds, source: 'hydrogen' });
+        return json({ text: result.text, claimIds: result.claimIds, source: 'hydrogen', modelId: result.modelId });
       }
     } catch {
       // fall through to the code template

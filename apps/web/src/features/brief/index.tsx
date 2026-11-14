@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { DownloadSimple, Printer } from '@phosphor-icons/react';
 import { PRESETS, type FuelPhase, type ScenarioId } from '@fire/contracts';
 import pkg from '../../../package.json';
@@ -25,13 +25,12 @@ export default function BriefPage() {
   const concern = useAtlas((s) => s.concern);
   const tol = useAtlas((s) => s.tolerances);
   const unit = useAtlas((s) => s.unit);
-  const plan = useAtlas((s) => s.license.plan);
   const selectedRowId = useAtlas((s) => s.selectedRowId);
   const notes = useNotes();
   const [paper, setPaper] = useState<'a4' | 'letter'>(() => (navigator.language === 'en-US' ? 'letter' : 'a4'));
   const [lab, setLab] = useState(() => { try { return localStorage.getItem(LAB_KEY) ?? ''; } catch { return ''; } });
   const [withNotes, setWithNotes] = useState(true);
-  const paid = plan !== 'explorer';
+  const paid = true;
 
   /* the route segment is the habitat id and wins over the stored one */
   useEffect(() => {
@@ -80,12 +79,11 @@ export default function BriefPage() {
             <select id="brief-paper" className="fa-select" value={paper} onChange={(e) => setPaper(e.target.value as 'a4' | 'letter')}><option value="a4">A4</option><option value="letter">Letter</option></select>
           </span>
           <Btn icon={<DownloadSimple size={14} />} onClick={() => downloadText('fire-atlas-references.bib', bibtexAll(model.cards, model.corpus), 'application/x-bibtex')}>BibTeX</Btn>
-          <span className="fa-field" role="group" aria-label="Researcher plan export">
+          <span className="fa-field" role="group" aria-label="Export options">
             <label className="fa-bar__label" htmlFor="brief-lab">Lab name</label>
             <input id="brief-lab" className="fa-input" value={lab} disabled={!paid} onChange={(e) => setLab(e.target.value)} maxLength={80} style={{ width: 160 }} />
             <label className="fa-field" style={{ fontSize: 12 }}><input type="checkbox" checked={withNotes} disabled={!paid} onChange={(e) => setWithNotes(e.target.checked)} /> Include notes</label>
           </span>
-          {!paid && <span className="fa-muted" style={{ fontSize: 12 }}>PDF with notes and your lab name is part of the Researcher plan. <Link to="/pricing">See plans</Link>. Printing the brief stays free.</span>}
         </div>
 
         {model.rows.length === 0 && model.corpus && model.corpus.rows.length > 0 && (

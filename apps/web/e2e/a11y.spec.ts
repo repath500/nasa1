@@ -7,7 +7,6 @@ const PAGES: { path: string; ready: (page: Page) => Promise<unknown> }[] = [
   { path: '/briefing', ready: page => page.getByTestId('briefing').waitFor() },
   { path: '/atlas', ready: async page => { await page.waitForSelector('.gapmap-chart svg[data-plot]'); await page.getByRole('table', { name: /Studies ranked/ }).waitFor(); } },
   { path: '/study/PSI-69', ready: page => page.getByRole('heading', { level: 1 }).first().waitFor() },
-  { path: '/pricing', ready: page => page.getByRole('heading', { level: 1 }).first().waitFor() },
   { path: '/about', ready: page => page.getByRole('heading', { level: 1 }).first().waitFor() },
 ];
 const THEMES = ['night', 'paper', 'contrast'] as const;

@@ -1,4 +1,4 @@
-import type { AskResponse, CheckoutRequest, Concern, HealthResponse, LicenseInfo, NarrationManifest, RankRequest, RankResponse, ScenarioId } from '@fire/contracts';
+import type { AskResponse, Concern, HealthResponse, NarrationManifest, RankRequest, RankResponse, ScenarioId } from '@fire/contracts';
 
 export class ApiError extends Error {
   constructor(message: string, readonly status: number | null, readonly requestId: string) {
@@ -10,7 +10,6 @@ export class ApiError extends Error {
 interface RequestOptions {
   signal?: AbortSignal;
   requestId?: string;
-  license?: string;
 }
 
 async function request<ResponseBody>(path: string, body?: unknown, options: RequestOptions = {}): Promise<ResponseBody> {
@@ -23,7 +22,6 @@ async function request<ResponseBody>(path: string, body?: unknown, options: Requ
   try {
     const headers = new Headers({ 'X-Request-Id': requestId });
     if (body !== undefined) headers.set('Content-Type', 'application/json');
-    if (options.license) headers.set('Authorization', `License ${options.license}`);
     const response = await fetch(path, {
       method: body === undefined ? 'GET' : 'POST',
       headers,
@@ -54,8 +52,4 @@ export const api = {
   ask: (question: string, options?: RequestOptions) => request<AskResponse>('/api/ask', { question }, options),
   narrate: (body: { scenarioKey: string } | { customScenario: { o2Pct: number; totalKpa: number; concern: Concern } }, options?: RequestOptions) =>
     request<NarrationManifest>('/api/narrate', body, options),
-  checkout: (body: CheckoutRequest, options?: RequestOptions) => request<{ url: string }>('/api/checkout', body, options),
-  license: (license: string, options?: RequestOptions) => request<LicenseInfo>('/api/license', undefined, { ...options, license }),
-  claimLicense: (sessionId: string, options?: RequestOptions) =>
-    request<{ token: string; plan: string; expiresAt: string }>('/api/license/claim', { sessionId }, options),
 };

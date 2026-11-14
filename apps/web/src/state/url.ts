@@ -6,7 +6,7 @@ import { useAtlas, type AtlasState } from './store';
 /**
  * SPEC §13 / contracts UrlState. Two-way sync between the query string and the store.
  * - Only the atlas keys below are owned here; every other parameter (compare a/b, duel h1/h2,
- *   Stripe session_id, billing) is preserved untouched.
+ *   any other feature's keys) is preserved untouched.
  * - Back/Forward and pasted links rehydrate the store; our own writes are not re-read (no echo loop).
  * - Committed choices (habitat, concern, fuel, material, mode) push a history entry; continuous
  *   changes (custom O2/pressure drags, selection, tab, units, timeline) replace it.
@@ -20,7 +20,7 @@ const UNITS: PressureUnit[] = ['kPa', 'psi', 'atm', 'mmHg'];
 
 const ATLAS_KEYS = ['h', 'o2', 'kpa', 'q', 'f', 'm', 'mode', 'tab', 'sel', 'u', 't', 'ex'] as const;
 const COMMITTED_KEYS = ['h', 'q', 'f', 'm', 'mode'] as const;
-/** Routes whose view depends on atlas state; other pages (pricing, account, about) keep clean URLs. */
+/** Routes whose view depends on atlas state; other pages (learn, about) keep clean URLs. */
 const SYNCED_ROUTES = ['/atlas', '/briefing', '/study', '/compare', '/brief', '/duel'];
 
 type UrlPatch = Partial<Pick<AtlasState, 'habitat' | 'custom' | 'concern' | 'fuelFilter' | 'material' | 'mode' | 'panelTab' | 'selectedRowId' | 'unit' | 'timelineYear' | 'expert'>>;

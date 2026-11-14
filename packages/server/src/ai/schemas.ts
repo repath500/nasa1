@@ -44,7 +44,7 @@ export const DecisionUpstreamSchema = z.object({
   }),
 });
 
-const judgementSource = z.enum(['jev-live', 'decision-1', 'cache', 'fixture']);
+const judgementSource = z.enum(['jev-live', 'decision-1', 'hydrogen-fallback', 'cache', 'fixture']);
 
 export const JevJudgementSchema = z.object({
   accession: z.string().min(1).max(40),
@@ -101,71 +101,6 @@ export const ElevenLabsResponseSchema = z.object({
   alignment: NarrationAlignmentSchema.nullable().optional(),
   normalized_alignment: NarrationAlignmentSchema.nullable().optional(),
 });
-
-export const CheckoutRequestSchema = z
-  .object({
-    plan: z.enum(['researcher', 'lab', 'support']),
-    interval: z.enum(['month', 'year', 'once']),
-    amountCents: z.number().int().min(100).max(500000).optional(),
-  })
-  .superRefine((value, ctx) => {
-    if (value.plan === 'support' && value.interval !== 'once') {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'support requires interval once', path: ['interval'] });
-    }
-    if (value.plan !== 'support' && value.interval === 'once') {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'subscriptions require month or year', path: ['interval'] });
-    }
-    if (value.amountCents !== undefined && value.plan !== 'support') {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'custom amount is support only', path: ['amountCents'] });
-    }
-    if (value.plan === 'lab' && value.interval === 'year') {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'lab yearly price is not configured', path: ['interval'] });
-    }
-  });
-
-export const LicenseTokenPayloadSchema = z
-  .object({
-    plan: z.enum(['explorer', 'researcher', 'lab']),
-    customer: z.string().min(1).max(120),
-    exp: z.number().int().positive(),
-    nonce: z.string().min(8).max(80),
-  })
-  .strict();
-
-export const LicenseClaimSchema = z.object({ sessionId: z.string().min(8).max(200) });
-
-export const StripeSessionSchema = z
-  .object({
-    id: z.string().min(3),
-    object: z.literal('checkout.session').optional(),
-    status: z.string().nullable().optional(),
-    payment_status: z.string().nullable().optional(),
-    mode: z.string().nullable().optional(),
-    customer: z.union([z.string(), z.object({ id: z.string() }).passthrough()]).nullable().optional(),
-    subscription: z.union([z.string(), z.object({ id: z.string() }).passthrough()]).nullable().optional(),
-    metadata: z.record(z.string(), z.string()).nullable().optional(),
-    amount_total: z.number().nullable().optional(),
-  })
-  .passthrough();
-
-export const StripeSubscriptionSchema = z
-  .object({
-    id: z.string().min(3),
-    status: z.string().optional(),
-    current_period_end: z.number().int().optional(),
-    customer: z.union([z.string(), z.object({ id: z.string() }).passthrough()]).nullable().optional(),
-    metadata: z.record(z.string(), z.string()).nullable().optional(),
-  })
-  .passthrough();
-
-export const StripeCheckoutResponseSchema = z.object({ url: z.string().url() }).passthrough();
-
-export const StripePortalResponseSchema = z.object({ url: z.string().url() }).passthrough();
-
-export const PlanForToken = (plan: string): 'explorer' | 'researcher' | 'lab' => {
-  if (plan === 'researcher' || plan === 'lab') return plan;
-  return 'explorer';
-};
 
 export const toPillarRecord = (value: unknown): Partial<Record<Pillar, number>> => {
   if (!value || typeof value !== 'object') return {};

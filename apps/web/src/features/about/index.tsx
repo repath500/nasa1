@@ -62,8 +62,8 @@ export default function AboutPage() {
         </ul>
       </section>
       <section className="fa-sec fa-prose">
-        <H id="free">What is free</H>
-        <p>NASA derived evidence is never paywalled: the Gap Map, rankings, source rows, the Caught by code ledger, Learn mode, preset audio overviews and printing the brief are free. Paid plans cover things that cost money to run, such as live AI and voice generation and branded exports. In this build payments run in Stripe test mode and no real charge is made. <Link to="/pricing">See plans</Link>.</p>
+        <H id="free">Free and open</H>
+        <p>Fire Atlas is a free, open-source research tool built for a hackathon. There are no accounts, plans or payments. Everything is free to use, and the code is Apache-2.0.</p>
       </section>
       <section className="fa-sec fa-prose">
         <H id="trust">How to trust a number</H>
@@ -223,7 +223,6 @@ export function CreditsPage() {
           <li><strong>Gemini 4 Hydrogen</strong> (Google): proposes table column maps and paper extracts at build time, parses questions, and drafts explanations that must pass a number guard.</li>
           <li><strong>Gemini decision-1</strong> (Google): fallback for the judgements. Always labelled decision-1, never as Jev.</li>
           <li><strong>ElevenLabs</strong>: the AI-generated voice in audio overviews. A stock library voice is used. No cloned or impersonated voice, and no imitation of any NASA voice. Each overview says so aloud and in text.</li>
-          <li><strong>Stripe</strong>: hosted checkout in <strong>test mode</strong> for this build. No real charge is made. Judges may use Stripe's test card.</li>
         </ul>
         <p>These services are proprietary and are not redistributed. Where a value carries the <Badge kind="fixture" /> chip it is a placeholder, not model output.</p>
       </section>
