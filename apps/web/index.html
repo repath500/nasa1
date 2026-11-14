@@ -1,13 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="night">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fire Atlas</title>
     <meta name="description" content="Every NASA microgravity fire test, mapped against the air of future habitats." />
+    <meta name="theme-color" content="#0B0D10" />
+    <link rel="preload" href="/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      /* Apply the saved theme before first paint so there is no flash. Storage may be blocked. */
+      try {
+        var t = localStorage.getItem('fa.theme');
+        if (t === 'paper' || t === 'night' || t === 'contrast') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>Fire Atlas needs JavaScript to draw the map. The method and credits are described in the project README.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
