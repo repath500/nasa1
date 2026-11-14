@@ -13,7 +13,7 @@ export interface BriefingData {
 export function useBriefingData(): BriefingData {
   const state = useCorpus();
   const habitat = useAtlas((s) => s.habitat); const custom = useAtlas((s) => s.custom); const tol = useAtlas((s) => s.tolerances);
-  const fuel = useAtlas((s) => s.fuelFilter); const material = useUi((s) => s.material);
+  const fuel = useAtlas((s) => s.fuelFilter); const material = useAtlas((x) => x.material);
   const corpus = state.status === 'ready' ? state.corpus : null;
   const scenario = useMemo(() => useAtlas.getState().scenario(), [habitat, custom]); // eslint-disable-line react-hooks/exhaustive-deps
   const counts = useMemo(() => (corpus ? countNear(corpus.rows, scenario, tol, fuel, material) : { covers: 0, byPhase: {}, unplaceable: 0, total: 0 }), [corpus, scenario, tol, fuel, material]);

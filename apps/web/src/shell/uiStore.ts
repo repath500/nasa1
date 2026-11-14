@@ -6,14 +6,12 @@ interface UiState {
   paletteOpen: boolean;
   cheatOpen: boolean;
   navOpen: boolean;
-  /** Material chosen in the wizard or palette (store has no material slice yet). */
-  material: string | null;
   eggsOff: boolean;
   coachOpen: boolean;
   set: (p: Partial<Omit<UiState, 'set'>>) => void;
 }
 export const useUi = create<UiState>((set) => ({
-  paletteOpen: false, cheatOpen: false, navOpen: false, material: null, coachOpen: false,
+  paletteOpen: false, cheatOpen: false, navOpen: false, coachOpen: false,
   eggsOff: lsGet(KEYS.eggsOff) === '1',
   set: (p) => set(p),
 }));

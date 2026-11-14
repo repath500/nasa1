@@ -282,6 +282,7 @@ export interface UrlState {
   kpa?: number;           // custom pressure kPa
   q: Concern;             // concern
   f?: FuelPhase[];        // fuel phase filter
+  m?: string;             // material
   mode?: Mode;
   tab?: PanelTab;
   sel?: string;           // selected row id

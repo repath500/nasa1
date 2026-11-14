@@ -12,6 +12,8 @@ export interface AtlasState {
   custom: { o2Pct: number; totalKpa: number };
   concern: Concern;
   fuelFilter: FuelPhase[];
+  /** Material chosen in the wizard or palette, e.g. "PMMA". */
+  material: string | null;
   tolerances: Tolerances;
   priority: BaselineKey[];
   // view slice
@@ -41,6 +43,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
   custom: { o2Pct: 30, totalKpa: 70.3 },
   concern: 'prevention',
   fuelFilter: [],
+  material: null,
   tolerances: DEFAULT_TOLERANCES,
   priority: DEFAULT_PRIORITY,
   mode: 'explore',

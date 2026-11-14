@@ -179,10 +179,10 @@ function ConcernStep({ headRef, data }: StepProps) {
 }
 
 function FuelStep({ headRef, data }: StepProps) {
-  const s = useAtlas(); const ui = useUi(); const [q, setQ] = useState(ui.material ?? ''); const [open, setOpen] = useState(false); const lid = useId();
-  const toggle = (p: FuelPhase) => { s.set({ fuelFilter: s.fuelFilter.includes(p) ? s.fuelFilter.filter((x) => x !== p) : [...s.fuelFilter, p] }); ui.set({ material: null }); setQ(''); };
+  const s = useAtlas(); const ui = useUi(); const [q, setQ] = useState(s.material ?? ''); const [open, setOpen] = useState(false); const lid = useId();
+  const toggle = (p: FuelPhase) => { s.set({ fuelFilter: s.fuelFilter.includes(p) ? s.fuelFilter.filter((x) => x !== p) : [...s.fuelFilter, p] }); s.set({ material: null }); setQ(''); };
   const matches = data.materials.filter((m) => !q || m.name.toLowerCase().includes(q.toLowerCase())).slice(0, 8);
-  const pick = (name: string, phase: FuelPhase) => { ui.set({ material: name }); s.set({ fuelFilter: [phase] }); setQ(name); setOpen(false); };
+  const pick = (name: string, phase: FuelPhase) => { s.set({ material: name }); s.set({ fuelFilter: [phase] }); setQ(name); setOpen(false); };
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_380px]">
       <div>
@@ -195,17 +195,17 @@ function FuelStep({ headRef, data }: StepProps) {
                 className={`inline-flex min-h-11 items-center gap-2 border px-4 text-sm transition-colors duration-[var(--dur-step)] active:scale-[0.98] ${on ? 'border-accent bg-raised' : 'border-hairline hover:border-strong'}`}>
                 <span aria-hidden className="size-3" style={{ background: p.color }} />{p.label}<span className="text-muted">{p.hint}</span>
               </button>); })}
-          {s.fuelFilter.length > 0 && <Button variant="ghost" onClick={() => { s.set({ fuelFilter: [] }); ui.set({ material: null }); setQ(''); }}>Clear</Button>}
+          {s.fuelFilter.length > 0 && <Button variant="ghost" onClick={() => { s.set({ fuelFilter: [] }); s.set({ material: null }); setQ(''); }}>Clear</Button>}
         </div>
         <div className="relative mt-6 max-w-[420px]">
           <label htmlFor={lid} className="mb-1 block text-[13px] text-muted">Material</label>
           <input id={lid} role="combobox" aria-expanded={open} aria-controls={`${lid}-list`} aria-autocomplete="list" value={q} autoComplete="off" placeholder="PMMA, Nomex, heptane, methanol"
-            onChange={(e) => { setQ(e.target.value); setOpen(true); if (!e.target.value) ui.set({ material: null }); }} onFocus={() => setOpen(true)} onBlur={() => setTimeout(() => setOpen(false), 120)}
+            onChange={(e) => { setQ(e.target.value); setOpen(true); if (!e.target.value) s.set({ material: null }); }} onFocus={() => setOpen(true)} onBlur={() => setTimeout(() => setOpen(false), 120)}
             onKeyDown={(e) => { if (e.key === 'Enter' && matches[0] && open) { e.preventDefault(); pick(matches[0].name, matches[0].phase); } }}
             className="min-h-10 w-full rounded-[2px] border border-strong bg-bg px-3 text-sm" data-testid="material-input" />
           {open && matches.length > 0 && (
             <ul id={`${lid}-list`} role="listbox" aria-label="Materials in the corpus" className="absolute left-0 right-0 z-10 mt-1 max-h-60 overflow-auto border border-strong bg-surface">
-              {matches.map((m) => <li key={m.name} role="option" aria-selected={ui.material === m.name} onMouseDown={(e) => { e.preventDefault(); pick(m.name, m.phase); }} className="flex min-h-10 cursor-pointer items-center justify-between px-3 text-sm hover:bg-raised"><span>{m.name}</span><span className="text-xs text-muted">{m.phase}</span></li>)}
+              {matches.map((m) => <li key={m.name} role="option" aria-selected={s.material === m.name} onMouseDown={(e) => { e.preventDefault(); pick(m.name, m.phase); }} className="flex min-h-10 cursor-pointer items-center justify-between px-3 text-sm hover:bg-raised"><span>{m.name}</span><span className="text-xs text-muted">{m.phase}</span></li>)}
             </ul>
           )}
           {data.corpus && data.materials.length === 0 && <p className="mt-1 text-xs text-muted">No named materials in this data set yet.</p>}
@@ -220,7 +220,7 @@ function FuelStep({ headRef, data }: StepProps) {
 }
 
 function SummaryStep({ headRef, data, onFinish }: StepProps & { onFinish: (listen: boolean) => void }) {
-  const s = useAtlas(); const scenario = s.scenario(); const material = useUi((u) => u.material);
+  const s = useAtlas(); const scenario = s.scenario(); const material = useAtlas((x) => x.material);
   const sentence = briefingSentence({ concern: s.concern, scenario, counts: data.counts, phases: s.fuelFilter, solidMax: data.solidMax, kpaLabel: formatPressure(scenario.totalKpa, s.unit) });
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_380px]">

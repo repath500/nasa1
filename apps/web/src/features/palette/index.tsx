@@ -65,7 +65,7 @@ export default function CommandPalette() {
     if (f.concern) patch.concern = f.concern;
     patch.fuelFilter = f.fuelPhase ? [f.fuelPhase] : s.fuelFilter;
     s.set(patch);
-    useUi.getState().set({ material: f.material });
+    useAtlas.getState().set({ material: f.material });
     close(); navigate({ pathname: '/atlas', search: window.location.search });
   };
 
@@ -128,7 +128,7 @@ export default function CommandPalette() {
                   onSelect={() => run(r, () => {
                     if (r.kind === 'study') navigate(`/study/${r.id}`);
                     else if (r.kind === 'habitat') { useAtlas.getState().set({ habitat: r.id as ScenarioId }); navigate('/atlas'); }
-                    else if (r.kind === 'material') { useUi.getState().set({ material: r.id }); navigate('/atlas'); }
+                    else if (r.kind === 'material') { useAtlas.getState().set({ material: r.id }); navigate('/atlas'); }
                     else actions.find((a) => a.id === r.id)?.run();
                   })}>
                   <Clock size={18} className="text-muted" aria-hidden /><span>{r.label}</span>
@@ -165,7 +165,7 @@ export default function CommandPalette() {
             <Command.Group heading="Materials" className={GROUP}>
               {materials.map(([name, phase]) => (
                 <Command.Item key={name} value={`material ${name} ${phase}`} className={ITEM}
-                  onSelect={() => run({ id: name, label: name, kind: 'material' }, () => { useAtlas.getState().set({ fuelFilter: [phase] }); useUi.getState().set({ material: name }); navigate({ pathname: '/atlas', search: window.location.search }); })}>
+                  onSelect={() => run({ id: name, label: name, kind: 'material' }, () => { useAtlas.getState().set({ fuelFilter: [phase] }); useAtlas.getState().set({ material: name }); navigate({ pathname: '/atlas', search: window.location.search }); })}>
                   <span className="flex-1">{name}</span><span className="text-xs text-muted">{phase}</span>
                 </Command.Item>
               ))}

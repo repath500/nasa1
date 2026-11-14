@@ -20,6 +20,7 @@ export function readUrl(search: string) {
   if (Number.isFinite(o2) && o2 > 0 && o2 <= 100 && Number.isFinite(kpa) && kpa > 0) patch.custom = { o2Pct: o2, totalKpa: kpa };
   const q = p.get('q') as Concern | null; if (q && CONCERNS.includes(q)) patch.concern = q;
   const f = p.get('f'); if (f) patch.fuelFilter = f.split(',').filter((x): x is FuelPhase => PHASES.includes(x as FuelPhase));
+  const m = p.get('m'); if (m && m.length <= 60) patch.material = m;
   const mode = p.get('mode') as Mode | null; if (mode && MODES.includes(mode)) patch.mode = mode;
   const tab = p.get('tab') as PanelTab | null; if (tab && TABS.includes(tab)) patch.panelTab = tab;
   const sel = p.get('sel'); if (sel && /^PSI-\d+:\d+$/.test(sel)) patch.selectedRowId = sel;
@@ -36,6 +37,7 @@ export function writeUrl(): string {
   if (s.habitat === 'custom') { p.set('o2', String(s.custom.o2Pct)); p.set('kpa', String(s.custom.totalKpa)); }
   p.set('q', s.concern);
   if (s.fuelFilter.length) p.set('f', s.fuelFilter.join(','));
+  if (s.material) p.set('m', s.material);
   if (s.mode !== 'explore') p.set('mode', s.mode);
   if (s.panelTab !== 'studies') p.set('tab', s.panelTab);
   if (s.selectedRowId) p.set('sel', s.selectedRowId);

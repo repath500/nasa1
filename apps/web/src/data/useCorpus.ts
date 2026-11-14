@@ -7,7 +7,9 @@ let cache: Promise<Corpus> | null = null;
 async function load(): Promise<Corpus> {
   for (const url of ['/data/corpus.v1.json', '/data/corpus.fixture.json']) {
     const res = await fetch(url).catch(() => null);
-    if (res?.ok) return (await res.json()) as Corpus;
+    // SPA hosts answer missing files with index.html and status 200, so check the type too.
+    if (!res?.ok || !(res.headers.get('content-type') ?? '').includes('json')) continue;
+    try { return (await res.json()) as Corpus; } catch { /* fall through to the next source */ }
   }
   throw new Error('Reviewed records could not be loaded.');
 }
