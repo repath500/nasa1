@@ -1,11 +1,54 @@
-.gapmap { color: var(--color-ink, #e8eaed); background: var(--color-surface, #12161b); border: 1px solid var(--color-hairline, #232a33); border-radius: 12px; padding: 12px; min-width: 0; }
-.gapmap button { color: inherit; background: var(--color-raised, #1a1f26); border: 1px solid var(--color-border-strong, #6b7480); border-radius: 5px; padding: 6px 9px; cursor: pointer; }
-.gapmap button:focus-visible, .gapmap svg:focus-visible { outline: 3px solid var(--color-focus, #a8dcff); outline-offset: 2px; }
-.gapmap-toolbar, .gapmap-legend { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12px; }.gapmap-legend { margin-top: 10px; }.gapmap-legend button[aria-pressed="false"] { opacity: .5; }
-.gapmap-chart { position: relative; width: 100%; }.gapmap-chart canvas, .gapmap-chart svg { display: block; width: 100%; aspect-ratio: 9 / 5; }.gapmap-chart canvas { position: absolute; inset: 0; pointer-events: none; }.gapmap-chart svg { position: relative; overflow: hidden; touch-action: none; }
-.gapmap-chart svg text { fill: var(--color-ink, #e8eaed); font: 11px system-ui, sans-serif; pointer-events: none; }.gapmap-grid line { stroke: var(--color-hairline, #232a33); }.gapmap-reference { stroke: var(--color-muted, #9aa1ab); stroke-dasharray: 4 5; fill: none; opacity: .65; }.gapmap-crosshair { stroke: var(--color-muted, #9aa1ab); stroke-dasharray: 2 4; pointer-events: none; }
-.gapmap-tooltip { position: absolute; top: 8px; right: 8px; padding: 8px; background: var(--color-bg, #0b0d10); border: 1px solid var(--color-border-strong, #6b7480); border-radius: 5px; font-size: 12px; pointer-events: none; }.gapmap-fixture { font-size: 11px; color: var(--color-flag-text, #f2b66b); }.gapmap-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }.gapmap-table { overflow: auto; max-height: 450px; }.gapmap-table th, .gapmap-table td { text-align: left; padding: 8px; border-bottom: 1px solid var(--color-hairline, #232a33); }
-.gapmap-toolbar button { min-height: 44px; }
-.gapmap { font-variant-numeric: tabular-nums; }
+.gapmap { position: relative; color: var(--color-ink, #e8eaed); background: var(--color-surface, #12161b); border: 1px solid var(--color-hairline, #232a33); border-radius: 0; padding: 8px; min-width: 0; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; gap: 6px; }
+.gapmap--fill { height: 100%; min-height: 0; }
+.gapmap button { color: inherit; background: var(--color-raised, #1a1f26); border: 1px solid var(--color-border-strong, #6b7480); border-radius: 2px; padding: 4px 10px; font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.gapmap button:hover { border-color: var(--color-accent, #7cc4f2); }
+.gapmap button[aria-pressed="true"]:not(.gapmap-legend button) { background: var(--color-accent, #7cc4f2); color: var(--color-accent-ink, #06121a); border-color: var(--color-accent, #7cc4f2); }
+.gapmap button:focus-visible, .gapmap svg:focus-visible { outline: 2px solid var(--color-focus, #a8dcff); outline-offset: 2px; }
+.gapmap-toolbar { display: flex; gap: 6px; align-items: center; font-size: 12px; overflow-x: auto; scrollbar-width: thin; flex: none; padding-bottom: 2px; }
+.gapmap-toolbar button { min-height: 32px; flex: none; }
+@media (pointer: coarse) { .gapmap-toolbar button, .gapmap-legend button { min-height: 44px; } }
+.gapmap-legend { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; font-size: 12px; flex: none; }
+.gapmap-legend button { min-height: 28px; }
+.gapmap-legend button[aria-pressed="false"] { opacity: .6; text-decoration: line-through; text-decoration-thickness: 1px; }
+.gapmap-note { display: inline-flex; align-items: center; gap: 6px; color: var(--color-muted, #9aa1ab); font-size: 12px; margin-left: 4px; }
+.gapmap-explain { margin: 0; padding-left: 18px; font-size: 12px; color: var(--color-muted, #9aa1ab); }
+.gapmap-chart { position: relative; width: 100%; min-width: 0; min-height: 0; flex: 1 1 auto; overflow: hidden; }
+.gapmap-chart canvas, .gapmap-chart svg { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+.gapmap-chart canvas { pointer-events: none; }
+.gapmap-chart svg { overflow: hidden; touch-action: none; }
+/* Halo keeps every label legible over grid lines and curves. */
+.gapmap-chart svg text { fill: var(--color-ink, #e8eaed); font: 11px system-ui, sans-serif; pointer-events: none; paint-order: stroke; stroke: var(--color-surface, #12161b); stroke-width: 3px; stroke-linejoin: round; }
+.gapmap-grid line { stroke: var(--color-hairline, #232a33); }
+.gapmap-grid text { fill: var(--color-muted, #9aa1ab); font-size: 11px; }
+.gapmap-ytick { font-family: var(--font-mono, ui-monospace, monospace); }
+.gapmap-rails rect { fill: var(--color-raised, #1a1f26); fill-opacity: .55; stroke: var(--color-hairline, #232a33); }
+.gapmap-rails .gapmap-railtext { fill: var(--color-muted, #9aa1ab); font-size: 10px; stroke: none; }
+.gapmap-axis { fill: var(--color-muted, #9aa1ab) !important; font-size: 11px; }
+.gapmap-reference { stroke: var(--color-muted, #9aa1ab); stroke-dasharray: 4 5; fill: none; opacity: .75; }
+.gapmap-curve { stroke-dasharray: 2 4; }
+.gapmap-reftext { fill: var(--color-muted, #9aa1ab) !important; }
+.gapmap-box { fill: var(--color-accent); fill-opacity: .08; stroke: var(--color-accent); stroke-width: 2; }
+.gapmap-box--faint { opacity: .35; stroke-width: 1.25; }
+.gapmap-box:focus-visible { outline: 2px solid var(--color-focus); }
+.gapmap-handle { fill: var(--color-accent); stroke: var(--color-bg, #0b0d10); }
+.gapmap-label--main text { fill: var(--color-accent) !important; font-weight: 600; }
+.gapmap-label--faint text { fill: var(--color-muted, #9aa1ab) !important; }
+.gapmap-leader { stroke: var(--color-muted, #9aa1ab); stroke-width: 1; }
+.gapmap-label--main .gapmap-leader { stroke: var(--color-accent); }
+.gapmap-crosshair { stroke: var(--color-muted, #9aa1ab); stroke-dasharray: 2 4; pointer-events: none; opacity: .7; }
+.gapmap-readout { font-family: var(--font-mono, ui-monospace, monospace) !important; font-size: 11px; }
+.gapmap-hover-bg { fill: var(--color-bg, #0b0d10); fill-opacity: .55; stroke: var(--color-bg, #0b0d10); stroke-width: 3; }
+.gapmap-hover-ring { fill: none; stroke: var(--color-ink, #e8eaed); stroke-width: 2; stroke-dasharray: 3 2; }
+.gapmap-spider line { stroke: var(--color-ink, #e8eaed); }
+.gapmap-spider path { stroke: var(--color-ink, #e8eaed); stroke-width: 1.5; cursor: pointer; }
+.gapmap-mini { fill: var(--color-bg, #0b0d10); stroke: var(--color-border-strong, #6b7480); }
+.gapmap-annotation text { fill: var(--color-accent) !important; }
+.gapmap-tooltip { position: absolute; max-width: 240px; padding: 6px 8px; background: var(--color-bg, #0b0d10); border: 1px solid var(--color-border-strong, #6b7480); border-radius: 2px; font-size: 12px; line-height: 1.4; pointer-events: none; z-index: 2; }
+.gapmap-tooltip--left { transform: translateX(-100%); }
+.gapmap-tooltip em { color: var(--color-muted, #9aa1ab); font-style: normal; }
+.gapmap-fixture { font-size: 11px; color: var(--color-flag-text, #f2b66b); margin-left: auto; flex: none; border: 1px dashed currentColor; padding: 2px 6px; border-radius: 2px; }
+.gapmap-fixture--corner { position: absolute; top: 4px; right: 6px; z-index: 3; background: var(--color-surface, #12161b); }
+.gapmap-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.gapmap-table { overflow: auto; max-height: 450px; }
+.gapmap-table th, .gapmap-table td { text-align: left; padding: 8px; border-bottom: 1px solid var(--color-hairline, #232a33); }
 .gapmap-table caption { text-align: left; padding: 8px; }
-.gapmap-annotation text { fill: var(--color-accent); }

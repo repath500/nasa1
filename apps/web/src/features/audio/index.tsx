@@ -34,6 +34,7 @@ function Bar() {
   const n = useNarration(key);
   const [captions, setCaptions] = useState(true); const [transcript, setTranscript] = useState(false);
   const [paused, setPaused] = useState(false); // following paused by the user
+  const [expanded, setExpanded] = useState(false); // phones: secondary controls fold away so the map keeps the screen
   const barRef = useRef<HTMLDivElement>(null);
   const sliderId = useId();
   const peaks = usePeaks(n.manifest?.audioUrl ?? null, n.manifest?.scriptHash ?? 'none');
@@ -51,7 +52,7 @@ function Bar() {
       if (!follow.current) return;
       const s = useAtlas.getState();
       for (const c of cues) {
-        if (c.kind === 'focusHabitat') s.set({ habitat: c.habitat });
+        if (c.kind === 'focusHabitat') { s.set({ habitat: c.habitat }); window.dispatchEvent(new CustomEvent('fa:focus-habitat', { detail: { habitat: c.habitat } })); } // sets the target AND zooms the map (OV-1 B11); highlightRows only highlights
         else if (c.kind === 'highlightRows') s.set({ highlightedRowIds: c.rowIds });
         else if (c.kind === 'filterPhase') s.set({ fuelFilter: c.phases });
         else if (c.kind === 'openLedger') s.set({ panelTab: 'ledger' });
@@ -109,19 +110,19 @@ function Bar() {
       {n.load === 'missing' && (
         <p className="px-4 pt-2 text-sm text-muted">{habitat === 'custom' ? <>No pre-rendered overview for custom air. Live voice generation is part of the Researcher plan. <Link to="/pricing">See plans</Link>.</> : 'No audio overview has been built for this scenario yet. Everything else still works.'}</p>
       )}
-      <div className="mx-auto flex max-w-[1100px] flex-wrap items-center gap-x-3 gap-y-1 px-4 py-2 md:flex-nowrap">
+      <div className="mx-auto flex max-w-[1100px] flex-wrap items-center gap-x-3 gap-y-1 px-4 py-1.5 md:flex-nowrap md:py-2">
         <div className="flex items-center gap-1">
-          <button type="button" aria-label="Back 10 seconds" disabled={disabled} onClick={() => n.seek(n.position - 10)} className="grid size-9 place-items-center hover:bg-raised disabled:opacity-40"><SkipBack size={18} /></button>
+          <button type="button" aria-label="Back 10 seconds" disabled={disabled} onClick={() => n.seek(n.position - 10)} className={`size-9 place-items-center hover:bg-raised disabled:opacity-40 ${expanded ? 'grid' : 'max-md:hidden md:grid'}`}><SkipBack size={18} /></button>
           <button type="button" aria-label={n.playing ? 'Pause briefing' : 'Play briefing'} data-testid="audio-play" disabled={disabled}
             onClick={() => { const s = useAtlas.getState(); s.set({ audio: { ...s.audio, playing: !n.playing, following: true }, ...(n.playing ? {} : {}) }); setPaused(false); }}
             className="grid size-11 place-items-center rounded-[2px] border border-accent bg-accent text-accent-ink active:scale-[0.98] disabled:opacity-40">
             {n.playing ? <Pause size={22} weight="fill" /> : <Play size={22} weight="fill" />}
           </button>
-          <button type="button" aria-label="Forward 10 seconds" disabled={disabled} onClick={() => n.seek(n.position + 10)} className="grid size-9 place-items-center hover:bg-raised disabled:opacity-40"><SkipForward size={18} /></button>
+          <button type="button" aria-label="Forward 10 seconds" disabled={disabled} onClick={() => n.seek(n.position + 10)} className={`size-9 place-items-center hover:bg-raised disabled:opacity-40 ${expanded ? 'grid' : 'max-md:hidden md:grid'}`}><SkipForward size={18} /></button>
         </div>
         <span className="num w-[5.5rem] shrink-0 text-xs text-muted" aria-hidden>{fmtTime(n.position)} / {fmtTime(n.duration)}</span>
 
-        <div className="relative order-last h-10 w-full min-w-0 flex-1 md:order-none md:w-auto">
+        <div className="relative h-10 min-w-[5rem] flex-1">
           <Waveform peaks={peaks} progress={n.duration ? n.position / n.duration : 0} />
           {n.duration > 0 && n.chapters.map((c) => <span key={c.title + c.start} aria-hidden title={c.title} className="pointer-events-none absolute bottom-0 top-0 w-px bg-ink opacity-60" style={{ left: `${(c.start / n.duration) * 100}%` }} />)}
           <label htmlFor={sliderId} className="sr-only">Seek in briefing</label>
@@ -130,7 +131,8 @@ function Bar() {
             className="absolute inset-0 h-full w-full cursor-pointer opacity-0 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-[var(--color-focus)]" style={{ background: 'transparent' }} />
         </div>
 
-        <div className="flex items-center gap-1">
+        <button type="button" aria-expanded={expanded} aria-label={expanded ? 'Hide audio options' : 'Show audio options'} onClick={() => setExpanded(!expanded)} className="grid size-9 place-items-center rounded-[2px] border border-strong text-xs hover:bg-raised md:hidden"><span aria-hidden>{expanded ? '−' : '+'}</span></button>
+        <div className={`items-center gap-1 max-md:w-full max-md:flex-wrap ${expanded ? 'flex' : 'max-md:hidden md:flex'}`}>
           <label className="sr-only" htmlFor={`${sliderId}-rate`}>Playback speed</label>
           <select id={`${sliderId}-rate`} value={speed} onChange={(e) => n.setRate(Number(e.target.value))} disabled={disabled} className="num min-h-9 rounded-[2px] border border-strong bg-transparent px-1 text-xs text-ink">
             {RATES.map((r) => <option key={r} value={r} className="bg-surface">{r}x</option>)}

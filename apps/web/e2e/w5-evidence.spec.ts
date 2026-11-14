@@ -22,7 +22,7 @@ test.describe('W5 evidence drawer', () => {
     await page.goto('/atlas?sel=PSI-25:0');
     const drawer = page.getByRole('dialog', { name: /Evidence:/ });
     await expect(drawer).toBeVisible();
-    await expect(drawer.getByText('Partial gravity: none in PSI').first()).toBeVisible();
+    await expect(drawer.getByText('Partial-gravity combustion data: none in PSI').first()).toBeVisible();
     await expect(drawer.getByText('not reported').first()).toBeVisible();
   });
 });

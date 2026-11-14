@@ -1,29 +1,26 @@
-import { useEffect, useMemo, useRef, useState, type ComponentType, type KeyboardEvent, type PointerEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import * as Tabs from '@radix-ui/react-tabs';
 import { ArrowsOutLineVertical, Export, NotePencil, Prohibit, Rows, Selection, X } from '@phosphor-icons/react';
-import { PRESETS, type FuelPhase, type PanelTab, type ScenarioId, type TestRow } from '@fire/contracts';
+import { PRESETS, type FuelPhase, type PanelTab, type ScenarioId } from '@fire/contracts';
 import { useAtlas } from '../../state/store';
 import { writeUrl } from '../../state/url';
 import GapMap from '../gapmap';
 import Timeline from '../timeline';
-import AudioBar from '../audio';
 import EvidenceDrawer from '../evidence';
 import StudiesTab from '../studies';
 import SelectionTab from '../selection';
 import LedgerTab from '../ledger';
 import NotesTab from '../notes';
 import { useNotes } from '../notes/notesStore';
+import { CoachMarks } from '../../components/CoachMarks';
 import { useAtlasModel } from './data';
 import { Badge, ErrorState, IconBtn } from './_ui';
 import { CONCERN_LABEL, PHASE_LABEL, kpaTo, parsePressure } from './format';
 import { describeView, diffSummary } from './science';
 import './atlas.css';
 
-/* The placeholder lanes do not take props yet. Real components arrive from W4 and W1 with these shapes (SPEC section 18). */
-interface TimelineProps { rows: TestRow[]; value: number | null; onChange: (v: number | null) => void }
-const TimelineC = Timeline as unknown as ComponentType<TimelineProps>;
-const AudioBarC = AudioBar as unknown as ComponentType;
+/* The shell mounts the one persistent AudioBar on /atlas (OV-1 B7), so the workspace never mounts a second. */
 
 const HABITATS: ScenarioId[] = ['earth-iss', 'lunar-cabin-example', 'exploration-upper', 'suit', 'custom'];
 const PHASES: FuelPhase[] = ['solid', 'liquid-droplet', 'gas', 'aerosol'];
@@ -72,6 +69,9 @@ export default function AtlasWorkspace() {
   const boxSelection = useAtlas((s) => s.boxSelection);
   const set = useAtlas((s) => s.set);
   const notes = useNotes();
+  const location = useLocation();
+  const fromBriefing = (location.state as { fromBriefing?: boolean } | null)?.fromBriefing === true;
+  const root = useRef<HTMLDivElement>(null);
   const [online, setOnline] = useState(() => (typeof navigator === 'undefined' ? true : navigator.onLine));
   const [sheetH, setSheetH] = useState(320);
   const [changed, setChanged] = useState<string | null>(null);
@@ -83,6 +83,22 @@ export default function AtlasWorkspace() {
     const off = () => setOnline(false);
     window.addEventListener('online', on); window.addEventListener('offline', off);
     return () => { window.removeEventListener('online', on); window.removeEventListener('offline', off); };
+  }, []);
+
+  /* The shell docks the AudioBar under <main>. Publish its height and the top bar's bottom edge so the fixed sheet and drawer leave room for both. */
+  useEffect(() => {
+    const element = root.current; if (!element) return;
+    let observer: ResizeObserver | null = null, watched: Element | null = null;
+    const measure = () => {
+      const main = document.getElementById('main'), bar = document.querySelector('[data-audio-bar]');
+      element.style.setProperty('--shell-top', `${Math.round(main?.getBoundingClientRect().top ?? 0)}px`);
+      element.style.setProperty('--fa-audio-h', `${Math.round(bar?.getBoundingClientRect().height ?? 0)}px`);
+      if (bar && bar !== watched) { observer?.disconnect(); watched = bar; observer = new ResizeObserver(measure); observer.observe(bar); }
+    };
+    measure();
+    const poll = window.setInterval(measure, 400); // the bar is lazy, so it may arrive after first paint
+    window.addEventListener('resize', measure);
+    return () => { window.clearInterval(poll); window.removeEventListener('resize', measure); observer?.disconnect(); };
   }, []);
 
   /* "What changed" pill after a habitat switch (SPEC section 7). Code written diff. */
@@ -125,7 +141,8 @@ export default function AtlasWorkspace() {
   const counts: Partial<Record<PanelTab, number>> = { studies: model.ranked.length, selection: boxSelection.length, ledger: model.corpus?.rejects.length, notes: notes.length };
 
   return (
-    <div className="fa fa-atlas" style={{ ['--fa-sheet-h' as string]: `${sheetH}px` }}>
+    <div ref={root} className="fa fa-atlas" style={{ ['--fa-sheet-h' as string]: `${sheetH}px` }}>
+      <CoachMarks autoStart={fromBriefing} />
       {/* scenario bar */}
       <header className="fa-bar" aria-label="Scenario">
         <span className="fa-field">
@@ -189,7 +206,7 @@ export default function AtlasWorkspace() {
               </p>
             )}
             <p className="fa-muted" style={{ fontSize: 11.5 }}>
-              {scenario.sourceNote}. Illustrative, not a design value. Gravity: microgravity (ISS). Partial gravity: none in PSI.
+              {scenario.sourceNote}. Illustrative, not a design value. Gravity: microgravity (ISS). Partial-gravity combustion data: none in PSI.
             </p>
           </>
         )}
@@ -212,6 +229,9 @@ export default function AtlasWorkspace() {
               timelineCutoff={cutoff}
               unit={unit}
               editableBox={habitat === 'custom'}
+              coach
+              fill
+              onTolerancesChange={(next) => set({ tolerances: next })}
               onSelectRow={(id) => set({ selectedRowId: id })}
               onBoxSelect={(ids) => set({ boxSelection: ids, panelTab: ids.length ? 'selection' : panelTab })}
               onScenarioDrag={(next) => set({ habitat: 'custom', custom: next })}
@@ -227,7 +247,7 @@ export default function AtlasWorkspace() {
           <Tabs.Root value={panelTab} onValueChange={(v) => set({ panelTab: v as PanelTab })} style={{ display: 'flex', flexDirection: 'column', minHeight: 0, flex: 1 }}>
             <Tabs.List className="fa-tabs" aria-label="Panel">
               {TABS.map((t) => (
-                <Tabs.Trigger key={t.id} value={t.id} className="fa-tab">
+                <Tabs.Trigger key={t.id} value={t.id} className="fa-tab" data-coach={t.id === 'studies' ? 'studies' : undefined}>
                   <t.icon size={14} aria-hidden="true" />
                   {t.label}
                   {counts[t.id] != null && <span className="fa-num fa-muted" style={{ fontSize: 11 }}>{counts[t.id]}</span>}
@@ -244,8 +264,7 @@ export default function AtlasWorkspace() {
 
       {/* timeline and audio */}
       <footer className="fa-bottom">
-        <TimelineC rows={rows} value={timelineYear} onChange={(v) => set({ timelineYear: v })} />
-        <AudioBarC />
+        <Timeline rows={rows} value={timelineYear} onChange={(v) => set({ timelineYear: v })} />
       </footer>
 
       <EvidenceDrawer rowId={selectedRowId} onClose={() => set({ selectedRowId: null })} />

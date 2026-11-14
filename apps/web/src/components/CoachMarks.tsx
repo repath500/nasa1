@@ -34,6 +34,7 @@ export function CoachMarks({ steps = ATLAS_COACH_STEPS, storageKey = 'atlas', au
   useLayoutEffect(() => {
     if (!step) return;
     const measure = () => setRect(document.querySelector(step.target)?.getBoundingClientRect() ?? null);
+    document.querySelector(step.target)?.scrollIntoView?.({ block: 'nearest', inline: 'nearest' }); // phone: the Studies panel sits below the map
     measure();
     window.addEventListener('resize', measure); window.addEventListener('scroll', measure, true);
     const t = setInterval(measure, 500);

@@ -337,7 +337,7 @@ export default function StudiesTab() {
         </div>
       </div>
       <p className="fa-muted" style={{ fontSize: 11.5 }}>
-        Gravity: microgravity (ISS) for every row. Partial gravity: none in PSI. Ranks order a reading list. They are not a finding about any atmosphere.
+        Gravity: microgravity (ISS) for every row. Partial-gravity combustion data: none in PSI. Ranks order a reading list. They are not a finding about any atmosphere.
       </p>
       <PrioritiesSheet open={sheet} onClose={() => setSheet(false)} d5Signed={model.d5Signed} />
     </>

@@ -44,7 +44,7 @@ export default function BriefingWizard() {
 
   useEffect(() => { const prev = useAtlas.getState().mode; useAtlas.getState().set({ mode: 'briefing' }); return () => { if (useAtlas.getState().mode === 'briefing') useAtlas.getState().set({ mode: prev === 'briefing' ? 'explore' : prev }); }; }, []);
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape' && !isTypingTarget(e.target) && !document.querySelector('[role="dialog"]')) { useAtlas.getState().set({ mode: 'explore' }); navigate({ pathname: '/atlas', search: window.location.search }); } };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape' && !isTypingTarget(e.target) && !document.querySelector('[role="dialog"]')) { useAtlas.getState().set({ mode: 'explore' }); navigate({ pathname: '/atlas', search: window.location.search }, { state: { fromBriefing: true } }); } };
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
   }, [navigate]);
 
@@ -52,7 +52,8 @@ export default function BriefingWizard() {
   const finish = (listen: boolean) => {
     const st = useAtlas.getState();
     st.set(listen ? { mode: 'listen', audio: { ...st.audio, playing: true, following: true } } : { mode: 'explore' });
-    navigate({ pathname: '/atlas', search: window.location.search });
+    // Coach marks (SPEC 3.2) follow the wizard. A Listen start keeps the screen quiet; the tour stays one `?` away.
+    navigate({ pathname: '/atlas', search: window.location.search }, { state: { fromBriefing: !listen } });
   };
 
   return (

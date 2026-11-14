@@ -13,9 +13,12 @@ if (process.env.VITEST) {
   await page.getByRole('button', { name: 'Fit all' }).click();
   const chartBounds = await chart.boundingBox();
   if (!chartBounds) throw new Error('Chart has no bounds');
-  const markX = 115 + Math.log(101) / Math.log(165) * 750;
-  const markY = 410 - 21 / 49.5 * 375;
-  await page.mouse.click(chartBounds.x + chartBounds.width * markX / 900, chartBounds.y + chartBounds.height * markY / 500);
+  // The map publishes its plot rectangle and domains, so the test follows the layout instead of hard-coding it.
+  const geometry = await chart.evaluate(node => ({ plot: node.getAttribute('data-plot')!.split(',').map(Number), x: node.getAttribute('data-x-domain')!.split(',').map(Number), y: node.getAttribute('data-y-domain')!.split(',').map(Number), box: node.getBoundingClientRect().toJSON(), view: node.getAttribute('viewBox')!.split(' ').map(Number) }));
+  const [left, right, top, bottom] = geometry.plot as [number, number, number, number];
+  const markX = left + Math.log(101) / Math.log(geometry.x[1]!) * (right - left);
+  const markY = bottom - 21 / geometry.y[1]! * (bottom - top);
+  await page.mouse.click(chartBounds.x + chartBounds.width * markX / geometry.view[2]!, chartBounds.y + chartBounds.height * markY / geometry.view[3]!);
   await expect(page.getByLabel('Selected row')).not.toHaveText('None');
   await chart.click({ position: { x: 10, y: 10 } });
   await expect(page.getByLabel('Selected row')).toHaveText('None');

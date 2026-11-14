@@ -203,7 +203,7 @@ export default function StudyPage() {
 
         <Section id="limits" title="Transfer limits">
           <ul className="fa-list">
-            <li>Gravity: {facts.gravity.map((g) => GRAVITY_LABEL[g]).join(', ') || 'microgravity (ISS)'}. Partial gravity: none in PSI, so these rows say nothing about lunar or Martian gravity.</li>
+            <li>Gravity: {facts.gravity.map((g) => GRAVITY_LABEL[g]).join(', ') || 'microgravity (ISS)'}. Partial-gravity combustion data: none in PSI. These rows say nothing about lunar or Martian gravity.</li>
             <li>Geometry, fuel and apparatus differ across investigations. A test row is a condition that was run, not a limit.</li>
             <li>Equal O₂ partial pressure is not equal flammability.</li>
             {facts.burnerRows > 0 && <li>{facts.burnerRows} rows report O₂ in the burner stream, not the cabin air. They are excluded from overlap.</li>}

@@ -70,6 +70,8 @@ body { background: var(--color-bg); color: var(--color-ink); margin: 0; font-fam
 h1, h2, h3, h4 { text-wrap: balance; margin: 0; font-weight: 600; letter-spacing: -0.02em; }
 p { margin: 0; text-wrap: pretty; }
 a { color: var(--color-accent); text-underline-offset: 3px; }
+/* Links inside running text carry an underline, so colour is never the only cue (WCAG 1.4.1, axe link-in-text-block). */
+p a, li a, dd a, figcaption a, small a { text-decoration: underline; text-underline-offset: 3px; }
 a:hover { text-decoration-thickness: 2px; }
 button { font: inherit; color: inherit; }
 ::selection { background: var(--color-accent); color: var(--color-accent-ink); }

@@ -143,7 +143,7 @@ export default function BriefPage() {
             <ul>
               {phaseGaps.length > 0 ? phaseGaps.map((p) => <li key={p}>No PSI row covers this air for {PHASE_LABEL[p]} fuel. None in PSI, which is not the same as none anywhere.</li>) : <li>Every fuel phase has at least one covering row.</li>}
               <li>{model.gap.counts.unknownO2Tables.length} {model.gap.counts.unknownO2Tables.length === 1 ? 'table reports' : 'tables report'} no O₂{model.gap.counts.unknownO2Tables.length ? ` (${model.gap.counts.unknownO2Tables.join(', ')})` : ''}. They are unknown, not absent.</li>
-              <li>Partial gravity: none in PSI.</li>
+              <li>Partial-gravity combustion data: none in PSI.</li>
             </ul>
           </section>
 
@@ -175,7 +175,7 @@ export default function BriefPage() {
           <section>
             <h2>Limits</h2>
             <ul>
-              <li>All rows are microgravity flight tests on the ISS. Partial gravity: none in PSI, so nothing here describes lunar or Martian gravity.</li>
+              <li>All rows are microgravity flight tests on the ISS. Partial-gravity combustion data: none in PSI. Nothing here describes lunar or Martian gravity.</li>
               <li>Only ambient O₂ counts. Burner stream O₂ rows are excluded.</li>
               <li>Geometry and apparatus differ between investigations. A test row is a condition that was run, not a limit.</li>
               <li>Rank orders a reading list. It is not a finding about any atmosphere.</li>

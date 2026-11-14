@@ -124,7 +124,7 @@ export function gapStatement(
   const sentence = covers > 0
     ? `Near ${scenario.label}, PSI has ${covers} test ${covers === 1 ? 'row' : 'rows'} that cover this air (${phases}).${solidClause}`
     : `PSI has no test row that covers ${scenario.label}. That is the gap.${solidClause}`;
-  const scope = `This describes rows that report O₂ and pressure. ${unknownO2Tables.length} ${unknownO2Tables.length === 1 ? 'table reports' : 'tables report'} no O₂ and ${unknownO2Tables.length === 1 ? 'is' : 'are'} counted as unknown, not as absent. Partial gravity: none in PSI.`;
+  const scope = `This describes rows that report O₂ and pressure. ${unknownO2Tables.length} ${unknownO2Tables.length === 1 ? 'table reports' : 'tables report'} no O₂ and ${unknownO2Tables.length === 1 ? 'is' : 'are'} counted as unknown, not as absent. Partial-gravity combustion data: none in PSI.`;
   return {
     allowed: opts.k5Signed,
     sentence: opts.k5Signed ? sentence : null,

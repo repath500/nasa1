@@ -82,7 +82,7 @@ function RowBody({ row, card, model, rec }: { row: TestRow; card: InvestigationC
   return (
     <>
       <div className="fa-chips">
-        <span className="fa-chip fa-chip--edit" title="Every PSI combustion row is a microgravity flight test. Partial gravity: none in PSI.">{GRAVITY_LABEL[row.gravity]}</span>
+        <span className="fa-chip fa-chip--edit" title="Every PSI combustion row is a microgravity flight test. Partial-gravity combustion data: none in PSI.">{GRAVITY_LABEL[row.gravity]}</span>
         <span className="fa-chip fa-chip--edit" title={row.o2Location === 'burner' ? 'The O₂ value is the burner stream, not the cabin air. Excluded from overlap.' : undefined}>
           O₂ location: {row.o2Location === 'ambient' ? 'ambient' : row.o2Location === 'burner' ? 'burner stream' : NOT_REPORTED}
         </span>
@@ -137,7 +137,7 @@ function RowBody({ row, card, model, rec }: { row: TestRow; card: InvestigationC
       <section className="fa-sec">
         <h3>Transfer limits</h3>
         <ul className="fa-list">
-          <li>Gravity: microgravity on the ISS. Partial gravity: none in PSI, so nothing here describes lunar or Martian gravity.</li>
+          <li>Gravity: microgravity on the ISS. Partial-gravity combustion data: none in PSI. Nothing here describes lunar or Martian gravity.</li>
           <li>Geometry and apparatus differ between investigations. A row is a test condition, not a limit.</li>
           {row.o2Location === 'burner' && <li>O₂ here is the burner stream, not the cabin air.</li>}
           {(card?.caveats ?? []).map((c) => <li key={c}>{c}</li>)}
@@ -181,18 +181,20 @@ export default function EvidenceDrawer({ rowId, onClose, recordId = null }: Evid
     return () => { window.clearTimeout(t); opener?.focus?.(); };
   }, [open]);
 
-  /* keys: Esc closes, [ and ] step through rows of the same investigation */
+  /* Esc closes. [ and ] arrive as the shell's fa:shortcut event (prev-row, next-row), so each key has exactly one handler. */
+  const goRef = useRef(go); goRef.current = go;
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      const t = e.target as HTMLElement | null;
-      const typing = !!t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable);
       if (e.key === 'Escape' && !e.defaultPrevented) { if (document.querySelector('[role="dialog"][data-state="open"]')) return; onClose(); }
-      else if (!typing && !e.metaKey && !e.ctrlKey && !e.altKey && e.key === '[') { e.preventDefault(); go(-1); }
-      else if (!typing && !e.metaKey && !e.ctrlKey && !e.altKey && e.key === ']') { e.preventDefault(); go(1); }
+    };
+    const onShortcut = (e: Event) => {
+      const action = (e as CustomEvent<{ action?: string }>).detail?.action;
+      if (action === 'prev-row') goRef.current(-1); else if (action === 'next-row') goRef.current(1);
     };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    window.addEventListener('fa:shortcut', onShortcut);
+    return () => { window.removeEventListener('keydown', onKey); window.removeEventListener('fa:shortcut', onShortcut); };
   });
 
   const title = row ? `${card?.acronym ?? row.accession} · ${row.testLabel ? `test ${row.testLabel}` : `row ${row.rowIndex}`}` : rec ? `${card?.acronym ?? rec.accession} · ${rec.evidenceKind}` : 'Evidence';
