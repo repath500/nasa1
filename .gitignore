@@ -10,3 +10,5 @@ playwright-report/
 test-results/
 .wrangler/
 data/kv-dev.json
+cache/
+data/labels/*.human.json

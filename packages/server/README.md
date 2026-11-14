@@ -55,9 +55,30 @@ runs in the client against the loaded corpus.
    `sha256(corpusHash + rubricVersion + modelId + request)`. Not committed for model
    output until provider terms are read (R8). Authoring may write it with
    `CACHE_RECORD=1`.
-4. **L3 baseline** no model. Rank returns human-authored fixtures, each
-   `source: fixture`, `modelId: fixture-human-authored-v1` and the note
-   `FIXTURE: human-authored, not model output`.
+4. **L3 baseline** no model. Rank returns synthetic demonstration fixtures, each
+   `source: fixture`, `modelId: fixture-placeholder-v1`. These are not model
+   output, experimental evidence, or human-reviewed labels.
+
+## Turning on real AI (for teammates)
+
+Live requests can be enabled by setting `TYPESAFE_API_KEY` and/or `GEMINI_API_KEY`
+in the repo-root `.env.local`, then starting `pnpm dev:server`. Do not commit
+the keys or the ignored `cache/` directory. Runtime calls can incur provider
+charges; check current provider pricing and account limits before enabling them.
+
+The offline recording, corpus-aware custom scenario, and human G3 labelling and
+reporting workflows are **not implemented yet**. Do not claim a G3 result or
+publish synthetic fixtures as real judgements. The G3 decision must remain
+hide-by-default until two independent people label and adjudicate at least 16
+pairs and the rule in BUILD_PLAN §4.2 is satisfied. The statistical helpers in
+`src/ai/g3.ts` are not a complete evaluation harness.
+
+After a compatible recorder exists and the provider's redistribution terms have
+been reviewed, setting `MODEL_OUTPUT_REDISTRIBUTION_OK=1` in the root `.env.local`
+allows `pnpm ai:publish` to read recordings from `cache/model_responses/` and
+write `apps/web/public/data/judgements.v1.json`. Without that exact local-file
+flag it refuses before writing. Publication is not proof of rights or model
+provenance; a human must verify both. Never commit the private recordings.
 
 Jev noul has no confidence. Score is a probability-weighted level index 0 to 3; the
 four-level probabilities are kept. Values are ordinal model judgements, never

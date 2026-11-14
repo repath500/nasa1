@@ -12,6 +12,7 @@
     "build": "pnpm corpus && pnpm --filter @fire/web build",
     "corpus": "pnpm --filter @fire/pipeline build:corpus",
     "audio:build": "pnpm --filter @fire/server audio:build",
+    "ai:publish": "pnpm --filter @fire/server ai:publish",
     "test": "pnpm -r --if-present test",
     "typecheck": "pnpm -r --if-present typecheck",
     "e2e": "pnpm --filter @fire/web e2e",
