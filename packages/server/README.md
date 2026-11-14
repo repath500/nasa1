@@ -55,9 +55,30 @@ runs in the client against the loaded corpus.
    `sha256(corpusHash + rubricVersion + modelId + request)`. Not committed for model
    output until provider terms are read (R8). Authoring may write it with
    `CACHE_RECORD=1`.
-4. **L3 baseline** no model. Rank returns human-authored fixtures, each
-   `source: fixture`, `modelId: fixture-human-authored-v1` and the note
-   `FIXTURE: human-authored, not model output`.
+4. **L3 baseline** no model. Rank returns synthetic demonstration fixtures, each
+   `source: fixture`, `modelId: fixture-placeholder-v1`. These are not model
+   output, experimental evidence, or human-reviewed labels.
+
+## Turning on real AI (for teammates)
+
+Live requests can be enabled by setting `TYPESAFE_API_KEY` and/or `GEMINI_API_KEY`
+in the repo-root `.env.local`, then starting `pnpm dev:server`. Do not commit
+the keys or the ignored `cache/` directory. Runtime calls can incur provider
+charges; check current provider pricing and account limits before enabling them.
+
+The offline recording, corpus-aware custom scenario, and human G3 labelling and
+reporting workflows are **not implemented yet**. Do not claim a G3 result or
+publish synthetic fixtures as real judgements. The G3 decision must remain
+hide-by-default until two independent people label and adjudicate at least 16
+pairs and the rule in BUILD_PLAN §4.2 is satisfied. The statistical helpers in
+`src/ai/g3.ts` are not a complete evaluation harness.
+
+After a compatible recorder exists and the provider's redistribution terms have
+been reviewed, setting `MODEL_OUTPUT_REDISTRIBUTION_OK=1` in the root `.env.local`
+allows `pnpm ai:publish` to read recordings from `cache/model_responses/` and
+write `apps/web/public/data/judgements.v1.json`. Without that exact local-file
+flag it refuses before writing. Publication is not proof of rights or model
+provenance; a human must verify both. Never commit the private recordings.
 
 Jev noul has no confidence. Score is a probability-weighted level index 0 to 3; the
 four-level probabilities are kept. Values are ordinal model judgements, never
@@ -173,3 +194,18 @@ Tests mock `fetch`; no real network. Covered: ladder order and timeout, zod reje
 of bad upstream data, Jev criteria with no numerals, decision-1 using `input`, licence
 sign/verify/expiry/tamper, webhook signature valid/invalid/stale, cross-site rejection,
 body cap, rate limit, billing 503, and narration timing from a sample alignment.
+
+## Turning on real AI and deciding G3 (for teammates)
+
+1. Put `TYPESAFE_API_KEY=...` (and optionally `GEMINI_API_KEY=...`) in the repo-root `.env.local`. Never commit it.
+2. `pnpm ai:record` calls Jev three times for each of 10 studies x 4 habitats x 3 concerns and writes the raw answers
+   plus their median to `cache/model_responses/` (gitignored). Cost is well under $0.05; `AI_RECORD_MAX_CALLS`
+   caps it (default 400). Re-running skips anything already recorded. Busy responses (429/529) back off and retry.
+3. Two people label blind, separately: `pnpm g3:label` (default concern prevention). Each sees only the habitat and
+   the study's own description, never a ranking. Label 2 = read first, 1 = relevant, 0 = not relevant. 16+ pairs each.
+4. `pnpm g3:adjudicate`: a person settles every disagreement. `pnpm g3:metrics` writes `data/labels/g3-report.md`:
+   top-3 hit rate, Wilson 95% interval and Spearman for the baseline and for Jev, and the keep/hide decision
+   (keep only if Jev is not worse on top-3 AND reviewers found a disagreement useful or prefer Jev).
+   "Jev did not improve on the baseline" is an honest, valid result.
+5. Only after reading the TypeSafe and Google terms: set `MODEL_OUTPUT_REDISTRIBUTION_OK=1` in `.env.local` and run
+   `pnpm ai:publish` to write `apps/web/public/data/judgements.v1.json`. Commit `data/labels/` and that file.

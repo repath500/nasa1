@@ -91,6 +91,15 @@ Each worker ran in its own git worktree and branch; the lead merged in dependenc
 | `2974697`, `f01d894` | No more "every NASA microgravity fire test"; narrower novelty lint plus more never-claim terms; fixtures labelled "synthetic demonstration, not model judgement or experimental evidence"; `LICENSE`, `NOTICE`, `SI_DISCLOSURE.md`, `DECISIONS.md` | Honest coverage; Space Apps requires an open licence, attribution and AI disclosure |
 | `7e7e32f` | Cloudflare Pages function and `wrangler.toml`; `pnpm build` rebuilds the corpus; Node pinned | The site must deploy; the function bundles for Workers and was called in-process |
 
+### Phase 5: human sign-off and real-AI tooling
+| Commit | What | Why |
+|---|---|---|
+| `7e7e32f`, `d2bc2c3` | Deploy wrapper, build log, README | Teammates can deploy and get oriented |
+| W8 merge | NTRS page text with rights metadata (all four files are unpaginated: no page-level quotes yet), gate hook, stale-gate removal | Groundwork for quotes and gates (partial; Terra stopped early) |
+| `5f5f8f2` | `pnpm review` and `pnpm review:sign k5|d5` (lead) | G1 needs two different people per record; K5/D5 must be signed by a person against the exact corpus hash. Two K5 candidates (FLEX #25, #26: methanol, 30% O₂, about 71.7 kPa) sit inside the Moon-base box; FLEX #19 (34%, 10.4 psi) does not |
+| W9 merge | Typed API client, guarded `ai:publish`, G3 statistics (partial; Terra stopped early) | |
+| this commit | `pnpm ai:record`, `pnpm g3:label`, `g3:adjudicate`, `g3:metrics` (lead) | One command records real Jev judgements honestly; two blind labellers decide whether Jev beats the code baseline |
+
 ## 4. Numbers you can quote (all computed by code from `data/corpus.v1.json`, hash `4d3a7aa6…`)
 
 - 1,476 parsed test rows from 12 PSI investigations; 11 source cells rejected by code.
@@ -108,6 +117,9 @@ Each worker ran in its own git worktree and branch; the lead merged in dependenc
 4. About page: team names and the contribution statement. Finish `SI_DISCLOSURE.md`.
 5. Keys in `.env.local`, then `pnpm audio:build` for real ElevenLabs audio; create the Cloudflare project and KV namespace.
 
-**In progress (agents):** see the next section of this log once they report.
+**Ready for the team now:** `pnpm review` (two people), `pnpm corpus`, `pnpm review:sign d5`, `pnpm review:sign k5`; with keys, `pnpm ai:record`, then `pnpm g3:label` (two people), `pnpm g3:adjudicate`, `pnpm g3:metrics`. Step-by-step guides: `packages/pipeline/README.md` and `packages/server/README.md`.
+
+**In progress (agents):**
 - W7 (Claude Sonnet 5.5): wiring shortcuts, coach marks, eggs and the single audio player across features; Gap Map label overlap; saving resized habitat boxes; axe accessibility and data-colour contrast.
+- WL (Claude Sonnet 5.5, medium): the new dithered landing page with the access button, challenge explainer and team credit.
 - OV-2 (GPT-6.1 Sol): end-to-end review of the merged app, 10-row re-verification against the CSVs, submission readiness, 7-slide deck outline.

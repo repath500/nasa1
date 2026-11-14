@@ -12,11 +12,18 @@
     "build": "pnpm corpus && pnpm --filter @fire/web build",
     "corpus": "pnpm --filter @fire/pipeline build:corpus",
     "audio:build": "pnpm --filter @fire/server audio:build",
+    "ai:publish": "pnpm --filter @fire/server ai:publish",
     "test": "pnpm -r --if-present test",
     "typecheck": "pnpm -r --if-present typecheck",
     "e2e": "pnpm --filter @fire/web e2e",
     "lint:claims": "node scripts/lint-claims.mjs",
-    "secret-scan": "sh scripts/secret-scan.sh"
+    "secret-scan": "sh scripts/secret-scan.sh",
+    "review": "pnpm --filter @fire/pipeline review",
+    "review:sign": "pnpm --filter @fire/pipeline review:sign",
+    "ai:record": "pnpm --filter @fire/server ai:record",
+    "g3:label": "pnpm --filter @fire/server g3:label",
+    "g3:adjudicate": "pnpm --filter @fire/server g3:adjudicate",
+    "g3:metrics": "pnpm --filter @fire/server g3:metrics"
   },
   "devDependencies": {
     "typescript": "~5.6.3",

@@ -1,6 +1,6 @@
 # Fire Atlas corpus reject ledger
 
-Generated: 2026-11-14T20:46:27.486Z
+Generated: 2026-11-14T21:46:10.621Z
 Corpus hash: `4d3a7aa6d1e8ecf3adb844bf4bb1887983aca2ce29b53f9eff002fe4eb45bd7f`
 Rejected cells: 11
 
