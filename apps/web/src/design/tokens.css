@@ -1,0 +1,27 @@
+/* SPEC §6.3. W1 owns and extends this file. Night Ops is the default theme. */
+@import "tailwindcss";
+
+:root, :root[data-theme="night"] {
+  color-scheme: dark;
+  --color-bg: #0B0D10; --color-surface: #12161B; --color-raised: #1A1F26; --color-hairline: #232A33;
+  --color-ink: #E8EAED; --color-muted: #9AA1AB; --color-accent: #7CC4F2; --color-accent-ink: #06121A;
+  --color-focus: #A8DCFF; --color-border-strong: #6B7480; --color-flag-text: #F2B66B;
+  --color-droplet: #6EC1F5; --color-solid: #FF9447; --color-gas: #56D3C1; --color-aerosol: #C7B7FF;
+  --color-burner: #9A90CC; --color-unknown: #8A94A3;
+  --dur-step: 120ms; --dur-fade: 200ms; --dur-fly: 450ms; --dur-scene: 900ms; --ease-out: cubic-bezier(0.2, 0, 0, 1);
+}
+:root[data-theme="paper"] {
+  color-scheme: light;
+  --color-bg: #F4F5F6; --color-surface: #FFFFFF; --color-raised: #EDEFF2; --color-hairline: #D5DAE0;
+  --color-ink: #111418; --color-muted: #4F5661; --color-accent: #0A5FA8; --color-accent-ink: #FFFFFF;
+  --color-focus: #0A5FA8; --color-border-strong: #7A828D; --color-flag-text: #8A4B00;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-step: 0ms; --dur-fade: 0ms; --dur-fly: 0ms; --dur-scene: 0ms; }
+}
+@theme inline {
+  --color-bg: var(--color-bg); --color-surface: var(--color-surface); --color-raised: var(--color-raised);
+  --color-hairline: var(--color-hairline); --color-ink: var(--color-ink); --color-muted: var(--color-muted);
+  --color-accent: var(--color-accent); --color-accent-ink: var(--color-accent-ink); --color-focus: var(--color-focus);
+}
+body { background: var(--color-bg); color: var(--color-ink); margin: 0; font-family: "Geist", system-ui, sans-serif; }
