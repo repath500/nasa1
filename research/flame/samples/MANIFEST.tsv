@@ -1,0 +1,63 @@
+file	bytes	sha256	source
+PSI-102_experimental_table_SAME.csv	331	268d1e121d2f211b124407dd32b9475617bd269ede2c2d1749441da3e949a2af	UNMAPPED - check
+PSI-98_experimental_table_SAFFIRE-1.csv	469	c01f29c62455f0a3b512290ab85e5687ecded326733189f002f580368402308d	UNMAPPED - check
+aws_registry.out	8961	8e79d3a47903a2ef47c8e399e691c353b8925cf693c1e69c476aaa4422da4d4e	UNMAPPED - check
+competitor-github-scan-2026-11-14.tsv	38869	25c7ff92218383ea9c6dd8d195c0deced54d8cbea26f0fdf0c2bb20fc3582867	gh search repos, 8 queries x 2 modes, created >= 2026-10-01, deduplicated
+contrast_check.py	2961	13d3570c783ddcd8e586f4acea0e95a241ae0ddf3b7f189860d1c1fadccedfb4	UNMAPPED - check
+contrast_results.txt	4921	03576ad5c2461d607abbf86d27afe8450a08ee26a576703baa294599b8640744	UNMAPPED - check
+gem_ai_google_dev_gemini-api_docs_decisions.html	34451	3096565b690bc1fbe11c46346eb226b6f018ca9528f37d27954eccf66b597ae4	UNMAPPED - check
+gem_ai_google_dev_gemini-api_docs_structured-output.html	105021	e982285c9ea5c21dda709cacc9a194a12a7272e2c06b5518770dab3af3b8b808	UNMAPPED - check
+gem_aistudio_google_com_docs_decisions.html	34451	091ec17e747b88962a7d2232ec49ba1805ece21e065236565f26e4b557ad7825	UNMAPPED - check
+gem_aistudio_google_com_docs_models_gemini-decision-1.html	44512	b847032b590e8c54e5cf3ffbe3670a401a6dca197b93f61aeceeacacf3bfd263	UNMAPPED - check
+gem_aistudio_google_com_docs_structured-output.html	105041	542ed6eef4d9e4c3542f044a56e6d37f515b183dccb3cc1a6bd1dbb86f423eab	UNMAPPED - check
+gem_decision1_model.txt	8748	f1b8e9b5b66ae662dcb11f345e18a4a13b6bb071efef0d2a7cf35c8e0295dd3b	UNMAPPED - check
+gem_decisions.txt	36	ee6c18bda11c3544aa843e9b51277b583033322a91c457761b838b62a41e8725	UNMAPPED - check
+gem_decisions_api.html	88870	3f14e612e4f587fb490204f70af99d959daae457e5737f4598c2cc4f374cd5f1	UNMAPPED - check
+gem_decisions_api.txt	46188	c9d8ae527ddf4aded0214f236d642a083a98c3fb2b742bc9ddcfd62473c1659b	UNMAPPED - check
+gem_docproc.html	90487	e4826454c13375d4a42aba735093dabf8529daa80466f1fc062af70e5dd73ec3	UNMAPPED - check
+gem_docproc.txt	49854	c922f48650a5ca89685385655482e11fbe96b8bec6495c2a132cd6ac53a71210	UNMAPPED - check
+gem_structured.txt	60902	7d61a096e04670d4257aec3dcdace472bd64325ad5c8b2ef0b12c26febd0b7b9	UNMAPPED - check
+gemini-decision-1.html	76697	feaa6f90b8bcef4318f0f0e3b3ce8695b58e8ba449923e4842647f1a2c893888	https://aistudio.google.com/docs/models/gemini-decision-1
+gemini-rate-limits.html	78582	6d8c1ac4c0fa1dbdb4ca72cdf65f8df82b81eed343f83bfdcd817cf8669384ac	https://aistudio.google.com/docs/rate-limits
+gemini4-hydrogen.html	72112	f84d9751eded65c85bc1b8d6611fd220b4c01416a23391dc9c0da7b3193dc257	https://aistudio.google.com/docs/models/gemini-4-hydrogen
+jev_noul.md	16697	c53213dda01777eb2ff183fd00862bb4f4825be9bc328149a2df865737704fd0	UNMAPPED - check
+jev_score.md	20657	93c593881a2cd134acba3514cf325cc156bad7dc1a4e0b0ed2580301127c2c3e	UNMAPPED - check
+jev_system-one.md	29761	a5c68bb00afd2c75504b5a9a07a497253f2b03380953b56934ddd80767f63c3d	UNMAPPED - check
+judging-guide.html	140294	73fa312ee1769233edbd3929d0e82f5b9d5b3a6a4cea16eb3944876ca9b2a17e	https://www.spaceappschallenge.org/resources/judging-awards-guide
+ntrs-20140011099.json	6331	b424a98d3071d4055f68339075028e58bfb5e5aede868027ece3f4952331e5f0	https://ntrs.nasa.gov/api/citations/20140011099
+ntrs-20180004258-full.pdf	2430800	71d4112904dab8a2e9c7ba1b33311da80960c322a7292ba561ff98c911c57fd6	https://ntrs.nasa.gov/api/citations/20180004258/downloads/20180004258.pdf (complete file)
+ntrs-20180004258.json	3686	9588010fea19222b452c3d15a8ae48264366152b6175f4f875f1544ff3853364	https://ntrs.nasa.gov/api/citations/20180004258
+ntrs-20200000361.json	7528	bf31dd62e798030dab5a8a54aa41ea92d91cf5f2735c62b02a0efde87a762c98	https://ntrs.nasa.gov/api/citations/20200000361
+ntrs-20210022402.json	13704	4f475c019861c734f2a90d363c4cc5e2b4b5158d50041e272c1673eca70caecd	https://ntrs.nasa.gov/api/citations/20210022402
+physci_repo.html	954	f6fc0a2afcb78ec0eda11f1392c510726ccd0eeb89bbbfc1b084ed733c7eb35c	UNMAPPED - check
+psi-PSI-100.json	148767	9c836955a28ff129b2f239f9499e06f4ca52ba58f7a03d384a7bd0528c8bbe10	https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-100
+psi-PSI-102.json	135432	fe221f1380ad3317f70b559a3213c4e00ef3676b40838a49cb5b3cba89dea5ba	https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-102
+psi-PSI-20.json	17376	ea118e19d02785f54d246406aacea93878053ff95ddd5bdca44bd29c09a753d1	https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-20
+psi-PSI-25.json	680348	b9234754db5da651ad27d888af082b889d07210b018e543369662f065b4ec2da	https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-25
+psi-PSI-26.json	190127	9dee45d44bb736178db270a07c9ee8f98ac02ee810189ab518271fd4720c0533	https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-26
+psi-PSI-69.json	31770	a2d8ec5d0e9ad1060f6ecc7a850598634cc5519c373ae70462bf76c31fc8731c	https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-69
+psi-PSI-98.json	134230	501b5f625733e29c0c6ff0c12b3de1a3e960a159a8c8f8a21ba5c5803afe0570	https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-98
+psi-PSI-99.json	10308	2c042a6bd82fa6b437cae61490d54ea91f890a52282bc5949b4a0119bcbf6633	https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-99
+psi-route-probe-log.tsv	5340	3ae66373531f563aeb0c30f2e39a212e0e46796b812d8be6695031870b9535bf	Probe log (curl/gh) for this review, 2026-11-14 UTC; signed URLs deliberately excluded
+psi100-table-PSI-100.csv	239	4d3c717ec20dd0247db670b2784a9fd7d746788bc54a936f80693e48eb8cd117	geode-py/ws/studies/<accession>/download?file=<experimentalTable _id>&version=1&redirect=false -> presigned S3 (psi-repo-prod); signature not retained
+psi102-table-PSI-102.csv	331	268d1e121d2f211b124407dd32b9475617bd269ede2c2d1749441da3e949a2af	geode-py/ws/studies/<accession>/download?file=<experimentalTable _id>&version=1&redirect=false -> presigned S3 (psi-repo-prod); signature not retained
+psi20-table-PSI-20.csv	1113	4aa5d3f98708ceacced5c620d46858b9965f8d4d941b203229f46467d53e5ab7	geode-py/ws/studies/<accession>/download?file=<experimentalTable _id>&version=1&redirect=false -> presigned S3 (psi-repo-prod); signature not retained
+psi25-table-PSI-25.csv	16590	71e792bf6b5fb5ea620c5dd70fbbac05515992e12aefcf5dff47312caa48c042	geode-py/ws/studies/<accession>/download?file=<experimentalTable _id>&version=1&redirect=false -> presigned S3 (psi-repo-prod); signature not retained
+psi26-table-PSI-26.csv	4726	ccfc3c54d948b64a1c5d2596a63c7c8019e51df0c91a1d62f039f48fa28c300f	geode-py/ws/studies/<accession>/download?file=<experimentalTable _id>&version=1&redirect=false -> presigned S3 (psi-repo-prod); signature not retained
+psi69-table-PSI-69.csv	24776	37c88ce8ae9391b7544ff630a45ce87543d04d317cdbfbed104fe7d5c27e1b96	geode-py/ws/studies/<accession>/download?file=<experimentalTable _id>&version=1&redirect=false -> presigned S3 (psi-repo-prod); signature not retained
+psi98-table-PSI-98.csv	469	c01f29c62455f0a3b512290ab85e5687ecded326733189f002f580368402308d	geode-py/ws/studies/<accession>/download?file=<experimentalTable _id>&version=1&redirect=false -> presigned S3 (psi-repo-prod); signature not retained
+psi99-table-PSI-99.csv	1973	3c24390b9ef86f3d1ebaab911a1a3cc95a8759aebf42062371370e6d4b31b8ac	geode-py/ws/studies/<accession>/download?file=<experimentalTable _id>&version=1&redirect=false -> presigned S3 (psi-repo-prod); signature not retained
+psi_candidates_summary.json	23663	e109a0c228aabf00236fc846fd07eefdd34b2a3fcccc1e596975176886490d76	UNMAPPED - check
+psi_download_log.json	491	f3c2d08ccea5ceb9037ef01290629881e7b68d168e2ed12abc1fa518230cb95d	UNMAPPED - check
+psi_home.html	343714	d990f914249696496fff6c4f7dde26ce25b1df6af9c79e794ebb7c4260f6e488	UNMAPPED - check
+psi_main.js	1638325	8509c035ffdeabc5d3b86891d47fb6b9afced8915593fd4b171636d4f8222c28	UNMAPPED - check
+psi_reports_log.json	872	f868a23c1fa265737bfc54968ddcdad2899cd6fc36d7f44a535c99fe565fb085	UNMAPPED - check
+psi_tables_log.json	4026	40fc91c00c360f67aaf89943c8c89a267d77119d78aa09635e051e895706bc5c	UNMAPPED - check
+s3_a.out	243	b9d61eb259cd7dce6c95c12b0efd215c01ab20b09d4a7c4e58790fe4ec988f8d	UNMAPPED - check
+s3_direct.out	362	911496d4e220cdcb232ddc2dd5b1bc7a2fc56b6a0f53bbc704f07bb86cacacb7	UNMAPPED - check
+s3_list_psi102.xml	254	b0178c266b91dc89fe3f25cc4c6bb70d1bcffa07af98f4be48668d84c1aa7e0f	UNMAPPED - check
+s3_list_root.xml	632	01f382e234d1e929566101b6fca037b2efd118a992592ca630c5115d00b2b0fc	UNMAPPED - check
+same_table_a.out	796	9c4f067567884f501d8e3e1a145674e29268a1e7afb552a377d72b6a750ae0d4	UNMAPPED - check
+typesafe-confidence.md	14159	3f15502effc8da348b7e5cf395632a9e7971c7cad91660f56995a9c6beb90ee3	https://docs.typesafe.ai/confidence.md
+typesafe-errors.md	2722	e0465b1d78a056ea4f2cf3bff66290dadc0feee39c96e99b0ad4b78852c01632	https://docs.typesafe.ai/api/errors.md
+typesafe-models.md	8177	09ff62cff4c56b2d4d1827541e2af06f1d15c21f0ef8879dd488e72a373b34ca	https://docs.typesafe.ai/models.md

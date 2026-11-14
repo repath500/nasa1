@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  
+    
+  
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
+    
+    <link rel="shortcut icon" type="image/ico" href="https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico"/>
+    <link rel="apple-touch-icon" sizes="57x57" href="https://a0.awsstatic.com/libra-css/images/site/touch-icon-iphone-114-smile.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="https://a0.awsstatic.com/libra-css/images/site/touch-icon-ipad-144-smile.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="https://a0.awsstatic.com/libra-css/images/site/touch-icon-iphone-114-smile.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="https://a0.awsstatic.com/libra-css/images/site/touch-icon-ipad-144-smile.png"/>  
+  
+    <title>NASA Physical Sciences Informatics (PSI) - Registry of Open Data on AWS</title>
+  
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://assets.opendata.aws/css/bootstrap/3.4.1/bootstrap.min.css">
+  
+    <!-- Our local CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+  
+    <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Dataset",
+      "name" : "NASA Physical Sciences Informatics (PSI)",
+      "description" : "NASA\u0026#39;s Physical Sciences Research Program, along with its predecessors, has conducted significant fundamental and applied research in the physical sciences. The International Space Station (ISS) is an orbiting laboratory that provides an ideal facility to conduct long-duration experiments in the near absence of gravity and allows continuous and interactive research similar to Earth-based laboratories. This enables scientists to pursue innovations and discoveries not currently achievable by other means. NASA\u0026#39;s Physical Sciences Research Program also benefits from collaborations with several of the ISS international partners—Europe, Russia, Japan, and Canada—and foreign governments with space programs, such as France, Germany and Italy. \u003cbr/\u003e\u003cbr/\u003e In fulfillment of the Open Science model, NASA\u0026#39;s Physical Sciences Research Program is pleased to offer the PSI data repository for physical science experiments performed in reduced-gravity environments such as the ISS, Space Shuttle flights, and Free-flyers. PSI also includes data from some related ground-based studies. The PSI system is accessible and open to the public. This provides the opportunity for researchers to data mine results from prior flight investigations, expanding on the research performed. This approach will allow numerous ground-based investigations to be conducted from one flight experiment’s data, exponentially increasing our body of knowledge. PSI is an Open Data initiative.",
+      "license" : "There are no restrictions on the use of this data.",
+      "sourceOrganization" : "NASA"
+    }
+    </script>
+  
+  </head>
+  <body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://assets.opendata.aws/js/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://assets.opendata.aws/js/bootstrap/3.4.1/bootstrap.min.js"></script>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="roda-header">
+          <h2><a href="/" alt="Home">Registry of Open Data on AWS</a></h2>
+          <a href="http://aws.amazon.com/what-is-cloud-computing">
+            <img src="https://assets.opendata.aws/img/AWS-Logo_White-Color_300x180.png" alt="Powered by AWS Cloud Computing" id="aws_header_logo">
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="container" >
+
+    <h1>NASA Physical Sciences Informatics (PSI)</h1>
+    <p>
+      
+
+      <span class="label label-info tag link-tag">chemistry</span>
+
+      <span class="label label-info tag link-tag">fluid dynamics</span>
+
+      <span class="label label-info tag link-tag">materials science</span>
+
+      <span class="label label-info tag link-tag">physics</span>
+
+      <span class="label label-info tag link-tag">space biology</span>
+    </p>
+    <div class="row">
+      <div class="col-md-6">
+      <h3>Description</h3>
+      <p>NASA&#39;s Physical Sciences Research Program, along with its predecessors, has conducted significant fundamental and applied research in the physical sciences. The International Space Station (ISS) is an orbiting laboratory that provides an ideal facility to conduct long-duration experiments in the near absence of gravity and allows continuous and interactive research similar to Earth-based laboratories. This enables scientists to pursue innovations and discoveries not currently achievable by other means. NASA&#39;s Physical Sciences Research Program also benefits from collaborations with several of the ISS international partners—Europe, Russia, Japan, and Canada—and foreign governments with space programs, such as France, Germany and Italy. <br/><br/> In fulfillment of the Open Science model, NASA&#39;s Physical Sciences Research Program is pleased to offer the PSI data repository for physical science experiments performed in reduced-gravity environments such as the ISS, Space Shuttle flights, and Free-flyers. PSI also includes data from some related ground-based studies. The PSI system is accessible and open to the public. This provides the opportunity for researchers to data mine results from prior flight investigations, expanding on the research performed. This approach will allow numerous ground-based investigations to be conducted from one flight experiment’s data, exponentially increasing our body of knowledge. PSI is an Open Data initiative.</p>
+
+      <h4>Update Frequency</h4>
+      <p>New research data is added as soon as it is available.</p>
+
+      <h4>License</h4>
+      <p>There are no restrictions on the use of this data.</p>
+
+      <h4>Documentation</h4>
+      <p><a href="https://www.nasa.gov/PSI">https://www.nasa.gov/PSI</a></p>
+
+      <h4>Managed By</h4>
+      <p><a href=""><img src="/img/logos/nasa-logo.png" class="managed-by-logo" alt=""></a></p>
+      <p>See all datasets managed by <a href="https://registry.opendata.aws/collab/nasa">NASA</a>.</p>
+
+      <h4>Contact</h4>
+      <p><a href="https://www.nasa.gov/content/psi-contacts-tutorials-and-related-links">https://www.nasa.gov/content/psi-contacts-tutorials-and-related-links</a></p>
+
+      <h4>How to Cite</h4>
+      <p>NASA Physical Sciences Informatics (PSI) was accessed on <code>DATE</code> from https://registry.opendata.aws/nasa-psi. </p>
+
+      <h4 name="usageexamples">Usage Examples</h4>
+        <h5 class="dataatwork-category">Publications</h5>
+        <ul class="dataatwork-list">
+          <li>
+            <a href="https://youtu.be/9uXgDUuWxTo" class="" target="_none">PSI System Demonstration</a> by Cheryl Payne</a>
+            <br>
+            
+            
+          </li>          <li>
+            <a href="https://www.nasa.gov/sites/default/files/atoms/files/psi_researchers_guide-tagged.pdf" class="" target="_none">Researcher&#x27;s Guide to Physical Sciences Informatics System</a> by NASA ISS Program Science Office</a>
+            <br>
+            
+            
+          </li>        </ul>
+
+    </div>
+    <div class="col-md-5 col-md-offset-1">
+      <h3>Resources on AWS</h3>
+      <ul class="resource-list">
+        <li>
+          <dl class="resource-list">
+            <dt class="resource-description">Description</dt>
+            <dd class="resource-description">Directional Solidification Insert (DSI) and Observation and Analysis of Smectic Islands In Space (OASIS) data</dd>
+            <dt class="resource-type">Resource type</dt>
+            <dd class="resource-type s3-bucket">S3 Bucket</dd>
+            <dt class="resource-arn">Amazon Resource Name (ARN)</dt>
+            <dd><code>arn:aws:s3:::nasa-psi</code></dd>
+            <dt class="resource-region">AWS Region</dt>
+            <dd><code>us-west-2</code></dd>
+            <dt class="resource-region"><a href="https://aws.amazon.com/cli/">AWS CLI</a> Access (No AWS account required)</dt>
+            <dd><code>aws s3 ls --no-sign-request s3://nasa-psi/</code></dd>
+            <dt class="resource-explore">Explore</dt>
+            <dd><a href="https://nasa-psi.s3.us-west-2.amazonaws.com/index.html">Browse Bucket</a></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+    <hr/>
+    <p><a href="https://github.com/awslabs/open-data-registry/blob/main/datasets/nasa-psi.yaml">Edit this dataset entry on GitHub</a></p>
+    <p><a href="mailto:opendata@amazon.com">Tell us about your project</a></p>
+    <p><a href="/"><b>Home</b></a></p>
+  </div>
+  <script src="/js/tags.js"></script>

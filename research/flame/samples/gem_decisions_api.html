@@ -1,0 +1,1381 @@
+<!doctype html><html lang="en-US" dir="ltr"><head><base href="https://aistudio.google.com/"><link rel="preconnect" href="//www.gstatic.com"><meta name="referrer" content="origin"><link rel="canonical" href="https://aistudio.google.com/docs/decisions-api"><meta property="og:type" content="website"><meta property="og:title" content="Google AI Studio"><meta property="og:description" content="The fastest path from prompt to production with Gemini"><meta property="og:image" content="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="628"><meta property="og:image:type" content="image/png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="application-name" content="AI Studio"><meta name="apple-mobile-web-app-title" content="AI Studio"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#000"><meta name="msapplication-tap-highlight" content="no"><link rel="preconnect" href="//fonts.googleapis.com"><link rel="preconnect" href="//fonts.gstatic.com"><link rel="preconnect" href="//www.gstatic.com"><link rel="preconnect" href="//alkalimakersuite-pa.clients6.google.com"><link rel="prefetch" href="//apis.google.com/js/api.js"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&amp;display=swap" nonce="1FceXQnhxq8JO6FS_RwTbg"><link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Inter+Tight:wght@300;500;600&amp;display=swap" nonce="1FceXQnhxq8JO6FS_RwTbg"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Text:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" nonce="1FceXQnhxq8JO6FS_RwTbg"><link rel="manifest" crossorigin="use-credentials" href="_/MakerSuite/manifest.json"><link rel="home" href="/prompts/new_chat?utm_source=pwa&amp;utm_medium=homescreen&amp;lfhs=2"><link rel="msapplication-starturl" href="/prompts/new_chat?utm_source=pwa&amp;utm_medium=homescreen&amp;lfhs=2"><link rel="icon" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-32dp/logo_ai_studio_color_1x_web_32dp.png" sizes="32x32"><link rel="apple-touch-icon-precomposed" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-32dp/logo_ai_studio_color_1x_web_32dp.png" sizes="32x32"><link rel="msapplication-square32x32logo" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-32dp/logo_ai_studio_color_1x_web_32dp.png" sizes="32x32"><link rel="icon" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-64dp/logo_ai_studio_color_1x_web_64dp.png" sizes="64x64"><link rel="apple-touch-icon-precomposed" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-64dp/logo_ai_studio_color_1x_web_64dp.png" sizes="64x64"><link rel="msapplication-square64x64logo" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-64dp/logo_ai_studio_color_1x_web_64dp.png" sizes="64x64"><link rel="icon" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_1x_web_96dp.png" sizes="96x96"><link rel="apple-touch-icon-precomposed" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_1x_web_96dp.png" sizes="96x96"><link rel="msapplication-square96x96logo" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_1x_web_96dp.png" sizes="96x96"><link rel="icon" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_2x_web_96dp.png" sizes="192x192"><link rel="apple-touch-icon-precomposed" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_2x_web_96dp.png" sizes="192x192"><link rel="msapplication-square192x192logo" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_2x_web_96dp.png" sizes="192x192"><link rel="icon" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-512dp/logo_ai_studio_color_1x_web_512dp.png" sizes="512x512"><link rel="apple-touch-icon-precomposed" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-512dp/logo_ai_studio_color_1x_web_512dp.png" sizes="512x512"><link rel="msapplication-square512x512logo" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-512dp/logo_ai_studio_color_1x_web_512dp.png" sizes="512x512"><link rel="preload" href="https://www.gstatic.com/_/mss/boq-makersuite/_/js/k=boq-makersuite.MakerSuite.en_US.JLBvzaeCXqM.2018.O/am=AaRKgIHgEA/d=1/excm=_b/ed=1/dg=0/wt=2/ujg=1/rs=AMOXD28TXvfRTu02iapAh4ulgskYyMojcA/dti=1/m=_b" as="script" nonce="CmGwTWRbMaiQITzzE0CAgQ"><link rel="preload" href="https://www.gstatic.com/_/mss/boq-makersuite/_/js/k=boq-makersuite.MakerSuite.en_US.JLBvzaeCXqM.2018.O/ck=boq-makersuite.MakerSuite.kzfi84e3Yfk.L.X.O/am=AaRKgIHgEA/d=1/exm=_b/excm=_b/ed=1/wt=2/ujg=1/rs=AMOXD2-ib17KaT37ns1_YK5ZGXyiQubPTw/dti=1/m=smxHue" as="script" nonce="CmGwTWRbMaiQITzzE0CAgQ"><script type="application/json" id="b109d973-9bec-48e9-90ee-691fcb8d39d8" nonce="CmGwTWRbMaiQITzzE0CAgQ">{"AfY8Hf":false,"CmfRSc":"0","CoJqbf":"https://alkalimakersuite-pa.clients6.google.com","DpimGf":false,"Dvqjfd":"","EBvNTe":"823511539352-ojaretejk1s95sdvkic0te923pt7knpu.apps.googleusercontent.com","EP1ykd":["/.well-known/*","/_/*","/accounts/*","/app","/app/*","/assets/*","/audio/*","/images/*","/music/*","/public/*","/templates/*"],"FdrFJe":"4133754309005625661","HiPsbb":1,"Im6cmf":"/_/MakerSuite","KU8tnd":"https://alkalimakersuiteapplets.pa.clients6.google.com","LoQv7e":true,"MT7f9b":[],"MUE6Ne":"alkali-makersuite","MsAAre":false,"NHyHAe":60000,"O7uJJ":"https://cloudconsole-pa.clients6.google.com","OC2PJe":"https://people-pa.clients6.google.com","Onibif":"https://webchannel-alkalimakersuite-pa.clients6.google.com","PeqOqb":"REDACTED_API_KEY","PgS1Kc":"https://content.googleapis.com","PqyQ6d":"","QrtxK":"","S06Grb":"","S6lZl":96797242,"TSDtV":"%.@.[[null,[[45847864,null,true,null,null,null,\"kE3j8b\"],[45750734,null,false,null,null,null,\"zNidwd\"],[45859437,null,null,null,\"\",null,\"iPg3y\"],[45786059,null,true,null,null,null,\"ZRXcme\"],[45800001,null,false,null,null,null,\"fEA85b\"],[45872738,null,false,null,null,null,\"Zemkge\"],[45815137,null,true,null,null,null,\"WRwkue\"],[45766584,null,false,null,null,null,\"uzk17e\"],[45812681,null,true,null,null,null,\"X7uB7c\"],[45870949,null,false,null,null,null,\"rOpvAb\"],[45864047,null,true,null,null,null,\"OHVamb\"],[45784561,null,false,null,null,null,\"LXfb5c\"],[45856904,null,true,null,null,null,\"FG6P7d\"],[45780874,null,false,null,null,null,\"Q1jbEd\"],[45772164,null,false,null,null,null,\"zeKiRd\"],[45764549,null,true,null,null,null,\"ZSgiif\"],[45841148,null,true,null,null,null,\"s6aszc\"],[45737435,null,true,null,null,null,\"QLHTQ\"],[45860610,null,false,null,null,null,\"pYjjGf\"],[45786683,null,true,null,null,null,\"SEwGId\"],[45860469,null,true,null,null,null,\"EuiBmf\"],[45714250,null,true,null,null,null,\"t52vxe\"],[45771578,null,true,null,null,null,\"FWnIxc\"],[45828307,null,false,null,null,null,\"yMyGUd\"],[45773098,null,true,null,null,null,\"tHUpTc\"],[45805229,null,false,null,null,null,\"s3lTDc\"],[45746196,null,true,null,null,null,\"Mkmxtb\"],[45820967,null,false,null,null,null,\"sFOxp\"],[45772817,null,true,null,null,null,\"fMTTic\"],[45884298,null,false,null,null,null,\"v5uyBe\"],[45824912,131072,null,null,null,null,\"b2C2B\"],[45773200,null,false,null,null,null,\"SNmu3c\"],[45784564,null,false,null,null,null,\"oj32cc\"],[45809279,null,false,null,null,null,\"PDJPhb\"],[45857667,null,false,null,null,null,\"NWij2c\"],[45796413,null,false,null,null,null,\"tO7rUe\"],[45837404,null,false,null,null,null,\"CT0XI\"],[45842046,null,null,null,null,null,\"f87Xt\",[\"[]\"]],[45776026,null,false,null,null,null,\"CEBNKb\"],[45777831,null,false,null,null,null,\"GPgspe\"],[45817873,null,true,null,null,null,\"TQ277c\"],[45845967,null,true,null,null,null,\"Sniiwc\"],[45854059,null,true,null,null,null,\"b40um\"],[45861368,null,false,null,null,null,\"lMSdOe\"],[45812538,null,false,null,null,null,\"eJaIR\"],[45784662,null,false,null,null,null,\"QdT1Z\"],[45764720,null,true,null,null,null,\"B2Bu0b\"],[45861278,null,false,null,null,null,\"V5KHhb\"],[45825903,null,false,null,null,null,\"mNGeee\"],[45862868,null,false,null,null,null,\"bfKXxd\"],[45879438,null,false,null,null,null,\"Aq2Vrc\"],[45773240,null,false,null,null,null,\"n7JOEb\"],[45772231,null,false,null,null,null,\"HsfSqc\"],[45632067,null,true,null,null,null,\"CyDiEf\"],[45820776,null,true,null,null,null,\"bFtnL\"],[45670190,null,false,null,null,null,\"ArIgzf\"],[45806859,null,true,null,null,null,\"RYGIvf\"],[45734881,null,false,null,null,null,\"RLIQje\"],[45834641,null,false,null,null,null,\"WHLyI\"],[45877221,null,true,null,null,null,\"km8lB\"],[45675258,null,false,null,null,null,\"z2PIFf\"],[45787299,null,true,null,null,null,\"h85Kkd\"],[45866857,null,false,null,null,null,\"xpMubf\"],[45875820,null,false,null,null,null,\"WtdpB\"],[45812905,null,true,null,null,null,\"Y9AUte\"],[45799321,null,false,null,null,null,\"Qsarhc\"],[45836227,null,false,null,null,null,\"FAv3Rc\"],[45874376,null,false,null,null,null,\"hAJked\"],[45784559,null,true,null,null,null,\"quitKc\"],[45806340,null,true,null,null,null,\"OEiE2c\"],[45820497,null,false,null,null,null,\"oYprSb\"],[45762876,null,false,null,null,null,\"JRm6id\"],[45737434,null,true,null,null,null,\"LYXRQd\"],[45876363,null,false,null,null,null,\"F175qf\"],[45833843,null,false,null,null,null,\"NYdl8e\"],[45851528,null,false,null,null,null,\"COIM7c\"],[45882926,null,false,null,null,null,\"YYknXb\"],[45884321,null,false,null,null,null,\"sioIbb\"],[45768537,null,true,null,null,null,\"HzvgYb\"],[45788298,null,false,null,null,null,\"ET3a6d\"],[45763863,null,false,null,null,null,\"srRqFc\"],[45777963,null,false,null,null,null,\"JE0rH\"],[45853662,null,false,null,null,null,\"z4Szhe\"],[45865399,null,false,null,null,null,\"DFzY9e\"],[45834985,null,true,null,null,null,\"sAqbnd\"],[45849298,null,false,null,null,null,\"j578Be\"],[45827384,null,false,null,null,null,\"g3QGVd\"],[45822819,null,true,null,null,null,\"YalIlf\"],[45742893,null,true,null,null,null,\"Irsrgf\"],[45827530,null,true,null,null,null,\"KGZnYc\"],[45713337,null,true,null,null,null,\"yauate\"],[45775967,null,true,null,null,null,\"h9YtGf\"],[45781210,null,true,null,null,null,\"ZAVYX\"],[45784560,null,true,null,null,null,\"aUo2dd\"],[45862407,null,false,null,null,null,\"xzAHle\"],[45786621,null,false,null,null,null,\"u5h94\"],[45856905,null,true,null,null,null,\"YyN5cb\"],[45721377,null,null,null,\"\",null,\"bXSQ7e\"],[45772596,null,true,null,null,null,\"AYGfy\"],[45817527,null,true,null,null,null,\"KAsw\"],[45850100,null,false,null,null,null,\"HIcJUb\"],[45817874,null,true,null,null,null,\"a6JmIf\"],[45733504,null,false,null,null,null,\"JZ5hpd\"],[45786417,null,false,null,null,null,\"jL0KB\"],[45781629,null,false,null,null,null,\"T92pzc\"],[45746822,null,true,null,null,null,\"Evf1d\"],[45885152,null,false,null,null,null,\"rZqh3\"],[45848811,null,false,null,null,null,\"UBGA9b\"],[45797765,null,false,null,null,null,\"LMH9V\"],[45784562,null,true,null,null,null,\"B7YKqc\"],[45870781,null,false,null,null,null,\"NryDGf\"],[45869556,null,false,null,null,null,\"tScIGe\"],[45806420,null,true,null,null,null,\"fEQEmb\"],[45767301,null,true,null,null,null,\"XNnQfb\"],[45790102,null,false,null,null,null,\"gWraHd\"],[45775806,null,false,null,null,null,\"f1cyrc\"],[45852907,null,true,null,null,null,\"a8lhaf\"],[45890186,null,false,null,null,null,\"CLydhf\"],[45865262,null,false,null,null,null,\"Bh3Ol\"],[45776819,null,true,null,null,null,\"CWdxXd\"],[45823295,null,false,null,null,null,\"Arlbpd\"],[45871674,null,false,null,null,null,\"o8NB9c\"],[45830082,null,false,null,null,null,\"ZUp3se\"],[45836590,null,null,0,null,null,\"vIGve\"],[45801163,null,true,null,null,null,\"VDs51c\"],[45858220,null,false,null,null,null,\"YAQRrc\"],[45796593,null,true,null,null,null,\"piQlge\"],[45751428,null,false,null,null,null,\"w8d1bc\"],[45837256,null,false,null,null,null,\"qckzOe\"],[45857099,null,false,null,null,null,\"cIG1vc\"],[45815733,null,true,null,null,null,\"ht9f6e\"],[45739638,null,true,null,null,null,\"hPR2wd\"],[45866669,null,true,null,null,null,\"xk2TDe\"],[45784349,null,true,null,null,null,\"xNyUwf\"],[45725952,null,false,null,null,null,\"LGSclc\"],[45716130,null,null,null,\"\",null,\"Qy4uld\"],[45773243,null,false,null,null,null,\"MLsv8b\"],[45793959,null,false,null,null,null,\"hOMnHf\"],[45646711,null,false,null,null,null,\"aKSrdd\"],[45773517,null,true,null,null,null,\"C4cpEd\"],[45863024,null,null,null,\"models/gemini-4-hydrogen\",null,\"SzcwOb\"],[45808440,null,false,null,null,null,\"OgCwYe\"],[45826997,null,true,null,null,null,\"XjAiEc\"],[45745504,null,false,null,null,null,\"II2tFb\"],[45830858,null,false,null,null,null,\"mJ13bb\"],[45786476,null,true,null,null,null,\"NtxR6e\"],[45832772,null,true,null,null,null,\"NrZPHe\"],[45765786,null,false,null,null,null,\"B1GdRb\"],[45780375,null,true,null,null,null,\"GAbK3d\"],[45785393,null,false,null,null,null,\"JVB6z\"],[45797100,null,false,null,null,null,\"iB2O1e\"],[45791779,null,false,null,null,null,\"DQg7Hb\"],[45767507,null,true,null,null,null,\"Zn5Ej\"],[45775384,null,true,null,null,null,\"DqVejd\"],[45802372,null,true,null,null,null,\"XXFwZe\"],[45716158,null,false,null,null,null,\"j1MtL\"],[45784330,null,true,null,null,null,\"WWo53e\"],[45869663,null,false,null,null,null,\"TDErSd\"],[106136619,null,true,null,null,null,\"iGreoe\"],[45794982,null,true,null,null,null,\"EW5nff\"],[45818348,null,false,null,null,null,\"r6kKsf\"],[45746195,null,true,null,null,null,\"eXVehb\"],[45865704,null,false,null,null,null,\"zgb7I\"],[45877248,null,false,null,null,null,\"ol8MBf\"],[45694412,null,false,null,null,null,\"SbCVZ\"],[45732213,null,false,null,null,null,\"w7xKfd\"],[45785017,null,true,null,null,null,\"ri7Eac\"],[45854438,null,false,null,null,null,\"YxfQyc\"],[45762227,null,true,null,null,null,\"Z4Lh5e\"],[45865613,null,true,null,null,null,\"TYumuf\"],[45828311,null,false,null,null,null,\"HUhtxc\"],[45773733,null,true,null,null,null,\"EGfkj\"],[45772448,null,true,null,null,null,\"i07PMb\"],[45827223,null,true,null,null,null,\"Jtk3bf\"],[45854328,null,true,null,null,null,\"UeVFAf\"],[45772059,null,true,null,null,null,\"R59tgd\"],[45798215,null,false,null,null,null,\"HCx3Oc\"],[45747021,null,true,null,null,null,\"pKd73e\"],[45834001,null,true,null,null,null,\"hfCZid\"],[45823372,null,false,null,null,null,\"oMK3Y\"],[45830753,null,null,0,null,null,\"cRQlrb\"],[45741743,null,false,null,null,null,\"FpM8Qe\"],[45800793,null,true,null,null,null,\"ou8vKf\"],[45822392,null,true,null,null,null,\"wJ3FQd\"],[45862259,null,false,null,null,null,\"sZycyd\"],[45816582,null,false,null,null,null,\"dSJ7Bd\"],[45835850,null,false,null,null,null,\"L6pDkb\"],[45772137,null,false,null,null,null,\"ishS2b\"],[45724978,null,false,null,null,null,\"OWw3ld\"],[45773922,null,true,null,null,null,\"RSYlDb\"],[45851577,null,false,null,null,null,\"Imb3Ce\"],[45837097,null,false,null,null,null,\"Ace8lb\"],[45776579,null,true,null,null,null,\"clXDpe\"],[45826123,null,true,null,null,null,\"I4xrBe\"],[45780339,null,true,null,null,null,\"RajHhe\"],[45786812,null,true,null,null,null,\"rG2Adf\"],[45872515,null,false,null,null,null,\"o84zEc\"],[45818351,null,false,null,null,null,\"jif7mb\"],[45872481,null,false,null,null,null,\"ZL3igd\"],[45797782,null,false,null,null,null,\"KGod8d\"],[45865396,null,true,null,null,null,\"F7dvAc\"],[45843340,null,false,null,null,null,\"DRXio\"],[45824509,null,true,null,null,null,\"j3c7ob\"],[45883228,null,false,null,null,null,\"nma2yd\"],[45814275,null,true,null,null,null,\"RkNCqf\"],[45857186,null,false,null,null,null,\"yZGRVd\"],[45750201,null,true,null,null,null,\"eOwTyc\"],[45869948,null,true,null,null,null,\"Fr9VSd\"],[45725932,null,false,null,null,null,\"Gb1Jaf\"],[45886982,null,false,null,null,null,\"KO1zzd\"],[45882374,null,false,null,null,null,\"pfT1bf\"],[45846308,null,true,null,null,null,\"I5yZof\"],[45818257,null,false,null,null,null,\"IXqyUd\"],[45791794,null,false,null,null,null,\"kc5JKd\"],[45741421,null,null,null,\"models/gemini-4-hydrogen\",null,\"PH4l9d\"],[45868031,null,false,null,null,null,\"OcMSwf\"],[45817341,null,false,null,null,null,\"E9pnPd\"],[45881088,null,false,null,null,null,\"v26dNe\"],[45821529,null,true,null,null,null,\"wXqG7\"],[45869851,null,true,null,null,null,\"XtjyHc\"],[45740367,null,true,null,null,null,\"jCr8Db\"],[45765657,null,false,null,null,null,\"TQncq\"],[45788850,null,true,null,null,null,\"Bh3THc\"],[45812131,null,false,null,null,null,\"tUuz0c\"],[45867460,null,false,null,null,null,\"UCMFWd\"],[45817301,null,true,null,null,null,\"QPlsw\"],[45794311,null,false,null,null,null,\"s5sys\"],[45798403,null,false,null,null,null,\"x2wuHf\"],[45880297,null,true,null,null,null,\"dtWFPb\"],[45722603,null,true,null,null,null,\"iWkpJ\"],[45708381,null,false,null,null,null,\"JkACyc\"],[45842058,null,false,null,null,null,\"BeXieb\"],[45831005,null,false,null,null,null,\"DHRiDc\"],[45835180,null,false,null,null,null,\"hBbzle\"],[45755068,null,true,null,null,null,\"EB2qEd\"],[45772802,null,true,null,null,null,\"gENGMb\"],[45787653,null,true,null,null,null,\"N0vGQ\"],[45796979,null,false,null,null,null,\"cElYhd\"],[45723374,null,false,null,null,null,\"FK7eJd\"],[45831247,null,false,null,null,null,\"dTRbcc\"],[45844654,null,false,null,null,null,\"Ll0PNe\"],[45753184,null,false,null,null,null,\"yUHVge\"],[45781083,null,false,null,null,null,\"NNIf1e\"],[45865261,null,true,null,null,null,\"HmKYT\"],[45737499,null,true,null,null,null,\"dIQ2Ic\"],[45861680,null,true,null,null,null,\"gXEGbd\"],[45796324,null,true,null,null,null,\"sFBYxc\"],[45836224,null,false,null,null,null,\"QODXE\"],[45712153,null,false,null,null,null,\"aynkwb\"],[45726760,null,null,null,\"\",null,\"OZtjO\"],[45807399,20000,null,null,null,null,\"Fklxcf\"],[45825002,null,false,null,null,null,\"UYZwfb\"],[45747224,null,true,null,null,null,\"hLDizc\"],[45778977,null,true,null,null,null,\"BQF0Ib\"],[45854839,null,false,null,null,null,\"Q2VwPe\"],[45788754,null,null,null,null,null,\"CAlZbf\",[\"[[[\\\"supercloud\\\",\\\"https://www.gstatic.com/images/branding/productlogos/google_cloud_2026/v1/192px.svg\\\",\\\"https://www.gstatic.com/images/branding/productlogos/google_cloud_2026/v1/192px.svg\\\"],[\\\"gemini\\\",\\\"https://www.gstatic.com/images/branding/productlogos/gemini_2026/v1/192px.svg\\\",\\\"https://www.gstatic.com/images/branding/productlogos/gemini_2026/v1/192px.svg\\\"]]]\"]],[45886867,null,true,null,null,null,\"o1mLC\"],[45854420,null,true,null,null,null,\"vYFiN\"],[45773239,null,false,null,null,null,\"FR4WA\"],[45828912,null,null,null,\"\",null,\"M4rIM\"],[45826452,null,true,null,null,null,\"fyn48c\"],[45757828,null,true,null,null,null,\"Q8uuOb\"],[45784563,null,false,null,null,null,\"E8pjWd\"],[45879950,null,false,null,null,null,\"EzTFA\"],[45799359,null,true,null,null,null,\"B1kymf\"],[45828251,null,false,null,null,null,\"y14pld\"],[45721546,null,true,null,null,null,\"kNlqGe\"],[45759847,null,true,null,null,null,\"yRDM\"],[45818673,null,false,null,null,null,\"qxbq6e\"],[45825960,null,true,null,null,null,\"v240vc\"],[45778471,null,true,null,null,null,\"GxQ9o\"],[45737255,null,true,null,null,null,\"ra4Rcf\"],[45740401,null,true,null,null,null,\"kAmEsf\"],[45782135,null,true,null,null,null,\"aWuK4b\"],[45870488,null,false,null,null,null,\"P7LWqb\"],[45789764,null,true,null,null,null,\"q7jIFe\"],[45799173,null,null,null,null,null,\"AyrXXd\",[\"[]\"]],[106476711,null,true,null,null,null,\"oGx9Pd\"],[45747468,null,true,null,null,null,\"gjSq0\"],[45825901,null,true,null,null,null,\"dAUG8e\"],[45775030,null,true,null,null,null,\"yT9XMb\"],[45785071,null,true,null,null,null,\"jCAPEe\"],[45792594,null,false,null,null,null,\"pl1NXc\"],[45868792,null,false,null,null,null,\"vvpGyc\"],[497238176,null,true,null,null,null,\"WSAzh\"],[45845522,null,false,null,null,null,\"p7emWb\"]],\"CAMSwwEdxwbx4LI1CI6DFQ+AngUP/QIPl5UGD4oJD9g7D/DHBg+/HQ+CQxWlKACQJw+kNg+9kAYPsKkGD8RZD79cD8mtBg+xBg+aCw/vnwYPyJEED8VZD8rmBg+79gYP5pUFD/QuD4+NBQ++ag+9Fg/2Sg+KxQUP6GgAg5cFD9pkD803D/kAD6bWBQ/EDg/yLQ+TPg/z+wMPiy0PhzwP8MIFD9AED/ugBQ+NfwCtuQYP7DcPwQQPwQ8PkGUPsdwGD+AED9T6Aw8\\u003d\"]]]","TwvH1d":false,"UUFaWc":"%.@.null,1000,2]","UsvuEb":true,"Vvafkd":false,"WIu0Nc":"REDACTED_API_KEY","Z8v1ze":["clients6.google.com"],"ZGhOkf":false,"ZLEzG":"","ZOkjLb":"","ax6qJc":false,"b5W2zf":"default_MakerSuite","cfb2h":"boq_alkali-makersuite_20261110.12_p5","eptZe":"/_/MakerSuite/","gGcLoe":false,"gTCm1":true,"goX6ee":[1706538,106240713,106421007,106640299,106821707,106848712,106596088,106070698,106034713,106313915,106090184,106460446,106091999,107005844,106912575,106194850,106326023,106274811,106168017,106168006,106278925,106527927,106735891,106874967,106654357,106261858,106889123,106124489,106136612,106620816,106827696,106790580,106705624,106153117,106577085,106729386,106602757,106115617,106741289,106621491,107045340,107003409,106889112,106647031,106888705,106099784,106486688,106426380,106737938,106127883,106828955,106823440,106206959,106917705,106875431,106868706,106641528,106108827,106146800,106782647,106854629,106844334,106142671,106824642,106296617,106476709,106474465,106791061,106589860,106385828,106240521,106999334,106071470,106876535,106354910,106917208,106218673,106737949,106115994,106818123,106518858,106748851,106238854,106190114,1714247,99469037,99469325,99469606,99470390,99470676,99471521,99472152,99472923,99473634,99474978,99475399,99476940,99479562,99479843,99481323,99483074,99485062,99487563,99488544,99490003,99498689,99502612,99504446,99506560,99507751,99511366,99513768,99515729,99519346,99521545,99526244,99592559,99592774,99593565,99593855,99594417,99595825,99597463,99598314,99599019,99600002,99601754,99603295,99603795,99605900,99610504,99612556,99615955,99618109,99620678,99624122,99627487,99628904,99631434,99634100,99636532,99643469,99645640,99649841,99663829,99670411,99674194,99684866,99690678,99697489,99698400,99706773,99709714,99722744,99730395,99818967,99819038,99819337,99819946,99822043,99824016,99825648,99831345,99835418,99836189,99843083,99846645,99848139,99851361,99853541,99856066,99858533,99864883,99871496,99874439,99880736,99888730,99892723,99895594,99900706,99922480,99925705,99934494,99939535,99947943,99948574,99955155,99964537,99966078,99976511,99982048,99986739,99988910,100006205,100011246,100015460,100022601,100024072,100036044,100048868,100056079,100056850,100066646,100072723,100080152,100085343,100091448,100116448,100130509,100133254,102390176,100153252,100161730,100167192,100175033,100190923,100196804,100225437,101401155,101401296,101401507,101404174,101404455,101404526,101412501,101413209,101413331,101415144,101415228,101415388,101415972,101416283,101416390,101421789,101422067,101422871,101425628,101425700,101426077,99654657,99671463,99689207,99823315,99826769,99827750,99837671,99866819,99898115,100098741,100138715,100182206,101413112,99820704,99885799,98419872,98419863,98419856,98419879,106242288,106065558,106895299,106895288,106542255,106195246,117434428,106641106,106597120,106793981,106808637,117071028,105901316,106914895,97785986,105739270,119919289,102936972,106172513,106240704,106420998,106640290,106821698,106848703,106596079,106070689,106034704,106313906,106090175,106460437,106091990,107005835,106912566,106194841,106326014,106274802,106168008,106167997,106278916,106527918,106735882,106874958,106654348,106261849,106889114,106124480,106136593,106620807,106827687,106790571,106705615,106153108,106577076,106729377,106602748,106115608,106741280,106621482,107045331,107003400,106889103,106647022,106888696,106099775,106486679,106426371,106737929,106127874,106828946,106823431,106206950,106917696,106875422,106868697,106641519,106108819,106146791,106782639,106854621,106844326,106142663,106824633,106296608,106476700,106474456,106791052,106589851,106385819,106240512,106999325,106071461,106876526,106354901,106917199,106218664,106737940,106115985,106818115,106518849,106748842,106238845,106190105,99469021,99469309,99469590,99470374,99470660,99471505,99472136,99472907,99473618,99474962,99475383,99476924,99479546,99479827,99481307,99483058,99485046,99487547,99488528,99489987,99498673,99502596,99504430,99506544,99507735,99511350,99513752,99515713,99519330,99521529,99526228,99592543,99592758,99593549,99593839,99594401,99595809,99597447,99598298,99599003,99599986,99601738,99603279,99603779,99605884,99610488,99612540,99615939,99618093,99620662,99624106,99627471,99628888,99631418,99634084,99636516,99643453,99645624,99649825,99663813,99670395,99674178,99684850,99690662,99697473,99698384,99706757,99709698,99722728,99730379,99818951,99819022,99819321,99819930,99822027,99824000,99825632,99831329,99835402,99836173,99843067,99846629,99848123,99851345,99853525,99856050,99858517,99864867,99871480,99874423,99880720,99888714,99892707,99895578,99900690,99922464,99925689,99934478,99939519,99947927,99948558,99955139,99964521,99966062,99976495,99982032,99986723,99988894,100006189,100011230,100015444,100022585,100024056,100036028,100048852,100056063,100056834,100066630,100072707,100080136,100085327,100091432,100116432,100130493,100133238,102390160,100153236,100161714,100167176,100175017,100190907,100196788,100225421,101401139,101401280,101401491,101404158,101404439,101404510,101412485,101413193,101413315,101415128,101415212,101415372,101415956,101416267,101416374,101421773,101422051,101422855,101425612,101425684,101426061,99654641,99671447,99689191,99823299,99826753,99827734,99837655,99866803,99898099,100098725,100138699,100182190,101413096,99820688,99885783,98419868,98419859,98419852,98419875,106242279,106065549,106895290,106895279,106542247,106195237,117434412,106641098,106597111,106808635,117071024,106914886,97785970,105739254,119919287,102936956,106172504],"hOXil":["FaxEntityService"],"hsFLT":"%.@.null,10,3]","iRz4i":3,"k76Vlc":[],"kFsUdb":"https://docs.google.com/picker","kPYdqb":false,"mXaIFf":false,"nPAWmd":"https://cloudconsole-pa.clients6.google.com","nQyAE":{},"nfd52d":"google-ai-studio","p9hQne":"https://www.gstatic.com/_/boq-makersuite/_/r/","pm20lb":"cloudconsole-pa.clients6.google.com","qc58fc":"","qocwD":false,"qwAQke":"MakerSuite","rU9UAf":86400000,"rtQCxc":0,"syGxEd":false,"teM9xe":"0949e57c-a76d-41f1-b613-2835d12524ee","tkHyOe":"MUST_PROVIDE_AN_API_KEY","u4g7r":"%.@.null,1,3]","wpAUPe":false,"xnI9P":false,"xwAfE":true,"y2FhP":"prod","yFnxrf":1957,"yWAmtc":false,"yueqgf":false,"z6uGHf":"6LfMhuItAAAAAPMRs5Icz9eJnvIjRlxrxvJQ6ABh","zBpHOc":"https://accounts.google.com/o/oauth2/auth","zChJod":"%.@.]","zQKvjb":25,"zSAhZc":"https://accounts.google.com/o/oauth2/iframe"}</script><script nonce="CmGwTWRbMaiQITzzE0CAgQ">window["_F_toggles_default_MakerSuite"] = [0x4aa401, 0x438206, 0x1800000, ];</script><script nonce="CmGwTWRbMaiQITzzE0CAgQ"></script><script nonce="CmGwTWRbMaiQITzzE0CAgQ">var _F_cssRowKey = 'boq-makersuite.MakerSuite.kzfi84e3Yfk.L.X.O';var _F_combinedSignature = 'AMOXD2-ib17KaT37ns1_YK5ZGXyiQubPTw';function _DumpException(e) {throw e;}</script><link rel="stylesheet" href="https://www.gstatic.com/_/mss/boq-makersuite/_/ss/k=boq-makersuite.MakerSuite.kzfi84e3Yfk.L.X.O/am=AaRKgIHgEAAAABg/d=1/ed=1/rs=AMOXD29QAgwnYLCJaE5_ftIyOmT02guqZQ/m=_b" data-id="_cl" nonce="1FceXQnhxq8JO6FS_RwTbg"><style data-font-stylesheet nonce="1FceXQnhxq8JO6FS_RwTbg">@font-face{font-family:'Product Sans';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/productsans/v9/pxiDypQkot1TnFhsFMOfGShVF9eL.ttf)format('truetype');}@font-face{font-family:'Google Sans';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/googlesans/v62/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJllpyw.ttf)format('truetype');}@font-face{font-family:'Google Sans';font-style:normal;font-weight:500;font-display:block;src:url(https://fonts.gstatic.com/s/googlesans/v62/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrw2IJllpyw.ttf)format('truetype');}@font-face{font-family:'Google Sans';font-style:normal;font-weight:700;font-display:block;src:url(https://fonts.gstatic.com/s/googlesans/v62/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrzjJ5llpyw.ttf)format('truetype');}@font-face{font-family:'Google Sans Mono';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/googlesansmono/v15/P5sUzYWFYtnZ_Cg-t0Uq_rfivrdYH4RE8-pZ5gQ1abT53wVQGrw.ttf)format('truetype');}@font-face{font-family:'Google Sans Mono';font-style:normal;font-weight:500;font-display:block;src:url(https://fonts.gstatic.com/s/googlesansmono/v15/P5sUzYWFYtnZ_Cg-t0Uq_rfivrdYH4RE8-pZ5gQ1abTL3wVQGrw.ttf)format('truetype');}@font-face{font-family:'Google Sans Display';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/googlesansdisplay/v13/ea8FacM9Wef3EJPWRrHjgE4B6CnlZxHVDv79pA.ttf)format('truetype');}@font-face{font-family:'Google Sans Display';font-style:normal;font-weight:500;font-display:block;src:url(https://fonts.gstatic.com/s/googlesansdisplay/v13/ea8IacM9Wef3EJPWRrHjgE4B6CnlZxHVBg3etBD7SQ.ttf)format('truetype');}@font-face{font-family:'Google Symbols';font-style:normal;font-weight:300;font-display:block;src:url(https://fonts.gstatic.com/l/font?kit=HhzMU5Ak9u-oMExPeInvcuEmPosC9zyteYEFU68cPrjdKM1XLPTxlGmzczpgWvF1d8Yp7AudBnt3CPar1JFWjoLAUv3G2tSNljixIIGUsC62cdTKiAkecSathI2-Ama_9tgxECbWyWdcPvfEJGvEQgr6-vH_5FdLAwAw6VG8UVin4vJWnDEuNkOg_Yu5j43CpNBozuwHmZ8fWrE9Lf4MNKI8Ob1p3vhM5MmL1xPtYWJxn249etAwJOtWcK4TGbpR9kT-hxSQZneh0280ej7HGssaEg83Dl7y2HGz0kOBfNx3wEu0X_XuCaG3cN2lRqWIbdLNSNDJRROijuPx8l9LJ9MUc3YVaAy_FvW5Mqt0GUo25_KQiw1hKNLtEJaxxjaMHUnuguCLmBasc_FprKmQJwcnLLo8bdqtzSuhFP_31k52MdmRBrH3GvPp7bHNbT4EXm1lWgmcIdjLuuJhef26zX41OuqUtxjwb8NDNZa8Q6TNW_dJyeL-gWgc_ClBMu341gqZlWdWoPecEu3euEPGsLoo4vfChyzXDI2WqoSMnLm-9pkpNBDu59zXyx5iF00pAp2AABx0R33XwMfUTHMtQMlXylX0za0M7FckJGLshp-5a4dlVw&skey=f8ec4d50247dc1c1&v=v470)format('truetype');}.google-symbols{font-family:'Google Symbols';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;}</style><title>Decisions API - Gemini API | Google AI Studio</title><meta name="description" content="Answer typed yes/no, choice, and score questions about text, images, audio, video, and PDFs with the Gemini Decisions API."><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"><script nonce="CmGwTWRbMaiQITzzE0CAgQ">
+      function glueCookieNotificationBarLoaded() {
+        const {instance} = window.glue.CookieNotificationBar;
+        instance.listen('visibilitychange', (event) => {
+          const cookieBanner = document.getElementsByClassName('glue-cookie-notification-bar')[0];
+          if (event.detail.visible) {
+            cookieBanner.classList.add('visible');
+          } else {
+            cookieBanner.classList.remove('visible');
+          }
+        });
+
+        (function (w, d, s, l) {
+          w[l] = w[l] || [];
+          w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '',
+            e=d.querySelector('script[nonce]'),n=e&&(e['nonce']||e.getAttribute('nonce'));
+          j.async = true;
+          j.setAttribute('nonce', n);
+          if (self.trustedTypes && self.trustedTypes.createPolicy) {var policy = self.trustedTypes.createPolicy('aistudio', {createScriptURL: function(unused) { return 'https:\/\/www.googletagmanager.com\/gtm.js?id\x3dGTM-TT9C75WP'; }}); j.src = policy.createScriptURL('');} else {j.src = 'https:\/\/www.googletagmanager.com\/gtm.js?id\x3dGTM-TT9C75WP';}
+
+          f.parentNode.insertBefore(j, f);
+
+          window[l].push({'event': 'dataLayer_initialized', 'page_name': 'Google AI Studio'});
+        })(window, document, 'script', 'dataLayer');
+      }
+    </script><!-- Cookie Consent --><script src="https://www.gstatic.com/glue/cookienotificationbar/cookienotificationbar.min.js" data-glue-cookie-notification-bar-category="2A" data-glue-cookie-notification-bar-site-id="Google AI Studio" nonce="CmGwTWRbMaiQITzzE0CAgQ"></script><!-- End Cookie Consent  --><link rel="llms.txt" href="/llms.txt"><link rel="alternate" type="text/markdown" href="/docs/decisions-api.md"><script nonce="CmGwTWRbMaiQITzzE0CAgQ">var AF_initDataKeys = window.AF_initDataKeys || {}; var AF_dataServiceRequests = window.AF_dataServiceRequests || {}; var AF_initDataChunkQueue = window.AF_initDataChunkQueue || {}; var AF_initDataCallback = window.AF_initDataCallback || {}; var AF_initDataInitializeCallback = window.AF_initDataInitializeCallback || {}; AF_initDataKeys['b109d973-9bec-48e9-90ee-691fcb8d39d8'] = []; AF_dataServiceRequests['b109d973-9bec-48e9-90ee-691fcb8d39d8'] = {}; AF_initDataChunkQueue['b109d973-9bec-48e9-90ee-691fcb8d39d8'] = AF_initDataChunkQueue['b109d973-9bec-48e9-90ee-691fcb8d39d8'] || []; if (AF_initDataInitializeCallback['b109d973-9bec-48e9-90ee-691fcb8d39d8']) {AF_initDataInitializeCallback['b109d973-9bec-48e9-90ee-691fcb8d39d8'](AF_initDataKeys['b109d973-9bec-48e9-90ee-691fcb8d39d8'], AF_initDataChunkQueue['b109d973-9bec-48e9-90ee-691fcb8d39d8'], AF_dataServiceRequests['b109d973-9bec-48e9-90ee-691fcb8d39d8']);}if (!AF_initDataCallback['b109d973-9bec-48e9-90ee-691fcb8d39d8']) {AF_initDataCallback['b109d973-9bec-48e9-90ee-691fcb8d39d8'] = function(chunk) {AF_initDataChunkQueue['b109d973-9bec-48e9-90ee-691fcb8d39d8'].push(chunk);};}</script></head><app-root></app-root><noscript><pre>&gt; ## AI Agent Context
+&gt; Get the complete documentation index at: https://aistudio.google.com/llms.txt
+&gt; Use this file to discover all available pages.
+&gt; For the full documentation in a single file, fetch: https://aistudio.google.com/llms-full.txt
+
+# Decisions API
+
+Generative models produce text for people to read. When your code needs a
+judgment to branch on, generating and parsing text adds latency and brittle
+parsing logic.
+
+The Decisions API evaluates typed questions over text, PDFs, audio, images, and
+video. It uses [Gemini Decision 1](/docs/models/gemini-decision-1) and returns
+calibrated probabilities. It generates zero text tokens, so output token usage
+is always 0. Your code can branch, sort, and route on the response directly.
+
+## How it works  {% id=&quot;how-it-works&quot; %}
+
+Each call sends [shared input](/docs/decisions-api#input) and a map of
+questions, and returns one typed answer per question. Shared input can combine
+text, JSON, [PDF documents](/docs/decisions-api#documents),
+[audio](/docs/decisions-api#audio), [images](/docs/decisions-api#media), and
+[video](/docs/decisions-api#video):
+
+![](https://www.gstatic.com/cloud-cms/55bb56725305bef6dd99ace3e16515c1.png)
+
+Every question uses one of three [question types](/docs/decisions-api#question-types):
+
+| Question type | Goal | Returns |
+| :--- | :--- | :--- |
+| [Yes/no (`noul`)](/docs/decisions-api#noul) | Check whether a statement holds | `noul` (0.01 to 0.99), `confidence` |
+| [Choice (`choice`)](/docs/decisions-api#choice) | Pick one option from a fixed list | `choice`, `probabilities`, `confidence` |
+| [Score (`score`)](/docs/decisions-api#score) | Rate input against ordered rubric levels | `score`, `probabilities`, `legend`, `confidence` |
+
+Keep three ideas in mind when building with Gemini Decision 1:
+
+*   **Parallel, isolated scoring:** Every question runs against the shared input
+  in one forward pass. Questions can&#39;t see each other, and latency stays
+  nearly flat when you
+  [ask multiple questions](/docs/decisions-api#multiple-questions).
+*   **Value plus confidence:** The answer tells your code what action fits.
+  [Confidence](/docs/decisions-api#confidence) tells your code whether to run
+  it automatically or escalate.
+*   **Atomic checks, composed in code:** Ask narrow, single-purpose questions.
+  Combine the answers with ordinary `if` statements and weights in code (see
+  [Best practices](/docs/decisions-api#best-practices)).
+
+## Quickstart  {% id=&quot;quickstart&quot; %}
+
+Requires SDK 3.2 or later (`pip install -U google-genai` or
+`npm install @google/genai@latest`). Pass a model, shared input, and a map of
+questions. Each question requires a type ([`noul`](/docs/decisions-api#noul) for
+yes/no) and instructions:
+
+{% tabs %}
+  {% tab filename=&quot;decisions.py&quot; label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  
+  client = genai.Client(http_options={&quot;api_version&quot;: &quot;v1beta&quot;})
+  
+  result = client.decisions.create(
+      model=&quot;gemini-decision-1&quot;,
+      input=&quot;The blue mug I ordered on Monday arrived cracked on Wednesday.&quot;,
+      questions={
+          &quot;is_damaged&quot;: {
+              &quot;type&quot;: &quot;noul&quot;,
+              &quot;instructions&quot;: &quot;Did the item arrive damaged?&quot;,
+          },
+      },
+  )
+  
+  answer = result.answers[&quot;is_damaged&quot;]
+  print(f&quot;P(yes)={answer.noul:.2f} confidence={answer.confidence:.2f}&quot;)
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.mjs&quot; label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({ apiVersion: &quot;v1beta&quot; });
+  
+  const result = await ai.decisions.create({
+    model: &quot;gemini-decision-1&quot;,
+    input: &quot;The blue mug I ordered on Monday arrived cracked on Wednesday.&quot;,
+    questions: {
+      is_damaged: {
+        type: &quot;noul&quot;,
+        instructions: &quot;Did the item arrive damaged?&quot;,
+      },
+    },
+  });
+  
+  const answer = result.answers?.is_damaged;
+  if (answer?.type === &quot;noul&quot;) {
+    console.log(`P(yes)=${answer.noul} confidence=${answer.confidence}`);
+  }
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.sh&quot; label=&quot;REST&quot; %}
+  ```bash
+  curl -X POST &quot;https://generativelanguage.googleapis.com/v1beta/decisions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &#39;{
+      &quot;model&quot;: &quot;gemini-decision-1&quot;,
+      &quot;input&quot;: &quot;The blue mug I ordered on Monday arrived cracked on Wednesday.&quot;,
+      &quot;questions&quot;: {
+        &quot;is_damaged&quot;: {
+          &quot;type&quot;: &quot;noul&quot;,
+          &quot;instructions&quot;: &quot;Did the item arrive damaged?&quot;
+        }
+      }
+    }&#39;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+The API returns calibrated probabilities and token usage:
+
+```json
+{
+  &quot;answers&quot;: {
+    &quot;is_damaged&quot;: { &quot;type&quot;: &quot;noul&quot;, &quot;noul&quot;: 0.99, &quot;confidence&quot;: 0.99 }
+  },
+  &quot;usage&quot;: {
+    &quot;total_input_tokens&quot;: 100,
+    &quot;input_tokens_by_modality&quot;: [{ &quot;modality&quot;: &quot;text&quot;, &quot;tokens&quot;: 100 }],
+    &quot;total_output_tokens&quot;: 0,
+    &quot;total_tokens&quot;: 100
+  }
+}
+```
+
+## Question types  {% id=&quot;question-types&quot; %}
+
+### Yes or no (noul)  {% id=&quot;noul&quot; %}
+
+A yes/no question returns the calibrated probability that the answer is yes. Add
+criteria to define what yes and no mean when the question alone is ambiguous.
+
+{% tabs %}
+  {% tab filename=&quot;decisions.py&quot; label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  
+  client = genai.Client(http_options={&quot;api_version&quot;: &quot;v1beta&quot;})
+  
+  result = client.decisions.create(
+      model=&quot;gemini-decision-1&quot;,
+      input=&quot;Customer returned the sweater because they preferred green over blue.&quot;,
+      questions={
+          &quot;is_defect&quot;: {
+              &quot;type&quot;: &quot;noul&quot;,
+              &quot;instructions&quot;: &quot;Is the customer reporting a product defect?&quot;,
+              &quot;criteria&quot;: {
+                  &quot;true_description&quot;: &quot;The product itself is broken or faulty.&quot;,
+                  &quot;false_description&quot;: &quot;Preference, sizing, shipping, or pricing complaint.&quot;,
+              },
+          },
+      },
+  )
+  
+  print(result.answers[&quot;is_defect&quot;].noul)
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.mjs&quot; label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({ apiVersion: &quot;v1beta&quot; });
+  
+  const result = await ai.decisions.create({
+    model: &quot;gemini-decision-1&quot;,
+    input: &quot;Customer returned the sweater because they preferred green over blue.&quot;,
+    questions: {
+      is_defect: {
+        type: &quot;noul&quot;,
+        instructions: &quot;Is the customer reporting a product defect?&quot;,
+        criteria: {
+          true_description: &quot;The product itself is broken or faulty.&quot;,
+          false_description: &quot;Preference, sizing, shipping, or pricing complaint.&quot;,
+        },
+      },
+    },
+  });
+  
+  const answer = result.answers?.is_defect;
+  if (answer?.type === &quot;noul&quot;) console.log(answer.noul);
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.sh&quot; label=&quot;REST&quot; %}
+  ```bash
+  curl -X POST &quot;https://generativelanguage.googleapis.com/v1beta/decisions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &#39;{
+      &quot;model&quot;: &quot;gemini-decision-1&quot;,
+      &quot;input&quot;: &quot;Customer returned the sweater because they preferred green over blue.&quot;,
+      &quot;questions&quot;: {
+        &quot;is_defect&quot;: {
+          &quot;type&quot;: &quot;noul&quot;,
+          &quot;instructions&quot;: &quot;Is the customer reporting a product defect?&quot;,
+          &quot;criteria&quot;: {
+            &quot;true_description&quot;: &quot;The product itself is broken or faulty.&quot;,
+            &quot;false_description&quot;: &quot;Preference, sizing, shipping, or pricing complaint.&quot;
+          }
+        }
+      }
+    }&#39;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+Answer:
+
+```json
+{ &quot;type&quot;: &quot;noul&quot;, &quot;noul&quot;: 0.03, &quot;confidence&quot;: 0.97 }
+```
+
+{% callout type=&quot;note&quot; %}
+  Yes/no probabilities always fall between 0.01 and 0.99. Set thresholds inside
+  that range, since a check above 0.99 never matches.
+
+{% /callout %}
+
+### Pick one option (choice)  {% id=&quot;choice&quot; %}
+
+A choice question scores a fixed set of options and returns both the top option
+and the calibrated probability of every option (summing to 1). Criteria maps
+each option ID to a description of when it applies. Use an empty string (`&quot;&quot;`)
+when the option ID is self-explanatory.
+
+Before evaluation, the API sorts option keys alphabetically in UTF-8 byte
+order. Changing key order in your JSON request doesn&#39;t change option positions,
+and exact probability ties break to the alphabetically first key.
+
+{% tabs %}
+  {% tab filename=&quot;decisions.py&quot; label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  
+  client = genai.Client(http_options={&quot;api_version&quot;: &quot;v1beta&quot;})
+  
+  result = client.decisions.create(
+      model=&quot;gemini-decision-1&quot;,
+      input=&quot;I was charged twice for my order.&quot;,
+      questions={
+          &quot;department&quot;: {
+              &quot;type&quot;: &quot;choice&quot;,
+              &quot;instructions&quot;: &quot;Which department should handle this request?&quot;,
+              &quot;criteria&quot;: {
+                  &quot;billing&quot;: &quot;Payments, invoices, and refunds.&quot;,
+                  &quot;technical&quot;: &quot;Problems using the product.&quot;,
+                  &quot;shipping&quot;: &quot;Delivery and tracking.&quot;,
+                  &quot;other&quot;: &quot;Anything outside these categories.&quot;,
+              },
+          },
+      },
+  )
+  
+  answer = result.answers[&quot;department&quot;]
+  print(answer.choice, answer.confidence, answer.probabilities)
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.mjs&quot; label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({ apiVersion: &quot;v1beta&quot; });
+  
+  const result = await ai.decisions.create({
+    model: &quot;gemini-decision-1&quot;,
+    input: &quot;I was charged twice for my order.&quot;,
+    questions: {
+      department: {
+        type: &quot;choice&quot;,
+        instructions: &quot;Which department should handle this request?&quot;,
+        criteria: {
+          billing: &quot;Payments, invoices, and refunds.&quot;,
+          technical: &quot;Problems using the product.&quot;,
+          shipping: &quot;Delivery and tracking.&quot;,
+          other: &quot;Anything outside these categories.&quot;,
+        },
+      },
+    },
+  });
+  
+  const answer = result.answers?.department;
+  if (answer?.type === &quot;choice&quot;) {
+    console.log(answer.choice, answer.confidence, answer.probabilities);
+  }
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.sh&quot; label=&quot;REST&quot; %}
+  ```bash
+  curl -X POST &quot;https://generativelanguage.googleapis.com/v1beta/decisions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &#39;{
+      &quot;model&quot;: &quot;gemini-decision-1&quot;,
+      &quot;input&quot;: &quot;I was charged twice for my order.&quot;,
+      &quot;questions&quot;: {
+        &quot;department&quot;: {
+          &quot;type&quot;: &quot;choice&quot;,
+          &quot;instructions&quot;: &quot;Which department should handle this request?&quot;,
+          &quot;criteria&quot;: {
+            &quot;billing&quot;: &quot;Payments, invoices, and refunds.&quot;,
+            &quot;technical&quot;: &quot;Problems using the product.&quot;,
+            &quot;shipping&quot;: &quot;Delivery and tracking.&quot;,
+            &quot;other&quot;: &quot;Anything outside these categories.&quot;
+          }
+        }
+      }
+    }&#39;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+Answer:
+
+```json
+{
+  &quot;type&quot;: &quot;choice&quot;,
+  &quot;choice&quot;: &quot;billing&quot;,
+  &quot;probabilities&quot;: { &quot;billing&quot;: 0.99, &quot;shipping&quot;: 0.004, &quot;other&quot;: 0.003, &quot;technical&quot;: 0.002 },
+  &quot;confidence&quot;: 0.99
+}
+```
+
+{% callout type=&quot;note&quot; %}
+  Choice questions always distribute probability across your options, even when
+  none fits. Threshold confidence to catch low-certainty inputs, pair the
+  question with a separate yes/no scope check, or add a catch-all option such as
+  &quot;other&quot; with an explicit description. Avoid positional keys like
+  &quot;none_of_the_above&quot;: alphabetical sorting places it ahead of keys like
+  &quot;shipping&quot; and &quot;technical&quot; instead of last.
+
+{% /callout %}
+
+### Rate on a scale (score)  {% id=&quot;score&quot; %}
+
+A score question rates the input across ordered levels. Criteria is an array of
+non-empty level descriptions ordered from lowest to highest (2 to 255 levels,
+with 2 to 10 recommended for most rubrics), indexed starting at 0.
+
+The returned score is the probability-weighted average of the level indices, so
+it can fall between levels, and legend maps each index back to its description.
+
+{% tabs %}
+  {% tab filename=&quot;decisions.py&quot; label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  
+  client = genai.Client(http_options={&quot;api_version&quot;: &quot;v1beta&quot;})
+  
+  result = client.decisions.create(
+      model=&quot;gemini-decision-1&quot;,
+      input=&quot;Export fails in Safari but works in Chrome.&quot;,
+      questions={
+          &quot;severity&quot;: {
+              &quot;type&quot;: &quot;score&quot;,
+              &quot;instructions&quot;: &quot;How severe is this issue for the user?&quot;,
+              &quot;criteria&quot;: [
+                  &quot;Cosmetic: appearance only, no lost functionality.&quot;,
+                  &quot;Workaround available: a task fails, but another way works.&quot;,
+                  &quot;Fully blocked: a task fails with no workaround.&quot;,
+              ],
+          },
+      },
+  )
+  
+  answer = result.answers[&quot;severity&quot;]
+  print(answer.score, answer.confidence, answer.probabilities)
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.mjs&quot; label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({ apiVersion: &quot;v1beta&quot; });
+  
+  const result = await ai.decisions.create({
+    model: &quot;gemini-decision-1&quot;,
+    input: &quot;Export fails in Safari but works in Chrome.&quot;,
+    questions: {
+      severity: {
+        type: &quot;score&quot;,
+        instructions: &quot;How severe is this issue for the user?&quot;,
+        criteria: [
+          &quot;Cosmetic: appearance only, no lost functionality.&quot;,
+          &quot;Workaround available: a task fails, but another way works.&quot;,
+          &quot;Fully blocked: a task fails with no workaround.&quot;,
+        ],
+      },
+    },
+  });
+  
+  const answer = result.answers?.severity;
+  if (answer?.type === &quot;score&quot;) {
+    console.log(answer.score, answer.confidence, answer.probabilities);
+  }
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.sh&quot; label=&quot;REST&quot; %}
+  ```bash
+  curl -X POST &quot;https://generativelanguage.googleapis.com/v1beta/decisions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &#39;{
+      &quot;model&quot;: &quot;gemini-decision-1&quot;,
+      &quot;input&quot;: &quot;Export fails in Safari but works in Chrome.&quot;,
+      &quot;questions&quot;: {
+        &quot;severity&quot;: {
+          &quot;type&quot;: &quot;score&quot;,
+          &quot;instructions&quot;: &quot;How severe is this issue for the user?&quot;,
+          &quot;criteria&quot;: [
+            &quot;Cosmetic: appearance only, no lost functionality.&quot;,
+            &quot;Workaround available: a task fails, but another way works.&quot;,
+            &quot;Fully blocked: a task fails with no workaround.&quot;
+          ]
+        }
+      }
+    }&#39;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+Answer:
+
+```json
+{
+  &quot;type&quot;: &quot;score&quot;,
+  &quot;score&quot;: 1.12,
+  &quot;legend&quot;: {
+    &quot;0&quot;: &quot;Cosmetic: appearance only, no lost functionality.&quot;,
+    &quot;1&quot;: &quot;Workaround available: a task fails, but another way works.&quot;,
+    &quot;2&quot;: &quot;Fully blocked: a task fails with no workaround.&quot;
+  },
+  &quot;probabilities&quot;: { &quot;0&quot;: 0.03, &quot;1&quot;: 0.83, &quot;2&quot;: 0.15 },
+  &quot;confidence&quot;: 0.83
+}
+```
+
+Because different probability distributions can produce the same expected
+value (here 1.12, sitting just above level 1), check the per-level
+probabilities and confidence alongside the score when inputs can split across
+levels.
+
+Use the score to rank inputs or filter candidate results against a rubric
+threshold. When your code needs a discrete level, pick the entry with the
+highest probability:
+
+```python
+level = max(answer.probabilities, key=answer.probabilities.get)  # &quot;1&quot;
+print(answer.legend[level])  # &quot;Workaround available: ...&quot;
+```
+
+To compare scales with different numbers of levels, divide the score by the
+highest level index to normalize it between 0 and 1.
+
+## Ask multiple questions  {% id=&quot;multiple-questions&quot; %}
+
+Put independent questions about the same input in one request. Shared input
+counts once per request regardless of how many questions you ask (each question
+adds only its own instructions and criteria), and question types can be mixed.
+This example routes a support ticket using order data and the customer message.
+
+{% tabs %}
+  {% tab filename=&quot;decisions.py&quot; label=&quot;Python&quot; %}
+  ```python
+  import json
+  from google import genai
+  
+  client = genai.Client(http_options={&quot;api_version&quot;: &quot;v1beta&quot;})
+  
+  order = {&quot;order&quot;: {&quot;id&quot;: &quot;8821&quot;, &quot;item&quot;: &quot;headphones&quot;, &quot;price_usd&quot;: 240}, &quot;tier&quot;: &quot;Gold&quot;}
+  message = {&quot;message&quot;: &quot;Audio cuts out on the left earcup. Fix it today or I cancel my membership.&quot;}
+  
+  result = client.decisions.create(
+      model=&quot;gemini-decision-1&quot;,
+      input=[
+          {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: json.dumps(order) + &quot;\n&quot;},
+          {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: json.dumps(message)},
+      ],
+      questions={
+          &quot;is_defect&quot;: {
+              &quot;type&quot;: &quot;noul&quot;,
+              &quot;instructions&quot;: &quot;Does `message` describe a hardware defect?&quot;,
+          },
+          &quot;next_action&quot;: {
+              &quot;type&quot;: &quot;choice&quot;,
+              &quot;instructions&quot;: &quot;What is the right resolution given `tier` and `order`?&quot;,
+              &quot;criteria&quot;: {
+                  &quot;instant_refund&quot;: &quot;Refund without return. Low value or clear fault.&quot;,
+                  &quot;replacement_shipment&quot;: &quot;Ship a replacement. Customer returns the original.&quot;,
+                  &quot;troubleshooting_flow&quot;: &quot;The issue may be fixable by the customer.&quot;,
+                  &quot;human_escalation&quot;: &quot;&quot;,
+              },
+          },
+          &quot;churn_risk&quot;: {
+              &quot;type&quot;: &quot;score&quot;,
+              &quot;instructions&quot;: &quot;How likely is the customer to churn if the issue is not resolved now?&quot;,
+              &quot;criteria&quot;: [
+                  &quot;No churn signal&quot;,
+                  &quot;Mild frustration&quot;,
+                  &quot;Mentions alternatives&quot;,
+                  &quot;Threatens to cancel&quot;,
+              ],
+          },
+      },
+  )
+  
+  a = result.answers
+  if a[&quot;is_defect&quot;].noul &gt; 0.9 and a[&quot;next_action&quot;].confidence &gt; 0.6:
+      action = a[&quot;next_action&quot;].choice
+  else:
+      action = &quot;human_escalation&quot;
+  
+  print(action, a[&quot;churn_risk&quot;].score)
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.mjs&quot; label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({ apiVersion: &quot;v1beta&quot; });
+  
+  const order = { order: { id: &quot;8821&quot;, item: &quot;headphones&quot;, price_usd: 240 }, tier: &quot;Gold&quot; };
+  const message = { message: &quot;Audio cuts out on the left earcup. Fix it today or I cancel my membership.&quot; };
+  
+  const result = await ai.decisions.create({
+    model: &quot;gemini-decision-1&quot;,
+    input: [
+      { type: &quot;text&quot;, text: JSON.stringify(order) + &quot;\n&quot; },
+      { type: &quot;text&quot;, text: JSON.stringify(message) },
+    ],
+    questions: {
+      is_defect: {
+        type: &quot;noul&quot;,
+        instructions: &quot;Does `message` describe a hardware defect?&quot;,
+      },
+      next_action: {
+        type: &quot;choice&quot;,
+        instructions: &quot;What is the right resolution given `tier` and `order`?&quot;,
+        criteria: {
+          instant_refund: &quot;Refund without return. Low value or clear fault.&quot;,
+          replacement_shipment: &quot;Ship a replacement. Customer returns the original.&quot;,
+          troubleshooting_flow: &quot;The issue may be fixable by the customer.&quot;,
+          human_escalation: &quot;&quot;,
+        },
+      },
+      churn_risk: {
+        type: &quot;score&quot;,
+        instructions: &quot;How likely is the customer to churn if the issue is not resolved now?&quot;,
+        criteria: [&quot;No churn signal&quot;, &quot;Mild frustration&quot;, &quot;Mentions alternatives&quot;, &quot;Threatens to cancel&quot;],
+      },
+    },
+  });
+  
+  const { is_defect, next_action, churn_risk } = result.answers ?? {};
+  let action = &quot;human_escalation&quot;;
+  if (
+    is_defect?.type === &quot;noul&quot; &amp;&amp; next_action?.type === &quot;choice&quot; &amp;&amp;
+    (is_defect.noul ?? 0) &gt; 0.9 &amp;&amp; (next_action.confidence ?? 0) &gt; 0.6
+  ) {
+    action = next_action.choice ?? action;
+  }
+  console.log(action, churn_risk?.type === &quot;score&quot; ? churn_risk.score : undefined);
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.sh&quot; label=&quot;REST&quot; %}
+  ```bash
+  curl -X POST &quot;https://generativelanguage.googleapis.com/v1beta/decisions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &#39;{
+      &quot;model&quot;: &quot;gemini-decision-1&quot;,
+      &quot;input&quot;: [
+        { &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;{\&quot;order\&quot;: {\&quot;id\&quot;: \&quot;8821\&quot;, \&quot;item\&quot;: \&quot;headphones\&quot;, \&quot;price_usd\&quot;: 240}, \&quot;tier\&quot;: \&quot;Gold\&quot;}\n&quot; },
+        { &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;{\&quot;message\&quot;: \&quot;Audio cuts out on the left earcup. Fix it today or I cancel my membership.\&quot;}&quot; }
+      ],
+      &quot;questions&quot;: {
+        &quot;is_defect&quot;: {
+          &quot;type&quot;: &quot;noul&quot;,
+          &quot;instructions&quot;: &quot;Does `message` describe a hardware defect?&quot;
+        },
+        &quot;next_action&quot;: {
+          &quot;type&quot;: &quot;choice&quot;,
+          &quot;instructions&quot;: &quot;What is the right resolution given `tier` and `order`?&quot;,
+          &quot;criteria&quot;: {
+            &quot;instant_refund&quot;: &quot;Refund without return. Low value or clear fault.&quot;,
+            &quot;replacement_shipment&quot;: &quot;Ship a replacement. Customer returns the original.&quot;,
+            &quot;troubleshooting_flow&quot;: &quot;The issue may be fixable by the customer.&quot;,
+            &quot;human_escalation&quot;: &quot;&quot;
+          }
+        },
+        &quot;churn_risk&quot;: {
+          &quot;type&quot;: &quot;score&quot;,
+          &quot;instructions&quot;: &quot;How likely is the customer to churn if the issue is not resolved now?&quot;,
+          &quot;criteria&quot;: [&quot;No churn signal&quot;, &quot;Mild frustration&quot;, &quot;Mentions alternatives&quot;, &quot;Threatens to cancel&quot;]
+        }
+      }
+    }&#39;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+Response:
+
+```json
+{
+  &quot;answers&quot;: {
+    &quot;is_defect&quot;: { &quot;type&quot;: &quot;noul&quot;, &quot;noul&quot;: 0.94, &quot;confidence&quot;: 0.94 },
+    &quot;next_action&quot;: {
+      &quot;type&quot;: &quot;choice&quot;,
+      &quot;choice&quot;: &quot;human_escalation&quot;,
+      &quot;probabilities&quot;: {
+        &quot;human_escalation&quot;: 0.76,
+        &quot;replacement_shipment&quot;: 0.18,
+        &quot;troubleshooting_flow&quot;: 0.04,
+        &quot;instant_refund&quot;: 0.02
+      },
+      &quot;confidence&quot;: 0.76
+    },
+    &quot;churn_risk&quot;: {
+      &quot;type&quot;: &quot;score&quot;,
+      &quot;score&quot;: 2.99,
+      &quot;legend&quot;: {
+        &quot;0&quot;: &quot;No churn signal&quot;,
+        &quot;1&quot;: &quot;Mild frustration&quot;,
+        &quot;2&quot;: &quot;Mentions alternatives&quot;,
+        &quot;3&quot;: &quot;Threatens to cancel&quot;
+      },
+      &quot;probabilities&quot;: { &quot;0&quot;: 0.0, &quot;1&quot;: 0.0, &quot;2&quot;: 0.01, &quot;3&quot;: 0.99 },
+      &quot;confidence&quot;: 0.99
+    }
+  },
+  &quot;usage&quot;: {
+    &quot;total_input_tokens&quot;: 324,
+    &quot;input_tokens_by_modality&quot;: [{ &quot;modality&quot;: &quot;text&quot;, &quot;tokens&quot;: 324 }],
+    &quot;total_output_tokens&quot;: 0,
+    &quot;total_tokens&quot;: 324
+  }
+}
+```
+
+Some decisions depend on another, for example picking a repair category only
+if the item is damaged. Either send a second request after you read the first
+answer, or ask both questions in one request and ignore the answer you don&#39;t
+need.
+
+## Answers, probabilities, and confidence  {% id=&quot;confidence&quot; %}
+
+Each answer includes calibrated probabilities and a confidence score:
+
+*   **Top value:** Probability of yes for binary questions, most likely option
+  for choice questions, or probability-weighted expected level for score
+  questions.
+*   **Probabilities:** On choice and score answers, a map of calibrated
+  probabilities across all options or levels (summing to 1). For yes/no
+  answers, the probability of no is 1 minus the yes probability.
+*   **Confidence:** Estimated probability (from 0 to 1) that the top answer is
+  right. Equals the top outcome&#39;s probability, or `max(noul, 1 - noul)` for
+  yes/no questions.
+
+Use the answer value to pick an action and confidence to decide whether to run
+it automatically:
+
+```python
+answer = result.answers[&quot;department&quot;]
+if answer.confidence &gt;= 0.7:
+    route_to(answer.choice)
+else:
+    route_to(&quot;human_review&quot;)
+```
+
+{% callout type=&quot;note&quot; %}
+  Set thresholds using labeled examples from your own traffic. Weigh the cost
+  of a false positive against a false negative.
+
+{% /callout %}
+
+## Input  {% id=&quot;input&quot; %}
+
+The input field accepts text, image, audio, video, and PDF document blocks
+using the same content block schema as the
+[Interactions API](/docs/interactions-overview) (tool-call, tool-result, and
+thought blocks aren&#39;t supported):
+
+```none
+Input   = string | Content | Content[]
+Content = TextContent | ImageContent | AudioContent | VideoContent | DocumentContent
+```
+
+| Block | Fields | Supported MIME types |
+| :--- | :--- | :--- |
+| `text` | `text` | n/a |
+| `image` | `data` or `uri`, `mime_type`, optional `resolution` | `image/png`, `image/jpeg`, `image/webp`, `image/heic`, `image/heif`, `image/gif`, `image/bmp`, `image/tiff` |
+| `audio` | `data` or `uri`, `mime_type` | `audio/wav`, `audio/mp3`, `audio/mpeg`, `audio/aiff`, `audio/aac`, `audio/ogg`, `audio/flac`, `audio/m4a`, `audio/opus`, `audio/webm`, `audio/l16`, `audio/alaw`, `audio/mulaw` |
+| `video` | `data` or `uri`, `mime_type`, optional `resolution` | `video/mp4`, `video/mpeg`, `video/mov`, `video/avi`, `video/webm`, `video/wmv`, `video/x-flv`, `video/3gpp` |
+| `document` | `data` or `uri`, `mime_type` | `application/pdf` |
+
+*   Inline data accepts base64-encoded bytes (up to 100 MB per request, or
+  50 MB for PDFs).
+*   URI inputs accept [Files API](/docs/files) URIs (`file.uri`) and public or
+  signed HTTPS URLs (up to 15 MB per external URL).
+*   Always set the MIME type to the real file format. The API rejects generic
+  octet-stream types and content that doesn&#39;t match the block type.
+*   The API concatenates adjacent text blocks in `input` and `instructions` in
+  order with no separator. Include your own spaces or newlines (`\n`) between
+  blocks.
+*   Input can&#39;t be empty.
+
+### Structured data  {% id=&quot;structured-data&quot; %}
+
+Serialize JSON objects and arrays to a string and pass them as text so keys
+inside your payload stay plain data rather than content blocks. In your
+question instructions, refer to JSON fields by their key path:
+
+```python
+state = json.dumps({&quot;customer&quot;: {&quot;tier&quot;: &quot;Gold&quot;}, &quot;order&quot;: {&quot;id&quot;: &quot;8821&quot;, &quot;age_days&quot;: 14}})
+```
+
+### Documents (PDF)  {% id=&quot;documents&quot; %}
+
+Pass a PDF up to 50 MB as inline base64 bytes. For larger or reusable files,
+upload them with the [Files API](/docs/files). The model reads text, tables,
+charts, and page layouts together. This example checks an invoice PDF for a
+purchase order number and routes it to an expense category:
+
+{% tabs %}
+  {% tab filename=&quot;decisions.py&quot; label=&quot;Python&quot; %}
+  ```python
+  import base64
+  from google import genai
+  
+  client = genai.Client(http_options={&quot;api_version&quot;: &quot;v1beta&quot;})
+  
+  with open(&quot;invoice.pdf&quot;, &quot;rb&quot;) as f:
+      pdf_b64 = base64.b64encode(f.read()).decode(&quot;utf-8&quot;)
+  
+  result = client.decisions.create(
+      model=&quot;gemini-decision-1&quot;,
+      input=[
+          {
+              &quot;type&quot;: &quot;document&quot;,
+              &quot;data&quot;: pdf_b64,
+              &quot;mime_type&quot;: &quot;application/pdf&quot;,
+          },
+      ],
+      questions={
+          &quot;has_po_number&quot;: {
+              &quot;type&quot;: &quot;noul&quot;,
+              &quot;instructions&quot;: &quot;Does the invoice include a purchase order (PO) number?&quot;,
+          },
+          &quot;expense_category&quot;: {
+              &quot;type&quot;: &quot;choice&quot;,
+              &quot;instructions&quot;: &quot;Which expense category fits this invoice?&quot;,
+              &quot;criteria&quot;: {
+                  &quot;cloud_infrastructure&quot;: &quot;Servers, GPU compute, hosting, or storage.&quot;,
+                  &quot;software_licenses&quot;: &quot;SaaS subscriptions or seat licenses.&quot;,
+                  &quot;travel&quot;: &quot;Flights, hotels, meals, or ground transport.&quot;,
+                  &quot;other&quot;: &quot;Anything outside these categories.&quot;,
+              },
+          },
+      },
+  )
+  
+  po = result.answers[&quot;has_po_number&quot;]
+  category = result.answers[&quot;expense_category&quot;]
+  print(po.noul, category.choice, category.confidence)
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.mjs&quot; label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { readFileSync } from &quot;node:fs&quot;;
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({ apiVersion: &quot;v1beta&quot; });
+  const pdfB64 = readFileSync(&quot;invoice.pdf&quot;).toString(&quot;base64&quot;);
+  
+  const result = await ai.decisions.create({
+    model: &quot;gemini-decision-1&quot;,
+    input: [
+      {
+        type: &quot;document&quot;,
+        data: pdfB64,
+        mime_type: &quot;application/pdf&quot;,
+      },
+    ],
+    questions: {
+      has_po_number: {
+        type: &quot;noul&quot;,
+        instructions: &quot;Does the invoice include a purchase order (PO) number?&quot;,
+      },
+      expense_category: {
+        type: &quot;choice&quot;,
+        instructions: &quot;Which expense category fits this invoice?&quot;,
+        criteria: {
+          cloud_infrastructure: &quot;Servers, GPU compute, hosting, or storage.&quot;,
+          software_licenses: &quot;SaaS subscriptions or seat licenses.&quot;,
+          travel: &quot;Flights, hotels, meals, or ground transport.&quot;,
+          other: &quot;Anything outside these categories.&quot;,
+        },
+      },
+    },
+  });
+  
+  const po = result.answers?.has_po_number;
+  const category = result.answers?.expense_category;
+  if (po?.type === &quot;noul&quot; &amp;&amp; category?.type === &quot;choice&quot;) {
+    console.log(po.noul, category.choice, category.confidence);
+  }
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.sh&quot; label=&quot;REST&quot; %}
+  ```bash
+  curl -X POST &quot;https://generativelanguage.googleapis.com/v1beta/decisions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &#39;{
+      &quot;model&quot;: &quot;gemini-decision-1&quot;,
+      &quot;input&quot;: [
+        { &quot;type&quot;: &quot;document&quot;, &quot;data&quot;: &quot;&lt;BASE64_PDF_DATA&gt;&quot;, &quot;mime_type&quot;: &quot;application/pdf&quot; }
+      ],
+      &quot;questions&quot;: {
+        &quot;has_po_number&quot;: {
+          &quot;type&quot;: &quot;noul&quot;,
+          &quot;instructions&quot;: &quot;Does the invoice include a purchase order (PO) number?&quot;
+        },
+        &quot;expense_category&quot;: {
+          &quot;type&quot;: &quot;choice&quot;,
+          &quot;instructions&quot;: &quot;Which expense category fits this invoice?&quot;,
+          &quot;criteria&quot;: {
+            &quot;cloud_infrastructure&quot;: &quot;Servers, GPU compute, hosting, or storage.&quot;,
+            &quot;software_licenses&quot;: &quot;SaaS subscriptions or seat licenses.&quot;,
+            &quot;travel&quot;: &quot;Flights, hotels, meals, or ground transport.&quot;,
+            &quot;other&quot;: &quot;Anything outside these categories.&quot;
+          }
+        }
+      }
+    }&#39;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+### Images  {% id=&quot;media&quot; %}
+
+Pass local image bytes as base64 or pass a URI, and set resolution to trade
+visual detail against token cost. This example checks a product photo for
+damage:
+
+{% tabs %}
+  {% tab filename=&quot;decisions.py&quot; label=&quot;Python&quot; %}
+  ```python
+  import base64
+  from google import genai
+  
+  client = genai.Client(http_options={&quot;api_version&quot;: &quot;v1beta&quot;})
+  
+  with open(&quot;earcup.jpg&quot;, &quot;rb&quot;) as f:
+      image_b64 = base64.b64encode(f.read()).decode(&quot;utf-8&quot;)
+  
+  result = client.decisions.create(
+      model=&quot;gemini-decision-1&quot;,
+      input=[
+          {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Customer photo for return request #8821.&quot;},
+          {
+              &quot;type&quot;: &quot;image&quot;,
+              &quot;data&quot;: image_b64,
+              &quot;mime_type&quot;: &quot;image/jpeg&quot;,
+              &quot;resolution&quot;: &quot;low&quot;,  # Supported values: &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;, &quot;ultra_high&quot;
+          },
+      ],
+      questions={
+          &quot;visible_damage&quot;: {
+              &quot;type&quot;: &quot;noul&quot;,
+              &quot;instructions&quot;: &quot;Does the photo show physical damage to the device? Ignore the packaging.&quot;,
+          },
+      },
+  )
+  
+  print(result.answers[&quot;visible_damage&quot;].noul)
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.mjs&quot; label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { readFileSync } from &quot;node:fs&quot;;
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({ apiVersion: &quot;v1beta&quot; });
+  const imageB64 = readFileSync(&quot;earcup.jpg&quot;).toString(&quot;base64&quot;);
+  
+  const result = await ai.decisions.create({
+    model: &quot;gemini-decision-1&quot;,
+    input: [
+      { type: &quot;text&quot;, text: &quot;Customer photo for return request #8821.&quot; },
+      {
+        type: &quot;image&quot;,
+        data: imageB64,
+        mime_type: &quot;image/jpeg&quot;,
+        resolution: &quot;low&quot;, // Supported values: &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;, &quot;ultra_high&quot;
+      },
+    ],
+    questions: {
+      visible_damage: {
+        type: &quot;noul&quot;,
+        instructions: &quot;Does the photo show physical damage to the device? Ignore the packaging.&quot;,
+      },
+    },
+  });
+  
+  const answer = result.answers?.visible_damage;
+  if (answer?.type === &quot;noul&quot;) console.log(answer.noul);
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.sh&quot; label=&quot;REST&quot; %}
+  ```bash
+  curl -X POST &quot;https://generativelanguage.googleapis.com/v1beta/decisions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &#39;{
+      &quot;model&quot;: &quot;gemini-decision-1&quot;,
+      &quot;input&quot;: [
+        { &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Customer photo for return request #8821.&quot; },
+        { &quot;type&quot;: &quot;image&quot;, &quot;data&quot;: &quot;&lt;BASE64_IMAGE_DATA&gt;&quot;, &quot;mime_type&quot;: &quot;image/jpeg&quot;, &quot;resolution&quot;: &quot;low&quot; }
+      ],
+      &quot;questions&quot;: {
+        &quot;visible_damage&quot;: {
+          &quot;type&quot;: &quot;noul&quot;,
+          &quot;instructions&quot;: &quot;Does the photo show physical damage to the device? Ignore the packaging.&quot;
+        }
+      }
+    }&#39;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+### Audio  {% id=&quot;audio&quot; %}
+
+Pass a public or signed HTTPS URL, upload local recordings with the
+[Files API](/docs/files), or send inline base64 bytes. The model evaluates
+spoken words, pacing, and vocal tone without a separate transcription step,
+making it suitable for call triage, QA, and speech evaluation.
+
+This example checks a speech recording for its topic and scores the speaker&#39;s
+delivery:
+
+{% tabs %}
+  {% tab filename=&quot;decisions.py&quot; label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  
+  client = genai.Client(http_options={&quot;api_version&quot;: &quot;v1beta&quot;})
+  
+  result = client.decisions.create(
+      model=&quot;gemini-decision-1&quot;,
+      input=[
+          {
+              &quot;type&quot;: &quot;audio&quot;,
+              &quot;uri&quot;: &quot;https://storage.googleapis.com/generativeai-downloads/audio/rehearsing.wav&quot;,
+              &quot;mime_type&quot;: &quot;audio/wav&quot;,
+          },
+      ],
+      questions={
+          &quot;mentions_launch&quot;: {
+              &quot;type&quot;: &quot;noul&quot;,
+              &quot;instructions&quot;: &quot;Is the speaker talking about a product campaign launch?&quot;,
+          },
+          &quot;delivery&quot;: {
+              &quot;type&quot;: &quot;score&quot;,
+              &quot;instructions&quot;: &quot;How fluent and prepared does the speaker sound?&quot;,
+              &quot;criteria&quot;: [
+                  &quot;Hesitant, searching for notes, or self-correcting.&quot;,
+                  &quot;Mostly steady with minor pauses.&quot;,
+                  &quot;Polished, fluent, and confident throughout.&quot;,
+              ],
+          },
+      },
+  )
+  
+  print(result.answers[&quot;mentions_launch&quot;].noul, result.answers[&quot;delivery&quot;].score)
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.mjs&quot; label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({ apiVersion: &quot;v1beta&quot; });
+  
+  const result = await ai.decisions.create({
+    model: &quot;gemini-decision-1&quot;,
+    input: [
+      {
+        type: &quot;audio&quot;,
+        uri: &quot;https://storage.googleapis.com/generativeai-downloads/audio/rehearsing.wav&quot;,
+        mime_type: &quot;audio/wav&quot;,
+      },
+    ],
+    questions: {
+      mentions_launch: {
+        type: &quot;noul&quot;,
+        instructions: &quot;Is the speaker talking about a product campaign launch?&quot;,
+      },
+      delivery: {
+        type: &quot;score&quot;,
+        instructions: &quot;How fluent and prepared does the speaker sound?&quot;,
+        criteria: [
+          &quot;Hesitant, searching for notes, or self-correcting.&quot;,
+          &quot;Mostly steady with minor pauses.&quot;,
+          &quot;Polished, fluent, and confident throughout.&quot;,
+        ],
+      },
+    },
+  });
+  
+  const launch = result.answers?.mentions_launch;
+  const delivery = result.answers?.delivery;
+  if (launch?.type === &quot;noul&quot; &amp;&amp; delivery?.type === &quot;score&quot;) {
+    console.log(launch.noul, delivery.score);
+  }
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.sh&quot; label=&quot;REST&quot; %}
+  ```bash
+  curl -X POST &quot;https://generativelanguage.googleapis.com/v1beta/decisions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &#39;{
+      &quot;model&quot;: &quot;gemini-decision-1&quot;,
+      &quot;input&quot;: [
+        {
+          &quot;type&quot;: &quot;audio&quot;,
+          &quot;uri&quot;: &quot;https://storage.googleapis.com/generativeai-downloads/audio/rehearsing.wav&quot;,
+          &quot;mime_type&quot;: &quot;audio/wav&quot;
+        }
+      ],
+      &quot;questions&quot;: {
+        &quot;mentions_launch&quot;: {
+          &quot;type&quot;: &quot;noul&quot;,
+          &quot;instructions&quot;: &quot;Is the speaker talking about a product campaign launch?&quot;
+        },
+        &quot;delivery&quot;: {
+          &quot;type&quot;: &quot;score&quot;,
+          &quot;instructions&quot;: &quot;How fluent and prepared does the speaker sound?&quot;,
+          &quot;criteria&quot;: [
+            &quot;Hesitant, searching for notes, or self-correcting.&quot;,
+            &quot;Mostly steady with minor pauses.&quot;,
+            &quot;Polished, fluent, and confident throughout.&quot;
+          ]
+        }
+      }
+    }&#39;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+For local files or recordings larger than 15 MB, upload once with the
+[Files API](/docs/files) and pass the returned URI (the same pattern works for
+PDFs, images, and video):
+
+```python
+uploaded = client.files.upload(file=&quot;support_call.wav&quot;)
+audio_block = {&quot;type&quot;: &quot;audio&quot;, &quot;uri&quot;: uploaded.uri, &quot;mime_type&quot;: uploaded.mime_type}
+```
+
+### Video  {% id=&quot;video&quot; %}
+
+Pass video through the [Files API](/docs/files), a public or signed HTTPS URL,
+or inline base64 bytes. Set resolution to low when fine visual detail isn&#39;t
+needed.
+
+This example checks an MP4 video clip at low resolution:
+
+{% tabs %}
+  {% tab filename=&quot;decisions.py&quot; label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  
+  client = genai.Client(http_options={&quot;api_version&quot;: &quot;v1beta&quot;})
+  
+  result = client.decisions.create(
+      model=&quot;gemini-decision-1&quot;,
+      input=[
+          {
+              &quot;type&quot;: &quot;video&quot;,
+              &quot;uri&quot;: &quot;https://storage.googleapis.com/generativeai-downloads/videos/ForBiggerBlazes.mp4&quot;,
+              &quot;mime_type&quot;: &quot;video/mp4&quot;,
+              &quot;resolution&quot;: &quot;low&quot;,
+          },
+      ],
+      questions={
+          &quot;shows_fire&quot;: {
+              &quot;type&quot;: &quot;noul&quot;,
+              &quot;instructions&quot;: &quot;Does the video show fire or flames?&quot;,
+          },
+      },
+  )
+  
+  print(result.answers[&quot;shows_fire&quot;].noul)
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.mjs&quot; label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({ apiVersion: &quot;v1beta&quot; });
+  
+  const result = await ai.decisions.create({
+    model: &quot;gemini-decision-1&quot;,
+    input: [
+      {
+        type: &quot;video&quot;,
+        uri: &quot;https://storage.googleapis.com/generativeai-downloads/videos/ForBiggerBlazes.mp4&quot;,
+        mime_type: &quot;video/mp4&quot;,
+        resolution: &quot;low&quot;,
+      },
+    ],
+    questions: {
+      shows_fire: {
+        type: &quot;noul&quot;,
+        instructions: &quot;Does the video show fire or flames?&quot;,
+      },
+    },
+  });
+  
+  const answer = result.answers?.shows_fire;
+  if (answer?.type === &quot;noul&quot;) console.log(answer.noul);
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;decisions.sh&quot; label=&quot;REST&quot; %}
+  ```bash
+  curl -X POST &quot;https://generativelanguage.googleapis.com/v1beta/decisions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &#39;{
+      &quot;model&quot;: &quot;gemini-decision-1&quot;,
+      &quot;input&quot;: [
+        {
+          &quot;type&quot;: &quot;video&quot;,
+          &quot;uri&quot;: &quot;https://storage.googleapis.com/generativeai-downloads/videos/ForBiggerBlazes.mp4&quot;,
+          &quot;mime_type&quot;: &quot;video/mp4&quot;,
+          &quot;resolution&quot;: &quot;low&quot;
+        }
+      ],
+      &quot;questions&quot;: {
+        &quot;shows_fire&quot;: {
+          &quot;type&quot;: &quot;noul&quot;,
+          &quot;instructions&quot;: &quot;Does the video show fire or flames?&quot;
+        }
+      }
+    }&#39;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+### Media resolution  {% id=&quot;media-resolution&quot; %}
+
+Set [media resolution](/docs/media-resolution) on image and video blocks (low,
+medium, high, or ultra_high) to control token cost and visual detail.
+Ultra-high resolution applies to images only; audio and document blocks don&#39;t
+use resolution settings.
+
+## Best practices  {% id=&quot;best-practices&quot; %}
+
+*   Keep each question focused on a single decision or rubric. Complex rubrics
+  work in one question when criteria are explicit, or you can split
+  independent checks into separate questions in one request and combine the
+  answers in code.
+*   Write the full question in the instructions. The model never sees question
+  keys or your variable names.
+*   Give each choice option and score level a short description. Make adjacent
+  score levels clearly distinct, and keep score scales linear. Because score
+  averages array indices (0, 1, 2, and up), exponential scales like 1, 10,
+  100, and 1000 skew the expected value.
+*   Plan for inputs that fit no choice option. Check confidence before acting
+  on the top option, or pair the choice question with a yes/no scope check
+  such as &quot;Is this message about an order?&quot;. If you add a catch-all option,
+  use a non-positional key like &quot;other&quot; rather than &quot;none_of_the_above&quot;,
+  since the API sorts option keys alphabetically.
+*   Prefer positive phrasing. Ask &quot;Is the tier Gold?&quot; and subtract the yes
+  probability from 1 in code rather than asking negated questions such as
+  &quot;Is the tier NOT Gold?&quot;.
+*   Send only the fields the questions need. Unrelated content lowers accuracy.
+*   Compare numbers, dates, and durations in code, then pass the result or a
+  named bucket in the input.
+*   Treat input as untrusted. User-supplied text can argue for its own
+  classification. Write explicit criteria, test with adversarial examples,
+  and keep a human or a second check on high-stakes actions such as payouts.
+
+## Decisions API or structured output  {% id=&quot;when-to-use&quot; %}
+
+Use the Decisions API when you need calibrated probabilities over closed-ended
+outcomes:
+
+*   Route a request to a model, queue, agent, or tool.
+*   Check inputs and outputs against many policy rules at once.
+*   Decide which tools an agent needs, or whether to compact, escalate, or stop.
+*   Filter, score, or rank candidate results against a rubric.
+*   React to UI state, audio, or video frames in real time.
+
+| Use the Decisions API when you need | Use the [Interactions API](/docs/interactions-overview) when you need |
+| :--- | :--- |
+| A yes/no probability, one option from a fixed set, or a rating on a fixed scale | Generated text, summaries, or explanations |
+| Calibrated probabilities you can threshold | Extracted values or objects that follow your own JSON schema (see [Structured outputs](/docs/structured-output)) |
+| Many independent checks over the same input in one call | Tool calls with arguments |
+| Low latency and zero output token cost | Multi-step reasoning |
+
+## Request and response reference  {% id=&quot;request&quot; %}
+
+| Field | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `model` | string | yes | Model ID: `gemini-decision-1`. See [Gemini Decision 1](/docs/models/gemini-decision-1). |
+| `input` | string, `Content`, or `Content[]` | yes | Shared context for all questions (text, image, audio, video, or PDF document). See [Input](/docs/decisions-api#input). |
+| `questions` | map of string to `Question` | yes | 1 to 1,000 questions. You choose the keys (`[A-Za-z0-9_-]+`, up to 64 characters). Answers come back under the same keys. |
+
+Every question has:
+
+| Field | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `type` | `noul`, `choice`, or `score` | yes | Question type. |
+| `instructions` | string, `TextContent`, or `TextContent[]` | yes | The question to evaluate against the input. Text only. |
+| `criteria` | depends on type | choice and score: yes. noul: no. | The possible answers. See [Question types](/docs/decisions-api#question-types). |
+
+The API evaluates each question independently against the shared input.
+Questions can&#39;t see each other, and adding or removing one doesn&#39;t change the
+other answers. The model never sees question keys, so write the full question in
+the instructions field.
+
+The response contains:
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `answers` | map of string to `Answer` | One answer per question, under the same keys as `questions`. Each answer has a type that matches its question. |
+| `usage` | `Usage` | Input token counts by modality (text, image, and audio, with video frames and PDF page images counted as image tokens) and 0 output tokens. Only input tokens are billed; see [Pricing](/docs/pricing#gemini-decision). |
+
+When input safety filters block a request, the API returns an HTTP
+`400 Bad Request` error instead of `answers`. The JSON `error` object includes
+a `message` and a `code` (`safety`, `prohibited_content`, `blocklist`,
+`image_safety`, or `content_blocked`):
+
+```json
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;safety&quot;,
+    &quot;message&quot;: &quot;Request blocked due to safety violations (harmful content). Please modify your input and retry.&quot;
+  }
+}
+```
+
+## Limits  {% id=&quot;limits&quot; %}
+
+| Limit | Value |
+| :--- | :--- |
+| Questions per request | 1 to 1,000 (bounded by the 262,144-token context window) |
+| Options per choice question | 2 to 255 |
+| Levels per score question | 2 to 255 non-empty strings (2 to 10 recommended for most rubrics) |
+| Question key | 1 to 64 ASCII characters matching `[A-Za-z0-9_-]+` |
+| Option key | 1 to 128 characters (up to 512 UTF-8 bytes). Internal ASCII spaces are allowed. Leading or trailing spaces, control characters, and non-ASCII spaces aren&#39;t allowed. |
+| Context window | 262,144 tokens across shared input and all questions |
+| JSON nesting depth | 100 levels |
+| Media per request | Same as the [Interactions API](/docs/interactions-overview) |
+| Question instructions | Text only |
+
+When a request exceeds a limit or fails key validation, the API returns HTTP 400
+with an error message that names the rule you exceeded.
+
+## Limitations  {% id=&quot;limitations&quot; %}
+
+*   Available on the Gemini Developer API (v1beta) with
+  [Gemini Decision 1](/docs/models/gemini-decision-1) only.
+*   Question instructions accept text only. Media inside questions isn&#39;t
+  supported.
+*   The Decisions API doesn&#39;t support YouTube URLs or direct Cloud Storage
+  (`gs://`) URIs. Pass media using a [Files API](/docs/files) URI, a public or
+  signed HTTPS URL, or inline base64 bytes.
+*   Conversation history, thought, and tool-call blocks aren&#39;t supported as
+  input blocks. Serialize multi-turn context as text.
+*   The Decisions API doesn&#39;t support context caching,
+  [Batch API](/docs/batch-api), or Flex or Priority inference. Repeated input
+  across requests counts in full.
+
+## What&#39;s next  {% id=&quot;whats-next&quot; %}
+
+*   Test yes/no, choice, and score questions interactively on custom text and
+  media in the [Decisions Playground](https://aistudio.google.com/apps/f6cbef57-8bad-443a-813f-4d4c8f9750af?fullscreenApplet=true),
+  then export runnable code.
+*   Explore sample apps built with Gemini Decision 1 in Google AI Studio,
+  including [Doorstep Parcels](https://aistudio.google.com/apps/bdca3fee-8d0a-4663-b30e-73828a55c1e8?fullscreenApplet=true)
+  and [Find the Zookeeper](https://aistudio.google.com/apps/b86d2f3b-c1d4-4d44-9198-5303a0cb65c1?fullscreenApplet=true).
+*   Review model specifications on the
+  [Gemini Decision 1](/docs/models/gemini-decision-1) model page, along with
+  [Pricing](/docs/pricing#gemini-decision) and
+  [Rate limits](/docs/rate-limits#gemini-decision).
+*   Build autonomous workflows with [Managed agents](/docs/agents) on the
+  Gemini API.
+
+</pre></noscript><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TT9C75WP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script src="https://www.gstatic.com/_/mss/boq-makersuite/_/js/k=boq-makersuite.MakerSuite.en_US.JLBvzaeCXqM.2018.O/am=AaRKgIHgEA/d=1/excm=_b/ed=1/dg=0/wt=2/ujg=1/rs=AMOXD28TXvfRTu02iapAh4ulgskYyMojcA/dti=1/m=_b" id="base-js" data-scope-id="b109d973-9bec-48e9-90ee-691fcb8d39d8" nonce="CmGwTWRbMaiQITzzE0CAgQ"></script></body></html>

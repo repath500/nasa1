@@ -1,0 +1,79 @@
+{
+  "fetched_utc": "2026-11-14T06:01Z",
+  "note": "Small test fetches only. Nothing bulk-downloaded.",
+  "tests": [
+    {
+      "id": "gibs_modis_terra_truecolor_4326",
+      "file": "gibs_wmts_epsg4326_modis_terra_truecolor_z1.jpg",
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_CorrectedReflectance_TrueColor/default/2024-01-15/250m/1/0/0.jpg",
+      "http": 200,
+      "result": "WORKED: 512x512 JPEG, 83,083 bytes. Layer found in gibs_caps.xml.",
+      "used_by": "Jukebox (background/dither test); storytelling (not used)"
+    },
+    {
+      "id": "gibs_viirs_dnb_enc_4326_500m",
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_SNPP_DayNightBand_ENCC/default/2024-01-15/500m/1/0/0.png",
+      "http": 404,
+      "result": "FAILED on this date/matrix. Night-lights layer id exists in caps; the date or matrix set is wrong. Retry with a DescribeDomains date before using. UNTESTED for a working tile.",
+      "used_by": "Jukebox direction J-A hero track (Night Lights)"
+    },
+    {
+      "id": "gibs_viirs_dnb_enc_3857_L8",
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_DayNightBand_ENCC/default/2024-01-15/GoogleMapsCompatible_Level8/0/0/0.png",
+      "http": 404,
+      "result": "FAILED. Same status as above. UNTESTED for a working tile."
+    },
+    {
+      "id": "images_api_surveyor3",
+      "file": "images_api_surveyor3.json",
+      "url": "https://images-api.nasa.gov/search?q=surveyor%203&media_type=image&page_size=5",
+      "http": 200,
+      "result": "WORKED: 89 total hits; first items AS12-48-7121 'View of Surveyor III in its crater' (JSC, 1969-11-20), AS12-48-7133, S69-55553 (artist concept). Credits in metadata; check each item's own rights note before use.",
+      "used_by": "Storytelling S-A (Surveyor 3 plate)"
+    },
+    {
+      "id": "images_api_lunar_module",
+      "file": "images_api_lunar_module.json",
+      "url": "https://images-api.nasa.gov/search?q=lunar%20module%20descent%20stage&media_type=image&page_size=5",
+      "http": 200,
+      "result": "WORKED: 41 total hits for this query (ds4 reported 1,762 for a different query 'lunar module'). Not a disagreement about the API; the query differs.",
+      "used_by": "Storytelling S-A"
+    },
+    {
+      "id": "lroc_anthropogenic_shapefile_head",
+      "url": "https://wms.lroc.asu.edu/lroc/view_rdr/SHAPEFILE_ANTHROPOGENIC_OBJECTS",
+      "http": 302,
+      "result": "REDIRECT to https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_ANTHROPOGENIC_OBJECTS. Only the redirect was checked here; the ZIP was not downloaded in this pass. ds4 downloaded and parsed 71 records earlier (VERIFIED there). Use the new host in the pipeline.",
+      "used_by": "Storytelling S-A and S-B"
+    },
+    {
+      "id": "nssdc_apollo11_lm_head",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "http": 200,
+      "result": "WORKED (HEAD only).",
+      "used_by": "Storytelling S-A"
+    },
+    {
+      "id": "svs_5313_head",
+      "url": "https://svs.gsfc.nasa.gov/5313/",
+      "http": 200,
+      "result": "WORKED (HEAD only).",
+      "used_by": "Jukebox J-A and J-B"
+    },
+    {
+      "id": "hirise_esp_050177_1780_head",
+      "url": "https://hirise.lpl.arizona.edu/ESP_050177_1780",
+      "http": 200,
+      "result": "WORKED (HEAD only).",
+      "used_by": "Storytelling S-A (Mars plate, optional)"
+    },
+    {
+      "id": "horizons_voyager1_observer_2026-11-14",
+      "file": "horizons_voyager1_2026-11-14.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api (COMMAND='-31', OBSERVER, CENTER 500@399, 1-day step)",
+      "http": 200,
+      "result": "WORKED: 200, $$SOE block returned. 2026-Nov-14 range 173.067682711 AU; 2026-Nov-15 173.083248374 AU (matches ds4 173.07 AU). One-way light time at 173.07 AU is ~24 h (INFERRED: 173.07 x 499.005 s/AU).",
+      "used_by": "Storytelling S-B"
+    }
+  ]
+}

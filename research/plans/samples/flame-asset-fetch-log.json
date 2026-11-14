@@ -1,0 +1,35 @@
+[
+  {
+    "file": "flame-PSI-98-table.csv",
+    "url": "https://psi.nasa.gov/datamanager/file/Home/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv",
+    "error": "HTTP Error 404: 404"
+  },
+  {
+    "file": "flame-PSI-102-table.csv",
+    "url": "https://psi.nasa.gov/datamanager/file/Home/psi-data/PSI-102/Experimental%20table/PSI-102_Experimental%20table_SAME.csv",
+    "error": "HTTP Error 404: 404"
+  },
+  {
+    "file": "research/plans/samples/flame-ntrs-20180004258.pdf.prefix",
+    "url": "https://ntrs.nasa.gov/api/citations/20180004258/downloads/20180004258.pdf",
+    "status": 200,
+    "content_type": "application/pdf",
+    "final_url": "https://ntrs.nasa.gov/api/citations/20180004258/downloads/20180004258.pdf",
+    "bytes": 2000000,
+    "sha256": "b0551b43831df9d5a13c04cd47ebb31c3cd7895c28f2581d3dad7cd29837354f",
+    "prefix": "%PDF-1.5",
+    "complete": false,
+    "note": "Read capped at 2,000,000 bytes; this is a PDF prefix, not a complete usable PDF. Hash covers prefix only."
+  },
+  {
+    "file": "research/plans/samples/flame-ntrs-20180004258.txt",
+    "url": "https://ntrs.nasa.gov/api/citations/20180004258/downloads/20180004258.txt",
+    "status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "final_url": "https://ntrs.nasa.gov/api/citations/20180004258/downloads/20180004258.txt",
+    "bytes": 17725,
+    "sha256": "24cb777a461f11b4099ce79d6f3946fb064ed3f52ff58b39c5e99e9e0654e232",
+    "prefix": "National Aeronautics and Space Administration\n\nSpacecraft Fire Safety: Protectin",
+    "complete": true
+  }
+]

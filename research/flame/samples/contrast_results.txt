@@ -1,0 +1,44 @@
+== DARK ==
+body ink on bg                                                         #E8EAED on #0B0D10   16.14:1  need 4.5  PASS
+body ink on surface                                                    #E8EAED on #12161B   15.07:1  need 4.5  PASS
+body ink on raised                                                     #E8EAED on #1A1F26   13.74:1  need 4.5  PASS
+muted text on bg                                                       #9AA1AB on #0B0D10    7.47:1  need 4.5  PASS
+muted text on surface                                                  #9AA1AB on #12161B    6.97:1  need 4.5  PASS
+muted text on raised                                                   #9AA1AB on #1A1F26    6.36:1  need 4.5  PASS
+accent text/link on surface                                            #7CC4F2 on #12161B    9.54:1  need 4.5  PASS
+accent text/link on bg                                                 #7CC4F2 on #0B0D10   10.22:1  need 4.5  PASS
+selected chip / primary button: accent_ink on accent                   #06121A on #7CC4F2    9.95:1  need 4.5  PASS
+muted text on raised (chips)                                           #9AA1AB on #1A1F26    6.36:1  need 4.5  PASS
+accent on raised                                                       #7CC4F2 on #1A1F26    8.70:1  need 4.5  PASS
+warning text on raised                                                 #F2B66B on #1A1F26    9.21:1  need 4.5  PASS
+focus ring vs raised                                                   #A8DCFF on #1A1F26   11.31:1  need 3.0  PASS
+input border vs bg                                                     #6B7480 on #0B0D10    4.11:1  need 3.0  PASS
+focus ring vs surface                                                  #A8DCFF on #12161B   12.41:1  need 3.0  PASS
+focus ring vs bg                                                       #A8DCFF on #0B0D10   13.29:1  need 3.0  PASS
+ordinal glyph ON vs surface                                            #E8EAED on #12161B   15.07:1  need 3.0  PASS
+ordinal glyph OFF vs surface                                           #68727F on #12161B    3.72:1  need 3.0  PASS
+input border / ui boundary vs surface                                  #6B7480 on #12161B    3.84:1  need 3.0  PASS
+warning text on surface                                                #F2B66B on #12161B   10.10:1  need 4.5  PASS
+hairline vs surface (DECORATIVE ONLY)                                  #232A33 on #12161B    1.25:1  need None  n/a (decorative)
+== LIGHT ==
+body ink on bg                                                         #111418 on #F4F5F6   16.92:1  need 4.5  PASS
+body ink on surface                                                    #111418 on #FFFFFF   18.47:1  need 4.5  PASS
+body ink on raised                                                     #111418 on #EDEFF2   16.03:1  need 4.5  PASS
+muted text on bg                                                       #4F5661 on #F4F5F6    6.78:1  need 4.5  PASS
+muted text on surface                                                  #4F5661 on #FFFFFF    7.40:1  need 4.5  PASS
+muted text on raised                                                   #4F5661 on #EDEFF2    6.43:1  need 4.5  PASS
+accent text/link on surface                                            #0A5FA8 on #FFFFFF    6.53:1  need 4.5  PASS
+accent text/link on bg                                                 #0A5FA8 on #F4F5F6    5.98:1  need 4.5  PASS
+selected chip / primary button: accent_ink on accent                   #FFFFFF on #0A5FA8    6.53:1  need 4.5  PASS
+muted text on raised (chips)                                           #4F5661 on #EDEFF2    6.43:1  need 4.5  PASS
+accent on raised                                                       #0A5FA8 on #EDEFF2    5.67:1  need 4.5  PASS
+warning text on raised                                                 #8A4B00 on #EDEFF2    5.91:1  need 4.5  PASS
+focus ring vs raised                                                   #0A5FA8 on #EDEFF2    5.67:1  need 3.0  PASS
+input border vs bg                                                     #7A828D on #F4F5F6    3.56:1  need 3.0  PASS
+focus ring vs surface                                                  #0A5FA8 on #FFFFFF    6.53:1  need 3.0  PASS
+focus ring vs bg                                                       #0A5FA8 on #F4F5F6    5.98:1  need 3.0  PASS
+ordinal glyph ON vs surface                                            #111418 on #FFFFFF   18.47:1  need 3.0  PASS
+ordinal glyph OFF vs surface                                           #737B87 on #FFFFFF    4.28:1  need 3.0  PASS
+input border / ui boundary vs surface                                  #7A828D on #FFFFFF    3.89:1  need 3.0  PASS
+warning text on surface                                                #8A4B00 on #FFFFFF    6.80:1  need 4.5  PASS
+hairline vs surface (DECORATIVE ONLY)                                  #D5DAE0 on #FFFFFF    1.41:1  need None  n/a (decorative)

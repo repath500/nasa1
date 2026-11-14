@@ -1,0 +1,42 @@
+[
+  {
+    "name": "flame-search",
+    "url": "https://psi.nasa.gov/geode-py/ws/repo/search?term=combustion&size=5",
+    "status": 200,
+    "bytes": 32678,
+    "file": "research/plans/samples/flame-search.json",
+    "utc": "2026-11-14T05:18:13.896129+00:00"
+  },
+  {
+    "name": "flame-PSI-98",
+    "url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-98",
+    "status": 200,
+    "bytes": 134230,
+    "file": "research/plans/samples/flame-PSI-98.json",
+    "utc": "2026-11-14T05:18:14.826430+00:00"
+  },
+  {
+    "name": "flame-PSI-102",
+    "url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-102",
+    "status": 200,
+    "bytes": 135432,
+    "file": "research/plans/samples/flame-PSI-102.json",
+    "utc": "2026-11-14T05:18:14.873222+00:00"
+  },
+  {
+    "name": "flame-ntrs-20180004258",
+    "url": "https://ntrs.nasa.gov/api/citations/20180004258",
+    "status": 200,
+    "bytes": 3686,
+    "file": "research/plans/samples/flame-ntrs-20180004258.json",
+    "utc": "2026-11-14T05:18:13.077038+00:00"
+  },
+  {
+    "name": "flame-jev-quickstart",
+    "url": "https://docs.typesafe.ai/introduction/quickstart.md",
+    "status": 200,
+    "bytes": 15156,
+    "file": "research/plans/samples/flame-jev-quickstart.md",
+    "utc": "2026-11-14T05:18:12.485552+00:00"
+  }
+]

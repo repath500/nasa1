@@ -1,0 +1,29 @@
+utc	label	url	http	content_type	bytes_read_or_size	redirect
+2026-11-14T06:06:18Z	A-encoded-curl	https://psi.nasa.gov/datamanager/file/Home/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv	404	text/html;charset=utf-8	796	https://psi.nasa.gov/datamanager/file/Home/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv
+2026-11-14T06:06:19Z	A-encoded-browserUA	https://psi.nasa.gov/datamanager/file/Home/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv	404	text/html;charset=utf-8	796	https://psi.nasa.gov/datamanager/file/Home/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv
+2026-11-14T06:06:20Z	B-plus-encoded	https://psi.nasa.gov/datamanager/file/Home/psi-data/PSI-98/Experimental+table/PSI-98_Experimental+table_SAFFIRE-1.csv	404	text/html;charset=utf-8	796	https://psi.nasa.gov/datamanager/file/Home/psi-data/PSI-98/Experimental+table/PSI-98_Experimental+table_SAFFIRE-1.csv
+2026-11-14T06:06:21Z	C-no-Home	https://psi.nasa.gov/datamanager/file/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv	404	text/html;charset=utf-8	796	https://psi.nasa.gov/datamanager/file/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv
+2026-11-14T06:06:22Z	D-datamanager-root	https://psi.nasa.gov/datamanager/file/	404	text/html;charset=utf-8	796	https://psi.nasa.gov/datamanager/file/
+2026-11-14T06:06:24Z	E-psi-home	https://psi.nasa.gov/	200	text/html; charset=UTF-8	343714	https://science.nasa.gov/biological-physical/data/
+2026-11-14T06:06:26Z	F-search-json	https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-98	200	application/json	134230	https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-98
+2026-11-14T06:06:26Z	G-athena-offgassing-pdf	https://psi.ndc.nasa.gov/mpglobal/api/athena/file/7652463/?inline=1&log=1	ERR\t\t0\tcurl: (6) Could not resolve host: psi.ndc.nasa.gov 
+2026-11-14T06:06:26Z	G2-athena-ndc-host-alt	https://psi.ndc.nasa.gov/mpglobal/api/athena/file/7652463/	ERR\t\t0\tcurl: (6) Could not resolve host: psi.ndc.nasa.gov 
+2026-11-14T06:06:38Z	S3-psi-repo-prod-virtual	https://psi-repo-prod.s3.amazonaws.com/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv	403	application/xml	263	https://psi-repo-prod.s3.amazonaws.com/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv
+2026-11-14T06:06:38Z	S3-psi-repo-prod-regional	https://psi-repo-prod.s3.us-east-1.amazonaws.com/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv	301	application/xml	483	https://psi-repo-prod.s3.us-east-1.amazonaws.com/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv
+2026-11-14T06:06:39Z	S3-nasa-psi-bucket	https://nasa-psi.s3.amazonaws.com/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv	404	application/xml	365	https://nasa-psi.s3.amazonaws.com/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv
+2026-11-14T06:06:40Z	S3-listing-psi-repo-prod	https://psi-repo-prod.s3.amazonaws.com/?prefix=psi-data/PSI-98/&max-keys=20	403	application/xml	243	https://psi-repo-prod.s3.amazonaws.com/?prefix=psi-data/PSI-98/&max-keys=20
+2026-11-14T06:07:23Z	H1-geode-download-PSI98-table	https://psi.nasa.gov/geode-py/ws/studies/PSI-98/download?file=6792c46eb7b6ff8e65037f3e&version=1&redirect=false	200	text/html; charset=utf-8	1840	https://psi.nasa.gov/geode-py/ws/studies/PSI-98/download?file=6792c46eb7b6ff8e65037f3e&version=1&redirect=false
+2026-11-14T06:07:24Z	H2-geode-download-PSI98-noversion	https://psi.nasa.gov/geode-py/ws/studies/PSI-98/download?file=6792c46eb7b6ff8e65037f3e&redirect=false	200	text/html; charset=utf-8	1836	https://psi.nasa.gov/geode-py/ws/studies/PSI-98/download?file=6792c46eb7b6ff8e65037f3e&redirect=false
+2026-11-14T06:07:25Z	H3-geode-download-PSI102-table	https://psi.nasa.gov/geode-py/ws/studies/PSI-102/download?file=6797d223b7b6ff8e65038de3&version=1&redirect=false	200	text/html; charset=utf-8	1831	https://psi.nasa.gov/geode-py/ws/studies/PSI-102/download?file=6797d223b7b6ff8e65038de3&version=1&redirect=false
+2026-11-14T06:07:26Z	H4-geode-download-PSI98-offgassing-pdf	https://psi.nasa.gov/geode-py/ws/studies/PSI-98/download?file=65eb514f2ec0b0961f8f9a49&version=1&redirect=false	404	application/json	30	https://psi.nasa.gov/geode-py/ws/studies/PSI-98/download?file=65eb514f2ec0b0961f8f9a49&version=1&redirect=false
+2026-11-14T06:07:36Z	PSI-98	200 application/vnd.ms-excel 469	signed-host-path=https://psi-repo-prod.s3.amazonaws.com/psi-data/PSI-98/Experimental%20table/PSI-98_Experimental%20table_SAFFIRE-1.csv	Expires=1794640055	sha256=c01f29c62455f0a3b512290ab85e5687ecded326733189f002f580368402308d
+2026-11-14T06:07:38Z	PSI-102	200 application/vnd.ms-excel 331	signed-host-path=https://psi-repo-prod.s3.amazonaws.com/psi-data/PSI-102/Experimental%20table/PSI-102_Experimental%20table_SAME.csv	Expires=1794640057	sha256=268d1e121d2f211b124407dd32b9475617bd269ede2c2d1749441da3e949a2af
+2026-11-14T06:08:21Z	NTRS full pdf 20180004258	size=2430800
+PSI-98 http=200 bytes=134230
+PSI-99 http=200 bytes=10308
+PSI-100 http=200 bytes=148767
+PSI-26 http=200 bytes=190127
+PSI-25 http=200 bytes=680348
+PSI-69 http=200 bytes=31770
+PSI-20 http=200 bytes=17376
+PSI-102 http=200 bytes=135432

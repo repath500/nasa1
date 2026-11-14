@@ -1,0 +1,1645 @@
+<!doctype html><html lang="en-US" dir="ltr"><head><base href="https://aistudio.google.com/"><link rel="preconnect" href="//www.gstatic.com"><meta name="referrer" content="origin"><link rel="canonical" href="https://aistudio.google.com/docs/document-processing"><meta property="og:type" content="website"><meta property="og:title" content="Google AI Studio"><meta property="og:description" content="The fastest path from prompt to production with Gemini"><meta property="og:image" content="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="628"><meta property="og:image:type" content="image/png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="application-name" content="AI Studio"><meta name="apple-mobile-web-app-title" content="AI Studio"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#000"><meta name="msapplication-tap-highlight" content="no"><link rel="preconnect" href="//fonts.googleapis.com"><link rel="preconnect" href="//fonts.gstatic.com"><link rel="preconnect" href="//www.gstatic.com"><link rel="preconnect" href="//alkalimakersuite-pa.clients6.google.com"><link rel="prefetch" href="//apis.google.com/js/api.js"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&amp;display=swap" nonce="25B3hn-bd0_CJ2GzhYOm3w"><link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Inter+Tight:wght@300;500;600&amp;display=swap" nonce="25B3hn-bd0_CJ2GzhYOm3w"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Text:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" nonce="25B3hn-bd0_CJ2GzhYOm3w"><link rel="manifest" crossorigin="use-credentials" href="_/MakerSuite/manifest.json"><link rel="home" href="/prompts/new_chat?utm_source=pwa&amp;utm_medium=homescreen&amp;lfhs=2"><link rel="msapplication-starturl" href="/prompts/new_chat?utm_source=pwa&amp;utm_medium=homescreen&amp;lfhs=2"><link rel="icon" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-32dp/logo_ai_studio_color_1x_web_32dp.png" sizes="32x32"><link rel="apple-touch-icon-precomposed" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-32dp/logo_ai_studio_color_1x_web_32dp.png" sizes="32x32"><link rel="msapplication-square32x32logo" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-32dp/logo_ai_studio_color_1x_web_32dp.png" sizes="32x32"><link rel="icon" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-64dp/logo_ai_studio_color_1x_web_64dp.png" sizes="64x64"><link rel="apple-touch-icon-precomposed" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-64dp/logo_ai_studio_color_1x_web_64dp.png" sizes="64x64"><link rel="msapplication-square64x64logo" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-64dp/logo_ai_studio_color_1x_web_64dp.png" sizes="64x64"><link rel="icon" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_1x_web_96dp.png" sizes="96x96"><link rel="apple-touch-icon-precomposed" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_1x_web_96dp.png" sizes="96x96"><link rel="msapplication-square96x96logo" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_1x_web_96dp.png" sizes="96x96"><link rel="icon" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_2x_web_96dp.png" sizes="192x192"><link rel="apple-touch-icon-precomposed" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_2x_web_96dp.png" sizes="192x192"><link rel="msapplication-square192x192logo" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_2x_web_96dp.png" sizes="192x192"><link rel="icon" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-512dp/logo_ai_studio_color_1x_web_512dp.png" sizes="512x512"><link rel="apple-touch-icon-precomposed" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-512dp/logo_ai_studio_color_1x_web_512dp.png" sizes="512x512"><link rel="msapplication-square512x512logo" href="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-512dp/logo_ai_studio_color_1x_web_512dp.png" sizes="512x512"><link rel="preload" href="https://www.gstatic.com/_/mss/boq-makersuite/_/js/k=boq-makersuite.MakerSuite.en_US.JLBvzaeCXqM.2018.O/am=AaRagIHgEA/d=1/excm=_b/ed=1/dg=0/wt=2/ujg=1/rs=AMOXD29Vx--BYKYAOCPW9OUqcv5j8uBrqg/dti=1/m=_b" as="script" nonce="PdkQEb3pFvIHt4tQrsFjtQ"><link rel="preload" href="https://www.gstatic.com/_/mss/boq-makersuite/_/js/k=boq-makersuite.MakerSuite.en_US.JLBvzaeCXqM.2018.O/ck=boq-makersuite.MakerSuite.kzfi84e3Yfk.L.X.O/am=AaRagIHgEA/d=1/exm=_b/excm=_b/ed=1/wt=2/ujg=1/rs=AMOXD2_0cq7YQOTxr3QgQaNGA341diiU8Q/dti=1/m=smxHue" as="script" nonce="PdkQEb3pFvIHt4tQrsFjtQ"><script type="application/json" id="40248f3c-69a7-4bbb-8e84-e07e03f28c2c" nonce="PdkQEb3pFvIHt4tQrsFjtQ">{"AfY8Hf":false,"CmfRSc":"0","CoJqbf":"https://alkalimakersuite-pa.clients6.google.com","DpimGf":false,"Dvqjfd":"","EBvNTe":"823511539352-ojaretejk1s95sdvkic0te923pt7knpu.apps.googleusercontent.com","EP1ykd":["/.well-known/*","/_/*","/accounts/*","/app","/app/*","/assets/*","/audio/*","/images/*","/music/*","/public/*","/templates/*"],"FdrFJe":"-7574249477438994190","HiPsbb":1,"Im6cmf":"/_/MakerSuite","KU8tnd":"https://alkalimakersuiteapplets.pa.clients6.google.com","LoQv7e":true,"MT7f9b":[],"MUE6Ne":"alkali-makersuite","MsAAre":false,"NHyHAe":60000,"O7uJJ":"https://cloudconsole-pa.clients6.google.com","OC2PJe":"https://people-pa.clients6.google.com","Onibif":"https://webchannel-alkalimakersuite-pa.clients6.google.com","PeqOqb":"REDACTED_API_KEY","PgS1Kc":"https://content.googleapis.com","PqyQ6d":"","QrtxK":"","S06Grb":"","S6lZl":96797242,"TSDtV":"%.@.[[null,[[45847864,null,true,null,null,null,\"kE3j8b\"],[45750734,null,false,null,null,null,\"zNidwd\"],[45859437,null,null,null,\"\",null,\"iPg3y\"],[45786059,null,true,null,null,null,\"ZRXcme\"],[45800001,null,false,null,null,null,\"fEA85b\"],[45872738,null,false,null,null,null,\"Zemkge\"],[45815137,null,true,null,null,null,\"WRwkue\"],[45766584,null,false,null,null,null,\"uzk17e\"],[45812681,null,true,null,null,null,\"X7uB7c\"],[45870949,null,false,null,null,null,\"rOpvAb\"],[45864047,null,true,null,null,null,\"OHVamb\"],[45784561,null,false,null,null,null,\"LXfb5c\"],[45856904,null,true,null,null,null,\"FG6P7d\"],[45780874,null,false,null,null,null,\"Q1jbEd\"],[45772164,null,false,null,null,null,\"zeKiRd\"],[45764549,null,true,null,null,null,\"ZSgiif\"],[45841148,null,true,null,null,null,\"s6aszc\"],[45737435,null,true,null,null,null,\"QLHTQ\"],[45860610,null,false,null,null,null,\"pYjjGf\"],[45786683,null,true,null,null,null,\"SEwGId\"],[45860469,null,true,null,null,null,\"EuiBmf\"],[45714250,null,true,null,null,null,\"t52vxe\"],[45771578,null,true,null,null,null,\"FWnIxc\"],[45828307,null,false,null,null,null,\"yMyGUd\"],[45773098,null,true,null,null,null,\"tHUpTc\"],[45805229,null,false,null,null,null,\"s3lTDc\"],[45746196,null,true,null,null,null,\"Mkmxtb\"],[45820967,null,false,null,null,null,\"sFOxp\"],[45772817,null,true,null,null,null,\"fMTTic\"],[45884298,null,false,null,null,null,\"v5uyBe\"],[45824912,131072,null,null,null,null,\"b2C2B\"],[45773200,null,false,null,null,null,\"SNmu3c\"],[45784564,null,false,null,null,null,\"oj32cc\"],[45809279,null,false,null,null,null,\"PDJPhb\"],[45857667,null,false,null,null,null,\"NWij2c\"],[45796413,null,false,null,null,null,\"tO7rUe\"],[45837404,null,false,null,null,null,\"CT0XI\"],[45842046,null,null,null,null,null,\"f87Xt\",[\"[]\"]],[45776026,null,false,null,null,null,\"CEBNKb\"],[45777831,null,false,null,null,null,\"GPgspe\"],[45817873,null,true,null,null,null,\"TQ277c\"],[45845967,null,true,null,null,null,\"Sniiwc\"],[45854059,null,true,null,null,null,\"b40um\"],[45861368,null,false,null,null,null,\"lMSdOe\"],[45812538,null,false,null,null,null,\"eJaIR\"],[45784662,null,false,null,null,null,\"QdT1Z\"],[45764720,null,true,null,null,null,\"B2Bu0b\"],[45861278,null,false,null,null,null,\"V5KHhb\"],[45825903,null,false,null,null,null,\"mNGeee\"],[45862868,null,false,null,null,null,\"bfKXxd\"],[45879438,null,false,null,null,null,\"Aq2Vrc\"],[45773240,null,false,null,null,null,\"n7JOEb\"],[45772231,null,false,null,null,null,\"HsfSqc\"],[45632067,null,true,null,null,null,\"CyDiEf\"],[45820776,null,true,null,null,null,\"bFtnL\"],[45670190,null,false,null,null,null,\"ArIgzf\"],[45806859,null,true,null,null,null,\"RYGIvf\"],[45734881,null,false,null,null,null,\"RLIQje\"],[45834641,null,false,null,null,null,\"WHLyI\"],[45877221,null,true,null,null,null,\"km8lB\"],[45675258,null,false,null,null,null,\"z2PIFf\"],[45787299,null,true,null,null,null,\"h85Kkd\"],[45866857,null,false,null,null,null,\"xpMubf\"],[45875820,null,false,null,null,null,\"WtdpB\"],[45812905,null,true,null,null,null,\"Y9AUte\"],[45799321,null,false,null,null,null,\"Qsarhc\"],[45836227,null,false,null,null,null,\"FAv3Rc\"],[45874376,null,false,null,null,null,\"hAJked\"],[45784559,null,true,null,null,null,\"quitKc\"],[45806340,null,true,null,null,null,\"OEiE2c\"],[45820497,null,false,null,null,null,\"oYprSb\"],[45762876,null,false,null,null,null,\"JRm6id\"],[45737434,null,true,null,null,null,\"LYXRQd\"],[45876363,null,false,null,null,null,\"F175qf\"],[45833843,null,false,null,null,null,\"NYdl8e\"],[45851528,null,false,null,null,null,\"COIM7c\"],[45882926,null,false,null,null,null,\"YYknXb\"],[45884321,null,false,null,null,null,\"sioIbb\"],[45768537,null,true,null,null,null,\"HzvgYb\"],[45788298,null,false,null,null,null,\"ET3a6d\"],[45763863,null,false,null,null,null,\"srRqFc\"],[45777963,null,false,null,null,null,\"JE0rH\"],[45853662,null,false,null,null,null,\"z4Szhe\"],[45865399,null,false,null,null,null,\"DFzY9e\"],[45834985,null,true,null,null,null,\"sAqbnd\"],[45849298,null,false,null,null,null,\"j578Be\"],[45827384,null,false,null,null,null,\"g3QGVd\"],[45822819,null,true,null,null,null,\"YalIlf\"],[45742893,null,true,null,null,null,\"Irsrgf\"],[45827530,null,true,null,null,null,\"KGZnYc\"],[45713337,null,true,null,null,null,\"yauate\"],[45775967,null,true,null,null,null,\"h9YtGf\"],[45781210,null,true,null,null,null,\"ZAVYX\"],[45784560,null,true,null,null,null,\"aUo2dd\"],[45862407,null,false,null,null,null,\"xzAHle\"],[45786621,null,false,null,null,null,\"u5h94\"],[45856905,null,true,null,null,null,\"YyN5cb\"],[45721377,null,null,null,\"\",null,\"bXSQ7e\"],[45772596,null,true,null,null,null,\"AYGfy\"],[45817527,null,true,null,null,null,\"KAsw\"],[45850100,null,false,null,null,null,\"HIcJUb\"],[45817874,null,true,null,null,null,\"a6JmIf\"],[45733504,null,false,null,null,null,\"JZ5hpd\"],[45786417,null,false,null,null,null,\"jL0KB\"],[45781629,null,false,null,null,null,\"T92pzc\"],[45746822,null,true,null,null,null,\"Evf1d\"],[45885152,null,false,null,null,null,\"rZqh3\"],[45848811,null,false,null,null,null,\"UBGA9b\"],[45797765,null,false,null,null,null,\"LMH9V\"],[45784562,null,true,null,null,null,\"B7YKqc\"],[45870781,null,false,null,null,null,\"NryDGf\"],[45869556,null,false,null,null,null,\"tScIGe\"],[45806420,null,true,null,null,null,\"fEQEmb\"],[45767301,null,true,null,null,null,\"XNnQfb\"],[45790102,null,false,null,null,null,\"gWraHd\"],[45775806,null,false,null,null,null,\"f1cyrc\"],[45852907,null,true,null,null,null,\"a8lhaf\"],[45890186,null,false,null,null,null,\"CLydhf\"],[45865262,null,false,null,null,null,\"Bh3Ol\"],[45776819,null,true,null,null,null,\"CWdxXd\"],[45823295,null,false,null,null,null,\"Arlbpd\"],[45871674,null,false,null,null,null,\"o8NB9c\"],[45830082,null,false,null,null,null,\"ZUp3se\"],[45836590,null,null,0,null,null,\"vIGve\"],[45801163,null,true,null,null,null,\"VDs51c\"],[45858220,null,false,null,null,null,\"YAQRrc\"],[45796593,null,true,null,null,null,\"piQlge\"],[45751428,null,false,null,null,null,\"w8d1bc\"],[45837256,null,false,null,null,null,\"qckzOe\"],[45857099,null,false,null,null,null,\"cIG1vc\"],[45815733,null,true,null,null,null,\"ht9f6e\"],[45739638,null,true,null,null,null,\"hPR2wd\"],[45866669,null,true,null,null,null,\"xk2TDe\"],[45784349,null,true,null,null,null,\"xNyUwf\"],[45725952,null,false,null,null,null,\"LGSclc\"],[45716130,null,null,null,\"\",null,\"Qy4uld\"],[45773243,null,false,null,null,null,\"MLsv8b\"],[45793959,null,false,null,null,null,\"hOMnHf\"],[45646711,null,false,null,null,null,\"aKSrdd\"],[45773517,null,true,null,null,null,\"C4cpEd\"],[45863024,null,null,null,\"models/gemini-4-hydrogen\",null,\"SzcwOb\"],[45808440,null,false,null,null,null,\"OgCwYe\"],[45826997,null,true,null,null,null,\"XjAiEc\"],[45745504,null,false,null,null,null,\"II2tFb\"],[45830858,null,false,null,null,null,\"mJ13bb\"],[45786476,null,true,null,null,null,\"NtxR6e\"],[45832772,null,true,null,null,null,\"NrZPHe\"],[45765786,null,false,null,null,null,\"B1GdRb\"],[45780375,null,true,null,null,null,\"GAbK3d\"],[45785393,null,false,null,null,null,\"JVB6z\"],[45797100,null,false,null,null,null,\"iB2O1e\"],[45791779,null,false,null,null,null,\"DQg7Hb\"],[45767507,null,true,null,null,null,\"Zn5Ej\"],[45775384,null,true,null,null,null,\"DqVejd\"],[45802372,null,true,null,null,null,\"XXFwZe\"],[45716158,null,false,null,null,null,\"j1MtL\"],[45784330,null,true,null,null,null,\"WWo53e\"],[45869663,null,false,null,null,null,\"TDErSd\"],[106136619,null,true,null,null,null,\"iGreoe\"],[45794982,null,true,null,null,null,\"EW5nff\"],[45818348,null,false,null,null,null,\"r6kKsf\"],[45746195,null,true,null,null,null,\"eXVehb\"],[45865704,null,false,null,null,null,\"zgb7I\"],[45877248,null,false,null,null,null,\"ol8MBf\"],[45694412,null,false,null,null,null,\"SbCVZ\"],[45732213,null,false,null,null,null,\"w7xKfd\"],[45785017,null,true,null,null,null,\"ri7Eac\"],[45854438,null,false,null,null,null,\"YxfQyc\"],[45762227,null,true,null,null,null,\"Z4Lh5e\"],[45865613,null,true,null,null,null,\"TYumuf\"],[45828311,null,false,null,null,null,\"HUhtxc\"],[45773733,null,true,null,null,null,\"EGfkj\"],[45772448,null,true,null,null,null,\"i07PMb\"],[45827223,null,true,null,null,null,\"Jtk3bf\"],[45854328,null,true,null,null,null,\"UeVFAf\"],[45772059,null,true,null,null,null,\"R59tgd\"],[45798215,null,false,null,null,null,\"HCx3Oc\"],[45747021,null,true,null,null,null,\"pKd73e\"],[45834001,null,true,null,null,null,\"hfCZid\"],[45823372,null,false,null,null,null,\"oMK3Y\"],[45830753,null,null,0,null,null,\"cRQlrb\"],[45741743,null,false,null,null,null,\"FpM8Qe\"],[45800793,null,true,null,null,null,\"ou8vKf\"],[45822392,null,true,null,null,null,\"wJ3FQd\"],[45862259,null,false,null,null,null,\"sZycyd\"],[45816582,null,false,null,null,null,\"dSJ7Bd\"],[45835850,null,true,null,null,null,\"L6pDkb\"],[45772137,null,false,null,null,null,\"ishS2b\"],[45724978,null,false,null,null,null,\"OWw3ld\"],[45773922,null,true,null,null,null,\"RSYlDb\"],[45851577,null,false,null,null,null,\"Imb3Ce\"],[45837097,null,false,null,null,null,\"Ace8lb\"],[45776579,null,true,null,null,null,\"clXDpe\"],[45826123,null,true,null,null,null,\"I4xrBe\"],[45780339,null,true,null,null,null,\"RajHhe\"],[45786812,null,true,null,null,null,\"rG2Adf\"],[45872515,null,false,null,null,null,\"o84zEc\"],[45818351,null,false,null,null,null,\"jif7mb\"],[45872481,null,false,null,null,null,\"ZL3igd\"],[45797782,null,false,null,null,null,\"KGod8d\"],[45865396,null,true,null,null,null,\"F7dvAc\"],[45843340,null,false,null,null,null,\"DRXio\"],[45824509,null,true,null,null,null,\"j3c7ob\"],[45883228,null,false,null,null,null,\"nma2yd\"],[45814275,null,true,null,null,null,\"RkNCqf\"],[45857186,null,false,null,null,null,\"yZGRVd\"],[45750201,null,true,null,null,null,\"eOwTyc\"],[45869948,null,true,null,null,null,\"Fr9VSd\"],[45725932,null,false,null,null,null,\"Gb1Jaf\"],[45886982,null,false,null,null,null,\"KO1zzd\"],[45882374,null,false,null,null,null,\"pfT1bf\"],[45846308,null,true,null,null,null,\"I5yZof\"],[45818257,null,false,null,null,null,\"IXqyUd\"],[45791794,null,false,null,null,null,\"kc5JKd\"],[45741421,null,null,null,\"models/gemini-4-hydrogen\",null,\"PH4l9d\"],[45868031,null,false,null,null,null,\"OcMSwf\"],[45817341,null,false,null,null,null,\"E9pnPd\"],[45881088,null,false,null,null,null,\"v26dNe\"],[45821529,null,true,null,null,null,\"wXqG7\"],[45869851,null,true,null,null,null,\"XtjyHc\"],[45740367,null,true,null,null,null,\"jCr8Db\"],[45765657,null,false,null,null,null,\"TQncq\"],[45788850,null,true,null,null,null,\"Bh3THc\"],[45812131,null,false,null,null,null,\"tUuz0c\"],[45867460,null,false,null,null,null,\"UCMFWd\"],[45817301,null,true,null,null,null,\"QPlsw\"],[45794311,null,false,null,null,null,\"s5sys\"],[45798403,null,false,null,null,null,\"x2wuHf\"],[45880297,null,true,null,null,null,\"dtWFPb\"],[45722603,null,true,null,null,null,\"iWkpJ\"],[45708381,null,false,null,null,null,\"JkACyc\"],[45842058,null,false,null,null,null,\"BeXieb\"],[45831005,null,false,null,null,null,\"DHRiDc\"],[45835180,null,false,null,null,null,\"hBbzle\"],[45755068,null,true,null,null,null,\"EB2qEd\"],[45772802,null,true,null,null,null,\"gENGMb\"],[45787653,null,true,null,null,null,\"N0vGQ\"],[45796979,null,false,null,null,null,\"cElYhd\"],[45723374,null,false,null,null,null,\"FK7eJd\"],[45831247,null,false,null,null,null,\"dTRbcc\"],[45844654,null,false,null,null,null,\"Ll0PNe\"],[45753184,null,false,null,null,null,\"yUHVge\"],[45781083,null,false,null,null,null,\"NNIf1e\"],[45865261,null,true,null,null,null,\"HmKYT\"],[45737499,null,true,null,null,null,\"dIQ2Ic\"],[45861680,null,true,null,null,null,\"gXEGbd\"],[45796324,null,true,null,null,null,\"sFBYxc\"],[45836224,null,false,null,null,null,\"QODXE\"],[45712153,null,false,null,null,null,\"aynkwb\"],[45726760,null,null,null,\"\",null,\"OZtjO\"],[45807399,20000,null,null,null,null,\"Fklxcf\"],[45825002,null,false,null,null,null,\"UYZwfb\"],[45747224,null,true,null,null,null,\"hLDizc\"],[45778977,null,true,null,null,null,\"BQF0Ib\"],[45854839,null,false,null,null,null,\"Q2VwPe\"],[45788754,null,null,null,null,null,\"CAlZbf\",[\"[[[\\\"supercloud\\\",\\\"https://www.gstatic.com/images/branding/productlogos/google_cloud_2026/v1/192px.svg\\\",\\\"https://www.gstatic.com/images/branding/productlogos/google_cloud_2026/v1/192px.svg\\\"],[\\\"gemini\\\",\\\"https://www.gstatic.com/images/branding/productlogos/gemini_2026/v1/192px.svg\\\",\\\"https://www.gstatic.com/images/branding/productlogos/gemini_2026/v1/192px.svg\\\"]]]\"]],[45886867,null,true,null,null,null,\"o1mLC\"],[45854420,null,true,null,null,null,\"vYFiN\"],[45773239,null,false,null,null,null,\"FR4WA\"],[45828912,null,null,null,\"\",null,\"M4rIM\"],[45826452,null,true,null,null,null,\"fyn48c\"],[45757828,null,true,null,null,null,\"Q8uuOb\"],[45784563,null,false,null,null,null,\"E8pjWd\"],[45879950,null,false,null,null,null,\"EzTFA\"],[45799359,null,true,null,null,null,\"B1kymf\"],[45828251,null,false,null,null,null,\"y14pld\"],[45721546,null,true,null,null,null,\"kNlqGe\"],[45759847,null,true,null,null,null,\"yRDM\"],[45818673,null,false,null,null,null,\"qxbq6e\"],[45825960,null,true,null,null,null,\"v240vc\"],[45778471,null,true,null,null,null,\"GxQ9o\"],[45737255,null,true,null,null,null,\"ra4Rcf\"],[45740401,null,true,null,null,null,\"kAmEsf\"],[45782135,null,true,null,null,null,\"aWuK4b\"],[45870488,null,false,null,null,null,\"P7LWqb\"],[45789764,null,true,null,null,null,\"q7jIFe\"],[45799173,null,null,null,null,null,\"AyrXXd\",[\"[]\"]],[106476711,null,true,null,null,null,\"oGx9Pd\"],[45747468,null,true,null,null,null,\"gjSq0\"],[45825901,null,true,null,null,null,\"dAUG8e\"],[45775030,null,true,null,null,null,\"yT9XMb\"],[45785071,null,true,null,null,null,\"jCAPEe\"],[45792594,null,false,null,null,null,\"pl1NXc\"],[45868792,null,false,null,null,null,\"vvpGyc\"],[497238176,null,true,null,null,null,\"WSAzh\"],[45845522,null,false,null,null,null,\"p7emWb\"]],\"CAMSwwEdxwbx4LI1CoyDFQ+AngUP/QIPl5UGD4oJD9g7D/DHBg+/HQ+CQxWlKACQJw+kNg+9kAYPsKkGD8RZD79cD8mtBg+xBg+aCw/vnwYPyJEED8VZD8rmBg+79gYP5pUFD/QuD4+NBQ++ag+9Fg/2Sg+KxQUP6GgAg5cFD9pkD803D/kAD6bWBQ/EDg/yLQ+UPg/y+wMPiy0PhzwP8MIFD9AED/ugBQ+NfwCtuQYP7DcPwQQPwQ8PkGUPsdwGD+AED9T6Aw8\\u003d\"]]]","TwvH1d":false,"UUFaWc":"%.@.null,1000,2]","UsvuEb":true,"Vvafkd":false,"WIu0Nc":"REDACTED_API_KEY","Z8v1ze":["clients6.google.com"],"ZGhOkf":false,"ZLEzG":"","ZOkjLb":"","ax6qJc":false,"b5W2zf":"default_MakerSuite","cfb2h":"boq_alkali-makersuite_20261110.12_p5","eptZe":"/_/MakerSuite/","gGcLoe":false,"gTCm1":true,"goX6ee":[1706538,106240713,106421007,106640299,106821707,106848712,106596088,106070698,106034713,106313915,106090184,106460446,106091999,107005844,106912575,106194850,106326023,106274811,106168017,106168006,106278925,106527927,106735891,106874967,106654356,106261858,106889123,106124489,106136612,106620816,106827696,106790580,106705624,106153117,106577085,106729386,106602757,106115617,106741289,106621491,107045340,107003409,106889112,106647031,106888705,106099784,106486688,106426380,106737938,106127883,106828955,106823440,106206959,106917705,106875431,106868706,106641528,106108827,106146800,106782647,106854629,106844334,106142671,106824642,106296617,106476709,106474465,106791061,106589860,106385828,106240521,106999334,106071470,106876535,106354910,106917208,106218673,106737949,106115994,106818123,106518858,106748851,106238854,106190114,1714255,99469034,99469322,99469603,99470387,99470673,99471518,99472149,99472920,99473631,99474975,99475396,99476937,99479559,99479840,99481320,99483071,99485059,99487560,99488541,99490000,99498686,99502609,99504443,99506557,99507748,99511363,99513765,99515726,99519343,99521542,99526241,99592556,99592771,99593562,99593852,99594414,99595822,99597460,99598311,99599016,99599999,99601751,99603292,99603792,99605897,99610501,99612553,99615952,99618106,99620675,99624119,99627484,99628901,99631431,99634097,99636529,99643466,99645637,99649838,99663826,99670408,99674191,99684863,99690675,99697486,99698397,99706770,99709711,99722741,99730392,99818964,99819035,99819334,99819943,99822040,99824013,99825645,99831342,99835415,99836186,99843080,99846642,99848136,99851358,99853538,99856063,99858530,99864880,99871493,99874436,99880733,99888727,99892720,99895591,99900703,99922477,99925702,99934491,99939532,99947940,99948571,99955152,99964534,99966075,99976508,99982045,99986736,99988907,100006202,100011243,100015457,100022598,100024069,100036041,100048865,100056076,100056847,100066643,100072720,100080149,100085340,100091445,100116445,100130506,100133251,102390173,100153249,100161727,100167189,100175030,100190920,100196801,100225434,101401152,101401293,101401504,101404171,101404452,101404523,101412498,101413206,101413328,101415141,101415225,101415385,101415969,101416280,101416387,101421786,101422064,101422868,101425625,101425697,101426074,99654654,99671460,99689204,99823312,99826766,99827747,99837668,99866816,99898112,100098738,100138712,100182203,101413109,99820701,99885796,98419871,98419863,98419856,98419880,106242288,106065558,106895299,106895288,106542255,106195246,117434425,106641106,106597120,106793981,106808637,117071028,105901316,106914895,105993283,97785984,105739268,119919289,102936969,106172513,106240704,106420998,106640290,106821698,106848703,106596079,106070689,106034704,106313906,106090175,106460437,106091990,107005835,106912566,106194841,106326014,106274802,106168008,106167997,106278916,106527918,106735882,106874958,106654347,106261849,106889114,106124480,106136593,106620807,106827687,106790571,106705615,106153108,106577076,106729377,106602748,106115608,106741280,106621482,107045331,107003400,106889103,106647022,106888696,106099775,106486679,106426371,106737929,106127874,106828946,106823431,106206950,106917696,106875422,106868697,106641519,106108819,106146791,106782639,106854621,106844326,106142663,106824633,106296608,106476700,106474456,106791052,106589851,106385819,106240512,106999325,106071461,106876526,106354901,106917199,106218664,106737940,106115985,106818115,106518849,106748842,106238845,106190105,99469021,99469309,99469590,99470374,99470660,99471505,99472136,99472907,99473618,99474962,99475383,99476924,99479546,99479827,99481307,99483058,99485046,99487547,99488528,99489987,99498673,99502596,99504430,99506544,99507735,99511350,99513752,99515713,99519330,99521529,99526228,99592543,99592758,99593549,99593839,99594401,99595809,99597447,99598298,99599003,99599986,99601738,99603279,99603779,99605884,99610488,99612540,99615939,99618093,99620662,99624106,99627471,99628888,99631418,99634084,99636516,99643453,99645624,99649825,99663813,99670395,99674178,99684850,99690662,99697473,99698384,99706757,99709698,99722728,99730379,99818951,99819022,99819321,99819930,99822027,99824000,99825632,99831329,99835402,99836173,99843067,99846629,99848123,99851345,99853525,99856050,99858517,99864867,99871480,99874423,99880720,99888714,99892707,99895578,99900690,99922464,99925689,99934478,99939519,99947927,99948558,99955139,99964521,99966062,99976495,99982032,99986723,99988894,100006189,100011230,100015444,100022585,100024056,100036028,100048852,100056063,100056834,100066630,100072707,100080136,100085327,100091432,100116432,100130493,100133238,102390160,100153236,100161714,100167176,100175017,100190907,100196788,100225421,101401139,101401280,101401491,101404158,101404439,101404510,101412485,101413193,101413315,101415128,101415212,101415372,101415956,101416267,101416374,101421773,101422051,101422855,101425612,101425684,101426061,99654641,99671447,99689191,99823299,99826753,99827734,99837655,99866803,99898099,100098725,100138699,100182190,101413096,99820688,99885783,98419867,98419859,98419852,98419876,106242279,106065549,106895290,106895279,106542247,106195237,117434412,106641098,106597111,106808635,117071024,106914886,105993269,97785970,105739254,119919287,102936956,106172504],"hOXil":["FaxEntityService"],"hsFLT":"%.@.null,10,3]","iRz4i":3,"k76Vlc":[],"kFsUdb":"https://docs.google.com/picker","kPYdqb":false,"mXaIFf":false,"nPAWmd":"https://cloudconsole-pa.clients6.google.com","nQyAE":{},"nfd52d":"google-ai-studio","p9hQne":"https://www.gstatic.com/_/boq-makersuite/_/r/","pm20lb":"cloudconsole-pa.clients6.google.com","qc58fc":"","qocwD":false,"qwAQke":"MakerSuite","rU9UAf":86400000,"rtQCxc":0,"syGxEd":false,"teM9xe":"7dc39022-f9ef-48d1-bce0-897324a9c0e4","tkHyOe":"MUST_PROVIDE_AN_API_KEY","u4g7r":"%.@.null,1,3]","wpAUPe":false,"xnI9P":false,"xwAfE":true,"y2FhP":"prod","yFnxrf":1957,"yWAmtc":false,"yueqgf":false,"z6uGHf":"6LfMhuItAAAAAPMRs5Icz9eJnvIjRlxrxvJQ6ABh","zBpHOc":"https://accounts.google.com/o/oauth2/auth","zChJod":"%.@.]","zQKvjb":25,"zSAhZc":"https://accounts.google.com/o/oauth2/iframe"}</script><script nonce="PdkQEb3pFvIHt4tQrsFjtQ">window["_F_toggles_default_MakerSuite"] = [0x5aa401, 0x438206, 0x1800000, ];</script><script nonce="PdkQEb3pFvIHt4tQrsFjtQ"></script><script nonce="PdkQEb3pFvIHt4tQrsFjtQ">var _F_cssRowKey = 'boq-makersuite.MakerSuite.kzfi84e3Yfk.L.X.O';var _F_combinedSignature = 'AMOXD2_0cq7YQOTxr3QgQaNGA341diiU8Q';function _DumpException(e) {throw e;}</script><link rel="stylesheet" href="https://www.gstatic.com/_/mss/boq-makersuite/_/ss/k=boq-makersuite.MakerSuite.kzfi84e3Yfk.L.X.O/am=AaRagIHgEAAAABg/d=1/ed=1/rs=AMOXD2_WnZjBAf42iy-4iWej2-u3q1tO3g/m=_b" data-id="_cl" nonce="25B3hn-bd0_CJ2GzhYOm3w"><style data-font-stylesheet nonce="25B3hn-bd0_CJ2GzhYOm3w">@font-face{font-family:'Product Sans';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/productsans/v9/pxiDypQkot1TnFhsFMOfGShVF9eL.ttf)format('truetype');}@font-face{font-family:'Google Sans';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/googlesans/v62/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJllpyw.ttf)format('truetype');}@font-face{font-family:'Google Sans';font-style:normal;font-weight:500;font-display:block;src:url(https://fonts.gstatic.com/s/googlesans/v62/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrw2IJllpyw.ttf)format('truetype');}@font-face{font-family:'Google Sans';font-style:normal;font-weight:700;font-display:block;src:url(https://fonts.gstatic.com/s/googlesans/v62/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrzjJ5llpyw.ttf)format('truetype');}@font-face{font-family:'Google Sans Mono';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/googlesansmono/v15/P5sUzYWFYtnZ_Cg-t0Uq_rfivrdYH4RE8-pZ5gQ1abT53wVQGrw.ttf)format('truetype');}@font-face{font-family:'Google Sans Mono';font-style:normal;font-weight:500;font-display:block;src:url(https://fonts.gstatic.com/s/googlesansmono/v15/P5sUzYWFYtnZ_Cg-t0Uq_rfivrdYH4RE8-pZ5gQ1abTL3wVQGrw.ttf)format('truetype');}@font-face{font-family:'Google Sans Display';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/googlesansdisplay/v13/ea8FacM9Wef3EJPWRrHjgE4B6CnlZxHVDv79pA.ttf)format('truetype');}@font-face{font-family:'Google Sans Display';font-style:normal;font-weight:500;font-display:block;src:url(https://fonts.gstatic.com/s/googlesansdisplay/v13/ea8IacM9Wef3EJPWRrHjgE4B6CnlZxHVBg3etBD7SQ.ttf)format('truetype');}@font-face{font-family:'Google Symbols';font-style:normal;font-weight:300;font-display:block;src:url(https://fonts.gstatic.com/l/font?kit=HhzMU5Ak9u-oMExPeInvcuEmPosC9zyteYEFU68cPrjdKM1XLPTxlGmzczpgWvF1d8Yp7AudBnt3CPar1JFWjoLAUv3G2tSNljixIIGUsC62cdTKiAkecSathI2-Ama_9tgxECbWyWdcPvfEJGvEQgr6-vH_5FdLAwAw6VG8UVin4vJWnDEuNkOg_Yu5j43CpNBozuwHmZ8fWrE9Lf4MNKI8Ob1p3vhM5MmL1xPtYWJxn249etAwJOtWcK4TGbpR9kT-hxSQZneh0280ej7HGssaEg83Dl7y2HGz0kOBfNx3wEu0X_XuCaG3cN2lRqWIbdLNSNDJRROijuPx8l9LJ9MUc3YVaAy_FvW5Mqt0GUo25_KQiw1hKNLtEJaxxjaMHUnuguCLmBasc_FprKmQJwcnLLo8bdqtzSuhFP_31k52MdmRBrH3GvPp7bHNbT4EXm1lWgmcIdjLuuJhef26zX41OuqUtxjwb8NDNZa8Q6TNW_dJyeL-gWgc_ClBMu341gqZlWdWoPecEu3euEPGsLoo4vfChyzXDI2WqoSMnLm-9pkpNBDu59zXyx5iF00pAp2AABx0R33XwMfUTHMtQMlXylX0za0M7FckJGLshp-5a4dlVw&skey=f8ec4d50247dc1c1&v=v470)format('truetype');}.google-symbols{font-family:'Google Symbols';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;}</style><title>Document understanding - Gemini API | Google AI Studio</title><meta name="description" content="Learn how to use the Gemini API to process documents like PDFs"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"><script nonce="PdkQEb3pFvIHt4tQrsFjtQ">
+      function glueCookieNotificationBarLoaded() {
+        const {instance} = window.glue.CookieNotificationBar;
+        instance.listen('visibilitychange', (event) => {
+          const cookieBanner = document.getElementsByClassName('glue-cookie-notification-bar')[0];
+          if (event.detail.visible) {
+            cookieBanner.classList.add('visible');
+          } else {
+            cookieBanner.classList.remove('visible');
+          }
+        });
+
+        (function (w, d, s, l) {
+          w[l] = w[l] || [];
+          w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '',
+            e=d.querySelector('script[nonce]'),n=e&&(e['nonce']||e.getAttribute('nonce'));
+          j.async = true;
+          j.setAttribute('nonce', n);
+          if (self.trustedTypes && self.trustedTypes.createPolicy) {var policy = self.trustedTypes.createPolicy('aistudio', {createScriptURL: function(unused) { return 'https:\/\/www.googletagmanager.com\/gtm.js?id\x3dGTM-TT9C75WP'; }}); j.src = policy.createScriptURL('');} else {j.src = 'https:\/\/www.googletagmanager.com\/gtm.js?id\x3dGTM-TT9C75WP';}
+
+          f.parentNode.insertBefore(j, f);
+
+          window[l].push({'event': 'dataLayer_initialized', 'page_name': 'Google AI Studio'});
+        })(window, document, 'script', 'dataLayer');
+      }
+    </script><!-- Cookie Consent --><script src="https://www.gstatic.com/glue/cookienotificationbar/cookienotificationbar.min.js" data-glue-cookie-notification-bar-category="2A" data-glue-cookie-notification-bar-site-id="Google AI Studio" nonce="PdkQEb3pFvIHt4tQrsFjtQ"></script><!-- End Cookie Consent  --><link rel="llms.txt" href="/llms.txt"><link rel="alternate" type="text/markdown" href="/docs/document-processing.md"><script nonce="PdkQEb3pFvIHt4tQrsFjtQ">var AF_initDataKeys = window.AF_initDataKeys || {}; var AF_dataServiceRequests = window.AF_dataServiceRequests || {}; var AF_initDataChunkQueue = window.AF_initDataChunkQueue || {}; var AF_initDataCallback = window.AF_initDataCallback || {}; var AF_initDataInitializeCallback = window.AF_initDataInitializeCallback || {}; AF_initDataKeys['40248f3c-69a7-4bbb-8e84-e07e03f28c2c'] = []; AF_dataServiceRequests['40248f3c-69a7-4bbb-8e84-e07e03f28c2c'] = {}; AF_initDataChunkQueue['40248f3c-69a7-4bbb-8e84-e07e03f28c2c'] = AF_initDataChunkQueue['40248f3c-69a7-4bbb-8e84-e07e03f28c2c'] || []; if (AF_initDataInitializeCallback['40248f3c-69a7-4bbb-8e84-e07e03f28c2c']) {AF_initDataInitializeCallback['40248f3c-69a7-4bbb-8e84-e07e03f28c2c'](AF_initDataKeys['40248f3c-69a7-4bbb-8e84-e07e03f28c2c'], AF_initDataChunkQueue['40248f3c-69a7-4bbb-8e84-e07e03f28c2c'], AF_dataServiceRequests['40248f3c-69a7-4bbb-8e84-e07e03f28c2c']);}if (!AF_initDataCallback['40248f3c-69a7-4bbb-8e84-e07e03f28c2c']) {AF_initDataCallback['40248f3c-69a7-4bbb-8e84-e07e03f28c2c'] = function(chunk) {AF_initDataChunkQueue['40248f3c-69a7-4bbb-8e84-e07e03f28c2c'].push(chunk);};}</script></head><app-root></app-root><noscript><pre>&gt; ## AI Agent Context
+&gt; Get the complete documentation index at: https://aistudio.google.com/llms.txt
+&gt; Use this file to discover all available pages.
+&gt; For the full documentation in a single file, fetch: https://aistudio.google.com/llms-full.txt
+
+# Document understanding
+
+Gemini models can process documents in PDF format, using native
+vision to understand entire document contexts. This goes beyond
+just text extraction, allowing Gemini to:
+
+*   Analyze and interpret content, including text, images, diagrams,
+  charts, and tables, even in long documents up to 1000 pages.
+
+*   Extract information into [structured output](/docs/structured-output) formats.
+
+*   Summarize and answer questions based on both the visual and textual elements
+  in a document.
+
+*   Transcribe document content (e.g. to HTML), preserving layouts and
+  formatting, for use in downstream applications.
+
+
+You can also pass Microsoft Office and OpenDocument files, such as Word
+documents, PowerPoint presentations, and Excel spreadsheets. For details, see
+[Office and OpenDocument files](/docs/document-processing#office-documents).
+Other non-PDF documents, such as TXT, Markdown, or HTML files, are processed as
+plain text, which eliminates context like charts or formatting.
+
+## Passing PDF data inline  {% id=&quot;inline_data&quot; %}
+
+You can pass PDF data inline in the request. This is best
+suited for smaller documents or temporary processing where you don&#39;t need to
+reference the file in subsequent requests. We recommend using the
+[Files API](/docs/document-processing#large-pdfs)
+for larger documents that you need to refer to in multi-turn interactions to
+improve request latency and reduce bandwidth usage.
+
+The following example shows you how to pass PDF data inline:
+
+{% tabs %}
+  {% tab label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  import base64
+  
+  client = genai.Client()
+  
+  with open(&#39;path/to/document.pdf&#39;, &#39;rb&#39;) as f:
+      pdf_bytes = f.read()
+  
+  interaction = client.interactions.create(
+      model=&quot;gemini-4-hydrogen&quot;,
+      input=[
+          {
+              &quot;type&quot;: &quot;document&quot;,
+              &quot;data&quot;: base64.b64encode(pdf_bytes).decode(&#39;utf-8&#39;),
+              &quot;mime_type&quot;: &quot;application/pdf&quot;
+          },
+          {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Summarize this document&quot;}
+      ]
+  )
+  
+  print(interaction.output_text)
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  import * as fs from &quot;node:fs&quot;;
+  
+  const ai = new GoogleGenAI({});
+  
+  async function main() {
+      const pdfData = fs.readFileSync(&quot;path/to/document.pdf&quot;, {
+          encoding: &quot;base64&quot;
+      });
+  
+      const interaction = await ai.interactions.create({
+          model: &quot;gemini-4-hydrogen&quot;,
+          input: [
+              { type: &quot;text&quot;, text: &quot;Summarize this document&quot; },
+              {
+                  type: &quot;document&quot;,
+                  data: pdfData,
+                  mime_type: &quot;application/pdf&quot;
+              }
+          ]
+      });
+      console.log(interaction.output_text);
+  }
+  
+  await main();
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Java&quot; %}
+  ```java
+  import com.google.genai.Client;
+  import com.google.genai.gaos.models.interactions.Content;
+  import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+  import com.google.genai.gaos.models.interactions.DocumentContent;
+  import com.google.genai.gaos.models.interactions.DocumentContentMimeType;
+  import com.google.genai.gaos.models.interactions.Interaction;
+  import com.google.genai.gaos.models.interactions.InteractionsInput;
+  import com.google.genai.gaos.models.interactions.Model;
+  import com.google.genai.gaos.models.interactions.TextContent;
+  import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+  import java.nio.file.Files;
+  import java.nio.file.Paths;
+  import java.util.Arrays;
+  import java.util.Base64;
+  import java.util.List;
+  
+  Client client = new Client();
+  
+  byte[] pdfBytes = Files.readAllBytes(Paths.get(&quot;path/to/document.pdf&quot;));
+  String base64Pdf = Base64.getEncoder().encodeToString(pdfBytes);
+  
+  Content docContent =
+      DocumentContent.builder()
+          .data(base64Pdf)
+          .mimeType(DocumentContentMimeType.APPLICATION_PDF)
+          .build();
+  Content textContent = TextContent.builder().text(&quot;Summarize this document&quot;).build();
+  
+  List&lt;Content&gt; contents = Arrays.asList(docContent, textContent);
+  
+  CreateModelInteraction params =
+      CreateModelInteraction.builder()
+          .model(Model.of(&quot;gemini-4-hydrogen&quot;))
+          .input(InteractionsInput.ofContent(contents))
+          .build();
+  
+  Interaction interaction =
+      client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+  System.out.println(interaction.outputText().orElse(&quot;&quot;));
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Go&quot; %}
+  ```go
+  package main
+  
+  import (
+      &quot;context&quot;
+      &quot;encoding/base64&quot;
+      &quot;fmt&quot;
+      &quot;log&quot;
+      &quot;os&quot;
+  
+      &quot;google.golang.org/genai&quot;
+      &quot;google.golang.org/genai/interactions/models/interactions&quot;
+      &quot;google.golang.org/genai/interactions/models/operations&quot;
+  )
+  
+  func main() {
+      ctx := context.Background()
+      client, err := genai.NewClient(ctx, nil)
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      pdfBytes, err := os.ReadFile(&quot;path/to/document.pdf&quot;)
+      if err != nil {
+          log.Fatal(err)
+      }
+      base64Pdf := base64.StdEncoding.EncodeToString(pdfBytes)
+  
+      res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+          Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+              Model: interactions.Model(&quot;gemini-4-hydrogen&quot;),
+              Input: interactions.NewInteractionsInput([]interactions.Content{
+                  interactions.NewContent(interactions.DocumentContent{
+                      Data:     genai.Ptr(base64Pdf),
+                      MimeType: interactions.DocumentContentMimeTypeApplicationPdf.ToPointer(),
+                  }),
+                  interactions.NewContent(interactions.TextContent{
+                      Text: &quot;Summarize this document&quot;,
+                  }),
+              }),
+          }),
+      })
+      if err != nil {
+          log.Fatal(err)
+      }
+      if res.Interaction.OutputText != nil {
+          fmt.Println(*res.Interaction.OutputText)
+      }
+  }
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;REST&quot; %}
+  ```shell
+  PDF_PATH=&quot;path/to/document.pdf&quot;
+  
+  if [[ &quot;$(base64 --version 2&gt;&amp;1)&quot; = *&quot;FreeBSD&quot;* ]]; then
+  B64FLAGS=&quot;--input&quot;
+  else
+  B64FLAGS=&quot;-w0&quot;
+  fi
+  
+  curl -X POST &quot;https://generativelanguage.googleapis.com/v1beta/interactions&quot; \
+  -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+  -H &#39;Content-Type: application/json&#39; \
+  -H &quot;Api-Revision: 2026-05-20&quot; \
+  -d &#39;{
+    &quot;model&quot;: &quot;gemini-4-hydrogen&quot;,
+    &quot;input&quot;: [
+      {
+        &quot;type&quot;: &quot;document&quot;,
+        &quot;data&quot;: &quot;&#39;$(base64 $B64FLAGS $PDF_PATH)&#39;&quot;,
+        &quot;mime_type&quot;: &quot;application/pdf&quot;
+      },
+      {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Summarize this document&quot;}
+    ]
+  }&#39;
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;CLI&quot; %}
+  ```bash
+  gemini-api analyze -i path/to/document.pdf &quot;Summarize this document&quot;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+You can also upload a local PDF file for processing:
+
+{% tabs %}
+  {% tab label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  
+  client = genai.Client()
+  
+  uploaded_file = client.files.upload(file=&quot;file.pdf&quot;)
+  
+  interaction = client.interactions.create(
+      model=&quot;gemini-4-hydrogen&quot;,
+      input=[
+          {&quot;type&quot;: &quot;document&quot;, &quot;uri&quot;: uploaded_file.uri, &quot;mime_type&quot;: uploaded_file.mime_type},
+          {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Summarize this document&quot;}
+      ]
+  )
+  print(interaction.output_text)
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({});
+  
+  async function main() {
+      const uploadedFile = await ai.files.upload({
+          file: &quot;file.pdf&quot;,
+          config: { mimeType: &quot;application/pdf&quot; }
+      });
+  
+      const interaction = await ai.interactions.create({
+          model: &quot;gemini-4-hydrogen&quot;,
+          input: [
+              { type: &quot;text&quot;, text: &quot;Summarize this document&quot; },
+              {
+                  type: &quot;document&quot;,
+                  uri: uploadedFile.uri,
+                  mime_type: uploadedFile.mimeType
+              }
+          ]
+      });
+      console.log(interaction.output_text);
+  }
+  
+  await main();
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Java&quot; %}
+  ```java
+  import com.google.genai.Client;
+  import com.google.genai.gaos.models.interactions.Content;
+  import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+  import com.google.genai.gaos.models.interactions.DocumentContent;
+  import com.google.genai.gaos.models.interactions.DocumentContentMimeType;
+  import com.google.genai.gaos.models.interactions.Interaction;
+  import com.google.genai.gaos.models.interactions.InteractionsInput;
+  import com.google.genai.gaos.models.interactions.Model;
+  import com.google.genai.gaos.models.interactions.TextContent;
+  import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+  import com.google.genai.types.File;
+  import com.google.genai.types.UploadFileConfig;
+  import java.util.Arrays;
+  import java.util.List;
+  
+  Client client = new Client();
+  
+  File uploadedFile =
+      client.files.upload(
+          new java.io.File(&quot;file.pdf&quot;),
+          UploadFileConfig.builder().mimeType(&quot;application/pdf&quot;).build());
+  
+  Content docContent =
+      DocumentContent.builder()
+          .uri(uploadedFile.uri().orElse(&quot;&quot;))
+          .mimeType(DocumentContentMimeType.of(uploadedFile.mimeType().orElse(&quot;application/pdf&quot;)))
+          .build();
+  Content textContent = TextContent.builder().text(&quot;Summarize this document&quot;).build();
+  
+  List&lt;Content&gt; contents = Arrays.asList(docContent, textContent);
+  
+  CreateModelInteraction params =
+      CreateModelInteraction.builder()
+          .model(Model.of(&quot;gemini-4-hydrogen&quot;))
+          .input(InteractionsInput.ofContent(contents))
+          .build();
+  
+  Interaction interaction =
+      client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+  System.out.println(interaction.outputText().orElse(&quot;&quot;));
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Go&quot; %}
+  ```go
+  package main
+  
+  import (
+      &quot;context&quot;
+      &quot;fmt&quot;
+      &quot;log&quot;
+  
+      &quot;google.golang.org/genai&quot;
+      &quot;google.golang.org/genai/interactions/models/interactions&quot;
+      &quot;google.golang.org/genai/interactions/models/operations&quot;
+  )
+  
+  func main() {
+      ctx := context.Background()
+      client, err := genai.NewClient(ctx, nil)
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      uploadedFile, err := client.Files.UploadFromPath(ctx, &quot;file.pdf&quot;, &amp;genai.UploadFileConfig{
+          MIMEType: &quot;application/pdf&quot;,
+      })
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+          Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+              Model: interactions.Model(&quot;gemini-4-hydrogen&quot;),
+              Input: interactions.NewInteractionsInput([]interactions.Content{
+                  interactions.NewContent(interactions.DocumentContent{
+                      URI:      genai.Ptr(uploadedFile.URI),
+                      MimeType: interactions.DocumentContentMimeType(uploadedFile.MIMEType).ToPointer(),
+                  }),
+                  interactions.NewContent(interactions.TextContent{
+                      Text: &quot;Summarize this document&quot;,
+                  }),
+              }),
+          }),
+      })
+      if err != nil {
+          log.Fatal(err)
+      }
+      if res.Interaction.OutputText != nil {
+          fmt.Println(*res.Interaction.OutputText)
+      }
+  }
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;CLI&quot; %}
+  ```bash
+  FILE=$(gemini-api files upload file.pdf --wait)
+  gemini-api analyze -i &quot;$FILE&quot; &quot;Summarize this document&quot;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+## Uploading PDFs using the Files API  {% id=&quot;large-pdfs&quot; %}
+
+We recommend you use Files API for larger files or when you intend to reuse a
+document across multiple requests. This improves request latency and reduces
+bandwidth usage by decoupling the file upload from the model requests.
+
+{% callout type=&quot;note&quot; %}
+  The Files API is available at no cost in all regions where the Gemini API
+  is available. Uploaded files are stored for 48 hours.
+
+{% /callout %}
+
+### Large PDFs from URLs  {% id=&quot;large-pdfs-urls&quot; %}
+
+Use the File API to simplify uploading and processing large PDF files from URLs:
+
+{% tabs %}
+  {% tab label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  import io
+  import httpx
+  
+  client = genai.Client()
+  
+  long_context_pdf_path = &quot;https://arxiv.org/pdf/2312.11805&quot;
+  
+  doc_io = io.BytesIO(httpx.get(long_context_pdf_path).content)
+  
+  sample_doc = client.files.upload(
+    file=doc_io,
+    config=dict(
+      mime_type=&#39;application/pdf&#39;)
+  )
+  
+  prompt = &quot;Summarize this document&quot;
+  
+  interaction = client.interactions.create(
+      model=&quot;gemini-4-hydrogen&quot;,
+      input=[
+          {&quot;type&quot;: &quot;document&quot;, &quot;uri&quot;: sample_doc.uri, &quot;mime_type&quot;: sample_doc.mime_type},
+          {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: prompt}
+      ]
+  )
+  print(interaction.output_text)
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({});
+  
+  async function main() {
+  
+      const pdfBuffer = await fetch(&quot;https://arxiv.org/pdf/2312.11805&quot;)
+          .then((response) =&gt; response.arrayBuffer());
+  
+      const fileBlob = new Blob([pdfBuffer], { type: &#39;application/pdf&#39; });
+  
+      const file = await ai.files.upload({
+          file: fileBlob,
+          config: {
+              displayName: &#39;A17_FlightPlan.pdf&#39;,
+          },
+      });
+  
+      let getFile = await ai.files.get({ name: file.name || &quot;&quot; });
+      while (getFile.state === &#39;PROCESSING&#39;) {
+          getFile = await ai.files.get({ name: file.name || &quot;&quot; });
+          console.log(`current file status: ${getFile.state}`);
+          console.log(&#39;File is still processing, retrying in 5 seconds&#39;);
+  
+          await new Promise((resolve) =&gt; {
+              setTimeout(resolve, 5000);
+          });
+      }
+      if (file.state === &#39;FAILED&#39;) {
+          throw new Error(&#39;File processing failed.&#39;);
+      }
+  
+      const interaction = await ai.interactions.create({
+          model: &#39;gemini-4-hydrogen&#39;,
+          input: [
+              { type: &quot;document&quot;, uri: file.uri, mime_type: file.mimeType },
+              { type: &quot;text&quot;, text: &quot;Summarize this document&quot; }
+          ],
+      });
+  
+      console.log(interaction.output_text);
+  
+  }
+  
+  await main();
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Java&quot; %}
+  ```java
+  import com.google.genai.Client;
+  import com.google.genai.gaos.models.interactions.Content;
+  import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+  import com.google.genai.gaos.models.interactions.DocumentContent;
+  import com.google.genai.gaos.models.interactions.DocumentContentMimeType;
+  import com.google.genai.gaos.models.interactions.Interaction;
+  import com.google.genai.gaos.models.interactions.InteractionsInput;
+  import com.google.genai.gaos.models.interactions.Model;
+  import com.google.genai.gaos.models.interactions.TextContent;
+  import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+  import com.google.genai.types.File;
+  import com.google.genai.types.UploadFileConfig;
+  import java.net.URI;
+  import java.net.http.HttpClient;
+  import java.net.http.HttpRequest;
+  import java.net.http.HttpResponse;
+  import java.util.Arrays;
+  import java.util.List;
+  
+  Client client = new Client();
+  
+  String longContextPdfPath = &quot;https://arxiv.org/pdf/2312.11805&quot;;
+  HttpClient httpClient = HttpClient.newHttpClient();
+  HttpRequest request = HttpRequest.newBuilder().uri(URI.create(longContextPdfPath)).build();
+  byte[] pdfBytes = httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray()).body();
+  
+  File sampleDoc =
+      client.files.upload(
+          pdfBytes, UploadFileConfig.builder().mimeType(&quot;application/pdf&quot;).build());
+  
+  String prompt = &quot;Summarize this document&quot;;
+  
+  Content docContent =
+      DocumentContent.builder()
+          .uri(sampleDoc.uri().orElse(&quot;&quot;))
+          .mimeType(DocumentContentMimeType.of(sampleDoc.mimeType().orElse(&quot;application/pdf&quot;)))
+          .build();
+  Content textContent = TextContent.builder().text(prompt).build();
+  
+  List&lt;Content&gt; contents = Arrays.asList(docContent, textContent);
+  
+  CreateModelInteraction params =
+      CreateModelInteraction.builder()
+          .model(Model.of(&quot;gemini-4-hydrogen&quot;))
+          .input(InteractionsInput.ofContent(contents))
+          .build();
+  
+  Interaction interaction =
+      client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+  System.out.println(interaction.outputText().orElse(&quot;&quot;));
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Go&quot; %}
+  ```go
+  package main
+  
+  import (
+      &quot;bytes&quot;
+      &quot;context&quot;
+      &quot;fmt&quot;
+      &quot;io&quot;
+      &quot;log&quot;
+      &quot;net/http&quot;
+  
+      &quot;google.golang.org/genai&quot;
+      &quot;google.golang.org/genai/interactions/models/interactions&quot;
+      &quot;google.golang.org/genai/interactions/models/operations&quot;
+  )
+  
+  func main() {
+      ctx := context.Background()
+      client, err := genai.NewClient(ctx, nil)
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      longContextPdfPath := &quot;https://arxiv.org/pdf/2312.11805&quot;
+      resp, err := http.Get(longContextPdfPath)
+      if err != nil {
+          log.Fatal(err)
+      }
+      defer resp.Body.Close()
+      pdfBytes, err := io.ReadAll(resp.Body)
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      sampleDoc, err := client.Files.Upload(ctx, bytes.NewReader(pdfBytes), &amp;genai.UploadFileConfig{
+          MIMEType: &quot;application/pdf&quot;,
+      })
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      prompt := &quot;Summarize this document&quot;
+  
+      res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+          Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+              Model: interactions.Model(&quot;gemini-4-hydrogen&quot;),
+              Input: interactions.NewInteractionsInput([]interactions.Content{
+                  interactions.NewContent(interactions.DocumentContent{
+                      URI:      genai.Ptr(sampleDoc.URI),
+                      MimeType: interactions.DocumentContentMimeType(sampleDoc.MIMEType).ToPointer(),
+                  }),
+                  interactions.NewContent(interactions.TextContent{
+                      Text: prompt,
+                  }),
+              }),
+          }),
+      })
+      if err != nil {
+          log.Fatal(err)
+      }
+      if res.Interaction.OutputText != nil {
+          fmt.Println(*res.Interaction.OutputText)
+      }
+  }
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;REST&quot; %}
+  ```shell
+  PDF_PATH=&quot;https://arxiv.org/pdf/2312.11805&quot;
+  DISPLAY_NAME=&quot;Gemini_paper&quot;
+  PROMPT=&quot;Summarize this document&quot;
+  
+  wget -O &quot;${DISPLAY_NAME}.pdf&quot; &quot;${PDF_PATH}&quot;
+  
+  MIME_TYPE=$(file -b --mime-type &quot;${DISPLAY_NAME}.pdf&quot;)
+  NUM_BYTES=$(wc -c &lt; &quot;${DISPLAY_NAME}.pdf&quot;)
+  
+  echo &quot;MIME_TYPE: ${MIME_TYPE}&quot;
+  echo &quot;NUM_BYTES: ${NUM_BYTES}&quot;
+  
+  tmp_header_file=upload-header.tmp
+  
+  curl &quot;https://generativelanguage.googleapis.com/upload/v1beta/files?key=${GEMINI_API_KEY}&quot; \
+  -D upload-header.tmp \
+  -H &quot;X-Goog-Upload-Protocol: resumable&quot; \
+  -H &quot;X-Goog-Upload-Command: start&quot; \
+  -H &quot;X-Goog-Upload-Header-Content-Length: ${NUM_BYTES}&quot; \
+  -H &quot;X-Goog-Upload-Header-Content-Type: ${MIME_TYPE}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &quot;{&#39;file&#39;: {&#39;display_name&#39;: &#39;${DISPLAY_NAME}&#39;}}&quot; 2&gt; /dev/null
+  
+  upload_url=$(grep -i &quot;x-goog-upload-url: &quot; &quot;${tmp_header_file}&quot; | cut -d&quot; &quot; -f2 | tr -d &quot;\r&quot;)
+  rm &quot;${tmp_header_file}&quot;
+  
+  curl &quot;${upload_url}&quot; \
+  -H &quot;Content-Length: ${NUM_BYTES}&quot; \
+  -H &quot;X-Goog-Upload-Offset: 0&quot; \
+  -H &quot;X-Goog-Upload-Command: upload, finalize&quot; \
+  --data-binary &quot;@${DISPLAY_NAME}.pdf&quot; 2&gt; /dev/null &gt; file_info.json
+  
+  file_uri=$(jq -r &quot;.file.uri&quot; file_info.json)
+  echo &quot;file_uri: ${file_uri}&quot;
+  
+  cat &lt;&lt; EOF &gt; payload.json
+  {
+  &quot;model&quot;: &quot;gemini-4-hydrogen&quot;,
+  &quot;input&quot;: [
+    {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;${PROMPT}&quot;},
+    {&quot;type&quot;: &quot;document&quot;, &quot;uri&quot;: &quot;${file_uri}&quot;, &quot;mime_type&quot;: &quot;application/pdf&quot;}
+  ]
+  }
+  EOF
+  
+  curl &quot;https://generativelanguage.googleapis.com/v1beta/interactions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &#39;Content-Type: application/json&#39; \
+    -H &quot;Api-Revision: 2026-05-20&quot; \
+    -X POST \
+    -d @payload.json 2&gt; /dev/null &gt; response.json
+  
+  cat response.json
+  echo
+  
+  jq &quot;.steps[-1].content[0].text&quot; response.json
+  
+  rm &quot;${DISPLAY_NAME}.pdf&quot;
+  rm payload.json
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;CLI&quot; %}
+  ```bash
+  curl -sL -o Gemini_paper.pdf &quot;https://arxiv.org/pdf/2312.11805&quot;
+  FILE=$(gemini-api files upload Gemini_paper.pdf --wait)
+  gemini-api analyze -i &quot;$FILE&quot; &quot;Summarize this document&quot;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+### Large PDFs stored locally  {% id=&quot;large-pdfs-local&quot; %}
+
+{% tabs %}
+  {% tab label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  import pathlib
+  
+  client = genai.Client()
+  
+  file_path = pathlib.Path(&#39;large_file.pdf&#39;)
+  sample_file = client.files.upload(
+      file=file_path,
+  )
+  
+  interaction = client.interactions.create(
+      model=&quot;gemini-4-hydrogen&quot;,
+      input=[
+          {&quot;type&quot;: &quot;document&quot;, &quot;uri&quot;: sample_file.uri, &quot;mime_type&quot;: sample_file.mime_type},
+          {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Summarize this document&quot;}
+      ]
+  )
+  print(interaction.output_text)
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({});
+  
+  async function main() {
+      const file = await ai.files.upload({
+          file: &#39;path-to-localfile.pdf&#39;,
+          config: {
+              displayName: &#39;A17_FlightPlan.pdf&#39;,
+          },
+      });
+  
+      let getFile = await ai.files.get({ name: file.name || &quot;&quot; });
+      while (getFile.state === &#39;PROCESSING&#39;) {
+          getFile = await ai.files.get({ name: file.name || &quot;&quot; });
+          console.log(`current file status: ${getFile.state}`);
+          console.log(&#39;File is still processing, retrying in 5 seconds&#39;);
+  
+          await new Promise((resolve) =&gt; {
+              setTimeout(resolve, 5000);
+          });
+      }
+      if (file.state === &#39;FAILED&#39;) {
+          throw new Error(&#39;File processing failed.&#39;);
+      }
+  
+      const interaction = await ai.interactions.create({
+          model: &#39;gemini-4-hydrogen&#39;,
+          input: [
+              { type: &quot;document&quot;, uri: file.uri, mime_type: file.mimeType },
+              { type: &quot;text&quot;, text: &quot;Summarize this document&quot; }
+          ],
+      });
+  
+      console.log(interaction.output_text);
+  
+  }
+  
+  await main();
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Java&quot; %}
+  ```java
+  import com.google.genai.Client;
+  import com.google.genai.gaos.models.interactions.Content;
+  import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+  import com.google.genai.gaos.models.interactions.DocumentContent;
+  import com.google.genai.gaos.models.interactions.DocumentContentMimeType;
+  import com.google.genai.gaos.models.interactions.Interaction;
+  import com.google.genai.gaos.models.interactions.InteractionsInput;
+  import com.google.genai.gaos.models.interactions.Model;
+  import com.google.genai.gaos.models.interactions.TextContent;
+  import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+  import com.google.genai.types.File;
+  import com.google.genai.types.UploadFileConfig;
+  import java.util.Arrays;
+  import java.util.List;
+  
+  Client client = new Client();
+  
+  File sampleFile =
+      client.files.upload(
+          new java.io.File(&quot;large_file.pdf&quot;),
+          UploadFileConfig.builder().mimeType(&quot;application/pdf&quot;).build());
+  
+  Content docContent =
+      DocumentContent.builder()
+          .uri(sampleFile.uri().orElse(&quot;&quot;))
+          .mimeType(DocumentContentMimeType.of(sampleFile.mimeType().orElse(&quot;application/pdf&quot;)))
+          .build();
+  Content textContent = TextContent.builder().text(&quot;Summarize this document&quot;).build();
+  
+  List&lt;Content&gt; contents = Arrays.asList(docContent, textContent);
+  
+  CreateModelInteraction params =
+      CreateModelInteraction.builder()
+          .model(Model.of(&quot;gemini-4-hydrogen&quot;))
+          .input(InteractionsInput.ofContent(contents))
+          .build();
+  
+  Interaction interaction =
+      client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+  System.out.println(interaction.outputText().orElse(&quot;&quot;));
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Go&quot; %}
+  ```go
+  package main
+  
+  import (
+      &quot;context&quot;
+      &quot;fmt&quot;
+      &quot;log&quot;
+  
+      &quot;google.golang.org/genai&quot;
+      &quot;google.golang.org/genai/interactions/models/interactions&quot;
+      &quot;google.golang.org/genai/interactions/models/operations&quot;
+  )
+  
+  func main() {
+      ctx := context.Background()
+      client, err := genai.NewClient(ctx, nil)
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      sampleFile, err := client.Files.UploadFromPath(ctx, &quot;large_file.pdf&quot;, &amp;genai.UploadFileConfig{
+          MIMEType: &quot;application/pdf&quot;,
+      })
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+          Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+              Model: interactions.Model(&quot;gemini-4-hydrogen&quot;),
+              Input: interactions.NewInteractionsInput([]interactions.Content{
+                  interactions.NewContent(interactions.DocumentContent{
+                      URI:      genai.Ptr(sampleFile.URI),
+                      MimeType: interactions.DocumentContentMimeType(sampleFile.MIMEType).ToPointer(),
+                  }),
+                  interactions.NewContent(interactions.TextContent{
+                      Text: &quot;Summarize this document&quot;,
+                  }),
+              }),
+          }),
+      })
+      if err != nil {
+          log.Fatal(err)
+      }
+      if res.Interaction.OutputText != nil {
+          fmt.Println(*res.Interaction.OutputText)
+      }
+  }
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;REST&quot; %}
+  ```shell
+  PDF_PATH=&quot;path/to/large_file.pdf&quot;
+  NUM_BYTES=$(wc -c &lt; &quot;${PDF_PATH}&quot;)
+  DISPLAY_NAME=TEXT
+  tmp_header_file=upload-header.tmp
+  
+  curl &quot;https://generativelanguage.googleapis.com/upload/v1beta/files?key=${GEMINI_API_KEY}&quot; \
+  -D upload-header.tmp \
+  -H &quot;X-Goog-Upload-Protocol: resumable&quot; \
+  -H &quot;X-Goog-Upload-Command: start&quot; \
+  -H &quot;X-Goog-Upload-Header-Content-Length: ${NUM_BYTES}&quot; \
+  -H &quot;X-Goog-Upload-Header-Content-Type: application/pdf&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &quot;{&#39;file&#39;: {&#39;display_name&#39;: &#39;${DISPLAY_NAME}&#39;}}&quot; 2&gt; /dev/null
+  
+  upload_url=$(grep -i &quot;x-goog-upload-url: &quot; &quot;${tmp_header_file}&quot; | cut -d&quot; &quot; -f2 | tr -d &quot;\r&quot;)
+  rm &quot;${tmp_header_file}&quot;
+  
+  curl &quot;${upload_url}&quot; \
+  -H &quot;Content-Length: ${NUM_BYTES}&quot; \
+  -H &quot;X-Goog-Upload-Offset: 0&quot; \
+  -H &quot;X-Goog-Upload-Command: upload, finalize&quot; \
+  --data-binary &quot;@${PDF_PATH}&quot; 2&gt; /dev/null &gt; file_info.json
+  
+  file_uri=$(jq &quot;.file.uri&quot; file_info.json)
+  echo file_uri=$file_uri
+  
+  curl &quot;https://generativelanguage.googleapis.com/v1beta/interactions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &#39;Content-Type: application/json&#39; \
+    -H &quot;Api-Revision: 2026-05-20&quot; \
+    -X POST \
+    -d &#39;{
+      &quot;model&quot;: &quot;gemini-4-hydrogen&quot;,
+      &quot;input&quot;: [
+        {&quot;type&quot;: &quot;document&quot;, &quot;uri&quot;: &#39;$file_uri&#39;, &quot;mime_type&quot;: &quot;application/pdf&quot;},
+        {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Can you add a few more lines to this poem?&quot;}
+      ]
+    }&#39; 2&gt; /dev/null &gt; response.json
+  
+  cat response.json
+  echo
+  
+  jq &quot;.steps[-1].content[0].text&quot; response.json
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;CLI&quot; %}
+  ```bash
+  FILE=$(gemini-api files upload large_file.pdf --wait)
+  gemini-api analyze -i &quot;$FILE&quot; &quot;Summarize this document&quot;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+You can verify the API successfully stored the uploaded file and get its
+metadata by calling [`files.get`](/api-reference/files/get-file). Only the `name`
+(and by extension, the `uri`) are unique.
+
+{% tabs %}
+  {% tab label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  import pathlib
+  
+  client = genai.Client()
+  
+  fpath = pathlib.Path(&#39;example.pdf&#39;)
+  fpath.write_text(&#39;hello&#39;)
+  
+  file = client.files.upload(file=&#39;example.pdf&#39;)
+  
+  file_info = client.files.get(name=file.name)
+  print(file_info.model_dump_json(indent=4))
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Java&quot; %}
+  ```java
+  import com.google.genai.Client;
+  import com.google.genai.types.File;
+  import com.google.genai.types.UploadFileConfig;
+  import java.nio.charset.StandardCharsets;
+  import java.nio.file.Files;
+  import java.nio.file.Path;
+  import java.nio.file.Paths;
+  
+  Client client = new Client();
+  
+  Path fpath = Paths.get(&quot;example.pdf&quot;);
+  Files.write(fpath, &quot;hello&quot;.getBytes(StandardCharsets.UTF_8));
+  
+  File file =
+      client.files.upload(
+          fpath.toFile(), UploadFileConfig.builder().mimeType(&quot;application/pdf&quot;).build());
+  
+  File fileInfo = client.files.get(file.name().orElse(&quot;&quot;), null);
+  System.out.println(fileInfo.toJson());
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Go&quot; %}
+  ```go
+  package main
+  
+  import (
+      &quot;context&quot;
+      &quot;fmt&quot;
+      &quot;log&quot;
+      &quot;os&quot;
+  
+      &quot;google.golang.org/genai&quot;
+  )
+  
+  func main() {
+      ctx := context.Background()
+      client, err := genai.NewClient(ctx, nil)
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      if err := os.WriteFile(&quot;example.pdf&quot;, []byte(&quot;hello&quot;), 0644); err != nil {
+          log.Fatal(err)
+      }
+  
+      file, err := client.Files.UploadFromPath(ctx, &quot;example.pdf&quot;, &amp;genai.UploadFileConfig{
+          MIMEType: &quot;application/pdf&quot;,
+      })
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      fileInfo, err := client.Files.Get(ctx, file.Name, nil)
+      if err != nil {
+          log.Fatal(err)
+      }
+      fmt.Println(fileInfo)
+  }
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;REST&quot; %}
+  ```shell
+  name=$(jq -r &quot;.file.name&quot; file_info.json)
+  curl &quot;https://generativelanguage.googleapis.com/v1beta/$name?key=$GEMINI_API_KEY&quot; &gt; file_info.json
+  name=$(jq -r &quot;.name&quot; file_info.json)
+  echo name=$name
+  file_uri=$(jq -r &quot;.uri&quot; file_info.json)
+  echo file_uri=$file_uri
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;CLI&quot; %}
+  ```bash
+  FILE=$(gemini-api files upload example.pdf)
+  gemini-api files get &quot;$FILE&quot; -o json
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+## Passing multiple PDFs  {% id=&quot;prompt-multiple&quot; %}
+
+The Gemini API is capable of processing multiple PDF documents (up to 1000
+pages) in a single request, as long as the combined size of the documents and
+the text prompt stays within the model&#39;s context window.
+
+{% tabs %}
+  {% tab label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  import io
+  import httpx
+  
+  client = genai.Client()
+  
+  doc_url_1 = &quot;https://arxiv.org/pdf/2312.11805&quot;
+  doc_url_2 = &quot;https://arxiv.org/pdf/2403.05530&quot;
+  
+  doc_data_1 = io.BytesIO(httpx.get(doc_url_1).content)
+  doc_data_2 = io.BytesIO(httpx.get(doc_url_2).content)
+  
+  sample_pdf_1 = client.files.upload(
+    file=doc_data_1,
+    config=dict(mime_type=&#39;application/pdf&#39;)
+  )
+  sample_pdf_2 = client.files.upload(
+    file=doc_data_2,
+    config=dict(mime_type=&#39;application/pdf&#39;)
+  )
+  
+  prompt = &quot;What is the difference between each of the main benchmarks between these two papers? Output these in a table.&quot;
+  
+  interaction = client.interactions.create(
+      model=&quot;gemini-4-hydrogen&quot;,
+      input=[
+          {&quot;type&quot;: &quot;document&quot;, &quot;uri&quot;: sample_pdf_1.uri, &quot;mime_type&quot;: sample_pdf_1.mime_type},
+          {&quot;type&quot;: &quot;document&quot;, &quot;uri&quot;: sample_pdf_2.uri, &quot;mime_type&quot;: sample_pdf_2.mime_type},
+          {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: prompt}
+      ]
+  )
+  
+  print(interaction.output_text)
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({});
+  
+  async function uploadRemotePDF(url = &#39;&#39;, displayName = &#39;&#39;) {
+      const pdfBuffer = await fetch(url)
+          .then((response) =&gt; response.arrayBuffer());
+  
+      const fileBlob = new Blob([pdfBuffer], { type: &#39;application/pdf&#39; });
+  
+      const file = await ai.files.upload({
+          file: fileBlob,
+          config: {
+              displayName: displayName,
+          },
+      });
+  
+      let getFile = await ai.files.get({ name: file.name || &quot;&quot; });
+      while (getFile.state === &#39;PROCESSING&#39;) {
+          getFile = await ai.files.get({ name: file.name || &quot;&quot; });
+          console.log(`current file status: ${getFile.state}`);
+          console.log(&#39;File is still processing, retrying in 5 seconds&#39;);
+  
+          await new Promise((resolve) =&gt; {
+              setTimeout(resolve, 5000);
+          });
+      }
+      if (file.state === &#39;FAILED&#39;) {
+          throw new Error(&#39;File processing failed.&#39;);
+      }
+  
+      return file;
+  }
+  
+  async function main() {
+      const file1 = await uploadRemotePDF(&quot;https://arxiv.org/pdf/2312.11805&quot;, &quot;PDF 1&quot;);
+      const file2 = await uploadRemotePDF(&quot;https://arxiv.org/pdf/2403.05530&quot;, &quot;PDF 2&quot;);
+  
+      const interaction = await ai.interactions.create({
+          model: &#39;gemini-4-hydrogen&#39;,
+          input: [
+              { type: &quot;document&quot;, uri: file1.uri, mime_type: file1.mimeType },
+              { type: &quot;document&quot;, uri: file2.uri, mime_type: file2.mimeType },
+              { type: &quot;text&quot;, text: &quot;What is the difference between each of the main benchmarks between these two papers? Output these in a table.&quot; }
+          ],
+      });
+  
+      console.log(interaction.output_text);
+  }
+  
+  await main();
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Java&quot; %}
+  ```java
+  import com.google.genai.Client;
+  import com.google.genai.gaos.models.interactions.Content;
+  import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+  import com.google.genai.gaos.models.interactions.DocumentContent;
+  import com.google.genai.gaos.models.interactions.DocumentContentMimeType;
+  import com.google.genai.gaos.models.interactions.Interaction;
+  import com.google.genai.gaos.models.interactions.InteractionsInput;
+  import com.google.genai.gaos.models.interactions.Model;
+  import com.google.genai.gaos.models.interactions.TextContent;
+  import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+  import com.google.genai.types.File;
+  import com.google.genai.types.UploadFileConfig;
+  import java.net.URI;
+  import java.net.http.HttpClient;
+  import java.net.http.HttpRequest;
+  import java.net.http.HttpResponse;
+  import java.util.Arrays;
+  import java.util.List;
+  
+  Client client = new Client();
+  
+  String docUrl1 = &quot;https://arxiv.org/pdf/2312.11805&quot;;
+  String docUrl2 = &quot;https://arxiv.org/pdf/2403.05530&quot;;
+  
+  HttpClient httpClient = HttpClient.newHttpClient();
+  byte[] docData1 =
+      httpClient
+          .send(HttpRequest.newBuilder().uri(URI.create(docUrl1)).build(), HttpResponse.BodyHandlers.ofByteArray())
+          .body();
+  byte[] docData2 =
+      httpClient
+          .send(HttpRequest.newBuilder().uri(URI.create(docUrl2)).build(), HttpResponse.BodyHandlers.ofByteArray())
+          .body();
+  
+  File samplePdf1 =
+      client.files.upload(
+          docData1, UploadFileConfig.builder().mimeType(&quot;application/pdf&quot;).build());
+  File samplePdf2 =
+      client.files.upload(
+          docData2, UploadFileConfig.builder().mimeType(&quot;application/pdf&quot;).build());
+  
+  String prompt =
+      &quot;What is the difference between each of the main benchmarks between these two papers? Output these in a table.&quot;;
+  
+  Content doc1Content =
+      DocumentContent.builder()
+          .uri(samplePdf1.uri().orElse(&quot;&quot;))
+          .mimeType(DocumentContentMimeType.of(samplePdf1.mimeType().orElse(&quot;application/pdf&quot;)))
+          .build();
+  Content doc2Content =
+      DocumentContent.builder()
+          .uri(samplePdf2.uri().orElse(&quot;&quot;))
+          .mimeType(DocumentContentMimeType.of(samplePdf2.mimeType().orElse(&quot;application/pdf&quot;)))
+          .build();
+  Content textContent = TextContent.builder().text(prompt).build();
+  
+  List&lt;Content&gt; contents = Arrays.asList(doc1Content, doc2Content, textContent);
+  
+  CreateModelInteraction params =
+      CreateModelInteraction.builder()
+          .model(Model.of(&quot;gemini-4-hydrogen&quot;))
+          .input(InteractionsInput.ofContent(contents))
+          .build();
+  
+  Interaction interaction =
+      client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+  System.out.println(interaction.outputText().orElse(&quot;&quot;));
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;Go&quot; %}
+  ```go
+  package main
+  
+  import (
+      &quot;bytes&quot;
+      &quot;context&quot;
+      &quot;fmt&quot;
+      &quot;io&quot;
+      &quot;log&quot;
+      &quot;net/http&quot;
+  
+      &quot;google.golang.org/genai&quot;
+      &quot;google.golang.org/genai/interactions/models/interactions&quot;
+      &quot;google.golang.org/genai/interactions/models/operations&quot;
+  )
+  
+  func main() {
+      ctx := context.Background()
+      client, err := genai.NewClient(ctx, nil)
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      docURL1 := &quot;https://arxiv.org/pdf/2312.11805&quot;
+      docURL2 := &quot;https://arxiv.org/pdf/2403.05530&quot;
+  
+      resp1, err := http.Get(docURL1)
+      if err != nil {
+          log.Fatal(err)
+      }
+      defer resp1.Body.Close()
+      docData1, err := io.ReadAll(resp1.Body)
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      resp2, err := http.Get(docURL2)
+      if err != nil {
+          log.Fatal(err)
+      }
+      defer resp2.Body.Close()
+      docData2, err := io.ReadAll(resp2.Body)
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      samplePdf1, err := client.Files.Upload(ctx, bytes.NewReader(docData1), &amp;genai.UploadFileConfig{
+          MIMEType: &quot;application/pdf&quot;,
+      })
+      if err != nil {
+          log.Fatal(err)
+      }
+      samplePdf2, err := client.Files.Upload(ctx, bytes.NewReader(docData2), &amp;genai.UploadFileConfig{
+          MIMEType: &quot;application/pdf&quot;,
+      })
+      if err != nil {
+          log.Fatal(err)
+      }
+  
+      prompt := &quot;What is the difference between each of the main benchmarks between these two papers? Output these in a table.&quot;
+  
+      res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+          Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+              Model: interactions.Model(&quot;gemini-4-hydrogen&quot;),
+              Input: interactions.NewInteractionsInput([]interactions.Content{
+                  interactions.NewContent(interactions.DocumentContent{
+                      URI:      genai.Ptr(samplePdf1.URI),
+                      MimeType: interactions.DocumentContentMimeType(samplePdf1.MIMEType).ToPointer(),
+                  }),
+                  interactions.NewContent(interactions.DocumentContent{
+                      URI:      genai.Ptr(samplePdf2.URI),
+                      MimeType: interactions.DocumentContentMimeType(samplePdf2.MIMEType).ToPointer(),
+                  }),
+                  interactions.NewContent(interactions.TextContent{
+                      Text: prompt,
+                  }),
+              }),
+          }),
+      })
+      if err != nil {
+          log.Fatal(err)
+      }
+      if res.Interaction.OutputText != nil {
+          fmt.Println(*res.Interaction.OutputText)
+      }
+  }
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;REST&quot; %}
+  ```shell
+  DOC_URL_1=&quot;https://arxiv.org/pdf/2312.11805&quot;
+  DOC_URL_2=&quot;https://arxiv.org/pdf/2403.05530&quot;
+  DISPLAY_NAME_1=&quot;Gemini_paper&quot;
+  DISPLAY_NAME_2=&quot;Gemini_1.5_paper&quot;
+  PROMPT=&quot;What is the difference between each of the main benchmarks between these two papers? Output these in a table.&quot;
+  
+  upload_pdf() {
+  local doc_url=&quot;$1&quot;
+  local display_name=&quot;$2&quot;
+  
+  echo &quot;Downloading ${display_name} from ${doc_url}...&quot; &gt;&amp;2
+  wget -O &quot;${display_name}.pdf&quot; &quot;${doc_url}&quot; 2&gt; /dev/null
+  
+  local MIME_TYPE=$(file -b --mime-type &quot;${display_name}.pdf&quot;)
+  local NUM_BYTES=$(wc -c &lt; &quot;${display_name}.pdf&quot;)
+  
+  echo &quot;MIME_TYPE: ${MIME_TYPE}&quot; &gt;&amp;2
+  echo &quot;NUM_BYTES: ${NUM_BYTES}&quot; &gt;&amp;2
+  
+  local tmp_header_file=&quot;upload-header-${display_name}.tmp&quot;
+  
+  curl &quot;https://generativelanguage.googleapis.com/upload/v1beta/files?key=${GEMINI_API_KEY}&quot; \
+    -D &quot;${tmp_header_file}&quot; \
+    -H &quot;X-Goog-Upload-Protocol: resumable&quot; \
+    -H &quot;X-Goog-Upload-Command: start&quot; \
+    -H &quot;X-Goog-Upload-Header-Content-Length: ${NUM_BYTES}&quot; \
+    -H &quot;X-Goog-Upload-Header-Content-Type: ${MIME_TYPE}&quot; \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &quot;{&#39;file&#39;: {&#39;display_name&#39;: &#39;${display_name}&#39;}}&quot; 2&gt; /dev/null
+  
+  local upload_url=$(grep -i &quot;x-goog-upload-url: &quot; &quot;${tmp_header_file}&quot; | cut -d&quot; &quot; -f2 | tr -d &quot;\r&quot;)
+  rm &quot;${tmp_header_file}&quot;
+  
+  echo &quot;Upload URL for ${display_name}: ${upload_url}&quot; &gt;&amp;2
+  
+  curl &quot;${upload_url}&quot; \
+    -H &quot;Content-Length: ${NUM_BYTES}&quot; \
+    -H &quot;X-Goog-Upload-Offset: 0&quot; \
+    -H &quot;X-Goog-Upload-Command: upload, finalize&quot; \
+    --data-binary &quot;@${display_name}.pdf&quot; 2&gt; /dev/null &gt; &quot;file_info_${display_name}.json&quot;
+  
+  local file_uri=$(jq -r &quot;.file.uri&quot; &quot;file_info_${display_name}.json&quot;)
+  echo &quot;file_uri for ${display_name}: ${file_uri}&quot; &gt;&amp;2
+  
+  rm &quot;${display_name}.pdf&quot;
+  
+  echo &quot;${file_uri}&quot;
+  }
+  
+  file_uri_1=$(upload_pdf &quot;${DOC_URL_1}&quot; &quot;${DISPLAY_NAME_1}&quot;)
+  
+  file_uri_2=$(upload_pdf &quot;${DOC_URL_2}&quot; &quot;${DISPLAY_NAME_2}&quot;)
+  
+  cat &lt;&lt; EOF &gt; payload_multi.json
+  {
+  &quot;model&quot;: &quot;gemini-4-hydrogen&quot;,
+  &quot;input&quot;: [
+    {&quot;type&quot;: &quot;document&quot;, &quot;uri&quot;: &quot;${file_uri_1}&quot;, &quot;mime_type&quot;: &quot;application/pdf&quot;},
+    {&quot;type&quot;: &quot;document&quot;, &quot;uri&quot;: &quot;${file_uri_2}&quot;, &quot;mime_type&quot;: &quot;application/pdf&quot;},
+    {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;${PROMPT}&quot;}
+  ]
+  }
+  EOF
+  
+  curl &quot;https://generativelanguage.googleapis.com/v1beta/interactions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &#39;Content-Type: application/json&#39; \
+    -H &quot;Api-Revision: 2026-05-20&quot; \
+    -X POST \
+    -d @payload_multi.json 2&gt; /dev/null &gt; response.json
+  
+  cat response.json
+  echo
+  
+  jq &quot;.steps[-1].content[0].text&quot; response.json
+  
+  rm payload_multi.json
+  rm &quot;file_info_${DISPLAY_NAME_1}.json&quot;
+  rm &quot;file_info_${DISPLAY_NAME_2}.json&quot;
+  ```
+
+  {% /tab %}
+
+  {% tab label=&quot;CLI&quot; %}
+  ```bash
+  curl -sL -o Gemini_paper.pdf &quot;https://arxiv.org/pdf/2312.11805&quot;
+  curl -sL -o Gemini_1.5_paper.pdf &quot;https://arxiv.org/pdf/2403.05530&quot;
+  PDF_1=$(gemini-api files upload Gemini_paper.pdf --wait)
+  PDF_2=$(gemini-api files upload Gemini_1.5_paper.pdf --wait)
+  gemini-api analyze -i &quot;$PDF_1&quot; -i &quot;$PDF_2&quot; \
+    &quot;What is the difference between each of the main benchmarks between these two papers? Output these in a table.&quot;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+## Office and OpenDocument files  {% id=&quot;office-documents&quot; %}
+
+Gemini models can process Microsoft Office and OpenDocument files. Pass them
+the same way as PDFs, either inline or with the Files API, using a `document`
+content block and one of the following MIME types:
+
+| File type | Extension | MIME type |
+| --- | --- | --- |
+| Documents | `.docx` | `application/vnd.openxmlformats-officedocument.wordprocessingml.document` |
+|  | `.doc` | `application/msword` |
+|  | `.dotx` | `application/vnd.openxmlformats-officedocument.wordprocessingml.template` |
+|  | `.odt` | `application/vnd.oasis.opendocument.text` |
+| Presentations | `.pptx` | `application/vnd.openxmlformats-officedocument.presentationml.presentation` |
+|  | `.ppt` | `application/vnd.ms-powerpoint` |
+|  | `.odp` | `application/vnd.oasis.opendocument.presentation` |
+| Spreadsheets | `.xlsx` | `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet` |
+|  | `.xls` | `application/vnd.ms-excel` |
+|  | `.ods` | `application/vnd.oasis.opendocument.spreadsheet` |
+
+These files are processed as follows:
+
+* **DOCX, DOTX, ODT, and PPTX files**: The model receives the text of the
+  whole file, plus embedded images for DOCX and PPTX files. Pages and slides
+  aren&#39;t rendered as images, so page layout and visual elements such as
+  charts might not be preserved.
+* **DOC, PPT, and ODP files**: Each page or slide is rendered as an image,
+  so the model can interpret layouts, charts, and images. The whole file is
+  processed.
+* **XLSX and XLS files**: Only the **first sheet** is read. Its contents are
+  converted to CSV, so the model receives the cell values but not formulas or
+  formatting.
+* **ODS files**: Only the **first sheet** is read. The model receives its cell
+  data and formulas.
+
+Other sheets in a workbook are ignored. To analyze a different sheet, move it to
+the first position or save it as a separate file.
+
+Files are processed the same way whether you pass them in a request or a tool
+returns them in a [function response](/docs/function-calling#multimodal).
+The existing file size and page limits apply to the whole file.
+
+The following example uploads a PowerPoint presentation with the Files API and
+asks the model to summarize it:
+
+{% tabs %}
+  {% tab filename=&quot;sample.py&quot; label=&quot;Python&quot; %}
+  ```python
+  from google import genai
+  
+  client = genai.Client()
+  
+  deck = client.files.upload(
+      file=&quot;quarterly_review.pptx&quot;,
+      config={
+          &quot;mime_type&quot;: &quot;application/vnd.openxmlformats-officedocument.presentationml.presentation&quot;
+      },
+  )
+  
+  interaction = client.interactions.create(
+      model=&quot;gemini-4-hydrogen&quot;,
+      input=[
+          {&quot;type&quot;: &quot;document&quot;, &quot;uri&quot;: deck.uri, &quot;mime_type&quot;: deck.mime_type},
+          {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Summarize the key takeaways from each slide.&quot;},
+      ],
+  )
+  
+  print(interaction.output_text)
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;sample.js&quot; label=&quot;JavaScript&quot; %}
+  ```javascript
+  import { GoogleGenAI } from &quot;@google/genai&quot;;
+  
+  const ai = new GoogleGenAI({});
+  
+  async function main() {
+      const deck = await ai.files.upload({
+          file: &quot;quarterly_review.pptx&quot;,
+          config: {
+              mimeType: &quot;application/vnd.openxmlformats-officedocument.presentationml.presentation&quot;,
+          },
+      });
+  
+      const interaction = await ai.interactions.create({
+          model: &quot;gemini-4-hydrogen&quot;,
+          input: [
+              { type: &quot;document&quot;, uri: deck.uri, mime_type: deck.mimeType },
+              { type: &quot;text&quot;, text: &quot;Summarize the key takeaways from each slide.&quot; }
+          ]
+      });
+      console.log(interaction.output_text);
+  }
+  
+  main();
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;sample.sh&quot; label=&quot;REST&quot; %}
+  ```shell
+  curl -X POST &quot;https://generativelanguage.googleapis.com/v1beta/interactions&quot; \
+    -H &quot;x-goog-api-key: $GEMINI_API_KEY&quot; \
+    -H &#39;Content-Type: application/json&#39; \
+    -d &#39;{
+      &quot;model&quot;: &quot;gemini-4-hydrogen&quot;,
+      &quot;input&quot;: [
+        {
+          &quot;type&quot;: &quot;document&quot;,
+          &quot;uri&quot;: &quot;https://generativelanguage.googleapis.com/v1beta/files/FILE_ID&quot;,
+          &quot;mime_type&quot;: &quot;application/vnd.openxmlformats-officedocument.presentationml.presentation&quot;
+        },
+        {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Summarize the key takeaways from each slide.&quot;}
+      ]
+    }&#39;
+  ```
+
+  {% /tab %}
+
+  {% tab filename=&quot;sample.sh&quot; label=&quot;CLI&quot; %}
+  ```bash
+  FILE=$(gemini-api files upload quarterly_review.pptx --wait \
+    --mime-type application/vnd.openxmlformats-officedocument.presentationml.presentation)
+  gemini-api analyze -i &quot;$FILE&quot; &quot;Summarize the key takeaways from each slide.&quot;
+  ```
+
+  {% /tab %}
+
+{% /tabs %}
+
+Tools can also return these files to the model. For details, see
+[Multimodal function responses](/docs/function-calling#multimodal).
+
+## Technical details  {% id=&quot;technical-details&quot; %}
+
+Gemini supports PDF files up to 50MB or 1000 pages. This limit applies
+to both inline data and Files API uploads. Each document page is equivalent to
+258 tokens.
+
+While there are no specific limits to the number of pixels in a document besides
+the model&#39;s [context window](/docs/long-context), larger pages are
+scaled down to a maximum resolution of 3072 x 3072 while preserving their
+original aspect ratio, while smaller pages are scaled up to 768 x 768 pixels.
+There is no cost reduction for pages at lower sizes, other than bandwidth, or
+performance improvement for pages at higher resolution.
+
+### Gemini 3 models  {% id=&quot;gemini-3-models&quot; %}
+
+Gemini 3 introduces granular control over multimodal vision processing with the
+`media_resolution` parameter. You can now set the resolution to low, medium, or
+high per individual media part. With this addition, the processing of PDF
+documents has been updated:
+
+1.   **Native text inclusion:** Text natively embedded in the PDF is extracted
+  and provided to the model.
+
+2.   **Billing &amp; token reporting:**
+
+  *     You are **not charged** for tokens originating from the extracted
+    **native text** in PDFs.
+
+  *     In the `usage_metadata` section of the API response, tokens generated
+    from processing PDF pages (as images) are now counted under the `IMAGE`
+    modality, not a separate `DOCUMENT` modality as in some earlier
+    versions.
+
+
+
+For more details about the media resolution parameter, see the
+[Media resolution](/docs/media-resolution) guide.
+
+### Document types  {% id=&quot;document-types&quot; %}
+
+Document vision meaningfully understands PDFs and DOC, PPT, and ODP files,
+which are rendered as page images. DOCX, DOTX, ODT, and PPTX files are converted
+to text, and spreadsheets are read as tabular data. For details, see
+[Office and OpenDocument files](/docs/document-processing#office-documents).
+
+Technically, you can pass other MIME types for document understanding, like
+TXT, Markdown, HTML, XML, etc. However, these types are extracted as pure
+text, which means the model can&#39;t understand the visual elements present in a
+rendered file. Any file-type specifics like charts, diagrams, HTML tags,
+Markdown formatting, etc., will be lost.
+
+To learn about other file input methods, see the
+[File input methods](/docs/file-input-methods) guide.
+
+### Best practices  {% id=&quot;best-practices&quot; %}
+
+For best results:
+
+* Rotate pages to the correct orientation before uploading.
+* Avoid blurry pages.
+* If using a single page, place the text prompt after the page.
+
+## What&#39;s next  {% id=&quot;whats-next&quot; %}
+
+To learn more, see the following resources:
+
+*   [File prompting strategies](/docs/files#prompt-guide): The
+  Gemini API supports prompting with text, image, audio, and video data, also
+  known as multimodal prompting.
+
+*   [System instructions](/docs/text-generation#system-instructions):
+  System instructions let you steer the behavior of the model based on your
+  specific needs and use cases.
+
+
+</pre></noscript><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TT9C75WP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script src="https://www.gstatic.com/_/mss/boq-makersuite/_/js/k=boq-makersuite.MakerSuite.en_US.JLBvzaeCXqM.2018.O/am=AaRagIHgEA/d=1/excm=_b/ed=1/dg=0/wt=2/ujg=1/rs=AMOXD29Vx--BYKYAOCPW9OUqcv5j8uBrqg/dti=1/m=_b" id="base-js" data-scope-id="40248f3c-69a7-4bbb-8e84-e07e03f28c2c" nonce="PdkQEb3pFvIHt4tQrsFjtQ"></script></body></html>

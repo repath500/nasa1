@@ -1,0 +1,20 @@
+[
+ {
+  "acc": "PSI-102",
+  "file": "PSI-102_Experimental table_SAME.csv",
+  "status": 200,
+  "ctype": "application/vnd.ms-excel",
+  "bytes": 331,
+  "sha256": "268d1e121d2f211b124407dd32b9475617bd269ede2c2d1749441da3e949a2af",
+  "secs": 2.21
+ },
+ {
+  "acc": "PSI-98",
+  "file": "PSI-98_Experimental table_SAFFIRE-1.csv",
+  "status": 200,
+  "ctype": "application/vnd.ms-excel",
+  "bytes": 469,
+  "sha256": "c01f29c62455f0a3b512290ab85e5687ecded326733189f002f580368402308d",
+  "secs": 2.35
+ }
+]

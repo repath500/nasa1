@@ -1,0 +1,1120 @@
+[
+ {
+  "acc": "PSI-98",
+  "title": "Spacecraft Fire Safety Experiment-I",
+  "acr": "SAFFIRE-I",
+  "doi": "10.60555/0t15-1z43",
+  "lic": "CC0-1.0",
+  "gb": 12.25,
+  "area": "Combustion Science",
+  "sub": "Spacecraft Fire, Smoke Distribution",
+  "hw": "Saffire 1 enclosure in Cygnus",
+  "mod": "03-Jun-2025",
+  "ver": 4,
+  "n_pub": 6,
+  "pub_doi": 3,
+  "et": [
+   [
+    "PSI-98_Experimental table_SAFFIRE-1.csv",
+    469
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-98_Engineering Documents_SAFFIRE Offgassing Testing Strategy.pdf",
+    1696929
+   ],
+   [
+    "PSI-98_Raw Data_SAFFIRE-I_ImageFrameSizes_ROI_Offsets_Grid_1280x920_v1.0.pdf",
+    784299
+   ],
+   [
+    "PSI-98_Raw Data_SFSDP-VIS-0295_Saffire 1 and 3_Thermocouple Placement.pdf",
+    1065733
+   ],
+   [
+    "PSI-98_Science Documents_SAFFIRE-I Image Directory Nomenclature.pdf",
+    262860
+   ],
+   [
+    "PSI-98_Science Documents_SAFFIRE Objectives, Development and Status.pdf",
+    186259
+   ],
+   [
+    "PSI-98_Engineering Documents_SAFFIRE-I Operations.pdf",
+    13957
+   ]
+  ],
+  "sha": "501b5f625733",
+  "bytes": 134230
+ },
+ {
+  "acc": "PSI-99",
+  "title": "Spacecraft Fire Experiment-II",
+  "acr": "SAFFIRE-II",
+  "doi": "10.60555/2chp-m469",
+  "lic": "CC0-1.0",
+  "gb": 16.93,
+  "area": "Combustion Science",
+  "sub": "Surface Combustion",
+  "hw": "Cygnus Pressurized Cargo Module, SAFFIRE",
+  "mod": "04-Jun-2025",
+  "ver": 5,
+  "n_pub": 7,
+  "pub_doi": 5,
+  "et": [
+   [
+    "PSI-99_Experimental table_SAFFIRE-2.csv",
+    1973
+   ]
+  ],
+  "pdfs": [],
+  "sha": "2c042a6bd82f",
+  "bytes": 10308
+ },
+ {
+  "acc": "PSI-100",
+  "title": "Spacecraft Fire Experiment-III",
+  "acr": "SAFFIRE-III",
+  "doi": "10.60555/040q-4h36",
+  "lic": "CC0-1.0",
+  "gb": 35.21,
+  "area": "Combustion Science",
+  "sub": "Spacecraft Fire Safety",
+  "hw": "Saffire III enclosure in Cygnus",
+  "mod": "05-Jun-2025",
+  "ver": 4,
+  "n_pub": 3,
+  "pub_doi": 0,
+  "et": [
+   [
+    "PSI-100_Experimental table_SAFFIRE-3.csv",
+    239
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-100_Engineering Documents_SAFFIRE Offgassing Testing Strategy.pdf",
+    1696929
+   ],
+   [
+    "PSI-100_Presentations_SAFFIRE_45 I Con of Env Sys presentation.pdf",
+    2821941
+   ],
+   [
+    "PSI-100_Presentations_SAFFIRE_46th I Con of Env Sys presentation.pdf",
+    2199305
+   ],
+   [
+    "PSI-100_Presentations_SAFFIRE_47th I Con of Env Sys presentation.pdf",
+    5224988
+   ],
+   [
+    "PSI-100_Science Documents_SAFFIRE-III Image Directory Nomenclature_v3.0.pdf",
+    273485
+   ],
+   [
+    "PSI-100_Science Documents_SAFFIRE Objectives, Development and Status.pdf",
+    186259
+   ],
+   [
+    "PSI-100_Engineering Documents_SAFFIRE-III Operations.pdf",
+    40256
+   ]
+  ],
+  "sha": "9c836955a28f",
+  "bytes": 148767
+ },
+ {
+  "acc": "PSI-25",
+  "title": "Burning and Suppression of Solids - II",
+  "acr": "BASS-II",
+  "doi": "10.60555/4qc4-de67",
+  "lic": "CC0-1.0",
+  "gb": 274.63,
+  "area": "Combustion Science",
+  "sub": "Spacecraft Fire Safety",
+  "hw": "Microgravity Science Glovebox (MSG)",
+  "mod": "24-Nov-2025",
+  "ver": 4,
+  "n_pub": 17,
+  "pub_doi": 9,
+  "et": [
+   [
+    "PSI-25_Experimental table_BASS-II.csv",
+    16590
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-25_Raw Data_GMT2014_050_BASS_S147M_TPB1_ProofSheet.pdf",
+    264402
+   ],
+   [
+    "PSI-25_Raw Data_GMT2014_050_BASS_S148M_TPB3_ProofSheet.pdf",
+    248184
+   ],
+   [
+    "PSI-25_Raw Data_GMT2014_050_BASS_S155M_TPB2_ProofSheet.pdf",
+    103013
+   ],
+   [
+    "PSI-25_Raw Data_GMT2014_050_BASS_S156M_TPB5_ProofSheet.pdf",
+    324243
+   ],
+   [
+    "PSI-25_Raw Data_GMT2014_050_BASS_S159M_TPB4_ProofSheet.pdf",
+    359250
+   ],
+   [
+    "PSI-25_Raw Data_GMT2014_050_BASS_S160M_TPB12_ProofSheet.pdf",
+    408613
+   ],
+   [
+    "PSI-25_Raw Data_GMT2014_050_BASS_S161M_TPB7_ProofSheet.pdf",
+    482009
+   ],
+   [
+    "PSI-25_Raw Data_GMT2014_183_BASS_S150M_TPB16ProofSheet.pdf",
+    504989
+   ],
+   [
+    "PSI-25_Raw Data_GMT2014_183_BASS_S151M_TPB19_ProofSheet.pdf",
+    583641
+   ],
+   [
+    "PSI-25_Raw Data_GMT2014_183_BASS_S152M_TPB20_ProofSheet.pdf",
+    641493
+   ],
+   [
+    "PSI-25_Raw Data_GMT2014_183_BASS_S174M_TPB14_ProofSheet.pdf",
+    231980
+   ],
+   [
+    "PSI-25_Raw Data_GMT2014_183_BASS_S175M_TPB17_ProofSheet.pdf",
+    769508
+   ]
+  ],
+  "sha": "b9234754db5d",
+  "bytes": 680348
+ },
+ {
+  "acc": "PSI-26",
+  "title": "Burning and Suppression of Solids",
+  "acr": "BASS",
+  "doi": "10.60555/58h4-dy80",
+  "lic": "CC0-1.0",
+  "gb": 163.55,
+  "area": "Combustion Science",
+  "sub": "Spacecraft Fire Safety",
+  "hw": "Microgravity Science Glovebox",
+  "mod": "19-Mar-2025",
+  "ver": 4,
+  "n_pub": 10,
+  "pub_doi": 7,
+  "et": [
+   [
+    "PSI-26_Experimental table_BASS.csv",
+    4726
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-26_Presentations_FlammabilityAspectsofCottonFiberglassFabric_ASGSR2012.pdf",
+    3212109
+   ],
+   [
+    "PSI-26_Presentations_BASS_Overview of Recent ISS Results.pdf",
+    4640227
+   ],
+   [
+    "PSI-26_Presentations_Flammability Aspects of Fabric_USNationalCombustion2013.pdf",
+    2804257
+   ],
+   [
+    "PSI-26_Reports_SPICE_FinalReport.pdf",
+    553693
+   ],
+   [
+    "PSI-26_Reports_BASS_FinalReport.pdf",
+    553693
+   ],
+   [
+    "PSI-26_Engineering Documents_SLICE_SysReqDesignReview.pdf",
+    1429180
+   ],
+   [
+    "PSI-26_Presentations_Crew Training 2010.pdf",
+    1348519
+   ],
+   [
+    "PSI-26_Presentations_Crew Training 2011.pdf",
+    1339967
+   ],
+   [
+    "PSI-26_Engineering Documents_BASS_SysAcceptanceReview.1.pdf",
+    2892502
+   ],
+   [
+    "PSI-26_Engineering Documents_BASS_SysAcceptanceReview.2.pdf",
+    1804490
+   ],
+   [
+    "PSI-26_Engineering Documents_Drawing_SPICE Housing.pdf",
+    192768
+   ],
+   [
+    "PSI-26_Engineering Documents_Drawing_SPICE_FanHousing.pdf",
+    133889
+   ]
+  ],
+  "sha": "9dee45d44bb7",
+  "bytes": 190127
+ },
+ {
+  "acc": "PSI-69",
+  "title": "Flame Extinguishment Experiment",
+  "acr": "FLEX",
+  "doi": "10.60555/mbq8-0451",
+  "lic": "CC0-1.0",
+  "gb": 923.83,
+  "area": "Combustion Science",
+  "sub": "Spacecraft Fire Safety",
+  "hw": "Combustion Integrated Rack (CIR)-Fluids and Combustion Facility (FCF), Multi-user Droplet Combustion Appartatus (MDCA)",
+  "mod": "06-Jun-2025",
+  "ver": 5,
+  "n_pub": 51,
+  "pub_doi": 45,
+  "et": [
+   [
+    "PSI-69_Experimental table_FLEX.csv",
+    24776
+   ]
+  ],
+  "pdfs": [],
+  "sha": "a2d8ec5d0e9a",
+  "bytes": 31770
+ },
+ {
+  "acc": "PSI-68",
+  "title": "Flame Extinguishment Experiment - 2",
+  "acr": "FLEX-2",
+  "doi": "10.60555/byp8-h018",
+  "lic": "CC0-1.0",
+  "gb": 1224.75,
+  "area": "Combustion Science",
+  "sub": "Spacecraft Fire Safety",
+  "hw": "Combustion Integrated Rack (CIR), Multi-user Droplet Combustion Appartatus (MDCA)",
+  "mod": "25-Nov-2025",
+  "ver": 6,
+  "n_pub": 48,
+  "pub_doi": 36,
+  "et": [
+   [
+    "PSI-68_Experimental table_Flex2.csv",
+    1029
+   ]
+  ],
+  "pdfs": [],
+  "sha": "de041dc1dc8b",
+  "bytes": 30456
+ },
+ {
+  "acc": "PSI-20",
+  "title": "Advanced Combustion via Microgravity Experiments - Burning Rate Emulator",
+  "acr": "ACME BRE",
+  "doi": "10.60555/vb93-3y72",
+  "lic": "CC0-1.0",
+  "gb": 2035.57,
+  "area": "Combustion Science",
+  "sub": "Flames of Gaseous Fuels",
+  "hw": "Combustion Integrated Rack (CIR), ACME",
+  "mod": "05-Jun-2025",
+  "ver": 4,
+  "n_pub": 16,
+  "pub_doi": 15,
+  "et": [
+   [
+    "PSI-20_Experimental table_ACME BRE.csv",
+    1113
+   ]
+  ],
+  "pdfs": [],
+  "sha": "ea118e19d027",
+  "bytes": 17376
+ },
+ {
+  "acc": "PSI-101",
+  "title": "Smoke Aerosol Measurement Experiment-Reflight",
+  "acr": "SAME-R",
+  "doi": "10.60555/2np7-jv14",
+  "lic": "CC0-1.0",
+  "gb": 6.31,
+  "area": "Combustion Science",
+  "sub": "Spacecraft Fire Safety",
+  "hw": "Comparitive Soot Diagnostic Hardware; Refer to final report",
+  "mod": "02-Jun-2025",
+  "ver": 4,
+  "n_pub": 6,
+  "pub_doi": 3,
+  "et": [
+   [
+    "PSI-101_Experimental table_SAME-R.csv",
+    5674
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-101_Engineering Documents_SAME EIRD Rev 2.00 02-25-05 HIgh Q.pdf",
+    5378409
+   ],
+   [
+    "PSI-101_Reports_SAME-R_Final Report.pdf",
+    4578437
+   ],
+   [
+    "PSI-101_Engineering Documents_Drawing_SAME Aging Chamber.PDF",
+    212840
+   ],
+   [
+    "PSI-101_Raw Data_K01-4K images.pdf",
+    8945561
+   ],
+   [
+    "PSI-101_Raw Data_62 pre 15K Kapton.pdf",
+    1023848
+   ],
+   [
+    "PSI-101_Raw Data_70-23K Kapton.pdf",
+    5292539
+   ],
+   [
+    "PSI-101_Raw Data_L13 images.pdf",
+    3203423
+   ],
+   [
+    "PSI-101_Raw Data_54 7L Lampwick.pdf",
+    1608893
+   ],
+   [
+    "PSI-101_Raw Data_55 8L Lampwick.pdf",
+    1487063
+   ],
+   [
+    "PSI-101_Raw Data_68 21L Lampwick.pdf",
+    4235607
+   ],
+   [
+    "PSI-101_Raw Data_52-5P Pyrell.pdf",
+    1824143
+   ],
+   [
+    "PSI-101_Raw Data_T01-3T images.pdf",
+    3342789
+   ]
+  ],
+  "sha": "e0aa75d01570",
+  "bytes": 552733
+ },
+ {
+  "acc": "PSI-102",
+  "title": "Smoke and Aerosol Measurement Experiment",
+  "acr": "SAME",
+  "doi": "10.60555/gd4k-8h62",
+  "lic": "CC0-1.0",
+  "gb": 0.66,
+  "area": "Combustion Science",
+  "sub": "Spacecraft Fire Safety",
+  "hw": "Comparitive Soot Diagnostic Hardware",
+  "mod": "02-Jun-2025",
+  "ver": 4,
+  "n_pub": 16,
+  "pub_doi": 10,
+  "et": [
+   [
+    "PSI-102_Experimental table_SAME.csv",
+    331
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-102_Engineering Documents_SAME_EIRD.pdf",
+    5378409
+   ],
+   [
+    "PSI-102_Reports_SAME_Final Science Report.pdf",
+    3712845
+   ],
+   [
+    "PSI-102_Engineering Documents_SAME Verification Plan and Engineering Requirements Document (VPRED)_January 2007.pdf",
+    514208
+   ],
+   [
+    "PSI-102_Engineering Documents_60089MFHA151-B Same Aging Chamber.pdf",
+    212992
+   ],
+   [
+    "PSI-102_Engineering Documents_60089MFHA150-B Aging Chamber Assembly.pdf",
+    335105
+   ],
+   [
+    "PSI-102_Engineering Documents_60089MFHD126-B Smoke Generation Tube.pdf",
+    243826
+   ],
+   [
+    "PSI-102_Engineering Documents_60089MFHD509 P-Trak Condenser Tube Modification.pdf",
+    162848
+   ],
+   [
+    "PSI-102_Engineering Documents_60089MFHA417-B Kapton Sample Assembly.pdf",
+    149738
+   ],
+   [
+    "PSI-102_Engineering Documents_60089MFHA432-A Kapton Ignitor Wire Coil Assembly.pdf",
+    169403
+   ],
+   [
+    "PSI-102_Engineering Documents_60089MFHA415 Ignitor Wire Coil Assembly (for 0 .250 OD samples).pdf",
+    98186
+   ],
+   [
+    "PSI-102_Engineering Documents_60089MFHA414-A Lampwick Sample Assembly.pdf",
+    151181
+   ],
+   [
+    "PSI-102_Engineering Documents_60089MFHP0001-C Same Fluids System Schematic.pdf",
+    258855
+   ]
+  ],
+  "sha": "fe221f1380ad",
+  "bytes": 135432
+ },
+ {
+  "acc": "PSI-107",
+  "title": "Smoke Point In Co-flow Experiment",
+  "acr": "SPICE",
+  "doi": "10.60555/9kbh-e962",
+  "lic": "CC0-1.0",
+  "gb": 6.95,
+  "area": "Combustion Science",
+  "sub": "Fire Safety",
+  "hw": "Microgravity Science Glovebox (MSG)",
+  "mod": "02-Jun-2025",
+  "ver": 4,
+  "n_pub": 9,
+  "pub_doi": 7,
+  "et": [
+   [
+    "PSI-107_Experimental table_Spice.csv",
+    31205
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-107_Reports_SMOKE POINTS OF MICROGRAVITY AND  NORMAL GRAVITY COFLOW DIFFUSION  FLAMES_DotsonThesis.pdf",
+    2227738
+   ],
+   [
+    "PSI-107_Reports_SPICE_30-DayPostFlightReport.pdf",
+    160909
+   ],
+   [
+    "PSI-107_Reports_SPICE_FinalReport.pdf",
+    601754
+   ],
+   [
+    "PSI-107_Presentations_Laminar Smoke Points in Coflow Measured Aboard ISS.pdf",
+    1306705
+   ],
+   [
+    "PSI-107_Presentations_IP-C Crew training 2010.pdf",
+    1348519
+   ],
+   [
+    "PSI-107_Presentations_IP-D Crew training 2011.pdf",
+    1339967
+   ],
+   [
+    "PSI-107_Engineering Documents_SPICE_Phase III Flight Safety Data Package.pdf",
+    4490750
+   ],
+   [
+    "PSI-107_Raw Data_SPICE_GMT2009_119_ContactSheet.pdf",
+    68775
+   ],
+   [
+    "PSI-107_Raw Data_SPICE_GMT136_Contact_Sheet.pdf",
+    83835
+   ],
+   [
+    "PSI-107_Raw Data_SPICE_GMT2009_166_SootClean_ContactSheet.pdf",
+    214153
+   ],
+   [
+    "PSI-107_Raw Data_SPICE_GMT2009_167_ContactSheet.pdf",
+    149256
+   ],
+   [
+    "PSI-107_Raw Data_SPICE_GMT2009_173_ContactSheet.pdf",
+    347642
+   ]
+  ],
+  "sha": "f31081deb2b0",
+  "bytes": 320156
+ },
+ {
+  "acc": "PSI-106",
+  "title": "Structure and Liftoff In Combustion Experiment",
+  "acr": "SLICE",
+  "doi": "10.60555/pm12-rg61",
+  "lic": "CC0-1.0",
+  "gb": 72.91,
+  "area": "Combustion Science",
+  "sub": "",
+  "hw": "",
+  "mod": "06-Feb-2025",
+  "ver": 3,
+  "n_pub": 5,
+  "pub_doi": 4,
+  "et": [
+   [
+    "PSI-106_Experimental table_Slice.csv",
+    734
+   ]
+  ],
+  "pdfs": [],
+  "sha": "f705b2e04bd0",
+  "bytes": 9715
+ },
+ {
+  "acc": "PSI-39",
+  "title": "Cool Flames Investigation",
+  "acr": "CFI",
+  "doi": "10.60555/m6pj-a914",
+  "lic": "CC0-1.0",
+  "gb": 718.89,
+  "area": "Combustion Science",
+  "sub": "Droplets",
+  "hw": "Multi-User Droplet Combustion Apparatus (MDCA), Combustion Integrated Rack (CIR)",
+  "mod": "03-Jun-2025",
+  "ver": 4,
+  "n_pub": 7,
+  "pub_doi": 6,
+  "et": [
+   [
+    "PSI-39_Experimental table_CFI.csv",
+    7792
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-39_Analyzed Data_FLEX-1261_Summary_prelim.pdf",
+    211160
+   ],
+   [
+    "PSI-39_Analyzed Data_FLEX-1261_Summary.pdf",
+    243278
+   ],
+   [
+    "PSI-39_Analyzed Data_FLEX-1239_Summary.pdf",
+    270563
+   ],
+   [
+    "PSI-39_Analyzed Data_FLEX-1239_Summary_v2.pdf",
+    393558
+   ],
+   [
+    "PSI-39_Analyzed Data_FLEX-1253_Summary.pdf",
+    394976
+   ],
+   [
+    "PSI-39_Analyzed Data_FLEX-1238_Summary.pdf",
+    380605
+   ],
+   [
+    "PSI-39_Analyzed Data_FLEX-1240_Summary.pdf",
+    349778
+   ],
+   [
+    "PSI-39_Analyzed Data_FLEX-1248_Summary.pdf",
+    382777
+   ],
+   [
+    "PSI-39_Analyzed Data_FLEX-1249_Summary.pdf",
+    334334
+   ],
+   [
+    "PSI-39_Analyzed Data_FLEX-1250_Summary.pdf",
+    349831
+   ],
+   [
+    "PSI-39_Analyzed Data_FLEX-1232_Summary.pdf",
+    364832
+   ],
+   [
+    "PSI-39_Analyzed Data_FLEX-1231_Summary.pdf",
+    328679
+   ]
+  ],
+  "sha": "ab2501bbe620",
+  "bytes": 4232395
+ },
+ {
+  "acc": "PSI-47",
+  "title": "Dust and Aerosol Measurement Feasibility Test / Dust and Aerosol Measurement Feasibility Test-2",
+  "acr": "DAFT / DAFT-2",
+  "doi": "10.60555/ztgj-d202",
+  "lic": "CC0-1.0",
+  "gb": 0.04,
+  "area": "Combustion Science",
+  "sub": "Spacecraft Fire Safety",
+  "hw": "TSI P-Trak",
+  "mod": "02-Jun-2025",
+  "ver": 5,
+  "n_pub": 2,
+  "pub_doi": 2,
+  "et": [
+   [
+    "PSI-47_Experimental table_DAFT.csv",
+    518
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-47_Reports_DAFT_30Day.PostFlightReport.pdf",
+    185648
+   ],
+   [
+    "PSI-47_Engineering Documents_60089MFHD509 P-Trak Condenser Tube Modification.pdf",
+    162862
+   ],
+   [
+    "PSI-47_Engineering Documents_Procedure.Sampling.pdf",
+    45776
+   ],
+   [
+    "PSI-47_Engineering Documents_Procedure.DataTransfer.pdf",
+    46025
+   ],
+   [
+    "PSI-47_Engineering Documents_Procedure.Restow.pdf",
+    34552
+   ],
+   [
+    "PSI-47_Presentations_Daft_FactSheet.pdf",
+    762700
+   ],
+   [
+    "PSI-47_Engineering Documents_Procedure.SetUp.pdf",
+    33915
+   ]
+  ],
+  "sha": "60ff7a7d0ef3",
+  "bytes": 174029
+ },
+ {
+  "acc": "PSI-21",
+  "title": "Advanced Combustion via Microgravity Experiments / Coflow Laminar Diffusion Flame",
+  "acr": "ACME CLD Flame",
+  "doi": "10.60555/23e1-9950",
+  "lic": "CC0-1.0",
+  "gb": 2005.54,
+  "area": "Combustion Science",
+  "sub": "Flames of gaseous fuel",
+  "hw": "Combustion Integrated Rack (CIR), ACME",
+  "mod": "22-Jan-2025",
+  "ver": 4,
+  "n_pub": 18,
+  "pub_doi": 18,
+  "et": [
+   [
+    "PSI-21_Experimental table_CLD Flame.csv",
+    2454
+   ]
+  ],
+  "pdfs": [],
+  "sha": "99a5e58119a9",
+  "bytes": 18065
+ },
+ {
+  "acc": "PSI-22",
+  "title": "Advanced Combustion via Microgravity Experiments Electric-Field Effects on Laminar Diffusion Flames",
+  "acr": "ACME E-FIELD Flames",
+  "doi": "10.60555/se5a-8c73",
+  "lic": "CC0-1.0",
+  "gb": 950.21,
+  "area": "Combustion Science",
+  "sub": "Laminar Flames",
+  "hw": "Combustion Integrated Rack (CIR), ACME",
+  "mod": "08-May-2026",
+  "ver": 7,
+  "n_pub": 25,
+  "pub_doi": 22,
+  "et": [
+   [
+    "PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+    2475
+   ]
+  ],
+  "pdfs": [],
+  "sha": "a491519f60b9",
+  "bytes": 20827
+ },
+ {
+  "acc": "PSI-23",
+  "title": "Advanced Combustion via Microgravity Experiments-Structure and Response of Spherical Diffusion Flames",
+  "acr": "ACME s-Flame",
+  "doi": "10.60555/k57n-p030",
+  "lic": "CC0-1.0",
+  "gb": 782.17,
+  "area": "Combustion Science",
+  "sub": "Flames of gaseous fuels",
+  "hw": "Combustion Integrated Rack (CIR), ACME",
+  "mod": "05-Jun-2025",
+  "ver": 4,
+  "n_pub": 44,
+  "pub_doi": 37,
+  "et": [
+   [
+    "PSI-23_Experimental table_ACME s-Flame.csv",
+    2456
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-23_Presentations_20120015928.pdf",
+    3693275
+   ],
+   [
+    "PSI-23_Presentations_PS-01548 ACME info sheet.pdf",
+    874049
+   ],
+   [
+    "PSI-23_Presentations_PS-01374 ACME posterFinal.pdf",
+    6249084
+   ],
+   [
+    "PSI-23_Presentations_PS-02788 ACME info sheet.pdf",
+    4839732
+   ],
+   [
+    "PSI-23_Presentations_ACME fact sheet 20180519.pdf",
+    437766
+   ],
+   [
+    "PSI-23_Presentations_PS-03055 ACME info sheet.pdf",
+    3782346
+   ],
+   [
+    "PSI-23_Presentations_ACME fact sheet 20180820.pdf",
+    1132230
+   ],
+   [
+    "PSI-23_Presentations_ACME pictorial overview slides 20170601.pdf",
+    1954184
+   ],
+   [
+    "PSI-23_Presentations_ACME_ASGSR_20121127.pdf",
+    1997745
+   ],
+   [
+    "PSI-23_Presentations_ACME_ASGSR_20131107.pdf",
+    2011222
+   ],
+   [
+    "PSI-23_Presentations_ACME_CSSCI_2014.pdf",
+    767030
+   ],
+   [
+    "PSI-23_Presentations_AIAA presentation - ACME on the ISS Jan2012.pdf",
+    4459532
+   ]
+  ],
+  "sha": "a89bd634a661",
+  "bytes": 8127138
+ },
+ {
+  "acc": "PSI-10",
+  "title": "Advanced Combustion via Microgravity Experiments / Flame Design",
+  "acr": "ACME/Flame Design",
+  "doi": "10.60555/w4zy-bt45",
+  "lic": "",
+  "gb": 2180.44,
+  "area": "Combustion Science",
+  "sub": "Flames of Gaseous Fuels",
+  "hw": "Advanced Combustion via Microgravity Experiments (ACME), Combustion Integrated Rack (CIR), Reconfiguration of Combustion Integrated Rack (CIR)",
+  "mod": "20-Nov-2025",
+  "ver": 1,
+  "n_pub": 33,
+  "pub_doi": 33,
+  "et": [
+   [
+    "PSI-10_Experimental table_Flame Design_Normal Flame.csv",
+    26933
+   ],
+   [
+    "PSI-10_Experimental table_Flame Design_Inverse Flame.csv",
+    17314
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-10_Reports_FinalRpt_ACMEFlameDesign.pdf",
+    4152310
+   ],
+   [
+    "PSI-10_Science Documents_SRD_ACMEFlameDesign.pdf",
+    471072
+   ],
+   [
+    "PSI-10_Reports_TaskbookRpts.pdf",
+    284417
+   ],
+   [
+    "PSI-10_Reports_TaskbookPubsList_Feb2023.pdf",
+    97986
+   ],
+   [
+    "PSI-10_Engineering Documents_ACME Engineering Implementation Rpt..pdf",
+    7496324
+   ],
+   [
+    "PSI-10_Raw Data_21301 test sheets.pdf",
+    1583719
+   ],
+   [
+    "PSI-10_Raw Data_21301 test parameter notes.pdf",
+    752549
+   ],
+   [
+    "PSI-10_Raw Data_21301 flow traces etc.pdf",
+    5931414
+   ],
+   [
+    "PSI-10_Raw Data_21301 daily test point log.pdf",
+    168183
+   ],
+   [
+    "PSI-10_Raw Data_19156 test sheets.pdf",
+    1249626
+   ],
+   [
+    "PSI-10_Raw Data_19156 test parameter notes.pdf",
+    896975
+   ],
+   [
+    "PSI-10_Raw Data_19156 flow traces etc.pdf",
+    1239244
+   ]
+  ],
+  "sha": "a20756e7acf6",
+  "bytes": 2867657
+ },
+ {
+  "acc": "PSI-159",
+  "title": "Advanced Combustion via Microgravity Experiments / Cool Flames Investigation with Gases",
+  "acr": "ACME CFI-G",
+  "doi": "10.60555/cyt1-kh64",
+  "lic": "CC0-1.0",
+  "gb": 2085.59,
+  "area": "Combustion Science",
+  "sub": "Flames of Gaseous Fuels",
+  "hw": "ACME, Combustion Integrated Rack (CIR)",
+  "mod": "20-Nov-2025",
+  "ver": 1,
+  "n_pub": 2,
+  "pub_doi": 2,
+  "et": [
+   [
+    "PSI-159_Experimental table_CFI-G_Normal Flames.csv",
+    22166
+   ],
+   [
+    "PSI-159_Experimental table_CFI-G_Inverse Flames.csv",
+    39422
+   ]
+  ],
+  "pdfs": [
+   [
+    "PSI-159_Reports_FinalRpt_ACME.CFI-G.pdf",
+    3894907
+   ],
+   [
+    "PSI-159_Engineering Documents_ACME Engineering Implementation Rpt..pdf",
+    7496324
+   ],
+   [
+    "PSI-159_Raw Data_21242 test sheets.pdf",
+    542395
+   ],
+   [
+    "PSI-159_Raw Data_21242 test parameter notes.pdf",
+    896762
+   ],
+   [
+    "PSI-159_Raw Data_21242 flow traces etc.pdf",
+    1423937
+   ],
+   [
+    "PSI-159_Raw Data_21242 daily test point log.pdf",
+    47323
+   ],
+   [
+    "PSI-159_Raw Data_21228 test sheets.pdf",
+    1304738
+   ],
+   [
+    "PSI-159_Raw Data_21228 test parameter notes.pdf",
+    479517
+   ],
+   [
+    "PSI-159_Raw Data_21228 flow traces etc.pdf",
+    5039003
+   ],
+   [
+    "PSI-159_Raw Data_21228 daily test point log.pdf",
+    51113
+   ],
+   [
+    "PSI-159_Raw Data_21222 test parameter notes.pdf",
+    776506
+   ],
+   [
+    "PSI-159_Raw Data_21222 flow traces etc.pdf",
+    3127767
+   ]
+  ],
+  "sha": "e01abe2caa30",
+  "bytes": 2796301
+ },
+ {
+  "acc": "PSI-60",
+  "title": "Computational and Experimental Analysis of SPICE Data Sets",
+  "acr": "",
+  "doi": "10.60555/mzjm-yv57",
+  "lic": "CC0-1.0",
+  "gb": 0.0,
+  "area": "Combustion Science",
+  "sub": "Gaseous",
+  "hw": "",
+  "mod": "30-Sep-2025",
+  "ver": 1,
+  "n_pub": 1,
+  "pub_doi": 1,
+  "et": [],
+  "pdfs": [],
+  "sha": "cc7a61fee3ea",
+  "bytes": 6505
+ },
+ {
+  "acc": "PSI-62",
+  "title": "Concurrent Flame Spread Modeling using Flamelet Generated Manifolds in Microgravity with Comparison to BASS Experiments using Two-Color Tomography",
+  "acr": "",
+  "doi": "10.60555/e9xp-ex83",
+  "lic": "CC0-1.0",
+  "gb": 0.0,
+  "area": "Combustion Science",
+  "sub": "Spacecraft Fire Safety",
+  "hw": "",
+  "mod": "14-Nov-2025",
+  "ver": 1,
+  "n_pub": 4,
+  "pub_doi": 4,
+  "et": [],
+  "pdfs": [],
+  "sha": "e4325a65cecd",
+  "bytes": 8719
+ },
+ {
+  "acc": "PSI-115",
+  "title": "Utilization of the Smoke Aerosol Measurement Experiment Data for Advanced Modeling and Simulation of Smoke Generation in Micro-Gravity",
+  "acr": "",
+  "doi": "10.60555/q0v5-1v28",
+  "lic": "CC0-1.0",
+  "gb": 0.26,
+  "area": "Combustion Science",
+  "sub": "Smoke Aerosol, Combustion Simulation",
+  "hw": "",
+  "mod": "02-Jun-2025",
+  "ver": 3,
+  "n_pub": 0,
+  "pub_doi": 0,
+  "et": [],
+  "pdfs": [
+   [
+    "PSI-115_Reports_NNX17AF08A_FinalReport.pdf",
+    10617514
+   ],
+   [
+    "PSI-115_Science Documents_DataOrganizationDocument.pdf",
+    96899
+   ]
+  ],
+  "sha": "9c5b463fbe8f",
+  "bytes": 66623
+ },
+ {
+  "acc": "PSI-117",
+  "title": "Effect of External Thermo-Convective Perturbation on Cool Flame Dynamics: A Multidimensional Multi-Physics CFD Analysis",
+  "acr": "",
+  "doi": "10.60555/gz0q-b577",
+  "lic": "CC0-1.0",
+  "gb": 0.07,
+  "area": "Combustion Science",
+  "sub": "Droplet",
+  "hw": "",
+  "mod": "09-Jun-2026",
+  "ver": 2,
+  "n_pub": 10,
+  "pub_doi": 5,
+  "et": [],
+  "pdfs": [
+   [
+    "PSI-117_Presentations_PSI_Users_Group_Cool_Flames_in_Space_03302026.pdf",
+    10786102
+   ],
+   [
+    "PSI-117_Presentations_Extinction_Characteristics_TFarouk.pdf",
+    11802360
+   ],
+   [
+    "PSI-117_Presentations_Oscillatory_Cool Flame_TFarouk.pdf",
+    8994674
+   ],
+   [
+    "PSI-117_Presentations_Three_Stage_Cool_Flame_TFarouk.pdf",
+    30873451
+   ],
+   [
+    "PSI-117_Reports_Dissertation_Combustion Behavior Of Sub-Millimeter Sized Oxygenated And N-Alka.pdf",
+    8072629
+   ]
+  ],
+  "sha": "13e50b67d851",
+  "bytes": 22422
+ },
+ {
+  "acc": "PSI-142",
+  "title": "Quantitative Studies of Cool Flame Transitions at Radiation / Stretch Extinction Using Counterflow Flames",
+  "acr": "",
+  "doi": "10.60555/80qf-vj95",
+  "lic": "CC0-1.0",
+  "gb": 0.0,
+  "area": "Combustion Science",
+  "sub": "Spacecraft Fire Safety",
+  "hw": "Principal Investigator Laboratory Hardware",
+  "mod": "06-Mar-2025",
+  "ver": 2,
+  "n_pub": 12,
+  "pub_doi": 10,
+  "et": [
+   [
+    "PSI-142_Experimental table_Data Summary Table.csv",
+    727
+   ]
+  ],
+  "pdfs": [],
+  "sha": "c55ab5d31400",
+  "bytes": 16715
+ }
+]

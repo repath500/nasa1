@@ -1,0 +1,246 @@
+Gemini Decision 1 - Gemini API | Google AI Studio> ## AI Agent Context
+> Get the complete documentation index at: https://aistudio.google.com/llms.txt
+> Use this file to discover all available pages.
+> For the full documentation in a single file, fetch: https://aistudio.google.com/llms-full.txt
+# Gemini Decision 1
+Gemini Decision 1 is a specialized multimodal model built for the
+[Decisions API](/docs/decisions-api). It evaluates typed questions over text,
+images, video, audio, and PDFs in a single prefill pass and returns calibrated
+outcome probabilities with zero output tokens.
+Use Gemini Decision 1 for request routing, policy checks across many rules at
+once, candidate scoring against a rubric, tool selection, and low-latency
+classification over live media streams. A single request can evaluate up to
+1,000 independent questions over shared input up to 262,144 tokens:
+*   **Yes/no:** Returns a calibrated probability from 0.01 to 0.99 and a
+  confidence score.
+*   **Single-select:** Evaluates 2 to 255 options and returns the top option,
+  per-option probabilities, and confidence.
+*   **Rubric rating:** Evaluates 2 to 255 ordered rubric levels and returns the
+  probability-weighted expected score, per-level probabilities, and
+  confidence.
+{% button href="/docs/decisions-api" variant="primary" %}View documentation{% /button %}
+## Quickstart  {% id="quickstart" %}
+Evaluate a yes/no question and a routing choice over the same customer message
+in one call:
+{% tabs %}
+  {% tab filename="decisions.py" label="Python" %}
+  ```python
+  from google import genai
+  client = genai.Client(http_options={"api_version": "v1beta"})
+  result = client.decisions.create(
+      model="gemini-decision-1",
+      input="The blue mug I ordered on Monday arrived cracked on Wednesday.",
+      questions={
+          "is_damaged": {
+              "type": "noul",
+              "instructions": "Did the item arrive damaged?",
+          },
+          "queue": {
+              "type": "choice",
+              "instructions": "Which support queue should handle this message?",
+              "criteria": {
+                  "billing": "Payment, invoice, or refund questions.",
+                  "replacements": "Damaged, missing, or wrong items.",
+                  "general": "Product questions and account updates.",
+              },
+          },
+      },
+  )
+  damaged = result.answers["is_damaged"]
+  queue = result.answers["queue"]
+  print(f"P(damaged)={damaged.noul:.2f} queue={queue.choice}")
+  ```
+  {% /tab %}
+  {% tab filename="decisions.mjs" label="JavaScript" %}
+  ```javascript
+  import { GoogleGenAI } from "@google/genai";
+  const ai = new GoogleGenAI({ apiVersion: "v1beta" });
+  const result = await ai.decisions.create({
+    model: "gemini-decision-1",
+    input: "The blue mug I ordered on Monday arrived cracked on Wednesday.",
+    questions: {
+      is_damaged: {
+        type: "noul",
+        instructions: "Did the item arrive damaged?",
+      },
+      queue: {
+        type: "choice",
+        instructions: "Which support queue should handle this message?",
+        criteria: {
+          billing: "Payment, invoice, or refund questions.",
+          replacements: "Damaged, missing, or wrong items.",
+          general: "Product questions and account updates.",
+        },
+      },
+    },
+  });
+  const damaged = result.answers?.is_damaged;
+  const queue = result.answers?.queue;
+  if (damaged?.type === "noul" && queue?.type === "choice") {
+    console.log(`P(damaged)=${damaged.noul} queue=${queue.choice}`);
+  }
+  ```
+  {% /tab %}
+  {% tab filename="decisions.sh" label="REST" %}
+  ```bash
+  curl -X POST "https://generativelanguage.googleapis.com/v1beta/decisions" \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "model": "gemini-decision-1",
+      "input": "The blue mug I ordered on Monday arrived cracked on Wednesday.",
+      "questions": {
+        "is_damaged": {
+          "type": "noul",
+          "instructions": "Did the item arrive damaged?"
+        },
+        "queue": {
+          "type": "choice",
+          "instructions": "Which support queue should handle this message?",
+          "criteria": {
+            "billing": "Payment, invoice, or refund questions.",
+            "replacements": "Damaged, missing, or wrong items.",
+            "general": "Product questions and account updates."
+          }
+        }
+      }
+    }'
+  ```
+  {% /tab %}
+{% /tabs %}
+## Documentation  {% id="documentation" %}
+Visit the [Decisions API](/docs/decisions-api) guide for request schemas,
+criteria design, multimodal inputs, and calibration details. See
+[Pricing](/docs/pricing#gemini-decision) and
+[Rate limits](/docs/rate-limits#gemini-decision) for billing and quota tiers.
+## Sample apps  {% id="sample-apps" %}
+Explore interactive sample apps in Google AI Studio built with Gemini Decision 1:
+*   [Decisions Playground](https://aistudio.google.com/apps/f6cbef57-8bad-443a-813f-4d4c8f9750af?fullscreenApplet=true):
+  Test yes/no, choice, and score questions interactively on custom text and
+  media inputs.
+*   [Doorstep Parcels](https://aistudio.google.com/apps/bdca3fee-8d0a-4663-b30e-73828a55c1e8?fullscreenApplet=true):
+  Classify delivery photos for package condition and placement using
+  calibrated probabilities.
+*   [Find the Zookeeper](https://aistudio.google.com/apps/b86d2f3b-c1d4-4d44-9198-5303a0cb65c1?fullscreenApplet=true):
+  Evaluate visual attributes across scene candidates in a single pass.
+## gemini-decision-1  {% id="gemini-decision-1" %}
+{% table variant="model" %}
+  * Property
+  * Description
+  ---
+  *     {% section class="model-property" %}
+  {% icon name="id_card" /%}Model code
+    {% /section %}
+  * `gemini-decision-1`
+  ---
+  *     {% section class="model-property" %}
+  {% icon name="save" /%}Supported data types
+    {% /section %}
+  *     **Inputs** Text, Image, Video, Audio, and PDF
+    **Output** Calibrated probabilities (yes/no, choice, and score, with 0 output tokens)
+  ---
+  *     {% section class="model-property" %}
+  {% icon name="token_auto" /%}Token limits{% sup %}[[*]](/docs/tokens){% /sup %}
+    {% /section %}
+  *     **Input token limit** 262,144
+    **Output token limit** 0 (up to 1,000 questions per request)
+  ---
+  *     {% section class="model-property" %}
+  {% icon name="handyman" /%}Capabilities
+    {% /section %}
+  *     {% section class="three-column-grid" %}
+  {% section %}
+  [**Calibrated decisions**](/docs/decisions-api)
+  {% badge type="supported" /%}
+  {% /section %}
+  {% section %}
+  **Audio generation**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Batch API**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Caching**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Code execution**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Computer use**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **File search**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Flex inference**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Function calling**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Grounding with Google Maps**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Image generation**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Live API**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Priority inference**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Search grounding**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Structured outputs**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Text generation**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **Thinking**
+  {% badge type="not-supported" /%}
+  {% /section %}
+  {% section %}
+  **URL context**
+  {% badge type="not-supported" /%}
+  {% /section %}
+    {% /section %}
+  ---
+  *     {% section class="model-property" %}
+  {% icon name="123" /%}Versions
+    {% /section %}
+  *     Read the [model version patterns](/docs/models#model-versions) for more details.
+    *   `gemini-decision-1`
+  ---
+  *     {% section class="model-property" %}
+  {% icon name="calendar_month" /%}Latest update
+    {% /section %}
+  * November 2026
+  ---
+  *     {% section class="model-property" %}
+  {% icon name="speed" /%}Rate limits
+    {% /section %}
+  * [Rate limits](/docs/rate-limits#gemini-decision)
+  ---
+  *     {% section class="model-property" %}
+  {% icon name="paid" /%}Pricing
+    {% /section %}
+  * [Pricing](/docs/pricing#gemini-decision)
+{% /table %}
