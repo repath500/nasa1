@@ -132,7 +132,7 @@ export function CheckoutSuccess() {
       <div>
         <h1 className="text-4xl">{state === 'ready' ? 'Payment confirmed' : state === 'error' ? 'Could not confirm yet' : 'Confirming your payment'}</h1>
         {state === 'loading' && <div role="status" className="mt-4 space-y-2"><Skeleton className="h-5 w-72" /><Skeleton className="h-5 w-56" /><p className="sr-only">Confirming</p></div>}
-        {state === 'error' && <InlineError className="mt-4" message={msg} stillWorks="No charge is lost: your payment is safe with the payment provider. Everything evidence-related still works." onRetry={sessionId ? () => void run() : undefined} />}
+        {state === 'error' && <InlineError className="mt-4" message={msg} stillWorks="If you were charged, the payment provider holds the record, and retrying here will claim it. Everything evidence-related still works." onRetry={sessionId ? () => void run() : undefined} />}
         {state === 'ready' && claim && (
           <div className="mt-4 space-y-3">
             <p className="text-lg" data-testid="claim-plan">Licence active: {PLAN_NAME[claim.plan]}.{claim.expiresAt ? ` Valid until ${new Date(claim.expiresAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}.` : ''}</p>

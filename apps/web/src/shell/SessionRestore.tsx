@@ -6,6 +6,8 @@ import { KEYS, lsGetJson, lsRemove, lsSetJson } from './storage';
 
 interface Saved { path: string; search: string; at: number }
 const SKIP = ['/', '/checkout/success', '/checkout/cancel', '/present'];
+const SAVE = ['/atlas', '/briefing', '/study/', '/compare', '/duel', '/brief/'];
+const saveable = (p: string) => SAVE.some((x) => p === x || (x.endsWith('/') && p.startsWith(x)));
 
 /** SPEC §7: "Continue where you left off". Saves the last working view and offers it on a bare landing visit. */
 export function SessionRestore() {
@@ -14,11 +16,11 @@ export function SessionRestore() {
 
   useEffect(() => { // read once on mount
     const s = lsGetJson<Saved | null>(KEYS.session, null);
-    if (s && s.path && !SKIP.includes(s.path) && Date.now() - s.at < 7 * 864e5 && pathname === '/' && !search) setSaved(s);
+    if (s && s.path && !SKIP.includes(s.path) && saveable(s.path) && Date.now() - s.at < 7 * 864e5 && pathname === '/' && !search) setSaved(s);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    if (SKIP.includes(pathname) || pathname === '/pricing') return;
+    if (SKIP.includes(pathname) || !saveable(pathname)) return;
     const t = setTimeout(() => lsSetJson(KEYS.session, { path: pathname, search, at: Date.now() } satisfies Saved), 400);
     return () => clearTimeout(t);
   }, [pathname, search]);

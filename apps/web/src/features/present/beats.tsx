@@ -16,7 +16,7 @@ export const BEATS: Beat[] = [
     <h2 className="text-[clamp(1.6rem,3vw,2.6rem)] font-semibold leading-tight">The Moon base example box.</h2>
     <p className="mt-3 text-[clamp(1rem,1.6vw,1.3rem)]" aria-live="polite">{c.nearMoon === null ? 'Counting tests.' : `${c.nearMoon} ${c.nearMoon === 1 ? 'test sits' : 'tests sit'} in the box.`}{c.solidMax === null ? '' : ` No solid-fuel row in this set reports O₂ above ${c.solidMax}%. That is an absence of rows, not a limit.`}</p></>) },
   { id: 'rankers', title: 'Two rankers', kind: 'app', tab: 'studies', render: () => (<>
-    <h2 className="text-[clamp(1.6rem,3vw,2.6rem)] font-semibold leading-tight">Two ways to rank what to read first.</h2>
+    <h2 className="text-[clamp(1.6rem,3vw,2.6rem)] font-semibold leading-tight">Two ways to rank what to read next.</h2>
     <p className="mt-3 text-[clamp(1rem,1.6vw,1.3rem)]">A code baseline and a model judgement, side by side. The agreement strip says plainly where they match and where they differ.</p></>) },
   { id: 'evidence', title: 'Evidence and Caught by code', kind: 'app', tab: 'ledger', render: (c) => (<>
     <h2 className="text-[clamp(1.6rem,3vw,2.6rem)] font-semibold leading-tight">Every dot opens its source.</h2>
