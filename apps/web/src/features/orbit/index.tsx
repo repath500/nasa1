@@ -35,7 +35,26 @@ export default function OrbitScene({ focus, onArrive, flamesToward, className }:
   return <canvas ref={canvas} width={480} height={270} className={className} role="img" aria-label="Illustration of Earth, Moon, and an exploration atmosphere, with flames orbiting" style={{ width: '100%', height: 'auto', imageRendering: 'pixelated', background: '#05080d' }} />;
 }
 export function OrbitToMapTransition({ focus, onArrive, children, className }: OrbitProps & { children?: ReactNode }) {
+  const [flying, setFlying] = useState(false);
   const [arrived, setArrived] = useState(false);
-  useEffect(() => { setArrived(false); }, [focus]);
-  return <div className={className} style={{ position: 'relative' }}><div style={{ opacity: arrived ? 0 : 1, transition: 'opacity 300ms ease', pointerEvents: arrived ? 'none' : 'auto' }}><OrbitScene focus={focus} onArrive={() => { setArrived(true); onArrive?.(); }}/></div>{arrived && <div>{children}</div>}</div>;
+  const callback = useRef(onArrive);
+  callback.current = onArrive;
+  useEffect(() => {
+    setFlying(false);
+    setArrived(false);
+    if (!focus) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setArrived(true);
+      callback.current?.();
+      return;
+    }
+    const frame = requestAnimationFrame(() => setFlying(true));
+    const timer = window.setTimeout(() => { setArrived(true); callback.current?.(); }, 900);
+    return () => { cancelAnimationFrame(frame); clearTimeout(timer); };
+  }, [focus]);
+  const origin = focus === 'exploration-upper' ? '86% 54%' : focus === 'lunar-cabin-example' ? '59% 37%' : '23% 48%';
+  return <div className={className} style={{ position: 'relative', overflow: 'hidden' }}>
+    <div style={{ opacity: flying ? 0 : 1, transform: flying ? 'scale(4)' : 'scale(1)', transformOrigin: origin, transition: 'transform 900ms cubic-bezier(.2,0,0,1), opacity 900ms ease', pointerEvents: arrived ? 'none' : 'auto' }}><OrbitScene flamesToward={focus}/></div>
+    <div aria-hidden={!arrived} style={{ position: arrived ? 'relative' : 'absolute', inset: 0, opacity: flying || arrived ? 1 : 0, transition: 'opacity 900ms ease', pointerEvents: arrived ? 'auto' : 'none' }}>{children}</div>
+  </div>;
 }

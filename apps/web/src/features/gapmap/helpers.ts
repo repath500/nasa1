@@ -21,3 +21,16 @@ export function nearestPoint<T extends { x: number; y: number }>(points: T[], x:
   for (const point of points) { const next = (point.x - x) ** 2 + (point.y - y) ** 2; if (next <= distance) { distance = next; best = point; } }
   return best;
 }
+
+export function nearestDirectional<T extends { x: number; y: number }>(points: T[], origin: T, direction: string): T | undefined {
+  const axis = direction === 'ArrowLeft' ? [-1, 0] : direction === 'ArrowRight' ? [1, 0] : direction === 'ArrowUp' ? [0, -1] : [0, 1];
+  return points.filter(point => point !== origin && (point.x - origin.x) * axis[0]! + (point.y - origin.y) * axis[1]! > 0)
+    .sort((left, right) => Math.hypot(left.x - origin.x, left.y - origin.y) - Math.hypot(right.x - origin.x, right.y - origin.y))[0];
+}
+
+export function boxHit(x: number, y: number, left: number, top: number, right: number, bottom: number, tolerance = 10): string | null {
+  if (x < left - tolerance || x > right + tolerance || y < top - tolerance || y > bottom + tolerance) return null;
+  const horizontal = Math.abs(x - left) <= tolerance ? 'w' : Math.abs(x - right) <= tolerance ? 'e' : '';
+  const vertical = Math.abs(y - top) <= tolerance ? 'n' : Math.abs(y - bottom) <= tolerance ? 's' : '';
+  return vertical + horizontal || 'move';
+}
