@@ -35,7 +35,7 @@ const HARDWARE: Record<string, HardwareFamily> = {
   'PSI-101': 'SAME-glovebox',
   'PSI-107': 'MSG-duct',
   'PSI-20': 'CIR-ACME',
-  'PSI-159': 'CIR-MDCA',
+  'PSI-159': 'CIR-ACME',
   'PSI-47': 'SAME-glovebox',
 };
 

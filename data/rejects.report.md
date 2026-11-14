@@ -1,7 +1,7 @@
 # Fire Atlas corpus reject ledger
 
-Generated: 2026-11-14T20:25:27.319Z
-Corpus hash: `99b7e76dd9c01d312e18aadfe8393051435ae54a35e9edfa7805f7eb9c9d5baa`
+Generated: 2026-11-14T20:27:27.493Z
+Corpus hash: `47283d80bb5a94e79f0583bf8728be64bc572dbbbc6085563b2aeac9fc0846d9`
 Rejected cells: 11
 
 ## Counts by reason
