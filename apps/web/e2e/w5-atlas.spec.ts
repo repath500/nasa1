@@ -31,7 +31,7 @@ test.describe('W5 atlas workspace', () => {
   test('ledger tab lists the rejected 3400% cell', async ({ page }) => {
     await page.goto('/atlas?tab=ledger');
     await expect(page.getByText('3400%')).toBeVisible({ timeout: 8000 });
-    await expect(page.getByText('O₂ outside 0 to 100%', { exact: true })..first()).toBeVisible();
+    await expect(page.getByText('O₂ outside 0 to 100%', { exact: true }).first()).toBeVisible();
   });
 
   test('hovering the 3400% cell for 3 seconds shows the tooltip', async ({ page }) => {
