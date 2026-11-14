@@ -4,12 +4,12 @@
   "type": "module",
   "packageManager": "pnpm@10.10.0",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18 <23"
   },
   "scripts": {
     "dev": "pnpm --filter @fire/web dev",
     "dev:server": "pnpm --filter @fire/server dev",
-    "build": "pnpm -r build",
+    "build": "pnpm corpus && pnpm --filter @fire/web build",
     "corpus": "pnpm --filter @fire/pipeline build:corpus",
     "audio:build": "pnpm --filter @fire/server audio:build",
     "test": "pnpm -r --if-present test",

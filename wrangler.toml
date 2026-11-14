@@ -1,0 +1,21 @@
+# Cloudflare Pages project for Fire Atlas.
+# Build: pnpm build   (builds the corpus, then the web app into apps/web/dist)
+# Deploy: npx wrangler pages deploy
+# Secrets (set with `npx wrangler pages secret put NAME`): TYPESAFE_API_KEY, GEMINI_API_KEY,
+#   ELEVENLABS_API_KEY, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, LICENSE_SECRET.
+# Plain vars below are safe to commit.
+name = "fire-atlas"
+pages_build_output_dir = "apps/web/dist"
+compatibility_date = "2026-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+STRIPE_MODE = "test"
+PUBLIC_ORIGIN = "https://fire-atlas.pages.dev"
+ELEVENLABS_VOICE_ID = ""
+ELEVENLABS_MODEL_ID = ""
+
+# Create with: npx wrangler kv namespace create LICENSES, then paste the id and uncomment.
+# [[kv_namespaces]]
+# binding = "LICENSES"
+# id = "REPLACE_WITH_KV_NAMESPACE_ID"

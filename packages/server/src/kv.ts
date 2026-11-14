@@ -104,7 +104,7 @@ export const getKv = (env: Env): Kv => {
   const path = env.KV_FILE?.trim();
   if (path) return new FileKv(path);
   // No binding in a test or on an isolate without KV: fail closed to memory.
-  if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') return memoryKv;
+  if (typeof process === 'undefined' || process.env.NODE_ENV === 'test') return memoryKv; // Workers: no filesystem
   return new FileKv(defaultFile());
 };
 
