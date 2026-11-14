@@ -98,7 +98,7 @@ export default function LedgerTab() {
               {!typing && (
                 <>
                   <div>{REASON[r.reason]}</div>
-                  <div className="fa-muted">{model.labelOf(r.accession)} · {r.accession} · row {r.rowIndex} · column {r.column}</div>
+                  <div className="fa-muted">{model.labelOf(r.accession) === r.accession ? r.accession : `${model.labelOf(r.accession)} · ${r.accession}`} · row {r.rowIndex} · column {r.column}</div>
                   {r.note && <div className="fa-muted" style={{ fontFamily: 'Geist, system-ui, sans-serif' }}>{r.note}</div>}
                   <div className="fa-hash fa-muted">source table SHA-256 {r.csvSha12} <CopyBtn variant="quiet" label="Copy hash" copiedLabel="Hash copied" text={r.csvSha12} /></div>
                 </>

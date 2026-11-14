@@ -142,7 +142,7 @@ export default function ComparePage() {
                 <div className="fa-cmp__h" role="columnheader"><Link to={`/study/${B.card.accession}`}>{B.card.acronym}</Link> <span className="fa-muted">{B.card.accession}</span></div>
                 {lines.map((l) => (
                   <div key={l.label} style={{ display: 'contents' }} role="row">
-                    <div className="fa-cmp__h" role="rowheader">{l.label}{l.differs ? <span className="fa-flag"> . differs</span> : null}</div>
+                    <div className="fa-cmp__h" role="rowheader">{l.label}{l.differs ? <span className="fa-flag"> (differs)</span> : null}</div>
                     <div role="cell" data-mismatch={l.differs === true}>{l.a}{l.note && <p className="fa-muted" style={{ fontSize: 11.5, marginTop: 4 }}>{l.note}</p>}</div>
                     <div role="cell" data-mismatch={l.differs === true}>{l.b}</div>
                   </div>

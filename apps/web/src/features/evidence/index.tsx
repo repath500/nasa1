@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, type ReactNode } from 'react';
+import { Fragment, useEffect, useMemo, useRef, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowLeft, ArrowRight, ArrowSquareOut, X } from '@phosphor-icons/react';
@@ -94,7 +94,7 @@ function RowBody({ row, card, model, rec }: { row: TestRow; card: InvestigationC
         <h3>Raw cells as written</h3>
         <div className="fa-raw">
           {Object.entries(row.raw).map(([k, v]) => (
-            <div key={k} style={{ display: 'contents' }}><div>{k}</div><div>{v === '' ? '(empty)' : v}</div></div>
+            <Fragment key={k}><div>{k}</div><div>{v === '' ? '(empty)' : v}</div></Fragment>
           ))}
         </div>
       </section>

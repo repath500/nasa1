@@ -22,12 +22,16 @@ export function distinct<T>(xs: (T | null | undefined)[]): T[] {
 /** Largest dimension in a size string, in millimetres. "1.69 mm" is 1.69. "40.6 x 94 cm" is 940. Null if unparseable. */
 export function sizeMm(text: string | null | undefined): number | null {
   if (!text) return null;
-  const unit = /(mm|cm|micron|microns|µm|um|\bm\b)/i.exec(text);
-  const nums = [...text.matchAll(/\d+(?:\.\d+)?/g)].map((m) => Number(m[0]));
-  if (!unit || nums.length === 0) return null;
-  const u = (unit[1] as string).toLowerCase();
-  const f = u === 'mm' ? 1 : u === 'cm' ? 10 : u === 'm' ? 1000 : 0.001;
-  return Math.max(...nums) * f;
+  let best: number | null = null;
+  for (const m of text.matchAll(/(\d+(?:\.\d+)?(?:\s*x\s*\d+(?:\.\d+)?)*)\s*(mm|cm|microns?|µm|um|m)\b/gi)) {
+    const u = (m[2] as string).toLowerCase();
+    const f = u === 'mm' ? 1 : u === 'cm' ? 10 : u === 'm' ? 1000 : 0.001;
+    for (const n of (m[1] as string).split(/x/i)) {
+      const v = Number(n) * f;
+      if (Number.isFinite(v)) best = best == null ? v : Math.max(best, v);
+    }
+  }
+  return best;
 }
 
 export function median(xs: number[]): number | null {

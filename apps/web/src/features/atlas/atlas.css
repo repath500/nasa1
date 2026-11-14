@@ -244,3 +244,10 @@ button.fa-chip:hover { background: var(--fa-raised); }
 }
 .fa-term { position: relative; }
 .fa-term:hover .fa-badge__card, .fa-term:focus .fa-badge__card { display: block; }
+
+.fa-list { list-style: disc; }
+ol.fa-list { list-style: decimal; }
+.fa-brief ul { list-style: disc; }
+.fa-brief ol { list-style: decimal; }
+.fa-brief ul[style*="list-style: none"] { list-style: none; }
+.fa-prose ul, .fa-prose ol { list-style: revert; }

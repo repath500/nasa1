@@ -97,7 +97,7 @@ export default function StudyPage() {
           </div>
           <p>
             <strong>Evidence tier:</strong> {card.evidenceTier == null ? <span className="fa-muted">not reviewed</span> : <span className="fa-num">{card.evidenceTier}</span>}
-            {card.evidenceTierRule && <span className="fa-muted"> . {card.evidenceTierRule}</span>}
+            {card.evidenceTierRule && <span className="fa-muted">: {card.evidenceTierRule}</span>}
           </p>
           <div className="fa-chips fa-noprint">
             <CopyBtn label="Copy citation (APA)" copiedLabel="Citation copied" text={() => apaCard(card, model.corpus)} />

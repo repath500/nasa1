@@ -33,4 +33,13 @@ test.describe('W5 atlas workspace', () => {
     await expect(page.getByText('3400%')).toBeVisible({ timeout: 8000 });
     await expect(page.getByText('O₂ outside 0 to 100%', { exact: true })).toBeVisible();
   });
+
+  test('hovering the 3400% cell for 3 seconds shows the tooltip', async ({ page }) => {
+    await page.goto('/atlas?tab=ledger');
+    const cell = page.getByText('3400%');
+    await expect(cell).toBeVisible({ timeout: 8000 });
+    await cell.hover();
+    await expect(page.getByRole('tooltip')).toHaveCount(0);
+    await expect(page.getByRole('tooltip')).toContainText('Even a spacecraft cannot hold 3400% oxygen', { timeout: 6000 });
+  });
 });
