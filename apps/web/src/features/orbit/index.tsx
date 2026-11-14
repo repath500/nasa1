@@ -32,7 +32,7 @@ export default function OrbitScene({ focus, onArrive, flamesToward, className }:
     return () => { observer.disconnect(); cancelAnimationFrame(frame); };
   }, [focus, flamesToward]);
   useEffect(() => { if (!focus || !onArrive) return; const timer = window.setTimeout(onArrive, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 900); return () => clearTimeout(timer); }, [focus, onArrive]);
-  return <canvas ref={canvas} width={480} height={270} className={className} role="img" aria-label="Illustration of Earth, Moon, and an exploration atmosphere, with flames orbiting" style={{ width: '100%', height: 'auto', imageRendering: 'pixelated', background: '#05080d' }} />;
+  return <canvas ref={canvas} width={480} height={270} className={className} role="img" aria-label="Illustration of Earth, Moon, and an exploration atmosphere, with flames orbiting" style={{ width: '100%', height: '100%', minHeight: 200, objectFit: 'contain', display: 'block', imageRendering: 'pixelated', background: '#05080d' }} />;
 }
 export function OrbitToMapTransition({ focus, onArrive, children, className }: OrbitProps & { children?: ReactNode }) {
   const [flying, setFlying] = useState(false);

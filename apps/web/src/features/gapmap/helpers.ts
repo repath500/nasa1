@@ -1,4 +1,4 @@
-import { scaleLinear } from 'd3-scale';
+import { scaleLinear, scaleLog } from 'd3-scale';
 import type { PressureUnit, TestRow } from '@fire/contracts';
 
 export const midpoint = (range: { min: number | null; max: number | null }): number | null => range.min === null ? range.max : range.max === null ? range.min : (range.min + range.max) / 2;
@@ -33,4 +33,24 @@ export function boxHit(x: number, y: number, left: number, top: number, right: n
   const horizontal = Math.abs(x - left) <= tolerance ? 'w' : Math.abs(x - right) <= tolerance ? 'e' : '';
   const vertical = Math.abs(y - top) <= tolerance ? 'n' : Math.abs(y - bottom) <= tolerance ? 's' : '';
   return vertical + horizontal || 'move';
+}
+
+const UNIT_FACTOR: Record<PressureUnit, number> = { kPa: 1, psi: 0.1450377377, atm: 1 / 101.325, mmHg: 7.50061683 };
+const compact = (v: number): string => (v >= 100 ? v.toFixed(0) : v >= 10 ? String(Number(v.toFixed(1))) : String(Number(v.toPrecision(2))));
+
+/** Pressure axis ticks chosen in the display unit (so psi shows 5, 10, 20), mapped back to kPa for placement.
+ *  Log axes keep only 1-2-5 mantissas so labels never collide. */
+export function pressureAxisTicks(domainKpa: [number, number], unit: PressureUnit, log: boolean, count = 7): { kpa: number; label: string }[] {
+  const f = UNIT_FACTOR[unit];
+  const lo = Math.max(Math.min(domainKpa[0], domainKpa[1]) * f, 1e-6), hi = Math.max(domainKpa[0], domainKpa[1]) * f;
+  let values: number[];
+  if (log) {
+    values = scaleLog().domain([lo, hi]).ticks(count);
+    const major = values.filter((v) => { const m = v / 10 ** Math.floor(Math.log10(v) + 1e-9); return [1, 2, 5].some((k) => Math.abs(m - k) < 1e-6); });
+    if (major.length >= 3) values = major;
+    if (values.length > 9) { const step = Math.ceil(values.length / 8); values = values.filter((_, i) => i % step === 0); }
+  } else {
+    values = scaleLinear().domain([lo, hi]).ticks(count);
+  }
+  return values.filter((v) => v > 0).map((v) => ({ kpa: v / f, label: compact(v) }));
 }
