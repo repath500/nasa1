@@ -397,7 +397,7 @@ G1: 3-4 gold records double-coded by humans (W2 prepares `data/reviews/candidate
 | Judge fallback | `gemini-decision-1` | `POST https://generativelanguage.googleapis.com/v1beta/decisions`, body uses `input` not `state` | Same questions via an adapter; always labelled `decision-1` |
 | Parse / extract / explain | Gemini 4 Hydrogen | `POST .../v1beta/interactions`, header `Api-Revision: 2026-05-20`, `response_format` with JSON schema | Column-map proposals and paper extracts (build time); Ask parsing (runtime); explanations and narration polish (must pass numberGuard) |
 | Voice | ElevenLabs | §4 | Audio overviews |
-Runtime order: L0 live (≤ 5 s) → L1 decision-1 → L2 recorded cache (labelled with date) → L3 baseline only. Cached responses are keyed by `sha256(corpusHash + rubricVersion + modelId + request)`. Until the provider terms are read (R8), the public build ships **fixtures** labelled `FIXTURE · human-authored, not model output`. Jev values are "model judgement (ordinal)", never "probability the science is true". No thresholds in the end-user UI.
+Runtime order: L0 live (≤ 5 s) → L1 decision-1 → L2 recorded cache (labelled with date) → L3 baseline only. Cached responses are keyed by `sha256(corpusHash + rubricVersion + modelId + request)`. Until the provider terms are read (R8), the public build ships **fixtures** labelled `FIXTURE · placeholder values, not model output, not yet reviewed` (switch to "human-authored" only after a team member writes or signs them). Jev values are "model judgement (ordinal)", never "probability the science is true". No thresholds in the end-user UI.
 
 ---
 
