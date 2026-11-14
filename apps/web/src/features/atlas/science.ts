@@ -1,8 +1,6 @@
 /**
- * ADAPTER (W5). Thin local stand ins for the W3 science functions in @fire/core.
- * Every export here uses the exact name the @fire/core function will have, so the lead can replace
- * this file's body with re-exports from '@fire/core' in one edit. Components never re implement science,
- * they only call these names.
+ * Presentation adapter over @fire/core. Scientific rules (overlap, ranking, Jev order, hashing) live in core;
+ * this file keeps the UI-facing signatures and the plain-language sentences.
  *
  * Local rules follow research/flame/BUILD_PLAN.md section 3.5 and 3.6:
  *  - overlap uses interval intersection with O2 +/- tolerance points and pressure +/- tolerance fraction
@@ -15,80 +13,24 @@ import type {
   JevJudgement, OverlapClass, Pillar, Range, Scenario, Sensitivity, StudyOverlap, TestRow, Tolerances,
 } from '@fire/contracts';
 import { DEFAULT_PRIORITY } from '@fire/contracts';
+import * as core from '@fire/core';
 import { PHASE_LABEL, fmtScenarioPressure } from './format';
 
-const inBand = (r: Range, center: number, halfWidth: number): boolean | null => {
-  if (r.min == null && r.max == null) return null;
-  const lo = (r.min ?? r.max) as number;
-  const hi = (r.max ?? r.min) as number;
-  return hi >= center - halfWidth && lo <= center + halfWidth;
-};
-
+// Rules (overlap classes, burner exclusion, lexicographic baseline) come from @fire/core, the single source of truth.
 export function overlap(row: TestRow, scenario: Scenario, tol: Tolerances): OverlapClass {
-  if (row.o2Location === 'burner') return 'excluded-burner';
-  if (row.o2Location === 'unknown') return 'unknown';
-  const o2 = inBand(row.o2Pct, scenario.o2Pct, tol.o2PctPoints);
-  const p = inBand(row.pressureKpa, scenario.totalKpa, scenario.totalKpa * tol.pressureFrac);
-  if (o2 === null || p === null) return 'unknown';
-  if (o2 && p) return 'covers';
-  if (o2) return 'near-o2-only';
-  if (p) return 'near-pressure-only';
-  return 'none';
+  return core.overlap(row, scenario, tol);
 }
-
-const CLASS_ORDER: OverlapClass[] = ['covers', 'near-o2-only', 'near-pressure-only', 'unknown', 'none', 'excluded-burner'];
 
 export function studyOverlap(accession: string, rows: TestRow[], scenario: Scenario, tol: Tolerances): StudyOverlap {
-  const out: StudyOverlap = { accession, covers: 0, nearO2Only: 0, nearPressureOnly: 0, none: 0, unknown: 0, excludedBurner: 0, bestClass: 'unknown' };
-  const seen = new Set<OverlapClass>();
-  for (const r of rows) {
-    if (r.accession !== accession) continue;
-    const c = overlap(r, scenario, tol);
-    seen.add(c);
-    if (c === 'covers') out.covers++;
-    else if (c === 'near-o2-only') out.nearO2Only++;
-    else if (c === 'near-pressure-only') out.nearPressureOnly++;
-    else if (c === 'none') out.none++;
-    else if (c === 'unknown') out.unknown++;
-    else out.excludedBurner++;
-  }
-  out.bestClass = CLASS_ORDER.find((c) => seen.has(c)) ?? 'unknown';
-  return out;
-}
-
-const matchOf = (card: InvestigationCard, concern: Concern): 'primary' | 'secondary' | 'none' => {
-  if (concern === 'explore') return 'none';
-  if (card.pillarPrimary === concern) return 'primary';
-  if (card.pillarSecondary === concern) return 'secondary';
-  return 'none';
-};
-
-function keyValue(r: BaselineRankRow, k: BaselineKey): number {
-  switch (k) {
-    case 'pillar_match': return r.pillarMatch === 'primary' ? 2 : r.pillarMatch === 'secondary' ? 1 : 0;
-    case 'covers_count': return r.overlap.covers;
-    case 'evidence_tier': return r.evidenceTier ?? -1;
-    case 'near_count': return r.overlap.nearO2Only + r.overlap.nearPressureOnly;
-  }
+  return { ...core.studyOverlap(rows.filter((r) => r.accession === accession), scenario, tol), accession };
 }
 
 export function baselineRank(
   cards: InvestigationCard[], rows: TestRow[], scenario: Scenario, tol: Tolerances, concern: Concern,
   priority: BaselineKey[] = DEFAULT_PRIORITY,
 ): BaselineRankRow[] {
-  const items: BaselineRankRow[] = cards.map((c) => ({
-    accession: c.accession, rank: 0, pillarMatch: matchOf(c, concern),
-    overlap: studyOverlap(c.accession, rows, scenario, tol), evidenceTier: c.evidenceTier,
-  }));
-  items.sort((a, b) => {
-    for (const k of priority) {
-      const d = keyValue(b, k) - keyValue(a, k);
-      if (d !== 0) return d;
-    }
-    return a.accession.localeCompare(b.accession, 'en', { numeric: true });
-  });
-  items.forEach((it, i) => { it.rank = i + 1; });
-  return items;
+  // Preview ranks every card; splitRanked below decides what is shown as ranked vs preview.
+  return core.baselineRankAll(cards, rows, scenario, concern, tol, priority);
 }
 
 function permutations<T>(xs: T[]): T[][] {
@@ -121,22 +63,10 @@ export function sensitivity(all: { order: BaselineKey[]; ranking: BaselineRankRo
   return { ordersTested: all.length, top3Stable: changing.length === 0, changingOrders: changing };
 }
 
-const bin = (x: number | null): number => (x == null ? -1 : Math.round(x * 10) / 10);
-
 export function jevRank(judgements: JevJudgement[], baseline: BaselineRankRow[], concern: Concern): { accession: string; rank: number }[] {
-  const base = new Map(baseline.map((b) => [b.accession, b.rank]));
-  const rows = judgements.filter((j) => base.has(j.accession));
-  const pSel = (j: JevJudgement) => (concern === 'explore' || !j.pillar ? null : (j.pillar.probabilities[concern as Pillar] ?? null));
-  rows.sort((a, b) => {
-    const d1 = bin(b.regimeRelevance) - bin(a.regimeRelevance);
-    if (d1 !== 0) return d1;
-    const d2 = bin(b.evidenceDirectness == null ? null : b.evidenceDirectness / 3) - bin(a.evidenceDirectness == null ? null : a.evidenceDirectness / 3);
-    if (d2 !== 0) return d2;
-    const d3 = bin(pSel(b)) - bin(pSel(a));
-    if (d3 !== 0) return d3;
-    return (base.get(a.accession) ?? 0) - (base.get(b.accession) ?? 0);
-  });
-  return rows.map((j, i) => ({ accession: j.accession, rank: i + 1 }));
+  const order = baseline.map((b) => b.accession);
+  const known = new Set(order);
+  return core.jevRank(judgements.filter((j) => known.has(j.accession)), concern, order).map((j, i) => ({ accession: j.accession, rank: i + 1 }));
 }
 
 export function agreement(
@@ -221,25 +151,11 @@ export function diffSummary(
   return `${n}, ${t}`;
 }
 
-/** Canonical JSON with sorted keys. The lead must confirm W2 uses the same canonical form before enforcing the block. */
-function canonical(v: unknown): string {
-  if (Array.isArray(v)) return `[${v.map(canonical).join(',')}]`;
-  if (v && typeof v === 'object') {
-    const o = v as Record<string, unknown>;
-    return `{${Object.keys(o).sort().map((k) => `${JSON.stringify(k)}:${canonical(o[k])}`).join(',')}}`;
-  }
-  return JSON.stringify(v);
-}
-
 export type HashState = 'ok' | 'mismatch' | 'fixture' | 'unchecked';
 export async function verifyCorpusHash(corpus: Corpus): Promise<HashState> {
   if (corpus.fixture || corpus.corpusHash === 'fixture') return 'fixture';
   try {
-    if (!globalThis.crypto?.subtle) return 'unchecked';
-    const bytes = new TextEncoder().encode(canonical({ cards: corpus.cards, rows: corpus.rows, rejects: corpus.rejects, records: corpus.records }));
-    const digest = await crypto.subtle.digest('SHA-256', bytes);
-    const hex = [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
-    return hex === corpus.corpusHash ? 'ok' : 'mismatch';
+    return core.corpusHash(corpus) === corpus.corpusHash ? 'ok' : 'mismatch';
   } catch {
     return 'unchecked';
   }
