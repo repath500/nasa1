@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { buildCorpus } from './corpus.ts';
 import { repoRoot } from './paths.ts';
@@ -21,6 +21,22 @@ function main(): void {
   const webDataDir = resolve(root, 'apps/web/public/data');
   const corpusPath = join(dataDir, 'corpus.v1.json');
   const webCorpusPath = join(webDataDir, 'corpus.v1.json');
+
+  for (const gate of ['k5', 'd5']) {
+    const publishedPath = join(webDataDir, 'reviews', `${gate}.json`);
+    if (!existsSync(publishedPath)) continue;
+    let valid = false;
+    try {
+      const attestation = JSON.parse(readFileSync(publishedPath, 'utf8')) as { corpusHash?: string };
+      valid = attestation.corpusHash === corpus.corpusHash;
+    } catch {
+      valid = false;
+    }
+    if (!valid) {
+      unlinkSync(publishedPath);
+      console.warn(`WARNING: removed stale or invalid published ${gate.toUpperCase()} gate; human review is required.`);
+    }
+  }
 
   const corpusBytes = writeJson(corpusPath, corpus);
   const webCorpusBytes = writeJson(webCorpusPath, corpus);
