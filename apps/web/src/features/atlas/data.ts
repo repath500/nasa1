@@ -1,14 +1,48 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type {
   Agreement, BaselineRankRow, Corpus, EvidenceRecord, GapStatement, InvestigationCard, JevJudgement, Scenario, ScenarioId, Sensitivity, TestRow,
 } from '@fire/contracts';
 import { PRESETS } from '@fire/contracts';
 import { useAtlas } from '../../state/store';
-import { useCorpus } from '../../data/useCorpus';
 import { FIXTURE_RECORDS, fixtureJudgement } from '../studies/fixtures';
 import {
   agreement, baselineRank, baselineRankAll, gapStatement, jevRank, overlap, sensitivity, splitRanked, verifyCorpusHash, type HashState,
 } from './science';
+
+/**
+ * Local corpus loader. data/useCorpus.ts treats any HTTP 200 as JSON, but the Vite dev server answers a missing file with
+ * index.html and status 200, so the real file is "found" and then fails to parse. This loader also checks the content type,
+ * falls back to the fixture, and offers Retry without a page reload. Lead: fold this into useCorpus if you prefer.
+ */
+type CorpusLoad = { status: 'loading' } | { status: 'ready'; corpus: Corpus } | { status: 'error'; message: string };
+let corpusPromise: Promise<Corpus> | null = null;
+let corpusDone: Corpus | null = null;
+async function loadCorpus(): Promise<Corpus> {
+  for (const url of ['/data/corpus.v1.json', '/data/corpus.fixture.json']) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok || !(res.headers.get('content-type') ?? '').includes('json')) continue;
+      const c = (await res.json()) as Corpus;
+      if (Array.isArray(c.rows) && Array.isArray(c.cards)) return c;
+    } catch { /* try the next file */ }
+  }
+  throw new Error('Reviewed records could not be loaded.');
+}
+function useCorpusLoad(): CorpusLoad & { retry: () => void } {
+  const [state, setState] = useState<CorpusLoad>(() => (corpusDone ? { status: 'ready', corpus: corpusDone } : { status: 'loading' }));
+  const [tick, setTick] = useState(0);
+  useEffect(() => {
+    let live = true;
+    corpusPromise ??= loadCorpus();
+    corpusPromise.then(
+      (corpus) => { corpusDone = corpus; if (live) setState({ status: 'ready', corpus }); },
+      (e: Error) => { if (live) setState({ status: 'error', message: e.message }); },
+    );
+    return () => { live = false; };
+  }, [tick]);
+  const retry = useCallback(() => { corpusPromise = null; corpusDone = null; setState({ status: 'loading' }); setTick((t) => t + 1); }, []);
+  return { ...state, retry };
+}
 
 /** Human sign-off files (SPEC 10.4). The shape is a guess: signed means a non empty string `approver`. Lead: confirm. */
 async function readSignoff(url: string): Promise<boolean> {
@@ -76,6 +110,7 @@ export interface AtlasModel {
   noAi: boolean;
   labelOf: (accession: string) => string;
   topLabel: string | null;
+  retry: () => void;
 }
 
 export function scenarioFor(habitat: ScenarioId, custom: { o2Pct: number; totalKpa: number }): Scenario {
@@ -84,7 +119,7 @@ export function scenarioFor(habitat: ScenarioId, custom: { o2Pct: number; totalK
 }
 
 export function useAtlasModel(): AtlasModel {
-  const cs = useCorpus();
+  const cs = useCorpusLoad();
   const habitat = useAtlas((s) => s.habitat);
   const custom = useAtlas((s) => s.custom);
   const concern = useAtlas((s) => s.concern);
@@ -122,9 +157,9 @@ export function useAtlasModel(): AtlasModel {
     return {
       status: cs.status, message: cs.status === 'error' ? cs.message : '', corpus, cards, cardsByAcc, records, scenario, rows, nearbyCount,
       baseline, ranked: split.ranked, notRanked: split.notRanked, preview: split.preview, jev, jevRanks, agreement: ag, sens, gap,
-      k5Signed: k5, d5Signed: d5, hash, noAi, labelOf, topLabel: split.ranked[0] ? labelOf(split.ranked[0].accession) : null,
+      k5Signed: k5, d5Signed: d5, hash, noAi, labelOf, topLabel: split.ranked[0] ? labelOf(split.ranked[0].accession) : null, retry: cs.retry,
     };
-  }, [cs.status, corpus, scenario, concern, fuelFilter, tol, priority, k5, d5, hash, noAi]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [cs.status, cs.retry, corpus, scenario, concern, fuelFilter, tol, priority, k5, d5, hash, noAi]); // eslint-disable-line react-hooks/exhaustive-deps
 }
 
 export const isFixtureRecord = (r: EvidenceRecord) => r.id.startsWith('FIXTURE-');
@@ -133,6 +168,3 @@ export function bestRecordFor(records: EvidenceRecord[], row: TestRow): Evidence
   return records.find((r) => r.accession === row.accession && r.locator.kind === 'csv-row' && r.locator.rowIndex === row.rowIndex);
 }
 
-export function retryLoad() {
-  window.location.reload();
-}

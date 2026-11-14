@@ -17,7 +17,7 @@ export default function NotesTab() {
   const full = limited && notes.length >= FREE_NOTE_LIMIT;
 
   if (model.status === 'loading') return <Skeleton rows={3} height={48} label="Loading notes" />;
-  if (model.status === 'error') return <ErrorState message={model.message} stillWorks="notes saved in this browser are still listed once data loads." onRetry={() => window.location.reload()} />;
+  if (model.status === 'error') return <ErrorState message={model.message} stillWorks="notes saved in this browser are still listed once data loads." onRetry={model.retry} />;
 
   const rowFor = (id: string | null) => (id ? model.corpus?.rows.find((r) => r.id === id) : undefined);
   const add = (pin: boolean) => {

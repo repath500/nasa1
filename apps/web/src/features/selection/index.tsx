@@ -57,7 +57,7 @@ export default function SelectionTab() {
   }, [rows, model.scenario, tol]);
 
   if (model.status === 'loading') return <Skeleton rows={5} height={30} label="Loading selection" />;
-  if (model.status === 'error') return <ErrorState message={model.message} stillWorks="the About and Method pages." onRetry={() => window.location.reload()} />;
+  if (model.status === 'error') return <ErrorState message={model.message} stillWorks="the About and Method pages." onRetry={model.retry} />;
   if (ids.length === 0) {
     return (
       <EmptyState title="No area selected">

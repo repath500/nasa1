@@ -63,7 +63,7 @@ export default function LedgerTab() {
   useEffect(() => { if (model.status === 'ready' && !animate) markTyped(); }, [model.status, animate]);
 
   if (model.status === 'loading') return <Skeleton rows={5} height={52} label="Loading the ledger" />;
-  if (model.status === 'error') return <ErrorState message={model.message} stillWorks="the About and Method pages." onRetry={() => window.location.reload()} />;
+  if (model.status === 'error') return <ErrorState message={model.message} stillWorks="the About and Method pages." onRetry={model.retry} />;
   if (rejects.length === 0) {
     return (
       <EmptyState title="Code rejected nothing in this corpus">

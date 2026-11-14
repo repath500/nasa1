@@ -65,7 +65,7 @@ export default function BriefPage() {
   const phaseGaps = PHASES.filter((p) => (by.get(p)?.covers ?? 0) === 0);
 
   if (model.status === 'loading') return <Root><main className="fa-page"><Skeleton rows={8} height={44} label="Loading the brief" /></main></Root>;
-  if (model.status === 'error') return <Root><main className="fa-page"><ErrorState message={model.message} stillWorks="the About, Method and Credits pages." onRetry={() => window.location.reload()} /></main></Root>;
+  if (model.status === 'error') return <Root><main className="fa-page"><ErrorState message={model.message} stillWorks="the About, Method and Credits pages." onRetry={model.retry} /></main></Root>;
 
   const printCss = `@page{size:${paper === 'a4' ? 'A4' : 'Letter'};margin:12mm}@media print{body :is(header,nav,footer,[role="banner"],[role="contentinfo"],[data-sonner-toaster],.fa-noprint){display:none!important}}`;
 

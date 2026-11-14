@@ -232,7 +232,7 @@ export default function EvidenceDrawer({ rowId, onClose, recordId = null }: Evid
 
             <div className="fa-drawer__body">
               {model.status === 'loading' && <Skeleton rows={6} height={34} label="Loading the source row" />}
-              {model.status === 'error' && <ErrorState message={model.message} stillWorks="the map and the other panels that already loaded." onRetry={() => window.location.reload()} />}
+              {model.status === 'error' && <ErrorState message={model.message} stillWorks="the map and the other panels that already loaded." onRetry={model.retry} />}
               {model.status === 'ready' && !row && !rec && (
                 <EmptyState title="This source row is not in the loaded corpus" actions={<Btn onClick={onClose}>Close</Btn>}>
                   The link may come from a different corpus build ({shown.rowId ?? shown.recordId}). Nothing is guessed in its place.

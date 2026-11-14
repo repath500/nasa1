@@ -27,6 +27,10 @@
 .fa h1, .fa h2, .fa h3, .fa h4 { margin: 0; font-weight: 600; letter-spacing: -0.01em; }
 .fa a { color: var(--fa-accent); text-underline-offset: 2px; }
 .fa a:hover { color: var(--fa-focus); }
+.fa a.fa-btn, .fa a.fa-chip { color: var(--fa-ink); text-decoration: none; }
+.fa a.fa-btn--primary { color: var(--fa-accent-ink); }
+.fa a.fa-btn--primary:hover { color: var(--fa-accent-ink); }
+.fa a.fa-btn:hover, .fa a.fa-chip:hover { color: var(--fa-ink); }
 .fa :focus-visible { outline: 2px solid var(--fa-focus); outline-offset: 2px; }
 .fa p { margin: 0; }
 .fa sub { font-size: 0.75em; line-height: 0; }

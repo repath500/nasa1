@@ -100,7 +100,7 @@ export default function ComparePage() {
         </header>
 
         {model.status === 'loading' && <Skeleton rows={8} height={42} label="Loading comparison" />}
-        {model.status === 'error' && <ErrorState message={model.message} stillWorks="the About, Method and Credits pages." onRetry={() => window.location.reload()} />}
+        {model.status === 'error' && <ErrorState message={model.message} stillWorks="the About, Method and Credits pages." onRetry={model.retry} />}
 
         {model.status === 'ready' && !sides && (
           <EmptyState title={a && b && (!cardA || !cardB) ? 'One of these studies is not in the loaded corpus' : 'Choose two studies to compare'} actions={<Link className="fa-btn" to="/atlas">Back to the atlas</Link>}>

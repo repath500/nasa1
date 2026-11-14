@@ -13,7 +13,7 @@ import PrioritiesSheet from './PrioritiesSheet';
 type ColId = 'base' | 'jevrank' | 'delta' | 'study' | 'pillar' | 'tier' | 'overlap' | 'kind' | 'rel' | 'dir' | 'jpillar';
 interface Col { id: ColId; label: string; title: string; w: string; jev?: boolean; sortable?: boolean; locked?: boolean; num?: boolean }
 const COLS: Col[] = [
-  { id: 'base', label: 'Base #', title: 'Rank from the transparent baseline (code)', w: '56px', sortable: true, num: true },
+  { id: 'base', label: 'Base #', title: 'Rank from the transparent baseline (code)', w: '64px', sortable: true, num: true },
   { id: 'jevrank', label: 'Jev #', title: 'Rank from the Jev judgements, separate from the baseline', w: '56px', jev: true, sortable: true, num: true },
   { id: 'delta', label: 'Δ', title: 'Places Jev moved this study relative to the baseline', w: '64px', jev: true, num: true },
   { id: 'study', label: 'Study', title: 'Investigation', w: '230px', sortable: true, locked: true },
@@ -155,7 +155,7 @@ export default function StudiesTab() {
 
   /* ---------- system states ---------- */
   if (model.status === 'loading') return <Skeleton rows={6} height={44} label="Loading studies" />;
-  if (model.status === 'error') return <ErrorState title="Studies did not load" message={model.message} stillWorks="the About, Method and Credits pages, and the glossary." onRetry={() => window.location.reload()} />;
+  if (model.status === 'error') return <ErrorState title="Studies did not load" message={model.message} stillWorks="the About, Method and Credits pages, and the glossary." onRetry={model.retry} />;
   if (model.cards.length === 0) return <EmptyState title="No investigation cards in this corpus">The corpus loaded but has no investigations to rank. Rows may still appear on the map.</EmptyState>;
   if (model.hash === 'mismatch' && !override) {
     return (

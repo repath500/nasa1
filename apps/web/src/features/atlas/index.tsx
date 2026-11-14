@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ComponentType, type KeyboardEvent, type PointerEvent } from 'react';
 import { Link } from 'react-router-dom';
 import * as Tabs from '@radix-ui/react-tabs';
-import { ArrowsOutLineVertical, Export, ListChecks, NotePencil, Prohibit, Rows, Selection, X } from '@phosphor-icons/react';
+import { ArrowsOutLineVertical, Export, NotePencil, Prohibit, Rows, Selection, X } from '@phosphor-icons/react';
 import { PRESETS, type FuelPhase, type PanelTab, type ScenarioId, type TestRow } from '@fire/contracts';
 import { useAtlas } from '../../state/store';
 import { writeUrl } from '../../state/url';
@@ -179,7 +179,7 @@ export default function AtlasWorkspace() {
               </>
             ) : (
               <p className="fa-muted" style={{ fontSize: 12 }}>
-                <ListChecks size={12} style={{ verticalAlign: '-1px' }} /> Gap sentence withheld until a human signs it off (gate K5). Count by code: <span className="fa-num">{model.gap.counts.rowsNear}</span> rows cover this air.
+                Gap sentence withheld until a human signs it off (gate K5). Count by code: <span className="fa-num">{model.gap.counts.rowsNear}</span> rows cover this air.
               </p>
             )}
             {changed && (
@@ -199,7 +199,7 @@ export default function AtlasWorkspace() {
       <div className="fa-main">
         <div className="fa-map" aria-label="Gap Map">
           {model.status === 'loading' && <div className="fa-skel" style={{ width: '100%', height: '100%' }} role="status" aria-label="Loading the Gap Map" />}
-          {model.status === 'error' && <div style={{ padding: 16 }}><ErrorState message={model.message} stillWorks="the About, Method and Credits pages." onRetry={() => window.location.reload()} /></div>}
+          {model.status === 'error' && <div style={{ padding: 16 }}><ErrorState message={model.message} stillWorks="the About, Method and Credits pages." onRetry={model.retry} /></div>}
           {model.status === 'ready' && (
             <GapMap
               rows={rows}

@@ -62,7 +62,7 @@ export default function StudyPage() {
   const pageRows = showAll ? shownRows : shownRows.slice(0, ROW_PAGE);
 
   if (model.status === 'loading') return <Root><main className="fa-page"><Skeleton rows={8} height={40} label="Loading the study" /></main></Root>;
-  if (model.status === 'error') return <Root><main className="fa-page"><ErrorState message={model.message} stillWorks="the About, Method and Credits pages." onRetry={() => window.location.reload()} /></main></Root>;
+  if (model.status === 'error') return <Root><main className="fa-page"><ErrorState message={model.message} stillWorks="the About, Method and Credits pages." onRetry={model.retry} /></main></Root>;
   if (!card) {
     return (
       <Root>
