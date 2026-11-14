@@ -8,7 +8,8 @@ const map: ColumnMap = {
   sha12: '4aa5d3f98708',
   fuelPhase: 'gas',
   gravity: 'microgravity',
-  o2Location: 'ambient',
+  // RED_TEAM S2: the column reads "as diluted with nitrogen" and never says chamber or burner. Unknown until a human reviews it.
+  o2Location: 'unknown',
   rowFilter: 'any',
   date: { format: 'bre', columns: ['Year', 'Month', 'Date'] },
   fuelName: 'Fuel Bottle',
@@ -16,7 +17,8 @@ const map: ColumnMap = {
   o2: { column: 'Oxygen Conc (percent)', unit: 'percent', approxDefault: true },
   caveats: [
     'Table reports no pressure; chamber pressure is not identified.',
-    'O2 cells list several approximate concentrations; the stored range is their min and max.',
+    'O2 cells list several approximate concentrations; each listed value is kept, and the range is shown for display only.',
+    'O2 basis (chamber or burner) is not stated, so these rows are excluded from cabin overlap until reviewed.',
     '3400% and 2100% cells are rejected.',
   ],
 };

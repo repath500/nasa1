@@ -39,3 +39,13 @@ describe('verification and hashes', () => {
 describe('narration', () => {
   it('provides cues, disclosure, gated gap, and deterministic hash', () => { const segments = buildNarrationScript(corpus, scenario, 'suppression', tol, { k5SignedOff: false }); expect(segments).toHaveLength(7); expect(segments[0]?.text).toContain('AI-generated voice'); expect(segments[3]?.text).toContain('awaits human review'); expect(segments.flatMap(segment => segment.cues).some(cue => cue.kind === 'openLedger')).toBe(true); expect(scriptHash(segments)).toBe(scriptHash(segments)); expect(segments.flatMap(segment => claimLint(segment.text))).toEqual([]); expect(numberGuard(segments[1]!.text, [scenario.o2Pct, scenario.totalKpa])).toEqual([]); });
 });
+
+import { overlap as overlapFn } from '../src/index';
+import { PRESETS as P, DEFAULT_TOLERANCES as TOL } from '@fire/contracts';
+it('discrete O2 lists are tested value by value, never as an envelope', () => {
+  const base = { id: 'X:0', accession: 'X', rowIndex: 0, testLabel: null, date: null, fuel: { name: null, phase: 'gas' as const, geometry: null, size: null },
+    o2Location: 'ambient' as const, o2Approx: false, o2FinalPct: null, pressureKpa: { min: 70, max: 70 }, flowCmS: { min: null, max: null }, gravity: 'microgravity' as const, raw: {}, csvSha12: 'x' };
+  // 21; 26.5; 40 spans the lunar band 27-33 but no listed value is inside it.
+  expect(overlapFn({ ...base, o2Pct: { min: 21, max: 40 }, o2ValuesPct: [21, 26.5, 40] }, P['lunar-cabin-example'], TOL)).toBe('near-pressure-only');
+  expect(overlapFn({ ...base, o2Pct: { min: 21, max: 40 }, o2ValuesPct: [21, 30, 40] }, P['lunar-cabin-example'], TOL)).toBe('covers');
+});

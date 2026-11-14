@@ -106,7 +106,7 @@ export default function AtlasWorkspace() {
     () => (model.status === 'ready' ? describeView(scenario, concern, { total: model.rows.length, near: model.nearbyCount, unit, fuelFilter }) : ''),
     [model.status, model.rows.length, model.nearbyCount, scenario, concern, unit, fuelFilter],
   );
-  const exportHref = `/brief/${habitat}?${writeUrl()}`;
+  const exportHref = `/brief/${habitat}?${writeUrl('')}`;
   const cutoff = timelineYear ? `${timelineYear}-12-31` : null;
 
   const toggleFuel = (p: FuelPhase) => set({ fuelFilter: fuelFilter.includes(p) ? fuelFilter.filter((x) => x !== p) : [...fuelFilter, p] });

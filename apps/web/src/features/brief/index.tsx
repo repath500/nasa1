@@ -56,7 +56,7 @@ export default function BriefPage() {
   }, [model.rows, scenario, tol]);
 
   const top = model.ranked.slice(0, 5);
-  const link = `${window.location.origin}/atlas?${writeUrl()}`;
+  const link = `${window.location.origin}/atlas?${writeUrl('')}`;
   const includeNotes = paid && withNotes && notes.length > 0;
   const noteAccs = new Set(notes.map((n) => n.accession).filter((a): a is string => !!a));
   const citeCards = model.cards.filter((c) => top.some((t) => t.accession === c.accession) || (includeNotes && noteAccs.has(c.accession)));

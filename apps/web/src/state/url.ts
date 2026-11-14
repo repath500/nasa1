@@ -1,9 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import type { Concern, FuelPhase, Mode, PanelTab, PressureUnit, ScenarioId } from '@fire/contracts';
-import { useAtlas } from './store';
+import { type Concern, type FuelPhase, type Mode, type PanelTab, type PressureUnit, type ScenarioId } from '@fire/contracts';
+import { useAtlas, type AtlasState } from './store';
 
-/** SPEC §13 / contracts UrlState. Two-way sync between the query string and the store. */
+/**
+ * SPEC §13 / contracts UrlState. Two-way sync between the query string and the store.
+ * - Only the atlas keys below are owned here; every other parameter (compare a/b, duel h1/h2,
+ *   Stripe session_id, billing) is preserved untouched.
+ * - Back/Forward and pasted links rehydrate the store; our own writes are not re-read (no echo loop).
+ * - Committed choices (habitat, concern, fuel, material, mode) push a history entry; continuous
+ *   changes (custom O2/pressure drags, selection, tab, units, timeline) replace it.
+ */
 const HABITATS: ScenarioId[] = ['earth-iss', 'lunar-cabin-example', 'exploration-upper', 'suit', 'custom'];
 const CONCERNS: Concern[] = ['prevention', 'detection', 'suppression', 'explore'];
 const PHASES: FuelPhase[] = ['solid', 'liquid-droplet', 'gas', 'aerosol', 'unknown'];
@@ -11,49 +18,119 @@ const MODES: Mode[] = ['explore', 'briefing', 'listen', 'present', 'learn', 'due
 const TABS: PanelTab[] = ['studies', 'selection', 'ledger', 'notes'];
 const UNITS: PressureUnit[] = ['kPa', 'psi', 'atm', 'mmHg'];
 
-export function readUrl(search: string) {
+const ATLAS_KEYS = ['h', 'o2', 'kpa', 'q', 'f', 'm', 'mode', 'tab', 'sel', 'u', 't', 'ex'] as const;
+const COMMITTED_KEYS = ['h', 'q', 'f', 'm', 'mode'] as const;
+/** Routes whose view depends on atlas state; other pages (pricing, account, about) keep clean URLs. */
+const SYNCED_ROUTES = ['/atlas', '/briefing', '/study', '/compare', '/brief', '/duel'];
+
+type UrlPatch = Partial<Pick<AtlasState, 'habitat' | 'custom' | 'concern' | 'fuelFilter' | 'material' | 'mode' | 'panelTab' | 'selectedRowId' | 'unit' | 'timelineYear' | 'expert'>>;
+
+const isSynced = (pathname: string) => SYNCED_ROUTES.some((route) => pathname === route || pathname.startsWith(route + '/'));
+
+/** Returns the complete URL-owned slice (defaults for absent keys) when the link carries atlas keys; {} otherwise. */
+export function readUrl(search: string): UrlPatch {
   const p = new URLSearchParams(search);
-  const patch: Record<string, unknown> = {};
+  if (!ATLAS_KEYS.some((key) => p.has(key))) return {};
   const h = p.get('h') as ScenarioId | null;
-  if (h && HABITATS.includes(h)) patch.habitat = h;
-  const o2 = Number(p.get('o2')); const kpa = Number(p.get('kpa'));
-  if (Number.isFinite(o2) && o2 > 0 && o2 <= 100 && Number.isFinite(kpa) && kpa > 0) patch.custom = { o2Pct: o2, totalKpa: kpa };
-  const q = p.get('q') as Concern | null; if (q && CONCERNS.includes(q)) patch.concern = q;
-  const f = p.get('f'); if (f) patch.fuelFilter = f.split(',').filter((x): x is FuelPhase => PHASES.includes(x as FuelPhase));
-  const m = p.get('m'); if (m && m.length <= 60) patch.material = m;
-  const mode = p.get('mode') as Mode | null; if (mode && MODES.includes(mode)) patch.mode = mode;
-  const tab = p.get('tab') as PanelTab | null; if (tab && TABS.includes(tab)) patch.panelTab = tab;
-  const sel = p.get('sel'); if (sel && /^PSI-\d+:\d+$/.test(sel)) patch.selectedRowId = sel;
-  const u = p.get('u') as PressureUnit | null; if (u && UNITS.includes(u)) patch.unit = u;
-  const t = Number(p.get('t')); if (Number.isInteger(t) && t > 2000 && t < 2100) patch.timelineYear = t;
-  if (p.get('ex') === '1') patch.expert = true;
+  const o2 = Number(p.get('o2'));
+  const kpa = Number(p.get('kpa'));
+  const q = p.get('q') as Concern | null;
+  const mode = p.get('mode') as Mode | null;
+  const tab = p.get('tab') as PanelTab | null;
+  const sel = p.get('sel');
+  const u = p.get('u') as PressureUnit | null;
+  const t = Number(p.get('t'));
+  const m = p.get('m');
+  const patch: UrlPatch = {
+    habitat: h && HABITATS.includes(h) ? h : 'lunar-cabin-example',
+    concern: q && CONCERNS.includes(q) ? q : 'prevention',
+    fuelFilter: (p.get('f') ?? '').split(',').filter((x): x is FuelPhase => PHASES.includes(x as FuelPhase)),
+    material: m && m.length <= 60 ? m : null,
+    mode: mode && MODES.includes(mode) ? mode : 'explore',
+    panelTab: tab && TABS.includes(tab) ? tab : 'studies',
+    selectedRowId: sel && /^PSI-\d+:\d+$/.test(sel) ? sel : null,
+    unit: u && UNITS.includes(u) ? u : 'kPa',
+    timelineYear: p.has('t') && Number.isInteger(t) && t > 2000 && t < 2100 ? t : null,
+    expert: p.get('ex') === '1',
+  };
+  if (p.has('o2') && p.has('kpa') && Number.isFinite(o2) && o2 >= 0 && o2 <= 100 && Number.isFinite(kpa) && kpa > 0 && kpa <= 1000) {
+    patch.custom = { o2Pct: o2, totalKpa: kpa };
+  }
   return patch;
 }
 
-export function writeUrl(): string {
-  const s = useAtlas.getState();
-  const p = new URLSearchParams();
-  p.set('h', s.habitat);
-  if (s.habitat === 'custom') { p.set('o2', String(s.custom.o2Pct)); p.set('kpa', String(s.custom.totalKpa)); }
-  p.set('q', s.concern);
-  if (s.fuelFilter.length) p.set('f', s.fuelFilter.join(','));
-  if (s.material) p.set('m', s.material);
-  if (s.mode !== 'explore') p.set('mode', s.mode);
-  if (s.panelTab !== 'studies') p.set('tab', s.panelTab);
-  if (s.selectedRowId) p.set('sel', s.selectedRowId);
-  if (s.unit !== 'kPa') p.set('u', s.unit);
-  if (s.timelineYear) p.set('t', String(s.timelineYear));
-  if (s.expert) p.set('ex', '1');
+/** The atlas keys for the current state, as an ordered list of [key, value]. */
+export function atlasParams(s: AtlasState = useAtlas.getState()): [string, string][] {
+  const out: [string, string][] = [['h', s.habitat]];
+  if (s.habitat === 'custom') out.push(['o2', String(s.custom.o2Pct)], ['kpa', String(s.custom.totalKpa)]);
+  out.push(['q', s.concern]);
+  if (s.fuelFilter.length) out.push(['f', s.fuelFilter.join(',')]);
+  if (s.material) out.push(['m', s.material]);
+  if (s.mode !== 'explore') out.push(['mode', s.mode]);
+  if (s.panelTab !== 'studies') out.push(['tab', s.panelTab]);
+  if (s.selectedRowId) out.push(['sel', s.selectedRowId]);
+  if (s.unit !== 'kPa') out.push(['u', s.unit]);
+  if (s.timelineYear) out.push(['t', String(s.timelineYear)]);
+  if (s.expert) out.push(['ex', '1']);
+  return out;
+}
+
+/** Merge atlas keys into an existing query string, preserving every non-atlas parameter. */
+export function writeUrl(existingSearch: string, s: AtlasState = useAtlas.getState()): string {
+  const p = new URLSearchParams(existingSearch);
+  for (const key of ATLAS_KEYS) p.delete(key);
+  for (const [key, value] of atlasParams(s)) p.set(key, value);
   return p.toString();
 }
+
+const committedOf = (search: string) => {
+  const p = new URLSearchParams(search);
+  return COMMITTED_KEYS.map((key) => p.get(key) ?? '').join('|');
+};
 
 /** Mount once inside the router. */
 export function useUrlSync() {
   const location = useLocation();
   const navigate = useNavigate();
-  useEffect(() => { useAtlas.getState().set(readUrl(location.search)); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, []);
-  useEffect(() => useAtlas.subscribe(() => {
-    const next = writeUrl();
-    if (next !== location.search.replace(/^\?/, '')) navigate({ search: next }, { replace: true });
-  }), [location.search, navigate]);
+  const lastWritten = useRef<string | null>(null);
+  const hydrating = useRef(false);
+
+  // Rehydrate on every navigation that we did not cause ourselves (first load, Back/Forward, pasted links).
+  useEffect(() => {
+    const search = location.search.replace(/^\?/, '');
+    if (search === lastWritten.current) return;
+    const patch = readUrl(search);
+    if (Object.keys(patch).length) {
+      hydrating.current = true;
+      useAtlas.getState().set(patch);
+      hydrating.current = false;
+    }
+  }, [location.key, location.search]);
+
+  // Write atlas keys back when the URL-owned slice changes.
+  useEffect(() => {
+    let previous = atlasParams().map((entry) => entry.join('=')).join('&');
+    return useAtlas.subscribe((state) => {
+      if (hydrating.current || !isSynced(window.location.pathname)) return;
+      const current = atlasParams(state).map((entry) => entry.join('=')).join('&');
+      if (current === previous) return;
+      previous = current;
+      const existing = window.location.search.replace(/^\?/, '');
+      const next = writeUrl(existing, state);
+      if (next === existing) return;
+      lastWritten.current = next;
+      navigate({ search: next }, { replace: committedOf(next) === committedOf(existing) });
+    });
+  }, [navigate]);
+
+  // Atlas routes opened without keys get them once, so the view is shareable as-is.
+  useEffect(() => {
+    if (!isSynced(location.pathname)) return;
+    const existing = location.search.replace(/^\?/, '');
+    if (new URLSearchParams(existing).has('h')) return;
+    const next = writeUrl(existing);
+    lastWritten.current = next;
+    navigate({ search: next }, { replace: true });
+  }, [location.pathname, location.search, navigate]);
 }
+

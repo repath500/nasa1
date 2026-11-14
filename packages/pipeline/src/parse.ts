@@ -21,6 +21,8 @@ export interface CellParse {
   range: Range;
   approx: boolean;
   reject: CellReject | null;
+  /** Discrete values when the cell is a ";" list (never treated as a continuous range). */
+  values?: number[];
 }
 
 export interface ParsedTableFile {
@@ -223,7 +225,10 @@ export function parseNumericCell(rawValue: string, spec: NumericSpec, kind: Nume
         },
       };
     }
-    return rangeFrom(percentValues, approxStripped.approx || (spec.approxDefault ?? false), 2);
+    const parsedO2 = rangeFrom(percentValues, approxStripped.approx || (spec.approxDefault ?? false), 2);
+    // A ';' list is a set of discrete tested values, not a continuous range: keep the set for overlap.
+    if (tokens.length > 1) parsedO2.values = percentValues.map((v) => roundTo(v, 2));
+    return parsedO2;
   }
 
   if (kind === 'pressure') {
@@ -448,7 +453,7 @@ export function parseTableFile(
     const parseField = (
       spec: NumericSpec | undefined,
       kind: NumericKind,
-    ): { range: Range; approx: boolean } => {
+    ): { range: Range; approx: boolean; values?: number[] } => {
       if (!spec) return { range: { ...NULL_RANGE }, approx: false };
       const cell = parseNumericCell(record[spec.column] ?? '', spec, kind);
       if (cell.reject) {
@@ -462,7 +467,7 @@ export function parseTableFile(
           csvSha12: table.sha12,
         });
       }
-      return { range: cell.range, approx: cell.approx };
+      return { range: cell.range, approx: cell.approx, values: cell.values };
     };
 
     const o2 = parseField(map.o2, 'o2');
@@ -494,6 +499,7 @@ export function parseTableFile(
         size: parseSize(record, map.size),
       },
       o2Pct: o2.range,
+      ...(o2.values ? { o2ValuesPct: o2.values } : {}),
       o2Location,
       o2Approx: o2.approx,
       o2FinalPct: finalO2.range.min,

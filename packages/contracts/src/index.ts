@@ -62,6 +62,9 @@ export interface TestRow {
   fuel: { name: string | null; phase: FuelPhase; geometry: string | null; size: string | null };
   /** Initial ambient (or burner) O2, percent by volume. Null = not reported. */
   o2Pct: Range;
+  /** Discrete tested O2 values when the source cell lists several (e.g. "21; 26.5; 40").
+   *  Overlap tests each value; the o2Pct envelope is for display only and never implies untested values in between. */
+  o2ValuesPct?: number[];
   o2Location: OxygenLocation;
   o2Approx: boolean;
   /** Post-test O2 if the table reports it (never a condition). */

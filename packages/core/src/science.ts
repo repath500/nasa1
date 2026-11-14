@@ -6,7 +6,11 @@ function intersects(range: Range, min: number, max: number): boolean | null {
 }
 export function overlap(row: TestRow, scenario: Scenario, tolerances: Tolerances): OverlapClass {
   if (row.o2Location === 'burner') return 'excluded-burner';
-  const oxygen = row.o2Location === 'ambient' ? intersects(row.o2Pct, scenario.o2Pct - tolerances.o2PctPoints, scenario.o2Pct + tolerances.o2PctPoints) : null;
+  const o2Lo = scenario.o2Pct - tolerances.o2PctPoints, o2Hi = scenario.o2Pct + tolerances.o2PctPoints;
+  // Discrete lists are tested value by value; an envelope would invent untested values in between.
+  const oxygen = row.o2Location !== 'ambient' ? null
+    : row.o2ValuesPct && row.o2ValuesPct.length > 1 ? row.o2ValuesPct.some(value => value >= o2Lo && value <= o2Hi)
+    : intersects(row.o2Pct, o2Lo, o2Hi);
   const pressure = intersects(row.pressureKpa, scenario.totalKpa * (1 - tolerances.pressureFrac), scenario.totalKpa * (1 + tolerances.pressureFrac));
   // Truth table (oxygen, pressure): in/in covers; in/out near-o2-only;
   // out/in near-pressure-only; out/out none; any unknown unknown.
