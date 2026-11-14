@@ -9,9 +9,15 @@ import type { Env } from '../src/env.ts';
 import { loadEnvFile } from '../src/env-file.ts';
 import { buildNarrationScript, presetScenario } from '../src/core-bridge.ts';
 import { renderNarration } from '../src/narration/index.ts';
+import { computeNarrationFacts } from '../src/narration/facts.ts';
+import { readFileSync } from 'node:fs';
+import type { Corpus } from '@fire/contracts';
 
 const repoRoot = new URL('../../../', import.meta.url).pathname;
 const outDir = new URL('../../../apps/web/public/audio/', import.meta.url).pathname;
+const corpus = JSON.parse(readFileSync(new URL('../../../data/corpus.v1.json', import.meta.url), 'utf8')) as Corpus;
+const factsFor = (id: ScenarioId | null | undefined, concern: Concern) =>
+  id && id !== 'custom' ? computeNarrationFacts(corpus, PRESETS[id], concern) : undefined;
 const concerns: Concern[] = ['prevention', 'detection', 'suppression', 'explore'];
 const presetIds: Exclude<ScenarioId, 'custom'>[] = ['earth-iss', 'lunar-cabin-example', 'exploration-upper', 'suit'];
 
@@ -45,6 +51,7 @@ const main = async (): Promise<void> => {
           scenario: scenario ?? undefined,
           concern: item.concern ?? 'explore',
           voiceProvider: live ? 'elevenlabs' : 'device',
+          facts: factsFor(item.scenarioId, item.concern ?? 'explore'),
         });
     try {
       const result = await renderNarration(env, script, {
@@ -66,6 +73,7 @@ const main = async (): Promise<void> => {
         scenario,
         concern: item.concern ?? 'explore',
         voiceProvider: 'device',
+        facts: item.landing ? undefined : factsFor(item.scenarioId, item.concern ?? 'explore'),
       });
       const result = await renderNarration({ ...env, ELEVENLABS_API_KEY: undefined }, device, {
         skipCache: true,

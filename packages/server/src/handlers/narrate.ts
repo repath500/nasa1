@@ -1,7 +1,9 @@
+import { PRESETS } from '@fire/contracts';
 import type { Concern } from '@fire/contracts';
 import { ApiError, json, readJsonBody, readLicenseHeader } from '../http.ts';
 import { elevenLabsConfigured, licenseConfigured, type Env } from '../env.ts';
 import { NarrateRequestSchema } from '../ai/schemas.ts';
+import { computeNarrationFacts, loadCorpusFromOrigin } from '../narration/facts.ts';
 import { buildNarrationScript, parseScenarioKey, presetScenario, type BuiltNarrationScript } from '../core-bridge.ts';
 import { renderNarration, type RenderOptions } from '../narration/index.ts';
 import { verifyLicenseToken } from '../billing/license.ts';
@@ -37,11 +39,14 @@ export const narrate = async (req: Request, env: Env, options?: RenderOptions): 
     if (record?.expiresAt && Date.parse(record.expiresAt) <= Date.now()) throw new ApiError(403, 'Licence expired');
     customer = verified.payload.customer;
     const custom = parsed.data.customScenario;
+    const customScenario = { id: 'custom' as const, label: 'the custom habitat', o2Pct: custom.o2Pct, totalKpa: custom.totalKpa };
+    const corpus = await loadCorpusFromOrigin(env.PUBLIC_ORIGIN);
     script = buildNarrationScript({
       scenarioKey: 'custom__' + custom.concern,
       kind: 'scenario',
-      scenario: { id: 'custom', label: 'the custom habitat', o2Pct: custom.o2Pct, totalKpa: custom.totalKpa },
+      scenario: customScenario,
       concern: custom.concern,
+      facts: corpus ? computeNarrationFacts(corpus, { ...customScenario, sourceNote: 'Set by the user', isExample: true }, custom.concern) : undefined,
       voiceProvider: elevenLabsConfigured(env) ? 'elevenlabs' : 'device',
     });
   } else {
@@ -62,6 +67,8 @@ export const narrate = async (req: Request, env: Env, options?: RenderOptions): 
         kind: 'scenario',
         scenario,
         concern: parsedKey.concern,
+        facts: await loadCorpusFromOrigin(env.PUBLIC_ORIGIN).then((corpus) =>
+          corpus && parsedKey.id !== 'custom' ? computeNarrationFacts(corpus, PRESETS[parsedKey.id], parsedKey.concern) : undefined),
         voiceProvider: elevenLabsConfigured(env) ? 'elevenlabs' : 'device',
       });
     }

@@ -1,6 +1,6 @@
 {
   "scenarioKey": "lunar-cabin-example__prevention",
-  "scriptHash": "b15f42e83738ce1ca020fca9ed4ff1ff87ed5262d8ff4c1c6ce29f7264942a61",
+  "scriptHash": "8f0e8384551b80bfabfbd910cc48a56d536133885ec2c2b238ad6047faabc91e",
   "segments": [
     {
       "id": "intro",
@@ -39,11 +39,33 @@
     {
       "id": "tested",
       "title": "What was tested",
-      "text": "Each mark is one parsed test row. Shape and colour show the fuel phase. Hollow marks are burner-stream oxygen and are left out of counts. A row with no reported pressure sits on the pressure not reported rail.",
+      "text": "Each mark is one parsed test row. Shape and colour show the fuel phase. Hollow marks are burner-stream oxygen and are left out of counts. A row with no reported pressure sits on the pressure not reported rail. Of 1476 parsed rows, 8 sit inside this box: 8 liquid droplet. 7 more match the oxygen but not the pressure, and 870 cannot be placed because their table leaves out pressure or oxygen.",
       "claimIds": [
-        "scenario:lunar-cabin-example"
+        "scenario:lunar-cabin-example",
+        "PSI-69:24",
+        "PSI-69:25",
+        "PSI-69:26",
+        "PSI-69:27",
+        "PSI-69:39",
+        "PSI-69:40",
+        "PSI-69:41",
+        "PSI-69:42"
       ],
       "cues": [
+        {
+          "kind": "highlightRows",
+          "rowIds": [
+            "PSI-69:24",
+            "PSI-69:25",
+            "PSI-69:26",
+            "PSI-69:27",
+            "PSI-69:39",
+            "PSI-69:40",
+            "PSI-69:41",
+            "PSI-69:42"
+          ],
+          "at": 27.44
+        },
         {
           "kind": "filterPhase",
           "phases": [
@@ -53,28 +75,28 @@
         }
       ],
       "startSec": 27.24,
-      "endSec": 41.85
+      "endSec": 54.93
     },
     {
       "id": "gap",
       "title": "The gap",
-      "text": "The gap sentence is written by code from reported rows. Tables that do not report oxygen are counted as unknown, never as absent. No model writes the counts, and no curve is fitted to the marks.",
+      "text": "The gap sentence is written by code from reported rows. Tables that do not report oxygen are counted as unknown, never as absent. No model writes the counts, and no curve is fitted to the marks. Code also set aside 11 source cells it could not trust, such as impossible oxygen values.",
       "claimIds": [
         "scenario:lunar-cabin-example"
       ],
       "cues": [
         {
           "kind": "openLedger",
-          "at": 42.2
+          "at": 55.28
         }
       ],
-      "startSec": 42.2,
-      "endSec": 56.05
+      "startSec": 55.28,
+      "endSec": 75.28
     },
     {
       "id": "read",
       "title": "Where to start",
-      "text": "Use the study list to compare the transparent baseline with the model judgement. The baseline sorts by purpose, overlap, evidence tier and nearby rows. The model column is an ordinal judgement, not a probability that the science is true.",
+      "text": "Use the study list to compare the transparent baseline with the model judgement. The baseline sorts by purpose, overlap, evidence tier and nearby rows. The model column is an ordinal judgement, not a probability that the science is true. In the unreviewed preview order, the leading studies are SAFFIRE-III, BASS-II and BASS. The team still has to review these cards.",
       "claimIds": [
         "PSI-25"
       ],
@@ -82,11 +104,11 @@
         {
           "kind": "openStudy",
           "accession": "PSI-25",
-          "at": 56.7
+          "at": 75.93
         }
       ],
-      "startSec": 56.4,
-      "endSec": 71.4
+      "startSec": 75.63,
+      "endSec": 98.71
     },
     {
       "id": "limits",
@@ -98,11 +120,11 @@
       "cues": [
         {
           "kind": "clear",
-          "at": 71.75
+          "at": 99.06
         }
       ],
-      "startSec": 71.75,
-      "endSec": 85.21
+      "startSec": 99.06,
+      "endSec": 112.52
     },
     {
       "id": "outro",
@@ -114,11 +136,11 @@
       "cues": [
         {
           "kind": "clear",
-          "at": 85.56
+          "at": 112.87
         }
       ],
-      "startSec": 85.56,
-      "endSec": 95.56
+      "startSec": 112.87,
+      "endSec": 122.87
     }
   ],
   "words": null,
@@ -128,6 +150,6 @@
     "voiceId": null,
     "modelId": null
   },
-  "generatedAt": "2026-11-14T20:31:24.770Z",
+  "generatedAt": "2026-11-14T20:43:21.632Z",
   "disclosure": "This overview uses a device voice. No AI voice service is called."
 }

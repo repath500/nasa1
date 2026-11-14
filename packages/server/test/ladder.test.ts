@@ -91,7 +91,7 @@ describe('fallback ladder', () => {
     expect(result.ladder).toBe('L3-baseline');
     expect(result.judgements.every((item) => item.source === 'fixture')).toBe(true);
     expect(result.judgements.every((item) => item.modelId === FIXTURE_MODEL_ID)).toBe(true);
-    expect(result.note).toContain('FIXTURE: human-authored, not model output');
+    expect(result.note).toContain('FIXTURE: placeholder values, not model output');
   });
 
   it('L3 when upstream data is invalid', async () => {

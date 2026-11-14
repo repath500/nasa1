@@ -1,6 +1,6 @@
 {
   "scenarioKey": "exploration-upper__prevention",
-  "scriptHash": "326623c8bce491a9c40f6d1d165e77e04c508fed7e17bdb8f157cedc8f388e85",
+  "scriptHash": "0fdef7ee5151e172512c614b843f1c9283f0b5b98e69edc7795f82c21913b7d8",
   "segments": [
     {
       "id": "intro",
@@ -39,7 +39,7 @@
     {
       "id": "tested",
       "title": "What was tested",
-      "text": "Each mark is one parsed test row. Shape and colour show the fuel phase. Hollow marks are burner-stream oxygen and are left out of counts. A row with no reported pressure sits on the pressure not reported rail.",
+      "text": "Each mark is one parsed test row. Shape and colour show the fuel phase. Hollow marks are burner-stream oxygen and are left out of counts. A row with no reported pressure sits on the pressure not reported rail. None of the 1476 parsed rows sits inside this box. That empty box is the gap. 9 more match the oxygen but not the pressure, and 870 cannot be placed because their table leaves out pressure or oxygen.",
       "claimIds": [
         "scenario:exploration-upper"
       ],
@@ -53,28 +53,28 @@
         }
       ],
       "startSec": 26.47,
-      "endSec": 41.08
+      "endSec": 55.7
     },
     {
       "id": "gap",
       "title": "The gap",
-      "text": "The gap sentence is written by code from reported rows. Tables that do not report oxygen are counted as unknown, never as absent. No model writes the counts, and no curve is fitted to the marks.",
+      "text": "The gap sentence is written by code from reported rows. Tables that do not report oxygen are counted as unknown, never as absent. No model writes the counts, and no curve is fitted to the marks. Code also set aside 11 source cells it could not trust, such as impossible oxygen values.",
       "claimIds": [
         "scenario:exploration-upper"
       ],
       "cues": [
         {
           "kind": "openLedger",
-          "at": 41.43
+          "at": 56.05
         }
       ],
-      "startSec": 41.43,
-      "endSec": 55.28
+      "startSec": 56.05,
+      "endSec": 76.05
     },
     {
       "id": "read",
       "title": "Where to start",
-      "text": "Use the study list to compare the transparent baseline with the model judgement. The baseline sorts by purpose, overlap, evidence tier and nearby rows. The model column is an ordinal judgement, not a probability that the science is true.",
+      "text": "Use the study list to compare the transparent baseline with the model judgement. The baseline sorts by purpose, overlap, evidence tier and nearby rows. The model column is an ordinal judgement, not a probability that the science is true. In the unreviewed preview order, the leading studies are SAFFIRE-III, BASS-II and BASS. The team still has to review these cards.",
       "claimIds": [
         "PSI-25"
       ],
@@ -82,11 +82,11 @@
         {
           "kind": "openStudy",
           "accession": "PSI-25",
-          "at": 55.93
+          "at": 76.7
         }
       ],
-      "startSec": 55.63,
-      "endSec": 70.63
+      "startSec": 76.4,
+      "endSec": 99.48
     },
     {
       "id": "limits",
@@ -98,11 +98,11 @@
       "cues": [
         {
           "kind": "clear",
-          "at": 70.98
+          "at": 99.83
         }
       ],
-      "startSec": 70.98,
-      "endSec": 84.44
+      "startSec": 99.83,
+      "endSec": 113.29
     },
     {
       "id": "outro",
@@ -114,11 +114,11 @@
       "cues": [
         {
           "kind": "clear",
-          "at": 84.79
+          "at": 113.64
         }
       ],
-      "startSec": 84.79,
-      "endSec": 94.79
+      "startSec": 113.64,
+      "endSec": 123.64
     }
   ],
   "words": null,
@@ -128,6 +128,6 @@
     "voiceId": null,
     "modelId": null
   },
-  "generatedAt": "2026-11-14T20:31:24.773Z",
+  "generatedAt": "2026-11-14T20:43:21.636Z",
   "disclosure": "This overview uses a device voice. No AI voice service is called."
 }

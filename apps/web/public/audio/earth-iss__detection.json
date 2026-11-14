@@ -1,6 +1,6 @@
 {
   "scenarioKey": "earth-iss__detection",
-  "scriptHash": "9072c858a76d6b215d24440c2bafb3de1b74e65aa0f8cc1fca2a385d94ec7511",
+  "scriptHash": "7b448c3b3359ed1785510430de5d5b70490d07aa42833511d423ed94d247e94d",
   "segments": [
     {
       "id": "intro",
@@ -39,11 +39,197 @@
     {
       "id": "tested",
       "title": "What was tested",
-      "text": "Each mark is one parsed test row. Shape and colour show the fuel phase. Hollow marks are burner-stream oxygen and are left out of counts. A row with no reported pressure sits on the pressure not reported rail.",
+      "text": "Each mark is one parsed test row. Shape and colour show the fuel phase. Hollow marks are burner-stream oxygen and are left out of counts. A row with no reported pressure sits on the pressure not reported rail. Of 1476 parsed rows, 90 sit inside this box: 90 liquid droplet. 74 more match the oxygen but not the pressure, and 870 cannot be placed because their table leaves out pressure or oxygen.",
       "claimIds": [
-        "scenario:earth-iss"
+        "scenario:earth-iss",
+        "PSI-69:0",
+        "PSI-69:1",
+        "PSI-69:2",
+        "PSI-69:3",
+        "PSI-69:4",
+        "PSI-69:5",
+        "PSI-69:6",
+        "PSI-69:7",
+        "PSI-69:8",
+        "PSI-69:32",
+        "PSI-69:33",
+        "PSI-69:34",
+        "PSI-69:45",
+        "PSI-69:46",
+        "PSI-69:47",
+        "PSI-69:48",
+        "PSI-69:49",
+        "PSI-69:50",
+        "PSI-69:52",
+        "PSI-69:57",
+        "PSI-69:58",
+        "PSI-69:59",
+        "PSI-69:60",
+        "PSI-69:61",
+        "PSI-69:62",
+        "PSI-69:63",
+        "PSI-69:130",
+        "PSI-69:131",
+        "PSI-69:132",
+        "PSI-69:133",
+        "PSI-69:134",
+        "PSI-69:135",
+        "PSI-69:136",
+        "PSI-69:137",
+        "PSI-69:138",
+        "PSI-69:143",
+        "PSI-69:144",
+        "PSI-69:145",
+        "PSI-69:147",
+        "PSI-69:148",
+        "PSI-69:149",
+        "PSI-69:150",
+        "PSI-69:151",
+        "PSI-69:152",
+        "PSI-69:153",
+        "PSI-69:154",
+        "PSI-69:155",
+        "PSI-69:164",
+        "PSI-69:167",
+        "PSI-69:168",
+        "PSI-69:169",
+        "PSI-69:170",
+        "PSI-69:171",
+        "PSI-69:172",
+        "PSI-69:179",
+        "PSI-69:180",
+        "PSI-69:181",
+        "PSI-69:186",
+        "PSI-69:187",
+        "PSI-69:188",
+        "PSI-69:189",
+        "PSI-69:190",
+        "PSI-69:195",
+        "PSI-69:196",
+        "PSI-69:197",
+        "PSI-69:198",
+        "PSI-69:199",
+        "PSI-69:200",
+        "PSI-69:201",
+        "PSI-69:202",
+        "PSI-69:203",
+        "PSI-69:204",
+        "PSI-69:205",
+        "PSI-69:206",
+        "PSI-69:207",
+        "PSI-69:221",
+        "PSI-69:222",
+        "PSI-69:223",
+        "PSI-69:224",
+        "PSI-69:225",
+        "PSI-69:226",
+        "PSI-69:227",
+        "PSI-69:228",
+        "PSI-69:229",
+        "PSI-69:230",
+        "PSI-69:231",
+        "PSI-69:232",
+        "PSI-69:233",
+        "PSI-69:272",
+        "PSI-69:273"
       ],
       "cues": [
+        {
+          "kind": "highlightRows",
+          "rowIds": [
+            "PSI-69:0",
+            "PSI-69:1",
+            "PSI-69:2",
+            "PSI-69:3",
+            "PSI-69:4",
+            "PSI-69:5",
+            "PSI-69:6",
+            "PSI-69:7",
+            "PSI-69:8",
+            "PSI-69:32",
+            "PSI-69:33",
+            "PSI-69:34",
+            "PSI-69:45",
+            "PSI-69:46",
+            "PSI-69:47",
+            "PSI-69:48",
+            "PSI-69:49",
+            "PSI-69:50",
+            "PSI-69:52",
+            "PSI-69:57",
+            "PSI-69:58",
+            "PSI-69:59",
+            "PSI-69:60",
+            "PSI-69:61",
+            "PSI-69:62",
+            "PSI-69:63",
+            "PSI-69:130",
+            "PSI-69:131",
+            "PSI-69:132",
+            "PSI-69:133",
+            "PSI-69:134",
+            "PSI-69:135",
+            "PSI-69:136",
+            "PSI-69:137",
+            "PSI-69:138",
+            "PSI-69:143",
+            "PSI-69:144",
+            "PSI-69:145",
+            "PSI-69:147",
+            "PSI-69:148",
+            "PSI-69:149",
+            "PSI-69:150",
+            "PSI-69:151",
+            "PSI-69:152",
+            "PSI-69:153",
+            "PSI-69:154",
+            "PSI-69:155",
+            "PSI-69:164",
+            "PSI-69:167",
+            "PSI-69:168",
+            "PSI-69:169",
+            "PSI-69:170",
+            "PSI-69:171",
+            "PSI-69:172",
+            "PSI-69:179",
+            "PSI-69:180",
+            "PSI-69:181",
+            "PSI-69:186",
+            "PSI-69:187",
+            "PSI-69:188",
+            "PSI-69:189",
+            "PSI-69:190",
+            "PSI-69:195",
+            "PSI-69:196",
+            "PSI-69:197",
+            "PSI-69:198",
+            "PSI-69:199",
+            "PSI-69:200",
+            "PSI-69:201",
+            "PSI-69:202",
+            "PSI-69:203",
+            "PSI-69:204",
+            "PSI-69:205",
+            "PSI-69:206",
+            "PSI-69:207",
+            "PSI-69:221",
+            "PSI-69:222",
+            "PSI-69:223",
+            "PSI-69:224",
+            "PSI-69:225",
+            "PSI-69:226",
+            "PSI-69:227",
+            "PSI-69:228",
+            "PSI-69:229",
+            "PSI-69:230",
+            "PSI-69:231",
+            "PSI-69:232",
+            "PSI-69:233",
+            "PSI-69:272",
+            "PSI-69:273"
+          ],
+          "at": 28.21
+        },
         {
           "kind": "filterPhase",
           "phases": [
@@ -53,28 +239,28 @@
         }
       ],
       "startSec": 28.01,
-      "endSec": 42.62
+      "endSec": 55.7
     },
     {
       "id": "gap",
       "title": "The gap",
-      "text": "The gap sentence is written by code from reported rows. Tables that do not report oxygen are counted as unknown, never as absent. No model writes the counts, and no curve is fitted to the marks.",
+      "text": "The gap sentence is written by code from reported rows. Tables that do not report oxygen are counted as unknown, never as absent. No model writes the counts, and no curve is fitted to the marks. Code also set aside 11 source cells it could not trust, such as impossible oxygen values.",
       "claimIds": [
         "scenario:earth-iss"
       ],
       "cues": [
         {
           "kind": "openLedger",
-          "at": 42.97
+          "at": 56.05
         }
       ],
-      "startSec": 42.97,
-      "endSec": 56.82
+      "startSec": 56.05,
+      "endSec": 76.05
     },
     {
       "id": "read",
       "title": "Where to start",
-      "text": "Use the study list to compare the transparent baseline with the model judgement. The baseline sorts by purpose, overlap, evidence tier and nearby rows. The model column is an ordinal judgement, not a probability that the science is true.",
+      "text": "Use the study list to compare the transparent baseline with the model judgement. The baseline sorts by purpose, overlap, evidence tier and nearby rows. The model column is an ordinal judgement, not a probability that the science is true. In the unreviewed preview order, the leading studies are SAME-R, SAME and DAFT / DAFT-2. The team still has to review these cards.",
       "claimIds": [
         "PSI-102"
       ],
@@ -82,11 +268,11 @@
         {
           "kind": "openStudy",
           "accession": "PSI-102",
-          "at": 57.47
+          "at": 76.7
         }
       ],
-      "startSec": 57.17,
-      "endSec": 72.17
+      "startSec": 76.4,
+      "endSec": 100.25
     },
     {
       "id": "limits",
@@ -98,11 +284,11 @@
       "cues": [
         {
           "kind": "clear",
-          "at": 72.52
+          "at": 100.6
         }
       ],
-      "startSec": 72.52,
-      "endSec": 85.98
+      "startSec": 100.6,
+      "endSec": 114.06
     },
     {
       "id": "outro",
@@ -114,11 +300,11 @@
       "cues": [
         {
           "kind": "clear",
-          "at": 86.33
+          "at": 114.41
         }
       ],
-      "startSec": 86.33,
-      "endSec": 96.33
+      "startSec": 114.41,
+      "endSec": 124.41
     }
   ],
   "words": null,
@@ -128,6 +314,6 @@
     "voiceId": null,
     "modelId": null
   },
-  "generatedAt": "2026-11-14T20:31:24.768Z",
+  "generatedAt": "2026-11-14T20:43:21.628Z",
   "disclosure": "This overview uses a device voice. No AI voice service is called."
 }

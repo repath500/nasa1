@@ -30,7 +30,7 @@ function Bar() {
   const navigate = useNavigate();
   const habitat = useAtlas((s) => s.habitat); const concern = useAtlas((s) => s.concern);
   const audio = useAtlas((s) => s.audio); const mode = useAtlas((s) => s.mode);
-  const key = audio.scenarioKey ?? (habitat === 'custom' ? null : `${habitat}-${concern}`);
+  const key = audio.scenarioKey ?? (habitat === 'custom' ? null : `${habitat}__${concern}`);
   const n = useNarration(key);
   const [captions, setCaptions] = useState(true); const [transcript, setTranscript] = useState(false);
   const [paused, setPaused] = useState(false); // following paused by the user
@@ -80,7 +80,7 @@ function Bar() {
   // Media Session (lock-screen controls).
   useEffect(() => {
     if (!('mediaSession' in navigator) || !n.manifest) return;
-    navigator.mediaSession.metadata = new MediaMetadata({ title: 'Fire Atlas briefing', artist: 'AI-generated voice', album: n.manifest.scenarioKey });
+    navigator.mediaSession.metadata = new MediaMetadata({ title: 'Fire Atlas briefing', artist: n.manifest.voice.provider === 'elevenlabs' ? 'AI-generated voice (ElevenLabs)' : 'Device voice', album: n.manifest.scenarioKey });
     navigator.mediaSession.setActionHandler('play', n.play); navigator.mediaSession.setActionHandler('pause', n.pause);
     navigator.mediaSession.setActionHandler('seekbackward', () => n.seek(n.position - 10)); navigator.mediaSession.setActionHandler('seekforward', () => n.seek(n.position + 10));
     try { navigator.mediaSession.setActionHandler('seekto', (d) => { if (typeof d.seekTime === 'number') n.seek(d.seekTime); }); } catch { /* unsupported */ }

@@ -8,10 +8,10 @@ import { CORE_STUDIES } from './studies.ts';
  * Values are ordinal stand-ins for a scenario, never probabilities that the
  * science is true.
  */
-export const FIXTURE_MODEL_ID = 'fixture-human-authored-v1';
+export const FIXTURE_MODEL_ID = 'fixture-placeholder-v1';
 export const FIXTURE_RECORDED_AT = '2026-11-14T00:00:00.000Z';
 export const FIXTURE_NOTE =
-  'FIXTURE: human-authored, not model output. Judgements are ordinal stand-ins for this scenario, not probabilities that the science is true.';
+  'FIXTURE: placeholder values, not model output, not yet reviewed. Judgements are ordinal stand-ins for this scenario, not probabilities that the science is true.';
 
 type PresetId = Exclude<ScenarioId, 'custom'>;
 

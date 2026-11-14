@@ -10,6 +10,7 @@
  */
 import type { Concern, FuelPhase, NarrationCue, NarrationSegment, ScenarioId } from '@fire/contracts';
 import { PRESETS } from '@fire/contracts';
+import type { NarrationFacts } from './narration/facts.ts';
 
 export interface BridgeScenario {
   id: ScenarioId;
@@ -24,6 +25,8 @@ export interface NarrationScriptInput {
   scenario?: BridgeScenario;
   concern?: Concern;
   voiceProvider: 'elevenlabs' | 'device';
+  /** Corpus facts computed by @fire/core. Without them the script explains the map but states no findings. */
+  facts?: NarrationFacts;
 }
 
 export interface BuiltNarrationScript {
@@ -105,11 +108,32 @@ const landingSegments = (disclosure: string): NarrationSegment[] => [
   },
 ];
 
+const PHASE_WORDS: Record<FuelPhase, string> = { solid: 'solid', 'liquid-droplet': 'liquid droplet', gas: 'gas', aerosol: 'aerosol', unknown: 'unknown fuel' };
+
+const listWords = (items: string[]): string =>
+  items.length <= 1 ? (items[0] ?? '') : items.slice(0, -1).join(', ') + ' and ' + items[items.length - 1];
+
+const factSentences = (facts: NarrationFacts | undefined) => {
+  if (!facts) return { tested: '', gap: '', read: '' };
+  const phases = Object.entries(facts.coversByPhase).map(([phase, n]) => n + ' ' + PHASE_WORDS[phase as FuelPhase]);
+  const tested = facts.covers > 0
+    ? ' Of ' + facts.totalRows + ' parsed rows, ' + facts.covers + ' sit inside this box: ' + listWords(phases) + '. '
+    : ' None of the ' + facts.totalRows + ' parsed rows sits inside this box. That empty box is the gap. ';
+  const rest = facts.nearO2Only + ' more match the oxygen but not the pressure, and ' + facts.unknown + ' cannot be placed because their table leaves out pressure or oxygen.';
+  const gap = ' Code also set aside ' + facts.rejects + ' source cells it could not trust, such as impossible oxygen values.';
+  const read = facts.previewTop3.length
+    ? ' In the unreviewed preview order, the leading studies are ' + listWords(facts.previewTop3) + '. The team still has to review these cards.'
+    : '';
+  return { tested: tested + rest, gap, read };
+};
+
 const scenarioSegments = (
   scenario: BridgeScenario,
   concern: Concern,
   disclosure: string,
+  facts?: NarrationFacts,
 ): NarrationSegment[] => {
+  const extra = factSentences(facts);
   const phase = CONCERN_PHASE[concern];
   const study = CONCERN_STUDY[concern];
   const introCue = cue(0, { kind: 'focusHabitat', habitat: scenario.id, at: 0 });
@@ -145,9 +169,12 @@ const scenarioSegments = (
       id: 'tested',
       title: 'What was tested',
       text:
-        'Each mark is one parsed test row. Shape and colour show the fuel phase. Hollow marks are burner-stream oxygen and are left out of counts. A row with no reported pressure sits on the pressure not reported rail.',
-      claimIds: ['scenario:' + scenario.id],
-      cues: testedCues,
+        'Each mark is one parsed test row. Shape and colour show the fuel phase. Hollow marks are burner-stream oxygen and are left out of counts. A row with no reported pressure sits on the pressure not reported rail.' +
+        extra.tested,
+      claimIds: ['scenario:' + scenario.id, ...(facts?.coverRowIds ?? [])],
+      cues: facts?.coverRowIds.length
+        ? [cue(0.2, { kind: 'highlightRows', rowIds: facts.coverRowIds, at: 0 }), ...testedCues]
+        : testedCues,
       startSec: null,
       endSec: null,
     },
@@ -155,7 +182,8 @@ const scenarioSegments = (
       id: 'gap',
       title: 'The gap',
       text:
-        'The gap sentence is written by code from reported rows. Tables that do not report oxygen are counted as unknown, never as absent. No model writes the counts, and no curve is fitted to the marks.',
+        'The gap sentence is written by code from reported rows. Tables that do not report oxygen are counted as unknown, never as absent. No model writes the counts, and no curve is fitted to the marks.' +
+        extra.gap,
       claimIds: ['scenario:' + scenario.id],
       cues: [cue(0, { kind: 'openLedger', at: 0 })],
       startSec: null,
@@ -165,7 +193,8 @@ const scenarioSegments = (
       id: 'read',
       title: 'Where to start',
       text:
-        'Use the study list to compare the transparent baseline with the model judgement. The baseline sorts by purpose, overlap, evidence tier and nearby rows. The model column is an ordinal judgement, not a probability that the science is true.',
+        'Use the study list to compare the transparent baseline with the model judgement. The baseline sorts by purpose, overlap, evidence tier and nearby rows. The model column is an ordinal judgement, not a probability that the science is true.' +
+        extra.read,
       claimIds: [study],
       cues: [cue(0.3, { kind: 'openStudy', accession: study, at: 0 })],
       startSec: null,
@@ -202,8 +231,13 @@ export const buildNarrationScript = (input: NarrationScriptInput): BuiltNarratio
   if (!input.scenario || !input.concern) throw new Error('scenario and concern are required');
   return {
     scenarioKey: input.scenarioKey,
-    segments: scenarioSegments(input.scenario, input.concern, disclosure),
-    allowedNumbers: [fmt(input.scenario.o2Pct), fmt(input.scenario.totalKpa), '3', '15'],
+    segments: scenarioSegments(input.scenario, input.concern, disclosure, input.facts),
+    allowedNumbers: [
+      fmt(input.scenario.o2Pct), fmt(input.scenario.totalKpa), '3', '15',
+      ...(input.facts
+        ? [input.facts.totalRows, input.facts.covers, input.facts.nearO2Only, input.facts.unknown, input.facts.rejects, ...Object.values(input.facts.coversByPhase)].map(String)
+        : []),
+    ],
     disclosure,
   };
 };

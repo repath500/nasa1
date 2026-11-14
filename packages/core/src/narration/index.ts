@@ -1,6 +1,6 @@
 import type { BaselineKey, Concern, Corpus, NarrationCue, NarrationSegment, Scenario, Tolerances } from '@fire/contracts';
-import { baselineRank, gapStatement, overlap } from '../science';
-import { canonicalJson, sha256Hex } from '../hash';
+import { baselineRank, gapStatement, overlap } from '../science.ts';
+import { canonicalJson, sha256Hex } from '../hash.ts';
 
 export function buildNarrationScript(corpus: Corpus, scenario: Scenario, concern: Concern, tol: Tolerances, opts: { k5SignedOff: boolean; priority?: BaselineKey[] }): NarrationSegment[] {
   const nearby = corpus.rows.filter(row => overlap(row, scenario, tol) === 'covers');
