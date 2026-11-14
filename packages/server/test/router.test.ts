@@ -111,7 +111,7 @@ describe('rank and ask validation', () => {
     const body = await res.json();
     expect(body.ladder).toBe('L3-baseline');
     expect(body.judgements[0].source).toBe('fixture');
-    expect(body.note).toContain('not model output');
+    expect(body.note).toContain('not model judgement');
   });
 
   it('parses Ask offline and enforces the 200 character limit', async () => {
