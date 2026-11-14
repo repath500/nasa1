@@ -1,0 +1,23 @@
+Fire Atlas
+Copyright 2026 the Fire Atlas team (names to be added by the team)
+
+This product's source code is licensed under the Apache License, Version 2.0 (see LICENSE).
+NASA does not endorse this project.
+
+DATA
+- NASA Physical Sciences Informatics (PSI) combustion investigations PSI-98, PSI-99, PSI-100, PSI-26, PSI-25,
+  PSI-69, PSI-102, PSI-101, PSI-107, PSI-20, PSI-159 and PSI-47: CC0-1.0, per each record's licenseIdentifier.
+  DOIs, record versions and access dates are listed in data/corpus.v1.json (sources, cards) and on /credits.
+- NASA Technical Reports Server (NTRS) documents are cited by ID with their copyright determination.
+  Verbatim quotes are limited to items marked PUBLIC_USE_PERMITTED or GOV_PUBLIC_USE_PERMITTED. No figures are copied.
+
+FONTS
+- Geist and JetBrains Mono, SIL Open Font License 1.1 (apps/web/public/fonts/licenses/).
+
+SOFTWARE (runtime dependencies; see each package for its licence)
+- React, React Router, Zustand, Motion, cmdk, sonner, d3 modules, Radix UI primitives, Phosphor Icons, zod,
+  qrcode-generator, Vite, Tailwind CSS, TypeScript, Vitest, Playwright (MIT, ISC or Apache-2.0).
+
+HOSTED SERVICES (not redistributed; used only when keys are configured)
+- TypeSafe Jev, Google Gemini (Hydrogen, decision-1), ElevenLabs text-to-speech, Stripe Checkout (test mode).
+  Outputs from these services are not committed to this repository until their terms are reviewed (rule R8).

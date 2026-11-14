@@ -12,7 +12,9 @@ const RULES = [
   [/\bpredicts?\b/i, '"predicts"'],
   [/\bfire risk\b/i, '"fire risk"'],
   [/\bnone exists?\b/i, 'write "none in PSI"'],
-  [/\b(first|novel|unprecedented)\b(?![-_])/i, 'novelty claim'],
+  [/\b(novel|unprecedented|first[- ]of[- ]its[- ]kind|world'?s first|the first (?:tool|atlas|app|dashboard|platform)|first ever)\b/i, 'unsupported novelty claim'],
+  [/\b(calibrated|predictive model|NASA[- ]approved|guarantee[sd]?)\b/i, 'never-claim list (RED_TEAM 2b)'],
+  [/\b(bound|bounds) the Moon\b/i, 'partial-gravity inference'],
   [/\bextinction limit\b/i, 'write "visible flame extinction diameter"'],
   [/lunar gravity is safer/i, 'partial-gravity claim'],
 ];

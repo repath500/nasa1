@@ -8,7 +8,7 @@ const Lead = ({ children }: { children: ReactNode }) => <p className="mt-6 max-w
 
 /** SPEC §3.13: the seven beats, mirroring the deck. Beats 3 to 5 drive the real workspace; the others are type. */
 export const BEATS: Beat[] = [
-  { id: 'title', title: 'Title', kind: 'slide', render: () => (<><Big>Where will astronauts breathe, and has NASA tested fire there?</Big><Lead>Fire Atlas maps every NASA microgravity fire test against the air of future habitats.</Lead><p className="mono mt-10 text-sm text-muted">NASA Space Apps 2026 · Flame in Freefall</p></>) },
+  { id: 'title', title: 'Title', kind: 'slide', render: () => (<><Big>Where will astronauts breathe, and has NASA tested fire there?</Big><Lead>Fire Atlas maps test conditions from NASA microgravity fire experiments against the air of future habitats.</Lead><p className="mono mt-10 text-sm text-muted">NASA Space Apps 2026 · Flame in Freefall</p></>) },
   { id: 'problem', title: 'The problem', kind: 'slide', render: () => (<><Big>Fire behaves differently when nothing falls.</Big>
     <Lead>The challenge text names air that is richer in oxygen and lower in pressure than Earth: 30% O₂ at 10.2 psi, and 100% O₂ at 4.3 psi in a suit.</Lead>
     <p className="mt-4 max-w-[40ch] text-[clamp(1rem,1.6vw,1.3rem)]">Researchers need to know what has been tested near that air, and what has not.</p></>) },

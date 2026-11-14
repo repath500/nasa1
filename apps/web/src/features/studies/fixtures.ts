@@ -7,7 +7,7 @@ import type { EvidenceRecord, JevJudgement, Pillar, ScenarioId } from '@fire/con
  * because the on screen label says they are human authored. They are not model output.
  */
 /** Placeholder values typed by an AI agent. Switch to 'FIXTURE · human-authored, not model output' only after a team member writes or signs them. */
-export const FIXTURE_LABEL = 'FIXTURE · placeholder values, not model output, not yet reviewed';
+export const FIXTURE_LABEL = 'FIXTURE · synthetic demonstration, not model judgement or experimental evidence';
 export const FIXTURE_RECORDED_AT = '2026-11-14T00:00:00Z';
 
 type Preset = Exclude<ScenarioId, 'custom'>;

@@ -23,7 +23,7 @@ export function Hero() {
     <section aria-labelledby="hero-h" className="mx-auto grid max-w-[1200px] gap-10 px-4 pb-16 pt-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:pb-24 lg:pt-20">
       <div className="flex flex-col justify-center">
         <h1 id="hero-h" className="text-[clamp(2.25rem,5.2vw,4rem)] font-semibold leading-[1.04] tracking-[-0.035em]">Where will astronauts breathe, and has NASA tested fire there?</h1>
-        <p className="mt-5 max-w-[46ch] text-lg text-muted">Every NASA microgravity fire test, mapped against the air of future habitats. Every dot opens its source.</p>
+        <p className="mt-5 max-w-[46ch] text-lg text-muted">Test conditions from NASA microgravity fire experiments, mapped against the air of future habitats. Every dot opens its source.</p>
         <div className="mt-8 flex flex-wrap gap-3">
           <span onMouseEnter={() => hint('lunar-cabin-example')} onMouseLeave={() => hint(null)} onFocus={() => hint('lunar-cabin-example')} onBlur={() => hint(null)}>
             <Button variant="primary" size="lg" data-testid="cta-briefing" onClick={() => navigate('/briefing')} icon={<ArrowRight size={18} aria-hidden />}>Start briefing</Button>

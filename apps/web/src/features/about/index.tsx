@@ -46,7 +46,7 @@ const A = ({ href, children }: { href: string; children: ReactNode }) => <a href
 /* ---------------- About ---------------- */
 export default function AboutPage() {
   return (
-    <Shell title="About Fire Atlas" lead="Pick where people will live in space. See every NASA microgravity fire test plotted against that air. Every dot opens its source.">
+    <Shell title="About Fire Atlas" lead="Pick where people will live in space. See reported conditions from a curated set of NASA microgravity fire tests, plotted against that air. Every dot opens its source.">
       <section className="fa-sec fa-prose">
         <H id="what">What it is</H>
         <p>Fire Atlas maps the test conditions of NASA microgravity combustion investigations from the Physical Sciences Informatics (PSI) repository. You choose a habitat atmosphere, such as the Moon base example, and the atlas shows which tests ran at oxygen and pressure near it, which did not, and which studies to start with.</p>

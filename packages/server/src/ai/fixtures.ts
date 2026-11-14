@@ -2,7 +2,7 @@ import type { JevJudgement, Pillar, ScenarioId } from '@fire/contracts';
 import { CORE_STUDIES } from './studies.ts';
 
 /**
- * HUMAN-AUTHORED FIXTURES, NOT MODEL OUTPUT.
+ * AI-AUTHORED SYNTHETIC FIXTURES, NOT MODEL OUTPUT AND NOT HUMAN-REVIEWED.
  * SPEC §11 and R8: the public build ships fixtures until provider terms are read.
  * They are labelled source 'fixture' and must render the FIXTURE chip.
  * Values are ordinal stand-ins for a scenario, never probabilities that the
@@ -11,7 +11,7 @@ import { CORE_STUDIES } from './studies.ts';
 export const FIXTURE_MODEL_ID = 'fixture-placeholder-v1';
 export const FIXTURE_RECORDED_AT = '2026-11-14T00:00:00.000Z';
 export const FIXTURE_NOTE =
-  'FIXTURE: placeholder values, not model output, not yet reviewed. Judgements are ordinal stand-ins for this scenario, not probabilities that the science is true.';
+  'FIXTURE: synthetic demonstration, not model judgement or experimental evidence. Judgements are ordinal stand-ins for this scenario, not probabilities that the science is true.';
 
 type PresetId = Exclude<ScenarioId, 'custom'>;
 
