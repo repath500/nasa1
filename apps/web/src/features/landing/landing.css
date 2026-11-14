@@ -1,0 +1,38 @@
+/* Landing page styles (WL2). Scoped under .lp so nothing leaks into the rest of the app. Tokens come from design/tokens.css. */
+.lp { position: relative; overflow-x: clip; }
+/* The shell renders its own footer after <main>; the landing page carries a fuller one, so hide the shell's here only. */
+body:has(.lp) #main ~ footer { display: none; }
+
+.lp-plate { position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: pixelated; }
+.lp-cover { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; image-rendering: pixelated; transition: opacity 200ms var(--ease-out); }
+.lp-reveal { position: relative; }
+.lp-reveal.is-done .lp-cover { display: none; }
+
+.lp-panel { background: var(--color-bg); border: 1px solid var(--color-border-strong); }
+.lp-panel-surface { background: var(--color-surface); border: 1px solid var(--color-hairline); }
+.lp-rule { border-top: 1px solid var(--color-hairline); }
+.lp-tick { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--color-muted); text-transform: uppercase; }
+
+.lp-hero { position: relative; isolation: isolate; background: var(--color-bg); }
+@media (min-width: 900px) { .lp-hero { height: calc(100svh - 56px); min-height: 640px; max-height: 940px; } }
+.lp-h1 { font-size: clamp(2rem, 3.15vw, 2.95rem); line-height: 1.04; letter-spacing: -0.035em; font-weight: 600; }
+@media (max-width: 899px) { .lp-h1 { font-size: 1.95rem; } }
+
+.lp-seg { display: inline-flex; border: 1px solid var(--color-border-strong); background: var(--color-bg); }
+.lp-seg button { min-height: 44px; padding: 0 16px; border: 0; background: transparent; color: var(--color-muted); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; cursor: pointer; transition: background-color var(--dur-step) var(--ease-out), color var(--dur-step) var(--ease-out); }
+.lp-seg button + button { border-left: 1px solid var(--color-border-strong); }
+.lp-seg button[aria-pressed="true"] { background: var(--color-accent); color: var(--color-accent-ink); }
+.lp-seg button:not([aria-pressed="true"]):hover { color: var(--color-ink); background: var(--color-raised); }
+
+.lp-big-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 500; letter-spacing: -0.04em; line-height: 1; font-size: clamp(2.5rem, 6vw, 5rem); }
+.lp-quote { font-size: clamp(1.35rem, 2.3vw, 2rem); line-height: 1.28; letter-spacing: -0.02em; font-weight: 500; text-wrap: balance; }
+.lp-quote mark { background: none; color: var(--color-accent); }
+.lp-limit-line { font-size: clamp(1.6rem, 3.2vw, 2.9rem); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600; text-wrap: balance; }
+
+.lp-term { background: #05070A; color: #E8EAED; border: 1px solid var(--color-border-strong); }
+:root[data-theme="paper"] .lp-term { background: #111418; color: #F4F5F6; }
+.lp-label { position: absolute; transform: translate(-50%, 0); white-space: nowrap; }
+.lp-link { color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-border-strong); text-underline-offset: 4px; }
+.lp-link:hover { color: var(--color-accent); text-decoration-color: var(--color-accent); }
+
+@media (prefers-reduced-motion: reduce) { .lp-cover { display: none; } }
