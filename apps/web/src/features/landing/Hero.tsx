@@ -32,7 +32,7 @@ export function Hero() {
   const place = () => {
     const p = plate.current; const el = root.current; if (!p || !el) return;
     const narrow = el.clientWidth < 900;
-    p.set(narrow ? { cx: 0.5, cy: 0.27, scale: 0.6 } : { cx: 0.74, cy: 0.54, scale: 0.72 }, true);
+    p.set(narrow ? { cx: 0.5, cy: 300 / Math.max(el.clientHeight, 1), scale: 0.62 } : { cx: 0.74, cy: 0.54, scale: 0.72 }, true);
   };
   const choose = (m: 'g1' | 'micro') => { touched.current = true; setMode(m); };
 
@@ -54,7 +54,7 @@ export function Hero() {
     <section ref={root} aria-labelledby="hero-h" className="lp-hero">
       <DitherPlate scene="flame" cell={cell} matrix="bayer4" params={{ morph: reduce ? 1 : 0, cx: 0.74, cy: 0.54, scale: 0.72 }}
         onReady={(p) => { plate.current = p; place(); apply(); }} />
-      <div className="relative z-10 flex h-full flex-col justify-between gap-6 px-4 py-6 md:px-14 md:py-12">
+      <div className="relative z-10 flex h-full flex-col justify-between gap-6 px-4 py-6 max-md:gap-[280px] md:px-14 md:py-12">
         <div className="lp-panel p-3 md:max-w-[400px] md:self-end md:p-4">
           <div role="group" aria-label="Flame gravity" className="lp-seg">
             <button type="button" aria-pressed={mode === 'g1'} onClick={() => choose('g1')}>1 g</button>

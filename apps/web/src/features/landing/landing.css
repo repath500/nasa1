@@ -13,8 +13,8 @@ body:has(.lp) #main ~ footer { display: none; }
 .lp-rule { border-top: 1px solid var(--color-hairline); }
 .lp-tick { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--color-muted); text-transform: uppercase; }
 
-.lp-hero { position: relative; isolation: isolate; min-height: 820px; height: calc(100svh - 56px); max-height: 940px; background: var(--color-bg); }
-@media (min-width: 900px) { .lp-hero { min-height: 640px; } }
+.lp-hero { position: relative; isolation: isolate; background: var(--color-bg); }
+@media (min-width: 900px) { .lp-hero { height: calc(100svh - 56px); min-height: 640px; max-height: 940px; } }
 .lp-h1 { font-size: clamp(2rem, 3.15vw, 2.95rem); line-height: 1.04; letter-spacing: -0.035em; font-weight: 600; }
 @media (max-width: 899px) { .lp-h1 { font-size: 1.95rem; } }
 
