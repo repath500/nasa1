@@ -43,7 +43,6 @@ export default function BriefingWizard() {
   const s = useAtlas();
 
   useEffect(() => { const prev = useAtlas.getState().mode; useAtlas.getState().set({ mode: 'briefing' }); return () => { if (useAtlas.getState().mode === 'briefing') useAtlas.getState().set({ mode: prev === 'briefing' ? 'explore' : prev }); }; }, []);
-  useEffect(() => { headRef.current?.focus({ preventScroll: true }); }, [step]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape' && !isTypingTarget(e.target) && !document.querySelector('[role="dialog"]')) { useAtlas.getState().set({ mode: 'explore' }); navigate({ pathname: '/atlas', search: window.location.search }); } };
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
@@ -94,7 +93,12 @@ export default function BriefingWizard() {
 }
 
 type StepProps = { headRef: React.RefObject<HTMLHeadingElement>; data: ReturnType<typeof useBriefingData> };
-const H = ({ children, headRef }: { children: string; headRef: StepProps['headRef'] }) => <h1 ref={headRef} tabIndex={-1} className="text-3xl outline-none md:text-4xl">{children}</h1>;
+/** Step heading. Takes focus on mount so keyboard and screen reader users land on the new question. */
+function H({ children }: { children: string; headRef?: unknown }) {
+  const ref = useRef<HTMLHeadingElement>(null);
+  useEffect(() => { ref.current?.focus({ preventScroll: true }); }, []);
+  return <h1 ref={ref} tabIndex={-1} className="text-3xl outline-none md:text-4xl">{children}</h1>;
+}
 
 function HabitatStep({ headRef, data }: StepProps) {
   const s = useAtlas(); const unit = s.unit;

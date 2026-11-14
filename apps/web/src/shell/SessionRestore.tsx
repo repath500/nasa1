@@ -12,7 +12,7 @@ export function SessionRestore() {
   const { pathname, search } = useLocation(); const navigate = useNavigate();
   const [saved, setSaved] = useState<Saved | null>(null);
 
-  useEffect(() => { // read once, on first mount only
+  useEffect(() => { // read once on mount
     const s = lsGetJson<Saved | null>(KEYS.session, null);
     if (s && s.path && !SKIP.includes(s.path) && Date.now() - s.at < 7 * 864e5 && pathname === '/' && !search) setSaved(s);
     // eslint-disable-next-line react-hooks/exhaustive-deps
