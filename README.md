@@ -12,7 +12,9 @@ Partial-gravity combustion data: none in PSI. NASA does not endorse this project
 pnpm install && pnpm dev     # http://127.0.0.1:5173, works with no keys
 ```
 
-- **Teammates start here:** [docs/BUILD_LOG.md](docs/BUILD_LOG.md) (setup, layout, commit-by-commit history, open items)
+- **Documentation:** [docs/README.md](docs/README.md) (getting started, architecture, data and science, AI and voice,
+  frontend, payments, deploy, team sign-off guide, contributing)
+- **What was built and why:** [docs/BUILD_LOG.md](docs/BUILD_LOG.md)
 - Product and build spec: [SPEC.md](SPEC.md)
 - AI use: [SI_DISCLOSURE.md](SI_DISCLOSURE.md) · Decisions: [DECISIONS.md](DECISIONS.md) · Licence: Apache-2.0 ([LICENSE](LICENSE), [NOTICE](NOTICE))
 - Research pack: [research/README.md](research/README.md)
