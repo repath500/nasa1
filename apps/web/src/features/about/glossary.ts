@@ -16,7 +16,7 @@ export const GLOSSARY: GlossaryEntry[] = [
     id: 'microgravity',
     term: 'microgravity',
     short: 'The near weightless condition on the ISS, where hot gas does not rise.',
-    long: 'On the International Space Station objects and gases feel almost no net weight because the station is in continuous free fall. Hot gas does not rise, so a flame loses the buoyancy driven flow that shapes it on Earth. A candle flame becomes a dim blue sphere. Every PSI combustion row used here comes from microgravity tests. Partial gravity, such as on the Moon: none in PSI.',
+    long: 'On the International Space Station objects and gases feel almost no net weight because the station is in continuous free fall. Hot gas does not rise, so a flame loses the buoyancy driven flow that shapes it on Earth. A candle flame becomes a dim blue sphere. Every PSI combustion row used here comes from microgravity tests. Partial-gravity combustion data, such as for the Moon: none in PSI.',
   },
   {
     id: 'psi',

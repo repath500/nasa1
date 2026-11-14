@@ -28,6 +28,6 @@ export const BEATS: Beat[] = [
     </div><p className="mt-6 text-sm text-muted">The voice is AI-generated (ElevenLabs) and disclosed on screen and in audio.</p></>) },
   { id: 'limits', title: 'Limits and team', kind: 'slide', render: () => (<><Big>What this does not claim.</Big>
     <ul className="mt-8 max-w-[44ch] space-y-3 text-[clamp(1.05rem,1.8vw,1.4rem)]">
-      <li>No partial-gravity result is in PSI.</li><li>Burner-stream oxygen is shown hollow and never counted.</li><li>Unknown is not none.</li><li>Presets are illustrative examples, not design values.</li>
+      <li>Partial-gravity combustion data: none in PSI.</li><li>Burner-stream oxygen is shown hollow and never counted.</li><li>Unknown is not none.</li><li>Presets are illustrative examples, not design values.</li>
     </ul><p className="mt-8 max-w-[50ch] text-sm text-muted">NASA does not endorse this project. Test data: NASA Physical Sciences Informatics, CC0-1.0. The team and its contribution statement are on the About page.</p></>) },
 ];

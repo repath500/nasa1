@@ -56,7 +56,7 @@ export default function AboutPage() {
         <H id="not">What it does not do</H>
         <ul className="fa-list">
           <li>It does not judge any atmosphere. A study being ranked high means it is worth reading early, nothing more.</li>
-          <li>It does not describe partial gravity. PSI holds no partial gravity combustion tests, so the Moon and Mars are never inferred from microgravity rows.</li>
+          <li>It does not describe partial gravity. Partial-gravity combustion data: none in PSI, so the Moon and Mars are never inferred from microgravity rows.</li>
           <li>It does not browse raw archives. The video and data archives behind these investigations run to terabytes. Only the experimental tables are used.</li>
           <li>It is not safety guidance. Real habitat decisions need qualified engineers and NASA standards.</li>
         </ul>
@@ -138,7 +138,7 @@ export function MethodPage() {
       <section className="fa-sec fa-prose">
         <H id="limits">Limits</H>
         <ul className="fa-list">
-          <li><strong>Gravity.</strong> Every row is a <Term id="microgravity">microgravity</Term> test on the ISS. Partial gravity: none in PSI. Microgravity and normal gravity results do not tell you what happens on the Moon.</li>
+          <li><strong>Gravity.</strong> Every row is a <Term id="microgravity">microgravity</Term> test on the ISS. Partial-gravity combustion data: none in PSI. Microgravity and normal gravity results do not tell you what happens on the Moon.</li>
           <li><strong>Oxygen.</strong> Only ambient O₂ counts. <Term id="burner-stream">Burner stream</Term> values are not cabin air. <Term id="partial-pressure">Partial pressure</Term> is shown as context only, and equal partial pressure is not equal flammability.</li>
           <li><strong>Unknowns.</strong> Some tables report no O₂ or no pressure. Those rows are counted as unknown, not as absent. The gap sentence names how many tables are unknown.</li>
           <li><strong>Geometry.</strong> A droplet a millimetre across and a fabric sheet tens of centimetres long are different problems. The Compare page declines to set studies side by side when fuel phase or geometry scale differs by more than 10 times.</li>

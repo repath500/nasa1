@@ -165,10 +165,10 @@ button.fa-chip:hover { background: var(--fa-raised); }
 .fa-drawer__body { overflow: auto; padding: 12px; display: grid; gap: 14px; align-content: start; flex: 1; }
 .fa-drawer__foot { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px; border-top: 1px solid var(--fa-hair); }
 .fa-kv { display: grid; grid-template-columns: 130px 1fr; gap: 1px; background: var(--fa-hair); border: 1px solid var(--fa-hair); }
-.fa-kv > dt, .fa-kv > dd { margin: 0; padding: 6px 8px; background: var(--fa-surface); }
-.fa-kv > dt { color: var(--fa-muted); font-size: 12px; }
-.fa-kv > dd { font-family: var(--fa-mono); font-variant-numeric: tabular-nums; font-size: 12px; overflow-wrap: anywhere; }
-.fa-kv > dd.fa-prose { font-family: inherit; }
+.fa-kv dt, .fa-kv dd { margin: 0; padding: 6px 8px; background: var(--fa-surface); }
+.fa-kv dt { color: var(--fa-muted); font-size: 12px; }
+.fa-kv dd { font-family: var(--fa-mono); font-variant-numeric: tabular-nums; font-size: 12px; overflow-wrap: anywhere; }
+.fa-kv dd.fa-prose { font-family: inherit; }
 .fa-raw { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 1px; background: var(--fa-hair); border: 1px solid var(--fa-hair); font-family: var(--fa-mono); font-size: 11.5px; }
 .fa-raw > div { background: var(--fa-bg); padding: 4px 8px; overflow-wrap: anywhere; }
 .fa-raw > div:nth-child(odd) { color: var(--fa-muted); }

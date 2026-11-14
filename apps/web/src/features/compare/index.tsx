@@ -131,7 +131,7 @@ export default function ComparePage() {
                 </div>
               ) : (
                 <Banner tone="accent">
-                  Fuel phase and geometry scale are within 10x of each other, so a side by side reading is reasonable. Apparatus and test method still differ, and partial gravity is none in PSI.
+                  Fuel phase and geometry scale are within 10x of each other, so a side by side reading is reasonable. Apparatus and test method still differ. Partial-gravity combustion data: none in PSI.
                 </Banner>
               )}
               {(A.facts.scaleMm == null || B.facts.scaleMm == null) && <Banner>Geometry scale is not reported for {A.facts.scaleMm == null ? A.card.acronym : B.card.acronym}, so the 10x check could not run on it.</Banner>}

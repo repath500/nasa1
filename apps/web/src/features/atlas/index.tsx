@@ -206,7 +206,7 @@ export default function AtlasWorkspace() {
               </p>
             )}
             <p className="fa-muted" style={{ fontSize: 11.5 }}>
-              {scenario.sourceNote}. Illustrative, not a design value. Gravity: microgravity (ISS). Partial gravity: none in PSI.
+              {scenario.sourceNote}. Illustrative, not a design value. Gravity: microgravity (ISS). Partial-gravity combustion data: none in PSI.
             </p>
           </>
         )}

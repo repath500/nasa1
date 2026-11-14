@@ -72,7 +72,7 @@ export default function GapMap(props: GapMapPropsExt) {
   const section = useRef<HTMLElement>(null), holder = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null), surface = useRef<SVGSVGElement>(null), transform = useRef<ZoomTransform>(zoomIdentity);
   const clipId = `gapmap-${useId().replaceAll(':', '')}`;
-  const receiving = useRef(false);
+  const receiving = useRef(false), flight = useRef(0);
   const behavior = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null), frame = useRef(0), points = useRef<Point[]>([]);
   const tree = useRef<ReturnType<typeof quadtree<Point>> | null>(null), drag = useRef<{ x: number; y: number } | null>(null);
   const [revision, setRevision] = useState(0), [linear, setLinear] = useState(false), [table, setTable] = useState(false), [explain, setExplain] = useState(false);
@@ -182,7 +182,7 @@ export default function GapMap(props: GapMapPropsExt) {
   useEffect(() => { draw(); setRevision(value => value + 1); const observer = new ResizeObserver(draw); if (canvas.current) observer.observe(canvas.current); return () => { observer.disconnect(); cancelAnimationFrame(frame.current); }; }, [draw, table]);
   useEffect(() => {
     const element = surface.current; if (!element) return;
-    const zoomer = zoom<SVGSVGElement, unknown>().scaleExtent([1, 40]).extent([[L, T], [R, B]]).filter(event => (!event.shiftKey || event.type === 'dblclick') && !selectArea && !boxDrag.current && !minimapDrag.current).on('zoom', event => {
+    const zoomer = zoom<SVGSVGElement, unknown>().scaleExtent([1, 40]).extent([[L, T], [R, B]]).filter(event => (!event.shiftKey || event.type === 'dblclick') && !selectArea && !boxDrag.current && !minimapDrag.current).on('start', event => { if (event.sourceEvent) cancelAnimationFrame(flight.current); }).on('zoom', event => {
       transform.current = event.transform; schedule();
       if (linkKey && !receiving.current) links.get(linkKey)?.forEach(listener => listener(event.transform));
     });
@@ -192,8 +192,8 @@ export default function GapMap(props: GapMapPropsExt) {
     return () => { select(element).on('.zoom', null); if (linkKey) links.get(linkKey)?.delete(receive); };
   }, [linkKey, schedule, selectArea, L, R, T, B, table]);
 
-  const changeZoom = (factor: number) => { if (surface.current && behavior.current) select(surface.current).call(behavior.current.scaleBy, factor); };
-  const reset = () => { if (surface.current && behavior.current) select(surface.current).call(behavior.current.transform, zoomIdentity); };
+  const changeZoom = (factor: number) => { cancelAnimationFrame(flight.current); if (surface.current && behavior.current) select(surface.current).call(behavior.current.scaleBy, factor); };
+  const reset = () => { cancelAnimationFrame(flight.current); if (surface.current && behavior.current) select(surface.current).call(behavior.current.transform, zoomIdentity); };
   const fit = (target: Scenario) => {
     const tol = tolRef.current;
     const left = xbase(Math.max(linear ? 0 : 1, target.totalKpa * (1 - tol.pressureFrac))), right = xbase(target.totalKpa * (1 + tol.pressureFrac));
@@ -203,8 +203,8 @@ export default function GapMap(props: GapMapPropsExt) {
     if (surface.current && behavior.current) {
       const element = surface.current, zoomer = behavior.current, start = transform.current, started = performance.now();
       const duration = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 450;
-      const animate = (now: number) => { const progress = duration ? Math.min(1, (now - started) / duration) : 1, eased = 1 - (1 - progress) ** 3; const current = zoomIdentity.translate(start.x + (next.x - start.x) * eased, start.y + (next.y - start.y) * eased).scale(start.k + (next.k - start.k) * eased); select(element).call(zoomer.transform, current); if (progress < 1) requestAnimationFrame(animate); };
-      requestAnimationFrame(animate);
+      const animate = (now: number) => { const progress = duration ? Math.min(1, (now - started) / duration) : 1, eased = 1 - (1 - progress) ** 3; const current = zoomIdentity.translate(start.x + (next.x - start.x) * eased, start.y + (next.y - start.y) * eased).scale(start.k + (next.k - start.k) * eased); select(element).call(zoomer.transform, current); if (progress < 1) flight.current = requestAnimationFrame(animate); };
+      cancelAnimationFrame(flight.current); flight.current = requestAnimationFrame(animate);
     }
   };
 
@@ -370,7 +370,7 @@ export default function GapMap(props: GapMapPropsExt) {
         <g className="gapmap-grid">{pressureTicks.map(tick => <g key={tick.kpa}><line x1={x(tick.kpa)} x2={x(tick.kpa)} y1={T} y2={B}/><text x={x(tick.kpa)} y={B + 13} textAnchor="middle">{tick.label}</text></g>)}{y.ticks(Math.max(3, Math.round((B - T) / 44))).filter(value => y(value) >= T - 0.5 && y(value) <= B + 0.5).map(value => <g key={value}><line x1={L} x2={R} y1={y(value)} y2={y(value)}/><text x={geo.railX - 4} y={y(value)} dy="0.32em" textAnchor="end" className="gapmap-ytick">{value}</text></g>)}</g>
         <g clipPath={`url(#${clipId})`}>
           {(props.otherScenarios ?? []).map(item => { const b = boxRect(item); return <rect key={item.id} className="gapmap-box gapmap-box--faint" x={b.x1} y={b.y1} width={b.x2 - b.x1} height={b.y2 - b.y1} />; })}
-          <rect data-coach={props.coach ? 'habitat-box' : undefined} data-habitat-box={scenario.id} className="gapmap-box" x={boxRect(scenario).x1} y={boxRect(scenario).y1} width={boxRect(scenario).x2 - boxRect(scenario).x1} height={boxRect(scenario).y2 - boxRect(scenario).y1} tabIndex={hasTolerances ? 0 : undefined} aria-label={hasTolerances ? 'Editable habitat box. Arrow keys move it, Alt plus arrow keys resize it.' : undefined}
+          <rect data-coach={props.coach ? 'habitat-box' : undefined} data-habitat-box={scenario.id} className="gapmap-box" x={boxRect(scenario).x1} y={boxRect(scenario).y1} width={boxRect(scenario).x2 - boxRect(scenario).x1} height={boxRect(scenario).y2 - boxRect(scenario).y1} tabIndex={hasTolerances ? 0 : undefined} role={hasTolerances ? 'group' : undefined} aria-label={hasTolerances ? 'Editable habitat box. Arrow keys move it, Alt plus arrow keys resize it.' : undefined}
             onKeyDown={event => {
               if (!hasTolerances || !event.key.startsWith('Arrow')) return; event.stopPropagation(); event.preventDefault();
               if (event.altKey) { const current = tolRef.current; applyTolerances({ ...current, pressureFrac: clamp(current.pressureFrac + (event.key === 'ArrowRight' ? .01 : event.key === 'ArrowLeft' ? -.01 : 0), .01, .95), o2PctPoints: clamp(current.o2PctPoints + (event.key === 'ArrowUp' ? .5 : event.key === 'ArrowDown' ? -.5 : 0), .1, 50) }); return; }

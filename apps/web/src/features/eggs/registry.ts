@@ -23,7 +23,7 @@ export const FLIGHT_RULES: { id: string; rule: string }[] = [
   { id: 'FR-03', rule: 'Never call an air mix "safe" or "unsafe". The atlas shows where tests were run, not where fire is acceptable.' }, // lint-claims-ignore
   { id: 'FR-04', rule: 'Write "visible flame extinction diameter", never "extinction limit".' }, // lint-claims-ignore
   { id: 'FR-05', rule: 'Unknown is not zero. A missing value is shown as not reported.' },
-  { id: 'FR-06', rule: 'Every result carries a gravity chip. Partial gravity: none in PSI.' },
+  { id: 'FR-06', rule: 'Every result carries a gravity chip. Partial-gravity combustion data: none in PSI.' },
   { id: 'FR-07', rule: 'Equal O₂ partial pressure is context. It is not equal flammability.' },
   { id: 'FR-08', rule: 'Burner-stream oxygen is shown hollow and never counted.' },
   { id: 'FR-09', rule: 'Presets are illustrative examples, not design values.' },

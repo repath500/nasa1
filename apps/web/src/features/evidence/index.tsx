@@ -82,7 +82,7 @@ function RowBody({ row, card, model, rec }: { row: TestRow; card: InvestigationC
   return (
     <>
       <div className="fa-chips">
-        <span className="fa-chip fa-chip--edit" title="Every PSI combustion row is a microgravity flight test. Partial gravity: none in PSI.">{GRAVITY_LABEL[row.gravity]}</span>
+        <span className="fa-chip fa-chip--edit" title="Every PSI combustion row is a microgravity flight test. Partial-gravity combustion data: none in PSI.">{GRAVITY_LABEL[row.gravity]}</span>
         <span className="fa-chip fa-chip--edit" title={row.o2Location === 'burner' ? 'The O₂ value is the burner stream, not the cabin air. Excluded from overlap.' : undefined}>
           O₂ location: {row.o2Location === 'ambient' ? 'ambient' : row.o2Location === 'burner' ? 'burner stream' : NOT_REPORTED}
         </span>
@@ -137,7 +137,7 @@ function RowBody({ row, card, model, rec }: { row: TestRow; card: InvestigationC
       <section className="fa-sec">
         <h3>Transfer limits</h3>
         <ul className="fa-list">
-          <li>Gravity: microgravity on the ISS. Partial gravity: none in PSI, so nothing here describes lunar or Martian gravity.</li>
+          <li>Gravity: microgravity on the ISS. Partial-gravity combustion data: none in PSI. Nothing here describes lunar or Martian gravity.</li>
           <li>Geometry and apparatus differ between investigations. A row is a test condition, not a limit.</li>
           {row.o2Location === 'burner' && <li>O₂ here is the burner stream, not the cabin air.</li>}
           {(card?.caveats ?? []).map((c) => <li key={c}>{c}</li>)}
