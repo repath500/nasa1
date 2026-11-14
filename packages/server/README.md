@@ -194,3 +194,18 @@ Tests mock `fetch`; no real network. Covered: ladder order and timeout, zod reje
 of bad upstream data, Jev criteria with no numerals, decision-1 using `input`, licence
 sign/verify/expiry/tamper, webhook signature valid/invalid/stale, cross-site rejection,
 body cap, rate limit, billing 503, and narration timing from a sample alignment.
+
+## Turning on real AI and deciding G3 (for teammates)
+
+1. Put `TYPESAFE_API_KEY=...` (and optionally `GEMINI_API_KEY=...`) in the repo-root `.env.local`. Never commit it.
+2. `pnpm ai:record` calls Jev three times for each of 10 studies x 4 habitats x 3 concerns and writes the raw answers
+   plus their median to `cache/model_responses/` (gitignored). Cost is well under $0.05; `AI_RECORD_MAX_CALLS`
+   caps it (default 400). Re-running skips anything already recorded. Busy responses (429/529) back off and retry.
+3. Two people label blind, separately: `pnpm g3:label` (default concern prevention). Each sees only the habitat and
+   the study's own description, never a ranking. Label 2 = read first, 1 = relevant, 0 = not relevant. 16+ pairs each.
+4. `pnpm g3:adjudicate`: a person settles every disagreement. `pnpm g3:metrics` writes `data/labels/g3-report.md`:
+   top-3 hit rate, Wilson 95% interval and Spearman for the baseline and for Jev, and the keep/hide decision
+   (keep only if Jev is not worse on top-3 AND reviewers found a disagreement useful or prefer Jev).
+   "Jev did not improve on the baseline" is an honest, valid result.
+5. Only after reading the TypeSafe and Google terms: set `MODEL_OUTPUT_REDISTRIBUTION_OK=1` in `.env.local` and run
+   `pnpm ai:publish` to write `apps/web/public/data/judgements.v1.json`. Commit `data/labels/` and that file.

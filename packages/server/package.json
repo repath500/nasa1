@@ -5,7 +5,23 @@
   "version": "0.0.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
-  "exports": { ".": "./src/index.ts" },
-  "scripts": { "typecheck": "tsc -p .", "test": "vitest run", "dev": "node --experimental-strip-types src/dev-server.ts", "audio:build": "node --experimental-strip-types scripts/build-audio.ts", "ai:publish": "node --experimental-strip-types scripts/publish-ai.ts" },
-  "dependencies": { "@fire/contracts": "workspace:*", "@fire/core": "workspace:*", "zod": "~3.23.8" }
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "test": "vitest run",
+    "dev": "node --experimental-strip-types src/dev-server.ts",
+    "audio:build": "node --experimental-strip-types scripts/build-audio.ts",
+    "ai:publish": "node --experimental-strip-types scripts/publish-ai.ts",
+    "ai:record": "node --experimental-strip-types scripts/record-ai.ts",
+    "g3:label": "node --experimental-strip-types scripts/g3.ts label",
+    "g3:adjudicate": "node --experimental-strip-types scripts/g3.ts adjudicate",
+    "g3:metrics": "node --experimental-strip-types scripts/g3.ts metrics"
+  },
+  "dependencies": {
+    "@fire/contracts": "workspace:*",
+    "@fire/core": "workspace:*",
+    "zod": "~3.23.8"
+  }
 }

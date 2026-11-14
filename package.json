@@ -19,7 +19,11 @@
     "lint:claims": "node scripts/lint-claims.mjs",
     "secret-scan": "sh scripts/secret-scan.sh",
     "review": "pnpm --filter @fire/pipeline review",
-    "review:sign": "pnpm --filter @fire/pipeline review:sign"
+    "review:sign": "pnpm --filter @fire/pipeline review:sign",
+    "ai:record": "pnpm --filter @fire/server ai:record",
+    "g3:label": "pnpm --filter @fire/server g3:label",
+    "g3:adjudicate": "pnpm --filter @fire/server g3:adjudicate",
+    "g3:metrics": "pnpm --filter @fire/server g3:metrics"
   },
   "devDependencies": {
     "typescript": "~5.6.3",
