@@ -7,6 +7,8 @@ import type {
   RejectedCell,
   TestRow,
 } from '@fire/contracts';
+import { DEFAULT_TOLERANCES, PRESETS } from '@fire/contracts';
+import { overlap } from '@fire/core';
 import { buildCard, firstUrl, readInvestigationJson } from './cards.ts';
 import { corpusHashOf } from './canonical.ts';
 import { CORE_ACCESSIONS, TABLE_MAPS } from './maps/index.ts';
@@ -71,6 +73,8 @@ export interface BuildResult {
 
 export interface BuildOptions {
   rootDir?: string;
+  /** Human-accepted, verifier-passing records (from data/reviews/records.json via review.ts). */
+  acceptedRecords?: EvidenceRecord[];
   builtAt?: string;
 }
 
@@ -178,7 +182,13 @@ export function buildCorpus(options: BuildOptions = {}): BuildResult {
     });
   }
 
-  const records: EvidenceRecord[] = [];
+  const records: EvidenceRecord[] = [...(options.acceptedRecords ?? [])];
+  // A card becomes gold only with at least one accepted record reviewed by two different people (R4, G1).
+  for (const card of cards) {
+    if (records.some((record) => record.accession === card.accession && record.review.state === 'accepted' && (record.review.by?.length ?? 0) >= 2)) {
+      card.cardState = 'gold';
+    }
+  }
   const corpusHash = corpusHashOf({ cards, rows, rejects, records });
   const corpus: Corpus = {
     version: 'v1',
@@ -278,6 +288,17 @@ function buildCandidates(
         'BASS-II test B1: PMMA film with calibrated initial O2 22.2 percent. Post-test O2 is kept separate. Proposed for double coding.',
     },
   ];
+
+  // K5 needs records inside the Moon-base example box: propose the first two ambient rows that code finds there.
+  const lunar = PRESETS['lunar-cabin-example'];
+  for (const row of rows.filter((r) => r.o2Location === 'ambient' && overlap(r, lunar, DEFAULT_TOLERANCES) === 'covers').slice(0, 2)) {
+    if (wanted.some((w) => w.accession === row.accession && w.rowIndex === row.rowIndex)) continue;
+    wanted.push({
+      accession: row.accession,
+      rowIndex: row.rowIndex,
+      notes: `K5 candidate: ${row.testLabel ?? row.id}, ${row.fuel.name ?? 'fuel'} at ${row.o2Pct.min}% O2 and ${row.pressureKpa.min} kPa, inside the Moon-base example box. Check that O2 is initial ambient chamber O2.`,
+    });
+  }
 
   const candidates: CandidateRecord[] = [];
   for (const want of wanted) {

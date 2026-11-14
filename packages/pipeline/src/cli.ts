@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
-import { buildCorpus } from './corpus.ts';
+import { buildCorpus, type CandidateFile } from './corpus.ts';
+import { acceptedRecords, defaultPaths, loadLog } from './review.ts';
 import { repoRoot } from './paths.ts';
 
 const MAX_CORPUS_BYTES = 1_500_000;
@@ -14,7 +15,12 @@ function writeJson(path: string, value: unknown): number {
 
 function main(): void {
   const root = repoRoot();
-  const result = buildCorpus({ rootDir: root });
+  const paths = defaultPaths(root);
+  // Accepted records come from the previous candidates file plus the human review log.
+  const previous = existsSync(paths.candidates) ? (JSON.parse(readFileSync(paths.candidates, 'utf8')) as CandidateFile) : null;
+  const accepted = previous ? acceptedRecords(previous.candidates, loadLog(paths)) : [];
+  if (accepted.length) console.log(`accepted records from human review: ${accepted.length}`);
+  const result = buildCorpus({ rootDir: root, acceptedRecords: accepted });
   const { corpus } = result;
 
   const dataDir = resolve(root, 'data');

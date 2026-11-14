@@ -198,11 +198,13 @@ describe('corpus integrity', () => {
     expect(corpus.records).toEqual([]);
   });
 
-  it('prepares three proposed gold-record candidates for humans', () => {
+  it('prepares proposed gold-record candidates for humans, including K5 rows inside the Moon-base box', () => {
     expect(result.candidates.candidates.map((candidate) => candidate.id)).toEqual([
       'candidate:PSI-69:18',
       'candidate:PSI-99:0',
       'candidate:PSI-25:0',
+      'candidate:PSI-69:24',
+      'candidate:PSI-69:25',
     ]);
     for (const candidate of result.candidates.candidates) {
       expect(candidate.review.state).toBe('proposed');
