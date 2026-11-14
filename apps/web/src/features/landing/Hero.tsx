@@ -1,54 +1,77 @@
-import { lazy, Suspense } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from '@phosphor-icons/react';
-import { PRESETS, type ScenarioId } from '@fire/contracts';
-import { useAtlas } from '../../state/store';
-import { useCorpus } from '../../data/useCorpus';
-import { Button } from '../../components/Button';
-import { NumberTween } from '../../components/NumberTween';
-import { Skeleton } from '../../components/Skeleton';
+import { useReducedMotion } from 'motion/react';
+import { buttonClass } from '../../components/Button';
+import type { Plate } from './dither/engine';
+import { DitherPlate, useCell } from './Plate';
+import { WipeLink } from './Wipe';
 
-const OrbitScene = lazy(() => import('../orbit'));
-const hint = (target: ScenarioId | null) => window.dispatchEvent(new CustomEvent('fa:orbit-hint', { detail: { target } }));
-const BODIES: { id: Exclude<ScenarioId, 'custom' | 'suit'>; name: string }[] = [
-  { id: 'earth-iss', name: 'Earth air' }, { id: 'lunar-cabin-example', name: 'Moon' }, { id: 'exploration-upper', name: 'Exploration atmosphere' },
-];
+export const ACCESS_PATH = '/atlas?h=lunar-cabin-example&q=prevention';
+export const CREDIT = 'An experimental app for NASA Space Apps x HackAthlone hackathon 2026, by Jay Popat & Repath Khan';
 
-/** SPEC §3.1: asymmetric split, two CTAs, live readout from the loaded corpus. */
+const CAPTION = {
+  g1: 'In 1 g, hot gas rises. Buoyancy stretches the flame into a flickering teardrop.',
+  micro: 'In microgravity there is no buoyancy. Oxygen arrives by diffusion and the flame becomes a sphere.',
+};
+
+/**
+ * Full-bleed hero. The flame plate breathes and morphs from the 1 g teardrop to the microgravity sphere:
+ * on load (story), when the toggle is pressed (control), and as the hero scrolls away (the IntersectionObserver ratio drives the uniform).
+ */
 export function Hero() {
-  const navigate = useNavigate(); const corpus = useCorpus();
-  const pick = (id: ScenarioId) => { useAtlas.getState().set({ habitat: id }); if (id === 'lunar-cabin-example') window.dispatchEvent(new CustomEvent('fa:moon-click')); };
-  const c = corpus.status === 'ready' ? corpus.corpus : null;
+  const reduce = useReducedMotion(); const cell = useCell(4, 3);
+  const root = useRef<HTMLElement>(null); const plate = useRef<Plate | null>(null);
+  const ratio = useRef(1); const base = useRef<0 | 1>(0); const touched = useRef(false);
+  const [mode, setMode] = useState<'g1' | 'micro'>(reduce ? 'micro' : 'g1');
+
+  const apply = () => {
+    const p = plate.current; if (!p) return;
+    p.set({ morph: Math.max(base.current, 1 - ratio.current), fade: Math.min(1, 0.2 + ratio.current * 1.3) });
+  };
+  const place = () => {
+    const p = plate.current; const el = root.current; if (!p || !el) return;
+    const narrow = el.clientWidth < 900;
+    p.set(narrow ? { cx: 0.5, cy: 0.27, scale: 0.6 } : { cx: 0.74, cy: 0.54, scale: 0.72 }, true);
+  };
+  const choose = (m: 'g1' | 'micro') => { touched.current = true; setMode(m); };
+
+  useEffect(() => { base.current = mode === 'micro' ? 1 : 0; apply(); }, [mode]);
+  useEffect(() => {
+    if (reduce || touched.current) return;
+    const t = window.setTimeout(() => { if (!touched.current) setMode('micro'); }, 1800);
+    return () => clearTimeout(t);
+  }, [reduce]);
+  useEffect(() => {
+    const el = root.current; if (!el) return;
+    const io = new IntersectionObserver((e) => { ratio.current = e[e.length - 1]?.intersectionRatio ?? 1; apply(); }, { threshold: Array.from({ length: 21 }, (_, i) => i / 20) });
+    io.observe(el);
+    const ro = new ResizeObserver(place); ro.observe(el);
+    return () => { io.disconnect(); ro.disconnect(); };
+  }, []);
+
   return (
-    <section aria-labelledby="hero-h" className="mx-auto grid max-w-[1200px] gap-10 px-4 pb-16 pt-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:pb-24 lg:pt-20">
-      <div className="flex flex-col justify-center">
-        <h1 id="hero-h" className="text-[clamp(2.25rem,5.2vw,4rem)] font-semibold leading-[1.04] tracking-[-0.035em]">Where will astronauts breathe, and has NASA tested fire there?</h1>
-        <p className="mt-5 max-w-[46ch] text-lg text-muted">Test conditions from NASA microgravity fire experiments, mapped against the air of future habitats. Every dot opens its source.</p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <span onMouseEnter={() => hint('lunar-cabin-example')} onMouseLeave={() => hint(null)} onFocus={() => hint('lunar-cabin-example')} onBlur={() => hint(null)}>
-            <Button variant="primary" size="lg" data-testid="cta-briefing" onClick={() => navigate('/briefing')} icon={<ArrowRight size={18} aria-hidden />}>Start briefing</Button>
-          </span>
-          <Button size="lg" data-testid="cta-explore" onClick={() => navigate('/atlas')}>Explore the map</Button>
+    <section ref={root} aria-labelledby="hero-h" className="lp-hero">
+      <DitherPlate scene="flame" cell={cell} matrix="bayer4" params={{ morph: reduce ? 1 : 0, cx: 0.74, cy: 0.54, scale: 0.72 }}
+        onReady={(p) => { plate.current = p; place(); apply(); }} />
+      <div className="relative z-10 flex h-full flex-col justify-between gap-6 px-4 py-6 md:px-14 md:py-12">
+        <div className="lp-panel p-3 md:max-w-[400px] md:self-end md:p-4">
+          <div role="group" aria-label="Flame gravity" className="lp-seg">
+            <button type="button" aria-pressed={mode === 'g1'} onClick={() => choose('g1')}>1 g</button>
+            <button type="button" aria-pressed={mode === 'micro'} onClick={() => choose('micro')}>Microgravity</button>
+          </div>
+          <p className="mt-3 text-[13px] leading-5 text-muted" aria-live="polite">{mode === 'g1' ? CAPTION.g1 : CAPTION.micro}</p>
         </div>
-        <dl className="compartments mt-12 max-w-[480px] grid-cols-3" aria-label="What is loaded">
-          {([['tests parsed', c?.rows.length], ['investigations', c?.cards.length], ['cells rejected', c?.rejects.length]] as const).map(([k, v]) => (
-            <div key={k} className="p-3">
-              <dd className="m-0 text-2xl font-semibold">{v === undefined ? <Skeleton className="h-8 w-12" /> : <NumberTween value={v} />}</dd>
-              <dt className="text-xs text-muted">{k}</dt>
-            </div>
-          ))}
-        </dl>
-        {c?.fixture && <p className="mt-2 text-xs text-flag">FIXTURE data is loaded. Counts are examples, not the archive.</p>}
+        <div className="lp-panel p-5 md:max-w-[780px] md:p-8">
+          <h1 id="hero-h" className="lp-h1">Where will astronauts breathe, and has NASA tested fire there?</h1>
+          <p className="mt-4 max-w-[52ch] text-base text-muted md:text-lg">NASA microgravity fire tests, mapped against the air of future Moon bases. Every dot opens its source row.</p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <WipeLink to={ACCESS_PATH} data-testid="cta-enter" className={buttonClass('primary', 'lg', 'no-underline hover:no-underline')}>Enter the Atlas<ArrowRight size={18} aria-hidden /></WipeLink>
+            <Link to="/briefing" data-testid="cta-briefing" className={buttonClass('secondary', 'lg', 'no-underline hover:no-underline')}>Take the briefing</Link>
+          </div>
+          <p className="mt-5 max-w-[60ch] border-t border-hairline pt-4 text-[13px] leading-5 text-muted">{CREDIT}</p>
+        </div>
       </div>
-      <figure className="m-0">
-        <div className="relative aspect-[4/5] max-h-[560px] w-full overflow-hidden border border-hairline bg-surface sm:aspect-square lg:aspect-[4/5]" data-testid="orbit-container">
-          <Suspense fallback={<Skeleton className="absolute inset-0" label="Loading orbit scene" />}><div className="absolute inset-0 [&_main]:p-0"><OrbitScene /></div></Suspense>
-        </div>
-        <figcaption className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
-          <span>Habitats to try:</span>
-          {BODIES.map((b) => <button key={b.id} type="button" onClick={() => pick(b.id)} title={`${PRESETS[b.id].o2Pct}% O₂ at ${PRESETS[b.id].totalKpa} kPa`} className="border-0 bg-transparent p-0 text-accent underline underline-offset-4 hover:text-ink">{b.name}</button>)}
-        </figcaption>
-      </figure>
     </section>
   );
 }

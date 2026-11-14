@@ -12,7 +12,9 @@ precision highp float;
 out vec4 outColor;
 uniform vec2 uCells;
 uniform float uT;
-uniform int uScene;      // 0 flame, 1 orbit
+uniform int uScene;      // 0 flame, 1 orbit, 2 sweep (threshold reveal overlay)
+uniform float uSweep;    // sweep: 0 = fully covered, 1 = fully revealed
+uniform int uDir;        // sweep direction: 0 top to bottom, 1 left to right
 uniform int uMatrix;     // 0 bayer 4x4, 1 bayer 8x8, 2 blue noise
 uniform sampler2D uBlue;
 uniform vec3 uBg;
@@ -139,6 +141,16 @@ vec4 orbitScene(vec2 frag, float t) {
 void main() {
   vec2 frag = gl_FragCoord.xy;
   float t = uT;
+  if (uScene == 2) {
+    // The matrix threshold is compared with a moving ramp, so cells flip one by one and the pattern itself never moves.
+    vec2 uv = frag / uCells;
+    float ramp = uDir == 0 ? (1.0 - uv.y) : uv.x;
+    float lvl = uSweep * 1.5 - ramp * 0.5;
+    float th2 = threshold(ivec2(frag));
+    if (lvl > th2 + 0.07) { outColor = vec4(0.0); return; }
+    if (lvl > th2) { outColor = vec4(uC1, 1.0); return; }
+    outColor = vec4(uBg, 1.0); return;
+  }
   vec4 s = uScene == 0 ? flameScene(frag, t) : orbitScene(frag, t);
   float th = threshold(ivec2(frag));
   bool on = s.a * uFade > th;
