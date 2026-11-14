@@ -1,0 +1,2 @@
+# Runtime/authoring cache only. Model output is not committed (R8).
+*.json

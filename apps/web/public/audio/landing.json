@@ -1,0 +1,42 @@
+{
+  "scenarioKey": "landing",
+  "scriptHash": "1a413fd38ae6aac7154fd463d395886d2d295a5d03a413b0353df317278bceff",
+  "segments": [
+    {
+      "id": "intro",
+      "title": "Intro",
+      "text": "This overview uses a device voice. No AI voice service is called. Fire Atlas maps NASA microgravity fire tests against the air of future habitats. Every dot opens its source.",
+      "claimIds": [],
+      "cues": [],
+      "startSec": 0,
+      "endSec": 11.54
+    },
+    {
+      "id": "map",
+      "title": "The map",
+      "text": "Pick a habitat, then read the map. Oxygen and pressure are plotted only when a table reports them. Rows without a value are marked unknown. The gap sentence is computed by code from those rows.",
+      "claimIds": [],
+      "cues": [],
+      "startSec": 11.89,
+      "endSec": 25.35
+    },
+    {
+      "id": "outro",
+      "title": "Outro",
+      "text": "The map shows what has been tested near a chosen atmosphere, and what has not. NASA does not endorse this project. The evidence stays free.",
+      "claimIds": [],
+      "cues": [],
+      "startSec": 25.7,
+      "endSec": 35.32
+    }
+  ],
+  "words": null,
+  "audioUrl": null,
+  "voice": {
+    "provider": "device",
+    "voiceId": null,
+    "modelId": null
+  },
+  "generatedAt": "2026-11-14T20:31:24.765Z",
+  "disclosure": "This overview uses a device voice. No AI voice service is called."
+}
