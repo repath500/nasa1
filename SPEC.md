@@ -123,7 +123,7 @@ Goal: a first-time user gets a meaningful view without knowing any jargon. Four 
 | Habitat | "Where will crews breathe?" | Cards: ISS / Earth air (21%, 101.3 kPa), Moon base example (30%, 70.3 kPa), Exploration atmosphere (34%, 56.5 kPa, NTRS 20180004258), Spacesuit (100%, 29.6 kPa), Custom (O₂ and pressure sliders, unit-aware text inputs accept "10.2 psi", "0.7 atm", "530 mmHg") | Mini Gap Map preview with the habitat box and a live count "N tests nearby" |
 | Concern | "What worries you most?" | Prevention: "Will materials catch and spread fire?" / Detection: "Will we notice smoke early?" / Suppression: "Can we put it out?" / "Just exploring" | One-line note on what PSI covers for that concern |
 | Fuel (optional) | "Anything specific?" | Chips: Solid (fabric, plastic) / Liquid droplet / Gas; material autocomplete from the corpus (PMMA, Nomex, SIBAL, heptane, methanol…) | Count updates with a number tween |
-| Summary | "Your briefing" | Code-written sentence, e.g. "Prevention evidence near 30% O₂ at 70 kPa, solid materials: 0 tests in PSI report oxygen this high. 24 liquid-droplet tests are nearby." | Buttons: **Open the atlas**, **Listen first** (starts Listen mode) |
+| Summary | "Your briefing" | Code-written sentence, e.g. "Prevention evidence near 30% O₂ at 70 kPa, solid materials: 0 tests in PSI report oxygen this high. N liquid-droplet tests are nearby." (all counts computed by code; never hard-code them)" | Buttons: **Open the atlas**, **Listen first** (starts Listen mode) |
 
 After the wizard: 3 coach marks in the atlas (habitat box, any dot, Studies panel), each dismissible, never shown twice (localStorage, wrapped in try/catch). `?` reopens the tour. A "New briefing" button lives in the scenario bar.
 
@@ -343,7 +343,7 @@ Each item is small; together they make it feel like a product. Owners in bracket
 ---
 
 ## 8. Wow moments (judge-facing, ranked)
-1. **Gap Map reveal**: Moon base chosen → orbit camera flies to the Moon → cross-fade into the map → tolerance box snaps on → 24 FLEX droplets light up → solid-fuel cloud stops below 22.2% → hero sentence types in.
+1. **Gap Map reveal**: Moon base chosen → orbit camera flies to the Moon → cross-fade into the map → tolerance box snaps on → the FLEX droplet rows inside the box light up (8 in corpus v1 at default tolerances; 24 FLEX rows are at ≥30% O₂ across all pressures) → solid-fuel cloud stops below 22.2% → hero sentence types in.
 2. **Listen mode**: press play and the app gives the briefing itself, zooming and highlighting in sync with an AI voice, captions on.
 3. **Drag the habitat box** and watch counts, ranks and the gap sentence update live.
 4. **Click any dot** → raw CSV row + hash + DOI.
