@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from '@phosphor-icons/react';
 import { PRESETS } from '@fire/contracts';
@@ -30,9 +30,17 @@ function OrbitBand() {
       {lay && BODIES.map((b, i) => {
         const s = PRESETS[b.id]; const body = lay[i]!;
         return (
-          <div key={b.id} className="lp-panel lp-label px-3 py-2 text-[13px] leading-5" style={{ left: Math.min(Math.max(body.x, 90), size.w - 90), top: Math.min(body.y + body.r + 12, size.h - 62) }}>
+          <Fragment key={b.id}>
+          {b.id === 'lunar-cabin-example' && (
+            // Easter egg hook (SPEC §9): the shell's EggHost counts three Moon clicks.
+            <button type="button" aria-label="Moon" className="absolute rounded-full bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-focus)]"
+              style={{ left: body.x - body.r, top: body.y - body.r, width: body.r * 2, height: body.r * 2 }}
+              onClick={() => window.dispatchEvent(new CustomEvent('fa:moon-click'))} />
+          )}
+          <div className="lp-panel lp-label px-3 py-2 text-[13px] leading-5" style={{ left: Math.min(Math.max(body.x, 90), size.w - 90), top: Math.min(body.y + body.r + 12, size.h - 62) }}>
             <span className="block text-ink">{b.name}</span><span className="mono text-muted">{s.o2Pct}% O₂{b.id === 'lunar-cabin-example' ? ' or more' : ''}</span>
           </div>
+          </Fragment>
         );
       })}
     </div>

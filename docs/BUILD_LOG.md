@@ -107,6 +107,15 @@ Each worker ran in its own git worktree and branch; the lead merged in dependenc
 | `e1e8aa2` | axe accessibility specs on key pages in Night and Paper, data-colour contrast test, copy fixes | Accessibility is judged; data marks need 3:1 contrast |
 | merge | 80 browser tests and 172 unit tests pass | |
 
+### Phase 7: dithered landing page (WL then WL2, Sonnet 5.5 medium; first run rate-limited, work saved and resumed)
+| Commit | What | Why |
+|---|---|---|
+| `4558eb3` | Own WebGL2 ordered-dither engine (Bayer 4x4/8x8, blue noise): one GL context and rAF loop, fixed matrix origin, pauses off-screen and on hidden tabs, static under reduced motion, Canvas 2D fallback | npm dither libraries only dither existing bitmaps on the CPU; we need animated procedural scenes |
+| WL2 commits | New landing: hero with a flame that morphs from the 1 g teardrop to the microgravity sphere (toggle and scroll), "Enter the Atlas" access button with a dithered wipe, "Take the briefing", team credit line; the challenge (quoted), why flames differ in orbit, Moon-base atmosphere, Apollo 1 / Apollo 13 / Mir note; live corpus numbers; Code / AI / People ledger beside a live Gap Map; Caught by code teleprinter; limits; orbit band where flames drift to the Moon on CTA hover; footer with credits and non-endorsement | Judges should understand the challenge and why we built this in the first scroll, and want to click in |
+| lead | Merge fixes: description-list markup for screen readers, keyboard-reachable Moon hit area for the easter egg, names kept on one line in the credit | 83 browser tests pass (including axe on the landing in three themes and at 375 px) |
+
+Screenshots for the deck: `apps/web/public/landing/shots/` (desktop Night and Paper, phone, orbit hover, access wipe).
+
 ## 4. Numbers you can quote (all computed by code from `data/corpus.v1.json`, hash `4d3a7aa6…`)
 
 - 1,476 parsed test rows from 12 PSI investigations; 11 source cells rejected by code.
@@ -127,5 +136,4 @@ Each worker ran in its own git worktree and branch; the lead merged in dependenc
 **Ready for the team now:** `pnpm review` (two people), `pnpm corpus`, `pnpm review:sign d5`, `pnpm review:sign k5`; with keys, `pnpm ai:record`, then `pnpm g3:label` (two people), `pnpm g3:adjudicate`, `pnpm g3:metrics`. Step-by-step guides: `packages/pipeline/README.md` and `packages/server/README.md`.
 
 **In progress (agents):**
-- WL (Claude Sonnet 5.5, medium): the new dithered landing page with the access button, challenge explainer and team credit.
 - OV-2 (GPT-6.1 Sol): end-to-end review of the merged app, 10-row re-verification against the CSVs, submission readiness, 7-slide deck outline.

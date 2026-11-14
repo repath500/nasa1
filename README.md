@@ -5,7 +5,7 @@
 Pick where people will live in space. See NASA microgravity fire tests plotted against that air. Find what has been
 tested near it, what has not, and what to read first. Every dot opens its source.
 
-NASA Space Apps Challenge 2026, challenge **Flame in Freefall**. A literature-screening tool, not safety guidance.
+An experimental app for NASA Space Apps x HackAthlone hackathon 2026, by Jay Popat & Repath Khan. Challenge: **Flame in Freefall**. A literature-screening tool, not safety guidance.
 Partial-gravity combustion data: none in PSI. NASA does not endorse this project.
 
 ```sh

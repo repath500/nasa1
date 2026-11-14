@@ -119,12 +119,9 @@ test.describe('W7 cross-feature wiring', () => {
 
   test('clicking the Moon three times opens the partial pressure card', async ({ page }) => {
     await page.goto('/');
-    const canvas = page.locator('canvas[role="img"]').first();
-    await expect(canvas).toBeVisible();
-    const box = (await canvas.boundingBox())!;
-    const scale = Math.min(box.width / 480, box.height / 270);
-    const cx = box.x + (box.width - 480 * scale) / 2 + 285 * scale, cy = box.y + (box.height - 270 * scale) / 2 + 100 * scale;
-    for (let i = 0; i < 3; i++) await page.mouse.click(cx, cy);
+    const moon = page.getByRole('button', { name: 'Moon', exact: true });
+    await moon.scrollIntoViewIfNeeded();
+    for (let i = 0; i < 3; i++) await moon.click();
     await expect(page.getByRole('dialog')).toContainText('almost the same O₂ partial pressure');
   });
 

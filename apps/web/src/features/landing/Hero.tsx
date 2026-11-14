@@ -8,7 +8,7 @@ import { DitherPlate, useCell } from './Plate';
 import { WipeLink } from './Wipe';
 
 export const ACCESS_PATH = '/atlas?h=lunar-cabin-example&q=prevention';
-export const CREDIT = 'An experimental app for NASA Space Apps x HackAthlone hackathon 2026, by Jay Popat & Repath Khan';
+export const CREDIT = 'An experimental app for NASA Space Apps x HackAthlone hackathon 2026, by Jay\u00a0Popat & Repath\u00a0Khan';
 
 const CAPTION = {
   g1: 'In 1 g, hot gas rises. Buoyancy stretches the flame into a flickering teardrop.',

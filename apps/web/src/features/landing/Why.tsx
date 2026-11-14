@@ -29,9 +29,11 @@ export function Why() {
         </div>
         <dl className="mt-14 grid grid-cols-2 gap-px border border-hairline bg-hairline lg:grid-cols-4" aria-label="Live from the loaded corpus">
           {stats.map(([label, value, note]) => (
-            <div key={label} className="flex min-h-[210px] flex-col justify-between bg-bg p-4 md:p-6">
-              <dd className="m-0">{value === undefined ? <Skeleton className="h-12 w-24" /> : <span className="lp-big-num"><NumberTween value={value} duration={0.9} format={(n) => Math.round(n).toLocaleString("en-US")} /></span>}</dd>
-              <div><dt className="mono text-[13px] text-ink">{label}</dt><dd className="m-0 mt-2 text-[13px] leading-5 text-muted">{note}</dd></div>
+            <div key={label} className="flex min-h-[210px] flex-col bg-bg p-4 md:p-6">
+              {/* dt must come first inside dl > div; CSS order keeps the number on top visually. */}
+              <dt className="order-2 mt-auto mono text-[13px] text-ink">{label}</dt>
+              <dd className="order-1 m-0">{value === undefined ? <Skeleton className="h-12 w-24" /> : <span className="lp-big-num"><NumberTween value={value} duration={0.9} format={(n) => Math.round(n).toLocaleString("en-US")} /></span>}</dd>
+              <dd className="order-3 m-0 mt-2 text-[13px] leading-5 text-muted">{note}</dd>
             </div>
           ))}
         </dl>
