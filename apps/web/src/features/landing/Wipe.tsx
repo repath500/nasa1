@@ -1,26 +1,31 @@
-import { createContext, useCallback, useContext, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useReducedMotion } from 'motion/react';
-import { DitherPlate } from './Plate';
 
 const WipeContext = createContext<(to: string) => void>(() => undefined);
 export const useWipe = () => useContext(WipeContext);
 
 /**
- * Access transition: pressing the main button sweeps a dither across the whole screen, then routes.
- * Reason: it makes "entering" the atlas a visible event and hides the route change. Instant under reduced motion.
+ * Access transition: pressing the main button fades the page to the background colour while a thin accent line draws
+ * across, then routes. Navigation is driven by a timer, not by an animation event, so it can never stall.
+ * Instant under reduced motion.
  */
+const FADE_MS = 380;
 export function WipeProvider({ children }: { children: ReactNode }) {
   const nav = useNavigate(); const reduce = useReducedMotion(); const [dest, setDest] = useState<string | null>(null);
   const go = useCallback((to: string) => { if (reduce) nav(to); else setDest((d) => d ?? to); }, [nav, reduce]);
+  useEffect(() => {
+    if (!dest) return;
+    const t = window.setTimeout(() => nav(dest), FADE_MS);
+    return () => window.clearTimeout(t);
+  }, [dest, nav]);
   return (
     <WipeContext.Provider value={go}>
       {children}
       {dest && (
-        <div className="fixed inset-0 z-[100]" role="status" aria-live="polite">
+        <div className="lp-wipe" role="status" aria-live="polite" style={{ animationDuration: `${FADE_MS}ms` }}>
           <span className="sr-only">Opening the atlas</span>
-          <DitherPlate className="lp-plate" scene="sweep" cell={6} matrix="bayer8" animate={false} sweepSeconds={0.7} params={{ sweep: 1, dir: 1 }}
-            onReady={(p) => p.set({ sweep: 0 })} onSettle={(s) => { if (s <= 0) nav(dest); }} />
+          <span className="lp-wipe-line" aria-hidden style={{ animationDuration: `${FADE_MS}ms` }} />
         </div>
       )}
     </WipeContext.Provider>

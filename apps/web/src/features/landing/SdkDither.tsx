@@ -21,6 +21,9 @@ export function SdkDither({
 }: { shape: Shape; matrix?: Matrix; speed?: number; scale?: number; size?: number; front?: string; className?: string }) {
   const reduce = useReducedMotion();
   const box = useRef<HTMLDivElement>(null);
+  // Mount once the field first nears the viewport, then keep it mounted: off-screen it is paused (speed 0), not removed,
+  // so scrolling back never makes it pop in again.
+  const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [colors, setColors] = useState({ back: '#0B0D10', front: '#7CC4F2' });
 
@@ -34,14 +37,18 @@ export function SdkDither({
 
   useEffect(() => {
     const el = box.current; if (!el) return;
-    const io = new IntersectionObserver((entries) => setVisible(entries.some((e) => e.isIntersecting)), { rootMargin: '120px' });
+    const io = new IntersectionObserver((entries) => {
+      const on = entries.some((e) => e.isIntersecting);
+      setVisible(on);
+      if (on) setMounted(true);
+    }, { rootMargin: '200px' });
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
   return (
-    <div ref={box} aria-hidden className={`pointer-events-none absolute inset-0 ${className}`}>
-      {visible && (
+    <div ref={box} aria-hidden className={`lp-sdk pointer-events-none absolute inset-0 ${mounted ? 'is-on' : ''} ${className}`}>
+      {mounted && (
         <Dithering
           style={{ width: '100%', height: '100%' }}
           colorBack={colors.back}
@@ -50,7 +57,7 @@ export function SdkDither({
           type={matrix}
           size={size}
           scale={scale}
-          speed={reduce ? 0 : speed}
+          speed={reduce || !visible ? 0 : speed}
           frame={reduce ? 4000 : undefined}
         />
       )}

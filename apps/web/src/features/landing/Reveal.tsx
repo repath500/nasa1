@@ -1,32 +1,33 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useReducedMotion } from 'motion/react';
-import type { Plate } from './dither/engine';
-import { DitherPlate, useCell } from './Plate';
 
 /**
- * Threshold sweep: the section sits under a page-coloured dither cover that dissolves cell by cell the first time the
- * section scrolls into view (IntersectionObserver, no scroll listener). Reason: it tells the reader a new section begins
- * and keeps the dither language alive between the big plates. Skipped entirely under reduced motion.
+ * Calm section reveal: the first time a section scrolls into view, its content fades in and rises 24 px with a long
+ * ease-out. One IntersectionObserver per section, no scroll listener, transform and opacity only (GPU-composited).
+ * Children marked data-reveal-item follow in a short stagger. Under reduced motion everything is shown at once.
+ * The dither stays in the image plates; text never dissolves.
  */
 export function Reveal({ children, className = '', as: Tag = 'section', ...rest }: { children: ReactNode; className?: string; as?: 'section' | 'div' | 'footer'; 'aria-labelledby'?: string }) {
-  const reduce = useReducedMotion(); const box = useRef<HTMLDivElement>(null);
-  const plate = useRef<Plate | null>(null); const seen = useRef(false);
-  const [done, setDone] = useState(false); const cell = useCell(6, 5);
-  const fire = () => { if (seen.current) plate.current?.set({ sweep: 1 }); };
+  const reduce = useReducedMotion();
+  const box = useRef<HTMLDivElement>(null);
+  const [shown, setShown] = useState(false);
+
   useEffect(() => {
-    if (reduce || !box.current) return;
-    const io = new IntersectionObserver((e) => { if (e[0]?.isIntersecting) { seen.current = true; io.disconnect(); fire(); } }, { threshold: 0.12 });
-    io.observe(box.current);
-    const failsafe = window.setTimeout(() => setDone(true), 25000); // never leave content covered if the engine stalls
-    return () => { io.disconnect(); clearTimeout(failsafe); };
+    const el = box.current;
+    if (reduce || !el || typeof IntersectionObserver === 'undefined') { setShown(true); return; }
+    // Already on screen at load (deep link, refresh mid-page): show without animating.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) { setShown(true); return; }
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) { setShown(true); io.disconnect(); }
+    }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+    io.observe(el);
+    return () => io.disconnect();
   }, [reduce]);
+
   return (
-    <Tag {...rest} className={`lp-reveal ${done || reduce ? 'is-done' : ''} ${className}`}>
-      <div ref={box}>{children}</div>
-      {!reduce && !done && (
-        <DitherPlate className="lp-cover" scene="sweep" cell={cell} matrix="bayer8" animate={false} sweepSeconds={1.1} params={{ sweep: 0, dir: 0 }}
-          onReady={(p) => { plate.current = p; fire(); }} onSettle={(s) => { if (s >= 1) setDone(true); }} />
-      )}
+    <Tag {...rest} className={`lp-reveal ${shown ? 'is-in' : ''} ${className}`}>
+      <div ref={box} className="lp-reveal-inner">{children}</div>
     </Tag>
   );
 }
