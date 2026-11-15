@@ -46,6 +46,8 @@ const STATES: { name: string; path: string; viewport?: { width: number; height: 
 for (const theme of THEMES) {
   for (const state of STATES) {
     test(`axe: ${state.name} in ${theme}`, async ({ page }) => {
+      // axe over the full 1,476-row table takes ~20 s; give it room under parallel load.
+      if (state.name.includes('table')) test.slow();
       if (state.viewport) await page.setViewportSize(state.viewport);
       await page.addInitScript(([t, coach]) => { try { localStorage.setItem('fa.theme', t!); if (coach === '1') localStorage.setItem('fa.coach.seen', JSON.stringify({ atlas: true })); } catch { /* storage blocked */ } }, [theme, '1']);
       await page.emulateMedia({ reducedMotion: 'reduce' });

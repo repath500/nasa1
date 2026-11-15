@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import * as Tabs from '@radix-ui/react-tabs';
 import { ArrowsOutLineVertical, Export, NotePencil, Prohibit, Rows, Selection, X } from '@phosphor-icons/react';
@@ -8,6 +8,7 @@ import { writeUrl } from '../../state/url';
 import GapMap from '../gapmap';
 import Timeline from '../timeline';
 import EvidenceDrawer from '../evidence';
+const MissionView = lazy(() => import('../mission'));
 import StudiesTab from '../studies';
 import SelectionTab from '../selection';
 import LedgerTab from '../ledger';
@@ -67,6 +68,7 @@ export default function AtlasWorkspace() {
   const highlighted = useAtlas((s) => s.highlightedRowIds);
   const timelineYear = useAtlas((s) => s.timelineYear);
   const boxSelection = useAtlas((s) => s.boxSelection);
+  const atlasView = useAtlas((s) => s.atlasView);
   const set = useAtlas((s) => s.set);
   const notes = useNotes();
   const location = useLocation();
@@ -165,13 +167,12 @@ export default function AtlasWorkspace() {
           ))}
           {fuelFilter.length === 0 && <span className="fa-muted" style={{ fontSize: 12 }}>all fuels</span>}
         </span>
-        <span className="fa-field">
-          <label className="fa-bar__label" htmlFor="fa-unit">Units</label>
-          <select id="fa-unit" className="fa-select" value={unit} onChange={(e) => set({ unit: e.target.value as typeof unit })}>
-            {(['kPa', 'psi', 'atm', 'mmHg'] as const).map((u) => <option key={u} value={u}>{u}</option>)}
-          </select>
-        </span>
+        {/* Units live in the global top bar (one control for the whole app). */}
         <span className="fa-bar__spacer" />
+        <div className="fa-viewswitch-seg" role="group" aria-label="Atlas picture">
+          <button type="button" aria-pressed={atlasView === 'gap'} title="Every test row by pressure and oxygen" onClick={() => set({ atlasView: 'gap' })}>Gap Map</button>
+          <button type="button" aria-pressed={atlasView === 'mission'} title="Same tests, habitat, filters and selection, as a dithered scene" onClick={() => set({ atlasView: 'mission' })}>Mission</button>
+        </div>
         {model.corpus?.fixture && <Badge kind="fixture" />}
         {model.noAi && <span className="fa-chip">NO-AI</span>}
         {!online && <span className="fa-chip" title="Static data still works offline">OFFLINE</span>}
@@ -214,10 +215,26 @@ export default function AtlasWorkspace() {
 
       {/* map and panel */}
       <div className="fa-main">
-        <div className="fa-map" aria-label="Gap Map">
+        <div className="fa-map" aria-label={atlasView === 'mission' ? 'Mission view' : 'Gap Map'}>
+          <div className="fa-map-body">
           {model.status === 'loading' && <div className="fa-skel" style={{ width: '100%', height: '100%' }} role="status" aria-label="Loading the Gap Map" />}
           {model.status === 'error' && <div style={{ padding: 16 }}><ErrorState message={model.message} stillWorks="the About, Method and Credits pages." onRetry={model.retry} /></div>}
-          {model.status === 'ready' && (
+          {model.status === 'ready' && atlasView === 'mission' && (
+            <Suspense fallback={<div className="fa-skel" style={{ width: '100%', height: '100%' }} role="status" aria-label="Loading the Mission view" />}>
+              <MissionView
+                rows={rows}
+                habitat={habitat}
+                scenario={scenario}
+                tolerances={tol}
+                selectedRowId={selectedRowId}
+                highlightedRowIds={highlighted}
+                phaseFilter={fuelFilter}
+                onSelectRow={(id) => set({ selectedRowId: id })}
+                onHoverRow={(id) => set({ highlightedRowIds: id ? [id] : [] })}
+              />
+            </Suspense>
+          )}
+          {model.status === 'ready' && atlasView === 'gap' && (
             <GapMap
               rows={rows}
               scenario={scenario}
@@ -238,6 +255,7 @@ export default function AtlasWorkspace() {
               onHoverRow={(id) => set({ highlightedRowIds: id ? [id] : [] })}
             />
           )}
+          </div>
         </div>
 
         <aside className="fa-panel" aria-label="Side panel">

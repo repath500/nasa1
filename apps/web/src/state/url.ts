@@ -18,12 +18,12 @@ const MODES: Mode[] = ['explore', 'briefing', 'listen', 'present', 'learn', 'due
 const TABS: PanelTab[] = ['studies', 'selection', 'ledger', 'notes'];
 const UNITS: PressureUnit[] = ['kPa', 'psi', 'atm', 'mmHg'];
 
-const ATLAS_KEYS = ['h', 'o2', 'kpa', 'q', 'f', 'm', 'mode', 'tab', 'sel', 'u', 't', 'ex'] as const;
+const ATLAS_KEYS = ['h', 'o2', 'kpa', 'q', 'f', 'm', 'mode', 'tab', 'v', 'sel', 'u', 't', 'ex'] as const;
 const COMMITTED_KEYS = ['h', 'q', 'f', 'm', 'mode'] as const;
 /** Routes whose view depends on atlas state; other pages (learn, about) keep clean URLs. */
 const SYNCED_ROUTES = ['/atlas', '/briefing', '/study', '/compare', '/brief', '/duel'];
 
-type UrlPatch = Partial<Pick<AtlasState, 'habitat' | 'custom' | 'concern' | 'fuelFilter' | 'material' | 'mode' | 'panelTab' | 'selectedRowId' | 'unit' | 'timelineYear' | 'expert'>>;
+type UrlPatch = Partial<Pick<AtlasState, 'habitat' | 'custom' | 'concern' | 'fuelFilter' | 'material' | 'mode' | 'panelTab' | 'atlasView' | 'selectedRowId' | 'unit' | 'timelineYear' | 'expert'>>;
 
 const isSynced = (pathname: string) => SYNCED_ROUTES.some((route) => pathname === route || pathname.startsWith(route + '/'));
 
@@ -48,6 +48,7 @@ export function readUrl(search: string): UrlPatch {
     material: m && m.length <= 60 ? m : null,
     mode: mode && MODES.includes(mode) ? mode : 'explore',
     panelTab: tab && TABS.includes(tab) ? tab : 'studies',
+    atlasView: p.get('v') === 'mission' ? 'mission' : 'gap',
     selectedRowId: sel && /^PSI-\d+:\d+$/.test(sel) ? sel : null,
     unit: u && UNITS.includes(u) ? u : 'kPa',
     timelineYear: p.has('t') && Number.isInteger(t) && t > 2000 && t < 2100 ? t : null,
@@ -68,6 +69,7 @@ export function atlasParams(s: AtlasState = useAtlas.getState()): [string, strin
   if (s.material) out.push(['m', s.material]);
   if (s.mode !== 'explore') out.push(['mode', s.mode]);
   if (s.panelTab !== 'studies') out.push(['tab', s.panelTab]);
+  if (s.atlasView === 'mission') out.push(['v', 'mission']);
   if (s.selectedRowId) out.push(['sel', s.selectedRowId]);
   if (s.unit !== 'kPa') out.push(['u', s.unit]);
   if (s.timelineYear) out.push(['t', String(s.timelineYear)]);

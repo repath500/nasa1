@@ -22,6 +22,8 @@ export interface AtlasState {
   unit: PressureUnit;
   expert: boolean;
   panelTab: PanelTab;
+  /** Which picture fills the atlas: the Gap Map chart or the dithered Mission view. */
+  atlasView: 'gap' | 'mission';
   selectedRowId: string | null;
   highlightedRowIds: string[];
   boxSelection: string[];
@@ -49,6 +51,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
   unit: 'kPa',
   expert: false,
   panelTab: 'studies',
+  atlasView: 'gap',
   selectedRowId: null,
   highlightedRowIds: [],
   boxSelection: [],

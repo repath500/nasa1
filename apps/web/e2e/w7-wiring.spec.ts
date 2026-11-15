@@ -76,7 +76,7 @@ test.describe('W7 cross-feature wiring', () => {
     const after = (await box.boundingBox())!;
     expect(after.width).toBeGreaterThan(before.width + 40);
     // a rerender that has nothing to do with the box (unit change) keeps the wider box
-    await page.locator('#fa-unit').selectOption('psi');
+    await page.getByTestId('unit-select').selectOption('psi');
     const later = (await box.boundingBox())!;
     expect(Math.abs(later.width - after.width)).toBeLessThan(3);
     expect(await seeing.textContent()).not.toBe(countBefore);

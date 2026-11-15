@@ -99,8 +99,17 @@ button.fa-chip:hover { background: var(--fa-raised); }
 .fa-hero__scope { font-size: 12px; color: var(--fa-muted); }
 .fa-pill { display: inline-flex; align-items: center; gap: 8px; padding: 2px 4px 2px 10px; border: 1px solid var(--fa-accent); color: var(--fa-accent); border-radius: 999px; font-family: var(--fa-mono); font-size: 11.5px; }
 .fa-main { display: grid; grid-template-columns: minmax(0, 1fr) 420px; min-height: 0; gap: 1px; background: var(--fa-hair); }
-.fa-map { position: relative; min-width: 0; min-height: 360px; background: var(--fa-bg); }
-.fa-map > * { width: 100%; height: 100%; }
+.fa-map { position: relative; min-width: 0; min-height: 360px; background: var(--fa-bg); display: flex; flex-direction: column; }
+.fa-map-body { position: relative; flex: 1; min-height: 0; }
+.fa-map-body > * { width: 100%; height: 100%; }
+/* Gap Map / Mission view switch */
+.fa-viewswitch-seg { display: inline-flex; border: 1px solid var(--color-border-strong); }
+.fa-viewswitch-seg button { min-height: 30px; padding: 0 14px; border: 0; border-left: 1px solid var(--fa-hair); background: transparent; color: var(--fa-muted); font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out); }
+.fa-viewswitch-seg button:first-child { border-left: 0; }
+.fa-viewswitch-seg button:hover { color: var(--fa-ink); }
+.fa-viewswitch-seg button[aria-pressed='true'] { background: var(--color-accent); color: var(--color-accent-ink); }
+.fa-viewswitch-seg button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
 .fa-panel { background: var(--fa-surface); min-height: 0; display: flex; flex-direction: column; }
 .fa-tabs { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; border-bottom: 1px solid var(--fa-hair); }
 .fa-tab { min-height: 36px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--fa-muted); font: inherit; font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 6px; }

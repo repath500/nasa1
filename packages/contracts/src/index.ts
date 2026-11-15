@@ -286,6 +286,7 @@ export interface UrlState {
   m?: string;             // material
   mode?: Mode;
   tab?: PanelTab;
+  v?: 'mission';          // atlas picture: Gap Map (default) or Mission view
   sel?: string;           // selected row id
   x?: [number, number];   // map x domain (kPa)
   y?: [number, number];   // map y domain (O2 %)
