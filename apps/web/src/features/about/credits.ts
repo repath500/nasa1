@@ -45,6 +45,7 @@ export const SOFTWARE_CREDITS: SoftwareCredit[] = [
   { name: 'sonner', licence: 'MIT' },
   { name: 'zod 3', licence: 'MIT' },
   { name: 'qrcode-generator 1.4.4', licence: 'MIT', note: 'draws the QR code on the Gap Brief' },
+  { name: 'Paper Design shaders 0.0.82', licence: 'Apache-2.0', note: 'animated dithering on the landing page' },
   { name: 'Vitest', licence: 'MIT', note: 'tests only' },
   { name: 'Playwright', licence: 'Apache-2.0', note: 'tests only' },
   { name: 'axe-core', licence: 'MPL-2.0', note: 'tests only' },

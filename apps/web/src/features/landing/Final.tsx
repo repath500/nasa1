@@ -8,7 +8,7 @@ import { orbitLayout } from './dither/scenes';
 import { DitherPlate, useCell } from './Plate';
 import { Reveal } from './Reveal';
 import { WipeLink } from './Wipe';
-import { ACCESS_PATH, CREDIT } from './Hero';
+import { ACCESS_PATH, CHALLENGE_URL, TEAM, TEAM_NOTE } from './Hero';
 
 const BODIES = [
   { id: 'earth-iss', name: 'Earth air' }, { id: 'lunar-cabin-example', name: 'Moon base example' }, { id: 'exploration-upper', name: 'Exploration atmosphere' },
@@ -62,7 +62,7 @@ export function Final() {
           </div>
           <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
             <span onMouseEnter={() => hint(true)} onMouseLeave={() => hint(false)} onFocus={() => hint(true)} onBlur={() => hint(false)}>
-              <WipeLink to={ACCESS_PATH} data-testid="cta-enter-final" className={buttonClass('primary', 'lg', 'w-full no-underline hover:no-underline sm:w-auto')}>Enter the Atlas<ArrowRight size={18} aria-hidden /></WipeLink>
+              <WipeLink to={ACCESS_PATH} data-testid="cta-enter-final" className="inline-flex min-h-[72px] w-full items-center justify-center gap-3 bg-accent px-10 text-xl font-semibold text-accent-ink no-underline transition-transform duration-150 hover:no-underline active:scale-[0.98] sm:w-auto md:min-h-[84px] md:px-14 md:text-2xl">Enter the Atlas<ArrowRight size={26} weight="bold" aria-hidden /></WipeLink>
             </span>
             <Link to="/briefing" className={buttonClass('secondary', 'lg', 'no-underline hover:no-underline')}>Take the briefing</Link>
           </div>
@@ -71,13 +71,14 @@ export function Final() {
       <footer className="border-t border-hairline bg-surface" data-testid="landing-footer">
         <div className="mx-auto grid max-w-[1280px] gap-8 px-4 py-10 text-sm text-muted md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:px-8">
           <div className="space-y-3">
-            <p className="max-w-[62ch] text-ink">{CREDIT}</p>
+            <p className="max-w-[62ch] text-ink">An experimental app for NASA Space Apps x HackAthlone hackathon 2026, by {TEAM[0].name} ({TEAM[0].now}) and {TEAM[1].name} ({TEAM[1].now}). <span className="text-muted">{TEAM_NOTE}</span></p>
             <p className="max-w-[62ch]">Test data: NASA Physical Sciences Informatics archive (CC0-1.0) and NASA Technical Reports Server (NTRS). NASA does not endorse this project.</p>
             <p className="max-w-[62ch]">AI models and AI coding agents helped build it, and the voice is AI-generated.</p>
           </div>
           <nav aria-label="Landing footer" className="grid grid-cols-2 content-start gap-x-6 gap-y-2">
             <Link className="lp-link" to="/about">About</Link><Link className="lp-link" to="/credits">Credits</Link>
             <Link className="lp-link" to="/credits#si">Use of AI disclosure</Link><Link className="lp-link" to="/method">Method and limits</Link>
+            <a className="lp-link" href={CHALLENGE_URL} target="_blank" rel="noopener noreferrer">The challenge on Space Apps</a>
             <a className="lp-link" href="https://github.com/repath500/nasa1" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
           </nav>
         </div>

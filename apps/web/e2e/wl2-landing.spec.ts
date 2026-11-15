@@ -9,7 +9,10 @@ test('landing: access button wipes then opens the atlas on the Moon example', as
 
 test('landing: live numbers come from the corpus and the credit line is present', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByText('An experimental app for NASA Space Apps x HackAthlone hackathon 2026, by Jay Popat & Repath Khan').first()).toBeVisible();
+  await expect(page.getByText(/An experimental app for NASA Space Apps x HackAthlone hackathon 2026, by Jay.Popat \(currently at Fidelity.Investments\) and Repath.Khan \(currently at Leemer.Group\)/).first()).toBeVisible();
+  await expect(page.getByTestId('view-challenge')).toHaveAttribute('href', 'https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/');
+  await expect(page.getByRole('heading', { name: 'Where code does the science, and why' })).toBeAttached();
+  await expect(page.getByRole('heading', { name: 'How we built it' })).toBeAttached();
   const stats = page.getByLabel('Live from the loaded corpus');
   await expect(stats).toContainText('test rows parsed');
   await expect(stats.locator('dd .num').first()).not.toHaveText('0');

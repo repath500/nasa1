@@ -247,7 +247,11 @@ type Cue =
 
 ---
 
-## 5. Monetization and payments (Stripe, test mode for the hackathon)
+## 5. Monetization and payments: RETIRED
+
+> **Decision (team, 15 Nov 2026): Fire Atlas is not a SaaS.** No pricing, plans, accounts, checkout or licences. Everything is free and open source. The text below is kept only as history.
+
+### (Retired) Monetization and payments (Stripe, test mode for the hackathon)
 
 ### 5.1 Principles
 - **NASA-derived evidence is never paywalled.** The Gap Map, rankings, sources, ledger, Learn mode, preset audio overviews and print-to-PDF are free forever. Paid plans cover things that cost money to run or save time: live AI and voice generation, branded exports, saved workspaces, API access, alerts.

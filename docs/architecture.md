@@ -16,8 +16,7 @@ packages/core  ◄────────────────────�
 
 packages/server  (Request -> Response handlers; Node dev server and Cloudflare Pages function share them)
    /api/health  /api/rank  /api/ask  /api/explain  /api/narrate
-   /api/checkout  /api/license/claim  /api/license  /api/portal  /api/stripe/webhook
-   AI ladder: Jev live -> Gemini decision-1 -> recorded cache -> code baseline (labelled at every step)
+   AI ladder: Jev live -> Gemini 4 Hydrogen fallback judge (OpenRouter) -> recorded cache -> code baseline (labelled at every step)
 
 apps/web  (Vite + React + TypeScript + Tailwind v4 tokens; Canvas/SVG for data; WebGL2 dither for imagery)
 ```
@@ -42,15 +41,15 @@ Every package imports from it; it is the one place a shape is defined.
 ## Web app
 
 **Routes** (`apps/web/src/routes.tsx`): `/` landing, `/briefing` wizard, `/atlas` workspace, `/study/:accession`,
-`/compare`, `/duel`, `/learn`, `/present`, `/brief/:scenario`, `/pricing`, `/account`, `/checkout/success|cancel`,
+`/compare`, `/duel`, `/learn`, `/present`, `/brief/:scenario`,
 `/about`, `/method`, `/credits`, `/flight-rules` (easter egg), `*` 404. Every feature is lazy-loaded.
 
 **State**: one Zustand store (`src/state/store.ts`): habitat and custom air, concern, fuel filter, material,
 tolerances, priority order, mode, theme, units, expert, panel tab, selection, highlights, timeline, AI ladder,
-audio, licence. Continuous values (map zoom, audio time) live outside React state.
+audio. Continuous values (map zoom, audio time) live outside React state.
 
 **URL sync** (`src/state/url.ts`): atlas state is mirrored to short query keys (`h, o2, kpa, q, f, m, mode, tab, sel,
-u, t, ex`) on atlas routes only. Other parameters (compare `a`/`b`, duel `h1`/`h2`, Stripe `session_id`) are
+u, t, ex`) on atlas routes only. Other parameters (compare `a`/`b`, duel `h1`/`h2`) are
 preserved. Committed choices push history (Back works); drags and selection replace it.
 
 **Data loading** (`src/data/useCorpus.ts`): loads `/data/corpus.v1.json`, falls back to the labelled fixture, and
@@ -65,8 +64,7 @@ ignores HTML fallbacks from SPA hosts. Gate files load from `/data/reviews/{k5,d
 Each handler is `(req: Request, env: Env) => Promise<Response>` and uses only Web APIs, so the same code runs in
 the Node dev server (`src/dev-server.ts`) and on Cloudflare Pages Functions. Shared protections: same-origin only
 for browser calls, 12 KB body cap, per-IP rate limit, zod validation of inputs and upstream responses,
-`Cache-Control: no-store`, secrets never logged or echoed. See [ai-and-voice.md](ai-and-voice.md) and
-[payments.md](payments.md).
+`Cache-Control: no-store`, secrets never logged or echoed. See [ai-and-voice.md](ai-and-voice.md).
 
 ## Testing
 

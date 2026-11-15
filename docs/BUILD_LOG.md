@@ -116,6 +116,14 @@ Each worker ran in its own git worktree and branch; the lead merged in dependenc
 
 Screenshots for the deck: `apps/web/public/landing/shots/` (desktop Night and Paper, phone, orbit hover, access wipe).
 
+### Phase 8: free and open, OpenRouter, landing story, smoother Atlas (lead, 15 Nov)
+| Commit | What | Why |
+|---|---|---|
+| `4c45710` | Removed pricing, plans, accounts, checkout, licences and Stripe from web, server, contracts and tests; unlimited notes; PDF export and custom-air narration for everyone | Team decision: Fire Atlas is not a SaaS |
+| `4c45710` | Gemini 4 Hydrogen via OpenRouter (`google/gemini-4-hydrogen`) for Ask, explanations and the fallback judge (`hydrogen-fallback`), since decision-1 is not on OpenRouter; explanations now get the study's objective, hardware and fuel phases | One key, one route; verified live |
+| next | Landing: dither SDK (Paper Design shaders, Apache-2.0) behind a big "Enter the Atlas" band; much larger CTAs; "View the challenge" link; "Where code does the science, and why"; "How we built it" (Perplexity research, Claude and ChatGPT as science tutors, our decisions); team credit with affiliations | Make the way in obvious and tell the story |
+| next | Gap Map: canvas reallocated only on resize, colour tokens resolved once per frame, badge layout and hit-test tree deferred until a gesture settles; `pnpm preview` serves the production build | Measured: the stutter came from React dev-mode checks; the production build holds 60 fps at 2x density with a 4x CPU throttle |
+
 ## 4. Numbers you can quote (all computed by code from `data/corpus.v1.json`, hash `4d3a7aa6…`)
 
 - 1,476 parsed test rows from 12 PSI investigations; 11 source cells rejected by code.

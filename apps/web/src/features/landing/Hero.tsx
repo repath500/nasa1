@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from '@phosphor-icons/react';
+import { ArrowRight, ArrowUpRight } from '@phosphor-icons/react';
 import { useReducedMotion } from 'motion/react';
 import { buttonClass } from '../../components/Button';
 import type { Plate } from './dither/engine';
@@ -8,7 +8,14 @@ import { DitherPlate, useCell } from './Plate';
 import { WipeLink } from './Wipe';
 
 export const ACCESS_PATH = '/atlas?h=lunar-cabin-example&q=prevention';
+export const CHALLENGE_URL = 'https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/';
 export const CREDIT = 'An experimental app for NASA Space Apps x HackAthlone hackathon 2026, by Jay\u00a0Popat & Repath\u00a0Khan';
+/** Who built it. Affiliations are for identification only; this is a personal hackathon project, not endorsed by any employer. */
+export const TEAM = [
+  { name: 'Jay\u00a0Popat', now: 'currently at Fidelity\u00a0Investments' },
+  { name: 'Repath\u00a0Khan', now: 'currently at Leemer\u00a0Group' },
+] as const;
+export const TEAM_NOTE = 'Affiliations are for identification only. This is a personal hackathon project, not endorsed by our employers.';
 
 const CAPTION = {
   g1: 'In 1 g, hot gas rises. Buoyancy stretches the flame into a flickering teardrop.',
@@ -65,11 +72,17 @@ export function Hero() {
         <div className="lp-panel p-5 md:max-w-[780px] md:p-8">
           <h1 id="hero-h" className="lp-h1">Where will astronauts breathe, and has NASA tested fire there?</h1>
           <p className="mt-4 max-w-[52ch] text-base text-muted md:text-lg">NASA microgravity fire tests, mapped against the air of future Moon bases. Every dot opens its source row.</p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <WipeLink to={ACCESS_PATH} data-testid="cta-enter" className={buttonClass('primary', 'lg', 'no-underline hover:no-underline')}>Enter the Atlas<ArrowRight size={18} aria-hidden /></WipeLink>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <WipeLink to={ACCESS_PATH} data-testid="cta-enter"
+              className="inline-flex min-h-[64px] w-full items-center justify-center gap-3 bg-accent px-9 text-xl font-semibold text-accent-ink no-underline transition-transform duration-150 hover:no-underline active:scale-[0.98] sm:w-auto md:min-h-[72px] md:px-12">
+              Enter the Atlas<ArrowRight size={24} weight="bold" aria-hidden />
+            </WipeLink>
             <Link to="/briefing" data-testid="cta-briefing" className={buttonClass('secondary', 'lg', 'no-underline hover:no-underline')}>Take the briefing</Link>
           </div>
-          <p className="mt-5 max-w-[60ch] border-t border-hairline pt-4 text-[13px] leading-5 text-muted">{CREDIT}</p>
+          <a href={CHALLENGE_URL} target="_blank" rel="noopener noreferrer" data-testid="view-challenge" className="lp-link mt-4 inline-flex items-center gap-1 text-[15px]">View the challenge on Space Apps<ArrowUpRight size={14} aria-hidden /></a>
+          <div className="mt-5 max-w-[64ch] border-t border-hairline pt-4 text-[13px] leading-5 text-muted">
+            <p>An experimental app for NASA Space Apps x HackAthlone hackathon 2026, by {TEAM[0].name} ({TEAM[0].now}) and {TEAM[1].name} ({TEAM[1].now}).</p>
+          </div>
         </div>
       </div>
     </section>

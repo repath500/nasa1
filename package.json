@@ -23,7 +23,8 @@
     "ai:record": "pnpm --filter @fire/server ai:record",
     "g3:label": "pnpm --filter @fire/server g3:label",
     "g3:adjudicate": "pnpm --filter @fire/server g3:adjudicate",
-    "g3:metrics": "pnpm --filter @fire/server g3:metrics"
+    "g3:metrics": "pnpm --filter @fire/server g3:metrics",
+    "preview": "pnpm --filter @fire/web build && pnpm --filter @fire/web preview --host 127.0.0.1"
   },
   "devDependencies": {
     "typescript": "~5.6.3",

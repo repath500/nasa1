@@ -14,7 +14,7 @@ pnpm dev:server      # API      -> http://127.0.0.1:8787 (optional; Vite proxies
 ```
 
 The app works with **no keys and no API server**: the status chip shows `OFFLINE` or `FIXTURE`, rankings use the
-transparent code baseline, narration uses your device voice, and billing says "not configured".
+transparent code baseline, and narration uses your device voice.
 
 Try: `/` (landing) → **Enter the Atlas** → click a dot → evidence drawer → **Studies** tab → a study → **Export brief**.
 Shortcuts: `⌘K` palette, `?` all shortcuts, `E` expert, `L` listen, `P` present, `T` theme, `0` fit map, `M` mark
@@ -27,16 +27,17 @@ Copy `.env.example` to `.env.local` at the repo root and fill in what you have. 
 | Variable | Turns on |
 |---|---|
 | `TYPESAFE_API_KEY` | Live Jev judgements and `pnpm ai:record` |
-| `GEMINI_API_KEY` | Gemini 4 Hydrogen (Ask parsing, explanations) and the decision-1 fallback |
+| `OPENROUTER_API_KEY` | Gemini 4 Hydrogen (`google/gemini-4-hydrogen`) via OpenRouter: Ask parsing, study explanations and the fallback judge. Preferred route |
+| `GEMINI_API_KEY` | Optional direct Google route for Hydrogen and decision-1, used only without an OpenRouter key |
 | `ELEVENLABS_API_KEY`, `ELEVENLABS_VOICE_ID`, `ELEVENLABS_MODEL_ID` | AI voice for audio overviews (`pnpm audio:build`) |
-| `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_*`, `STRIPE_MODE=test`, `LICENSE_SECRET` | Test-mode checkout and licences |
-| `PUBLIC_ORIGIN` | Checkout return URLs and live narration's corpus fetch |
+| `PUBLIC_ORIGIN` | Live narration's corpus fetch |
 
 ## All commands
 
 | Command | What it does |
 |---|---|
-| `pnpm dev` / `pnpm dev:server` | Web app / API in development |
+| `pnpm dev` / `pnpm dev:server` | Web app / API in development (the dev build runs React's checks, so the map is slower) |
+| `pnpm preview` | Production build served on http://127.0.0.1:4173 with the API proxy: use this to judge smoothness |
 | `pnpm build` | Rebuild the corpus, then build the web app into `apps/web/dist` |
 | `pnpm corpus` | Parse the NASA tables into `data/corpus.v1.json` (+ web copy, manifest, reject ledger, candidates) |
 | `pnpm test` | All unit tests (core, pipeline, server, web) |

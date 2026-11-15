@@ -26,11 +26,6 @@ narration returns device-voice manifests.
 | `POST /api/ask` | `{ question }` (200 characters max) | `AskResponse`, Hydrogen or keyword parser |
 | `POST /api/explain` | `{ accession, scenarioId }` | `{ text, claimIds, source }` |
 | `POST /api/narrate` | `{ scenarioKey }` or `{ customScenario }` | `NarrationManifest` |
-| `POST /api/checkout` | `{ plan, interval, amountCents? }` | `{ url }` |
-| `POST /api/license/claim` | `{ sessionId }` | `{ token, plan, expiresAt }` |
-| `GET /api/license` | header `Authorization: License <token>` | `LicenseInfo` |
-| `POST /api/portal` | licence header | `{ url }` |
-| `POST /api/stripe/webhook` | Stripe event | `{ received, result }` |
 
 Every response has `Cache-Control: no-store`. Requests with
 `sec-fetch-site: cross-site` are rejected. Bodies are capped at 12 KB. A per-IP
@@ -41,6 +36,13 @@ Rank and explain accept allowlisted ids only. The server has no corpus payload i
 `RankRequest`, so it judges the core investigation roster in `src/ai/studies.ts`.
 Ask never returns free text: Hydrogen returns structured filters, and row matching
 runs in the client against the loaded corpus.
+
+## Gemini 4 Hydrogen via OpenRouter
+
+With `OPENROUTER_API_KEY`, Hydrogen (`google/gemini-4-hydrogen`, override with `OPENROUTER_MODEL`) is called through
+OpenRouter's chat completions endpoint with strict JSON-schema output (`src/ai/openrouter.ts`). It serves Ask, explain
+and the fallback judge (`src/ai/decision1.ts`, source `hydrogen-fallback`), because Gemini decision-1 is not on
+OpenRouter. Without that key, the direct Google API (`GEMINI_API_KEY`) is used.
 
 ## AI fallback ladder
 
@@ -93,8 +95,8 @@ are not supplied. If the model is unavailable, Ask is labelled `keyword-parser`.
 
 `POST /api/narrate` builds the script with the core bridge, calls ElevenLabs, maps
 character alignment to segment and word timings, places cues at each segment start
-plus offsets, and caches the manifest by script hash. Custom scenarios require a
-Researcher or Lab licence (`Authorization: License <token>`).
+plus offsets, and caches the manifest by script hash. Custom scenarios are open to
+anyone (no licence; the per-IP rate limit bounds voice cost).
 
 `pnpm audio:build` writes `apps/web/public/audio/{scenarioKey}.mp3` and `.json` for
 the landing overview and 4 presets x 4 concerns. With no key it writes
@@ -113,41 +115,9 @@ The mp3 gets an ID3v2.4 comment naming the AI voice.
   `eleven_multilingual_v2`). Use a stock library voice cleared for commercial use
   (D22). No cloned or impersonated voices.
 
-## Stripe (test mode for the hackathon)
+## No billing
 
-Billing uses REST with form-encoded bodies (`fetch`), no SDK.
-
-- Checkout: `mode=subscription` for researcher and lab, `mode=payment` for support
-  (price id or custom `amountCents` via `price_data`). Success URL is
-  `${PUBLIC_ORIGIN}/checkout/success?session_id={CHECKOUT_SESSION_ID}`.
-- Licence claim retrieves the session and requires `status=complete` and
-  `payment_status` of `paid` or `no_payment_required`, then issues
-  `base64url(payload).base64url(HMAC-SHA256(payload))` with
-  `{ plan, customer, exp, nonce }`.
-- `GET /api/license` verifies the token and the KV record. Webhooks update the KV
-  record so deleted or unpaid subscriptions fail verification.
-- Webhook signature: `Stripe-Signature: t=...,v1=...`, HMAC-SHA256 of
-  `${t}.${rawBody}` with `STRIPE_WEBHOOK_SECRET`, 300 s tolerance, constant-time
-  verify through Web Crypto.
-
-**Stripe shapes: VERIFIED** against the documented REST API. With no Stripe keys
-every billing endpoint returns `503 { "error": "Billing not configured" }` and
-health reports `stripe: false`, `stripeMode: "off"`.
-
-Test mode checklist:
-
-1. Set `STRIPE_SECRET_KEY` (test key), `STRIPE_WEBHOOK_SECRET`, `LICENSE_SECRET`,
-   the four price ids, `PUBLIC_ORIGIN`, and `STRIPE_MODE=test`.
-2. `stripe listen --forward-to 127.0.0.1:8787/api/stripe/webhook` and copy the
-   `whsec_...` it prints into `STRIPE_WEBHOOK_SECRET`.
-3. Pay with card `4242 4242 4242 4242`, any future expiry and CVC. The UI shows
-   "Test mode, no real charge".
-4. The success page calls `/api/license/claim`, stores the token, and `/api/license`
-   should return the plan.
-
-KV is a Cloudflare KV binding (`LICENSES`) in production and
-`data/kv-dev.json` in dev (gitignored). Only the Stripe customer id, plan,
-status, expiry and usage counters are stored.
+Fire Atlas is free and open. There are no checkout, licence or webhook endpoints; requests to the old paths return 404.
 
 ## Cloudflare Pages
 
@@ -179,8 +149,6 @@ npx wrangler pages deploy apps/web/dist --project-name fire-atlas
 | decision-1 endpoint, `input` field, answer types | VERIFIED (docs) |
 | Hydrogen Interactions endpoint, `Api-Revision`, response_format | VERIFIED |
 | Hydrogen REST response envelope | UNVERIFIED. Docs show the structured object; the SDK exposes `output_text`. The adapter accepts both. |
-| Stripe REST shapes, Checkout, portal, signature scheme | VERIFIED (documented REST) |
-| Stripe price ids, current API version | Configuration, not verified against an account |
 
 ## Tests
 
@@ -191,9 +159,9 @@ sh scripts/secret-scan.sh
 ```
 
 Tests mock `fetch`; no real network. Covered: ladder order and timeout, zod rejection
-of bad upstream data, Jev criteria with no numerals, decision-1 using `input`, licence
-sign/verify/expiry/tamper, webhook signature valid/invalid/stale, cross-site rejection,
-body cap, rate limit, billing 503, and narration timing from a sample alignment.
+of bad upstream data, Jev criteria with no numerals, decision-1 using `input`,
+cross-site rejection,
+body cap, rate limit, no billing endpoints (404), and narration timing from a sample alignment.
 
 ## Turning on real AI and deciding G3 (for teammates)
 

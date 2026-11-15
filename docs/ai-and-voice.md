@@ -1,22 +1,26 @@
 # AI and voice
 
 ## Who does what
-| Role | Model | Used for | Never used for |
-|---|---|---|---|
-| Measure | Code (`@fire/core`) | Every count, overlap class, ranking, hash, sentence with a number | |
-| Judge | Jev `jev-1.14.0` (TypeSafe) | Per study and habitat: regime relevance (yes/no probability), evidence directness (0 to 3), purpose (prevention, detection, suppression, fundamental) | Numbers, safety verdicts |
-| Judge fallback | Gemini decision-1 | Same questions when Jev is unavailable; always labelled `decision-1` | Pretending to be Jev |
-| Parse and explain | Gemini 4 Hydrogen | Turning a typed question into editable filters; short explanations from accepted records | Answering from its own knowledge |
-| Voice | ElevenLabs | Reading code-written narration scripts aloud with word timings | Writing the script |
+| Role | Model | Where in the app | Why a model is used here | Never used for |
+|---|---|---|---|---|
+| Measure | Code (`@fire/core`) | Every count, overlap class, ranking, hash and sentence with a number | Numbers must be exact and repeatable | |
+| Judge | Jev `jev-1.14.0` (TypeSafe) | Studies tab, the Jev columns beside the code baseline | Judging how relevant and how direct a study's evidence is needs reading its objective, which a fixed rule cannot do | Numbers, safety verdicts |
+| Parse | **Gemini 4 Hydrogen** via OpenRouter (`google/gemini-4-hydrogen`) | ⌘K palette, "Ask the atlas" | Turns a free-text question ("has PMMA burned near Moon-base air?") into editable filter chips; code then finds the rows | Answering from its own knowledge |
+| Explain | **Gemini 4 Hydrogen** via OpenRouter | Study page and evidence aside, "Why this study" | Writes two plain sentences from the study's objective, fuel phases and hardware; every numeral is checked against the data and banned words are blocked, else a code template is shown | New facts or numbers |
+| Fallback judge | **Gemini 4 Hydrogen** via OpenRouter, labelled `hydrogen-fallback` | Studies tab, only when Jev is unavailable | Keeps the AI column working when Jev is down. It answers Jev's same three questions as validated JSON; its probabilities are its own stated distribution, not calibrated | Pretending to be Jev |
+| Voice | ElevenLabs | Audio bar, Listen mode | Reads code-written scripts aloud with word timings | Writing the script |
+
+Gemini decision-1 (the earlier fallback) is not available on OpenRouter, so with an OpenRouter key Hydrogen takes over that
+role. The direct Google API route still exists and is used only if `GEMINI_API_KEY` is set and no OpenRouter key is.
 
 ## The fallback ladder (`/api/rank`)
-`L0` live Jev (5 s timeout) → `L1` decision-1 → `L2` recorded cache → `L3` code baseline only. The status chip and the
-Studies header always say which level is showing. With no keys the build shows **synthetic demonstration** values,
-labelled "FIXTURE · synthetic demonstration, not model judgement or experimental evidence" (written by an agent; only
-relabel as human-authored if a team member writes or signs them).
+`L0` live Jev (5 s timeout) → `L1` Hydrogen fallback judge (OpenRouter) → `L2` recorded cache → `L3` code baseline only.
+The status chip and the Studies header always say which level is showing. With no keys the build shows **synthetic
+demonstration** values, labelled "FIXTURE · synthetic demonstration, not model judgement or experimental evidence"
+(written by an agent; only relabel as human-authored if a team member writes or signs them).
 
 ## Turning on real AI
-1. Add `TYPESAFE_API_KEY` (and optionally `GEMINI_API_KEY`) to `.env.local`.
+1. Add `OPENROUTER_API_KEY` (Hydrogen) and `TYPESAFE_API_KEY` (Jev) to `.env.local`. Never commit it.
 2. `pnpm ai:record`: Jev three times per study x habitat x concern (10 x 4 x 3), median kept, into gitignored
    `cache/model_responses/`. Cost well under $0.05; capped by `AI_RECORD_MAX_CALLS` (default 400); retries 429/529.
 3. Decide G3 with two people (see [team-guide.md](team-guide.md)).

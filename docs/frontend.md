@@ -13,7 +13,8 @@
 ## Features (`apps/web/src/features/`)
 | Feature | What it is |
 |---|---|
-| `landing` | Dithered landing: breathing flame (1 g teardrop to microgravity sphere), challenge explainer, live numbers, Caught by code, limits, orbit band, "Enter the Atlas" with a dithered wipe |
+| `landing` | Dithered landing: breathing flame (1 g teardrop to microgravity sphere), the challenge with a "View the challenge" link, a big "Enter the Atlas" band, live numbers, where code does the science and why, how it works, Caught by code, how we built it (process and decisions), limits, orbit band, team credit |
+| `landing/SdkDither.tsx` | Wrapper for the dither SDK, Paper Design shaders (`@paper-design/shaders-react` 0.0.82, Apache-2.0): animated warp, dots and other 2-colour dither fields; theme colours, paused off-screen, still under reduced motion |
 | `landing/dither` | Own WebGL2 ordered-dither engine (Bayer 4x4/8x8, blue noise): one GL context, one rAF loop, fixed matrix origin, pauses off-screen and on hidden tabs, static under reduced motion, Canvas 2D fallback |
 | `briefing` | Four-screen wizard: habitat, concern, fuel, code-written summary |
 | `atlas` | Workspace: scenario bar, "What you are seeing", Gap Map, side panel, timeline, audio bar |
@@ -24,7 +25,6 @@
 | `orbit`, `timeline`, `duel` | Dithered orbit scene, test-date scrubber, two habitats side by side |
 | `audio`, `palette` | Audio bar with Listen mode; ⌘K palette with Ask |
 | `learn`, `present` | Learn mode (no live AI), seven-beat Present mode |
-| `pricing`, `account` | Plans, test-mode pay buttons, licence, checkout pages |
 | `eggs`, `notfound`, `about` | Easter eggs, 404, About / Method / Credits |
 
 ## Modes

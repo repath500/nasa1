@@ -17,7 +17,8 @@ FONTS
 SOFTWARE (runtime dependencies; see each package for its licence)
 - React, React Router, Zustand, Motion, cmdk, sonner, d3 modules, Radix UI primitives, Phosphor Icons, zod,
   qrcode-generator, Vite, Tailwind CSS, TypeScript, Vitest, Playwright (MIT, ISC or Apache-2.0).
+- Paper Design shaders (@paper-design/shaders-react, @paper-design/shaders 0.0.82), Apache-2.0: animated dithering on the landing page.
 
 HOSTED SERVICES (not redistributed; used only when keys are configured)
-- TypeSafe Jev, Google Gemini (Hydrogen, decision-1), ElevenLabs text-to-speech, Stripe Checkout (test mode).
+- TypeSafe Jev, Google Gemini 4 Hydrogen via OpenRouter (and optionally the Google API), ElevenLabs text-to-speech.
   Outputs from these services are not committed to this repository until their terms are reviewed (rule R8).

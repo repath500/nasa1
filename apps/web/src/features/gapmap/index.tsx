@@ -72,7 +72,7 @@ export default function GapMap(props: GapMapPropsExt) {
   const section = useRef<HTMLElement>(null), holder = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null), surface = useRef<SVGSVGElement>(null), transform = useRef<ZoomTransform>(zoomIdentity);
   const clipId = `gapmap-${useId().replaceAll(':', '')}`;
-  const receiving = useRef(false), flight = useRef(0);
+  const receiving = useRef(false), flight = useRef(0), moving = useRef(false), settle = useRef(0);
   const behavior = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null), frame = useRef(0), points = useRef<Point[]>([]);
   const tree = useRef<ReturnType<typeof quadtree<Point>> | null>(null), drag = useRef<{ x: number; y: number } | null>(null);
   const [revision, setRevision] = useState(0), [linear, setLinear] = useState(false), [table, setTable] = useState(false), [explain, setExplain] = useState(false);
@@ -129,12 +129,14 @@ export default function GapMap(props: GapMapPropsExt) {
   const draw = useCallback(() => {
     const element = canvas.current; if (!element) return;
     const ratio = window.devicePixelRatio || 1, bounds = element.getBoundingClientRect();
-    element.width = Math.round(bounds.width * ratio); element.height = Math.round(bounds.height * ratio);
+    const wantW = Math.round(bounds.width * ratio), wantH = Math.round(bounds.height * ratio);
+    if (element.width !== wantW || element.height !== wantH) { element.width = wantW; element.height = wantH; } // resizing reallocates the canvas: only when needed
     const context = element.getContext('2d'); if (!context) return;
     context.setTransform(element.width / W, 0, 0, element.height / H, 0, 0); context.clearRect(0, 0, W, H);
     const xs = transform.current.rescaleX(xbase), ys = transform.current.rescaleY(ybase), computed = getComputedStyle(element);
     const token = (name: string, fallback: string) => computed.getPropertyValue(name).trim() || fallback;
     const ink = token('--color-ink', '#e8eaed'), background = token('--color-bg', '#0b0d10'), accent = token('--color-accent', '#7cc4f2');
+    const palette = new Map<string, string>(); const colorOf = (name: string) => { let value = palette.get(name); if (value === undefined) { value = token(name, '#8a94a3'); palette.set(name, value); } return value; };
     const plotted = plotGroups(xs, ys);
     const activeSet = (group: RowGroup) => { const row = group.rows[0]!; return !hidden.includes(row.fuel.phase) && (!props.phaseFilter?.length || props.phaseFilter.includes(row.fuel.phase)); };
     const dim = externalHighlight(selected, hover);
@@ -156,7 +158,7 @@ export default function GapMap(props: GapMapPropsExt) {
         if (!region.test(point.group)) continue;
         const row = point.group.rows[0]!, burner = row.o2Location === 'burner', isSelected = point.group.rows.some(item => item.id === props.selectedRowId);
         context.globalAlpha = alphaOf(point.group);
-        context.fillStyle = token(burner ? '--color-burner' : colors[row.fuel.phase], '#8a94a3'); context.strokeStyle = context.fillStyle; context.lineWidth = burner ? 2 : 1.5;
+        context.fillStyle = colorOf(burner ? '--color-burner' : colors[row.fuel.phase]); context.strokeStyle = context.fillStyle; context.lineWidth = burner ? 2 : 1.5;
         if (point.group.rows.some(item => selected.has(item.id)) && dim) { context.shadowColor = context.fillStyle; context.shadowBlur = 14; }
         mark(context, row.fuel.phase, point.x, point.y, burner); context.shadowBlur = 0;
         if (isSelected) {
@@ -168,21 +170,22 @@ export default function GapMap(props: GapMapPropsExt) {
     }
     // Count badges: dark pill, light text, placed at a free corner or dropped (the tooltip still states the count).
     context.globalAlpha = 1; context.font = BADGE_FONT; context.textBaseline = 'middle'; context.textAlign = 'center';
-    badgeLayout(plotted).forEach((box, id) => {
+    if (!moving.current) badgeLayout(plotted).forEach((box, id) => {
       const point = plotted[Number(id)]!; context.globalAlpha = Math.max(0.35, alphaOf(point.group));
       context.fillStyle = background; context.strokeStyle = ink; context.lineWidth = 1;
       context.beginPath(); if (context.roundRect) context.roundRect(box.x1, box.y1, box.x2 - box.x1, box.y2 - box.y1, 6.5); else context.rect(box.x1, box.y1, box.x2 - box.x1, box.y2 - box.y1); context.fill(); context.globalAlpha *= 0.7; context.stroke(); context.globalAlpha = Math.max(0.35, alphaOf(point.group));
       context.fillStyle = ink; context.fillText(String(point.group.rows.length), (box.x1 + box.x2) / 2, (box.y1 + box.y2) / 2 + 0.5);
     });
     context.globalAlpha = 1; context.textBaseline = 'alphabetic'; context.textAlign = 'start';
-    points.current = plotted; tree.current = quadtree<Point>().x(point => point.x).y(point => point.y).addAll(plotted);
+    points.current = plotted;
+    if (!moving.current) tree.current = quadtree<Point>().x(point => point.x).y(point => point.y).addAll(plotted);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groups, hidden, props.phaseFilter, props.selectedRowId, props.timelineCutoff, selected, hover, xbase, ybase, geo, plotGroups, badgeLayout]);
   const schedule = useCallback(() => { cancelAnimationFrame(frame.current); frame.current = requestAnimationFrame(() => { draw(); setRevision(value => value + 1); }); }, [draw]);
   useEffect(() => { draw(); setRevision(value => value + 1); const observer = new ResizeObserver(draw); if (canvas.current) observer.observe(canvas.current); return () => { observer.disconnect(); cancelAnimationFrame(frame.current); }; }, [draw, table]);
   useEffect(() => {
     const element = surface.current; if (!element) return;
-    const zoomer = zoom<SVGSVGElement, unknown>().scaleExtent([1, 40]).extent([[L, T], [R, B]]).filter(event => (!event.shiftKey || event.type === 'dblclick') && !selectArea && !boxDrag.current && !minimapDrag.current).on('start', event => { if (event.sourceEvent) cancelAnimationFrame(flight.current); }).on('zoom', event => {
+    const zoomer = zoom<SVGSVGElement, unknown>().scaleExtent([1, 40]).extent([[L, T], [R, B]]).filter(event => (!event.shiftKey || event.type === 'dblclick') && !selectArea && !boxDrag.current && !minimapDrag.current).on('start', event => { if (event.sourceEvent) { cancelAnimationFrame(flight.current); moving.current = true; window.clearTimeout(settle.current); } }).on('end', () => { window.clearTimeout(settle.current); settle.current = window.setTimeout(() => { moving.current = false; schedule(); }, 90); }).on('zoom', event => {
       transform.current = event.transform; schedule();
       if (linkKey && !receiving.current) links.get(linkKey)?.forEach(listener => listener(event.transform));
     });

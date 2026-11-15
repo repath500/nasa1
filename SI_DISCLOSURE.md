@@ -6,6 +6,11 @@
 priorities and every accepted record. AI tools helped research options before the team decided; they did not
 choose the idea. Dated decisions are in `DECISIONS.md`.
 
+**How we learned and researched.** We talked the idea through between ourselves and refined the plan. We used
+Perplexity for research (NASA PSI, technical reports, prior approaches) and Claude and ChatGPT as tutors to learn the
+science of fire in microgravity (buoyancy, diffusion flames, oxygen fraction versus pressure), then checked what we
+learned against NASA sources.
+
 **Planning and code.** Research and planning documents in `research/` and `SPEC.md` were drafted with AI
 assistance (Claude, GPT, Grok, Kimi, DeepSeek and others, as listed in `research/README.md`). Application code was
 written largely by AI coding agents (Claude Opus 5.5 and Sonnet 5.5, GPT-6.1 Terra and Sol, DeepSeek V4.1 Flash)
@@ -17,7 +22,8 @@ Rejected source cells are listed in `data/rejects.report.md`.
 
 **At runtime.**
 - Code computes every count, overlap class, ranking and hash.
-- Gemini 4 Hydrogen [actual role, or "not used in this build"]: parses free-text questions into editable filters.
+- Gemini 4 Hydrogen (via OpenRouter): parses free-text questions into editable filters, writes two-sentence study
+  explanations that code checks for numbers and banned words, and acts as the labelled fallback judge when Jev is unavailable.
 - Jev (TypeSafe) and Gemini decision-1 [actual role, or "not used in this build"]: ordinal judgements of relevance,
   evidence directness and purpose. These are model judgements, not probabilities that the science is true, and
   they are shown beside a transparent code baseline.

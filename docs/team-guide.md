@@ -33,8 +33,8 @@ Keep the Jev column only if it is not worse than the baseline on top-3 picks **a
 useful or prefer Jev. "Jev did not improve on the baseline" is a valid, honest result.
 
 ## 4. Decisions and disclosure
-- Fill in `DECISIONS.md`: name (D1), priorities (D5), contribution statement (D12), pay buttons visible (D20),
-  prices (D21), voice (D22), and the K5/G1/G3 outcomes with who and when.
+- Fill in `DECISIONS.md`: name (D1), priorities (D5), contribution statement (D12), voice (D22), and the
+  K5/G1/G3 outcomes with who and when.
 - Finish `SI_DISCLOSURE.md` in your own words; add team names and the contribution statement on the About page
   (`apps/web/src/features/about/index.tsx`, marked PLACEHOLDER).
 - Replace the synthetic Jev values with recorded output (`pnpm ai:publish`) or keep them labelled synthetic.
