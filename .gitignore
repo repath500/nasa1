@@ -12,3 +12,5 @@ test-results/
 data/kv-dev.json
 cache/
 data/labels/*.human.json
+.vercel/
+.vercel

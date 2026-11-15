@@ -124,6 +124,12 @@ Screenshots for the deck: `apps/web/public/landing/shots/` (desktop Night and Pa
 | next | Landing: dither SDK (Paper Design shaders, Apache-2.0) behind a big "Enter the Atlas" band; much larger CTAs; "View the challenge" link; "Where code does the science, and why"; "How we built it" (Perplexity research, Claude and ChatGPT as science tutors, our decisions); team credit with affiliations | Make the way in obvious and tell the story |
 | next | Gap Map: canvas reallocated only on resize, colour tokens resolved once per frame, badge layout and hit-test tree deferred until a gesture settles; `pnpm preview` serves the production build | Measured: the stutter came from React dev-mode checks; the production build holds 60 fps at 2x density with a 4x CPU throttle |
 
+### Phase 9: Mission view and Vercel (lead, 15 Nov)
+| Commit | What | Why |
+|---|---|---|
+| `ceb0c8e` | Mission view inside the Atlas: the planning prototype's dithered stage (orbit with flying test flames, Air map, Oxygen ladder, Timeline, Replay by date) on the real corpus, sharing habitat, filters and selection with the Gap Map | The team wanted the prototype's interactive map back, cleaner and on the real data |
+| this commit | Vercel deploy: prebuilt output with the API as one bundled Node.js function; `vercel.json` for GitHub builds; live at https://fire-atlas-sand.vercel.app | Put it online for judges |
+
 ## 4. Numbers you can quote (all computed by code from `data/corpus.v1.json`, hash `4d3a7aa6…`)
 
 - 1,476 parsed test rows from 12 PSI investigations; 11 source cells rejected by code.
